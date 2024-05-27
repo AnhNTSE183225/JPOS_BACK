@@ -22,6 +22,7 @@ public class OrderController {
     }
 
     // tạm thời chưa có chức năng login nên để customerId lên trên url nhé, sau này sửa sau. ?
+    @CrossOrigin
     @PostMapping("/orders")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody Order theOrder, @RequestParam(name = "id") int customerId) {
 
