@@ -21,7 +21,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    // tạm thời chưa có chức năng login nên để customerId lên trên url nhé, sau này sửa sau.....
+    // tạm thời chưa có chức năng login nên để customerId lên trên url nhé, sau này sửa sau. ?
     @PostMapping("/orders")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody Order theOrder, @RequestParam(name = "id") int customerId) {
 
