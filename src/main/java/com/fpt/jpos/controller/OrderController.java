@@ -28,16 +28,11 @@ public class OrderController {
         // set id = 0 -> add new
         theOrder.setId(0);
 
-        //Order newOrder = orderService.insertOrder(theOrder, customerId);
-
-
         Order newOrder = orderService.insertOrder(
                 customerId,
                 theOrder.getDesignFile(),
                 theOrder.getBudget(),
-                theOrder.getOrderType(),
-                theOrder.getDescription(),
-                theOrder.getStatus()
+                theOrder.getDescription()
         );
 
 

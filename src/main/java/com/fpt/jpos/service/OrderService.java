@@ -37,16 +37,16 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order insertOrder(int customerId, String designFile, String budget, String orderType, String description, String status) {
+    public Order insertOrder(int customerId, String designFile, String budget, String description) {
         Order theOrder = new Order();
 
         Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
 
         theOrder.setDesignFile(designFile);
         theOrder.setBudget(budget);
-        theOrder.setOrderType(orderType);
+        theOrder.setOrderType("customize");
         theOrder.setDescription(description);
-        theOrder.setStatus(status);
+        theOrder.setStatus("wait_sale_staff");
         theOrder.setCustomer(customer);
 
         orderRepository.save(theOrder);
