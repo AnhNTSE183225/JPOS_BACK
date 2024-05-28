@@ -1,9 +1,7 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.pojo.Customer;
+import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
-import com.fpt.jpos.repository.ICustomerRepository;
-import com.fpt.jpos.service.ICustomerService;
 import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,19 +20,12 @@ public class OrderController {
 
     // tạm thời chưa có chức năng login nên để customerId lên trên url nhé, sau này sửa sau. ?
     @CrossOrigin
-    @PostMapping("/orders")
-    public ResponseEntity<Order> saveCustomerRequest(@RequestBody Order theOrder, @RequestParam(name = "id") int customerId) {
+    @PostMapping("/send-request")
+    public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequest customerRequest) {
 
-        // set id = 0 -> add new
-        theOrder.setId(0);
+        System.out.println(customerRequest.getCustomerId());
 
-        Order newOrder = orderService.insertOrder(
-                customerId,
-                theOrder.getDesignFile(),
-                theOrder.getBudget(),
-                theOrder.getDescription()
-        );
-
+        Order newOrder = orderService.insertOrder(customerRequest);
 
         return ResponseEntity.ok(newOrder);
     }

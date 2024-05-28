@@ -1,6 +1,7 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.Customer;
+import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.repository.ICustomerRepository;
 import com.fpt.jpos.repository.IOrderRepository;
@@ -37,15 +38,15 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order insertOrder(int customerId, String designFile, String budget, String description) {
+    public Order insertOrder(CustomerRequest customerRequest) {
         Order theOrder = new Order();
 
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
+        Customer customer = customerRepository.findById(customerRequest.getCustomerId()).orElseThrow(() -> new RuntimeException("Customer not found"));
 
-        theOrder.setDesignFile(designFile);
-        theOrder.setBudget(budget);
+        theOrder.setDesignFile(customerRequest.getDesignFile());
+        theOrder.setBudget(customerRequest.getBudget());
         theOrder.setOrderType("customize");
-        theOrder.setDescription(description);
+        theOrder.setDescription(customerRequest.getDescription());
         theOrder.setStatus("wait_sale_staff");
         theOrder.setCustomer(customer);
 
