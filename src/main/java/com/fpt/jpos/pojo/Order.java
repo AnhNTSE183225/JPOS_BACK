@@ -42,15 +42,15 @@ public class Order {
 
     private String description;
 
-    private double qDiamondPrice;
+    private Double qDiamondPrice;
 
-    private double qMaterialPrice;
+    private Double qMaterialPrice;
 
     private Date qDate;
 
-    private double oDiamondPrice;
+    private Double oDiamondPrice;
 
-    private double oMaterialPrice;
+    private Double oMaterialPrice;
 
     private Date oDate;
 
@@ -60,11 +60,11 @@ public class Order {
 
     private String productImage;
 
-    private double shippingFee;
+    private Double shippingFee;
 
-    private double taxFee;
+    private Double taxFee;
 
-    private double discount;
+    private Double discount;
 
 
 
