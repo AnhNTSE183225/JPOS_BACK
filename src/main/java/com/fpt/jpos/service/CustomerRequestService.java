@@ -9,7 +9,8 @@ import com.fpt.jpos.repository.IOrderRepository;
 
 import jakarta.transaction.Transactional;
 
-public class CustomerRequestService implements ICustomerRequestService {
+//public class CustomerRequestService implements ICustomerRequestService {
+	public class CustomerRequestService {
 
     private IOrderRepository orderRepository;
 	
@@ -20,18 +21,18 @@ public class CustomerRequestService implements ICustomerRequestService {
 		customerRequestRepository = theCustomerRequestRepository;
 	}
 
-	@Override
-	@Transactional
-	public Order handleRequest(int customerId) {
-		Order customer = customerRequestRepository.findById((int) customerId)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-		
-        Optional<Order> existingOrder = orderRepository.findByCustomerAndStatus(customer, "wait_sale_staff");
-
-        if (existingOrder.isPresent()) {
-            return existingOrder.get();
-        } else {
-        	return null;
-        }
-	}
+//	@Override
+//	@Transactional
+//	public Order handleRequest(int customerId) {
+//		Order customer = customerRequestRepository.findById((int) customerId)
+//                .orElseThrow(() -> new RuntimeException("Customer not found"));
+//
+//        Optional<Order> existingOrder = orderRepository.findByCustomerAndStatus(customer, "wait_sale_staff");
+//
+//        if (existingOrder.isPresent()) {
+//            return existingOrder.get();
+//        } else {
+//        	return null;
+//        }
+//	}
 }
