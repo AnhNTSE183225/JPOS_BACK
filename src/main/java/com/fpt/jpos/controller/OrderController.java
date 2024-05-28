@@ -3,6 +3,7 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.repository.ICustomerRepository;
+import com.fpt.jpos.service.ICustomerService;
 import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,6 @@ public class OrderController {
     private IOrderService orderService;
 
     @Autowired
-    private ICustomerRepository customerRepository;// inject orderService
-
     public OrderController(IOrderService orderService) {
         this.orderService = orderService;
     }
