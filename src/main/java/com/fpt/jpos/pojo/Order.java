@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "[Order]")
 @Data
-@NoArgsConstructor  // using lombok
+@NoArgsConstructor  // using Lombok
 @AllArgsConstructor
 public class Order {
 
