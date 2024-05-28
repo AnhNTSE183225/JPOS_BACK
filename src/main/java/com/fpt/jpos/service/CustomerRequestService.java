@@ -21,17 +21,18 @@ import jakarta.transaction.Transactional;
 		customerRequestRepository = theCustomerRequestRepository;
 	}
 
-	@Transactional
-	public Order handleRequest(int customerId) {
-		Order customer = customerRequestRepository.findById((int) customerId)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-
-        Optional<Order> existingOrder = orderRepository.findByCustomer(customer);
-
-        if (existingOrder.isPresent()) {
-            return existingOrder.get();
-        } else {
-        	return null;
-        }
-	}
+//	@Override
+//	@Transactional
+//	public Order handleRequest(int customerId) {
+//		Order customer = customerRequestRepository.findById((int) customerId)
+//                .orElseThrow(() -> new RuntimeException("Customer not found"));
+//
+//        Optional<Order> existingOrder = orderRepository.findByCustomerAndStatus(customer, "wait_sale_staff");
+//
+//        if (existingOrder.isPresent()) {
+//            return existingOrder.get();
+//        } else {
+//        	return null;
+//        }
+//	}
 }
