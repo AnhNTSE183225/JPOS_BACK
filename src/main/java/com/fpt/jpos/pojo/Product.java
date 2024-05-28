@@ -20,18 +20,22 @@ public class Product {
     @Column(name="product_name")
     private String productName;
 
+    @Column(name="e_diamond_price")
     private double eDiamondPrice;
 
+    @Column(name="e_material_price")
     private double eMaterialPrice;
 
+    @Column(name="production_price")
     private double productionPrice;
 
+    @Column(name="markup_rate")
     private double markupRate;
 
+    @Column(name="product_type")
     private String productType;
 
+    @Column(name="product_design_id")
     private String productDesignId;
-
-
 
 }
