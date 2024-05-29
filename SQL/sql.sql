@@ -439,30 +439,31 @@ create table [Diamond] (
 	carat_weight: 0 to 30
 */
 go
-insert into [Diamond] ([diamond_name],[shape],[origin],[proportions],[fluorescence],
-[symmetry],[polish],[cut],[color],[clarity],[carat_weight],[active],[diamond_code],[note])
-values
-('1.01 Carat Round Diamond','round','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Excellent','Excellent','Excellent','H','VS2',1.01,1,null,null),
-('1.0 Carat Round Diamond','round','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','D','FL',1.0,1,null,null),
-('1.0 Carat Princess Diamond','princess','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','E','IF',1.0,1,null,null),
-('1.0 Carat Cushion Diamond','cushion','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','F','VVS1',1.0,0,null,null),
-('1.0 Carat Emerald Diamond','emerald','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','G','VVS2',1.0,0,null,null),
-('1.0 Carat Oval Diamond','oval','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','H','VS1',1.0,0,null,null),
-('1.0 Carat Radiant Diamond','radiant','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','I','VS2',1.0,1,null,null),
-('1.0 Carat Asscher Diamond','asscher','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','J','SI1',1.0,1,null,null),
-('1.0 Carat Marquise Diamond','marquise','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','K','SI2',1.0,0,null,null),
-('1.0 Carat Heart Diamond','heart','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','L','I1',1.0,0,null,null),
-('1.0 Carat Pear Diamond','pear','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','M','I2',1.0,0,null,null),
-('1.0 Carat Round Diamond','round','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','N','I3',1.0,1,null,null),
-('1.0 Carat Princess Diamond','princess','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','O','FL',1.0,1,null,null),
-('1.0 Carat Cushion Diamond','cushion','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','P','IF',1.0,0,null,null),
-('1.0 Carat Emerald Diamond','emerald','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','Q','VVS1',1.0,0,null,null),
-('1.0 Carat Oval Diamond','oval','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','R','VVS2',1.0,0,null,null),
-('1.0 Carat Radiant Diamond','radiant','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','S','VS1',1.0,1,null,null),
-('1.0 Carat Asscher Diamond','asscher','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','T','VS2',1.0,1,null,null),
-('1.0 Carat Marquise Diamond','marquise','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','U','SI1',1.0,0,null,null),
-('1.0 Carat Heart Diamond','heart','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','V','SI2',1.0,0,null,null),
-('1.0 Carat Pear Diamond','pear','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','W','I1',1.0,0,null,null);
+INSERT INTO [Diamond] 
+([diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [active], [diamond_code], [note])
+VALUES
+('1.01 Carat Round Diamond', 'round', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Excellent', 'Excellent', 'Excellent', 'H', 'VS2', 1.01, 1, 'D001', 'First batch'),
+('1.0 Carat Round Diamond', 'round', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.0, 1, 'D002', 'New arrival'),
+('1.0 Carat Princess Diamond', 'princess', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'E', 'IF', 1.0, 1, 'D003', 'High quality'),
+('1.0 Carat Cushion Diamond', 'cushion', 'Namibia', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'F', 'VVS1', 1.0, 0, 'D004', 'Good value'),
+('1.0 Carat Emerald Diamond', 'emerald', 'Botswana', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'G', 'VVS2', 1.0, 0, 'D005', 'Special offer'),
+('1.0 Carat Oval Diamond', 'oval', 'Lesotho', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very Strong', 'Poor', 'Poor', 'Poor', 'H', 'VS1', 1.0, 0, 'D006', 'Clearance'),
+('1.0 Carat Radiant Diamond', 'radiant', 'South Africa', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'I', 'VS2', 1.0, 1, 'D007', 'Best seller'),
+('1.0 Carat Asscher Diamond', 'asscher', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'J', 'SI1', 1.0, 1, 'D008', 'Unique cut'),
+('1.0 Carat Marquise Diamond', 'marquise', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'K', 'SI2', 1.0, 0, 'D009', 'Vintage style'),
+('1.0 Carat Heart Diamond', 'heart', 'Namibia', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'L', 'I1', 1.0, 0, 'D010', 'Romantic choice'),
+('1.0 Carat Pear Diamond', 'pear', 'Botswana', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very Strong', 'Poor', 'Poor', 'Poor', 'M', 'I2', 1.0, 0, 'D011', 'Distinctive shape'),
+('1.0 Carat Round Diamond', 'round', 'Lesotho', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'N', 'I3', 1.0, 1, 'D012', 'Budget option'),
+('1.0 Carat Princess Diamond', 'princess', 'South Africa', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'O', 'FL', 1.0, 1, 'D013', 'Luxurious feel'),
+('1.0 Carat Cushion Diamond', 'cushion', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'P', 'IF', 1.0, 0, 'D014', 'Designer choice'),
+('1.0 Carat Emerald Diamond', 'emerald', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'Q', 'VVS1', 1.0, 0, 'D015', 'Exquisite clarity'),
+('1.0 Carat Oval Diamond', 'oval', 'Namibia', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very Strong', 'Poor', 'Poor', 'Poor', 'R', 'VVS2', 1.0, 0, 'D016', 'Elegant cut'),
+('1.0 Carat Radiant Diamond', 'radiant', 'Botswana', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'S', 'VS1', 1.0, 1, 'D017', 'Sparkling brilliance'),
+('1.0 Carat Asscher Diamond', 'asscher', 'Lesotho', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'T', 'VS2', 1.0, 1, 'D018', 'Sophisticated design'),
+('1.0 Carat Marquise Diamond', 'marquise', 'South Africa', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'U', 'SI1', 1.0, 0, 'D019', 'Timeless piece'),
+('1.0 Carat Heart Diamond', 'heart', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 1.0, 0, 'D020', 'Symbol of love'),
+('1.0 Carat Pear Diamond', 'pear', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very Strong', 'Poor', 'Poor', 'Poor', 'W', 'I1', 1.0, 0, 'D021', 'Graceful shape');
+
 go
 create table [DiamondPriceList] (
 	[diamond_price_id] int identity(1,1),
