@@ -29,7 +29,7 @@ public class Customer {
     private String address;
 
     @OneToMany(mappedBy = "customer",
-            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE},    fetch = FetchType.LAZY)
     private List<Order> orderList;
 
 }
