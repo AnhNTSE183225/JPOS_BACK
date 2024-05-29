@@ -24,8 +24,8 @@ create table [Account] (
 go
 insert into [Account]
 values
-('user_admin','123',1,'admin'),
-('user_customer_01','123',1,'customer'),
+('user_admin','{bcrypt}$2a$12$EXmafYMsWPDLj0CS5BdHgOzV.739rBEm8uiui/SEtdAylspWuWJJq',1,'admin'),
+('user_customer_01','{bcrypt}$2a$12$cM74/PBTg.N6tQXsA/FL3ef.R/bLiCoLFMmsCQolQPtFoFTSm6Q4y',1,'customer'),
 ('user_customer_02','123',1,'customer'),
 ('user_customer_03','123',1,'customer'),
 ('user_sale_staff','123',1,'staff'),
