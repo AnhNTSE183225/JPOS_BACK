@@ -27,7 +27,7 @@ import jakarta.transaction.Transactional;
 //		Order customer = customerRequestRepository.findById((int) customerId)
 //                .orElseThrow(() -> new RuntimeException("Customer not found"));
 //
-//        Optional<Order> existingOrder = orderRepository.findByCustomerAndStatus(customer, "wait_sale_staff");
+//        Optional<Order> existingOrder = orderRepository.findByCustomer(customer, "wait_sale_staff");
 //
 //        if (existingOrder.isPresent()) {
 //            return existingOrder.get();
