@@ -182,6 +182,9 @@ create table [Order] (
 	[order_id] int identity(1,1),
 	[customer_id] int,
 	[product_id] int,
+	[sale_staff_id] int,
+	[design_staff_id] int,
+	[production_staff_id] int,
 	[status] varchar(255),
 	[order_date] datetime,
 	[order_type] varchar(255),
@@ -194,6 +197,11 @@ create table [Order] (
 	[o_diamond_price] decimal(19,4),
 	[o_material_price] decimal(19,4),
 	[o_date] datetime,
+	[e_diamond_price] decimal(19,4),
+	[e_material_price] decimal(19,4),
+	[production_price] decimal(19,4),
+	[markup_rate] decimal(19,4),
+	[total_amount] decimal(19,4),
 	[model_file] varchar(255),
 	[model_feedback] varchar(255),
 	[product_image] varchar(255),
@@ -202,7 +210,10 @@ create table [Order] (
 	[discount] decimal(19,4),
 	primary key([order_id]),
 	foreign key([product_id]) references [Product],
-	foreign key([customer_id]) references [Customer]
+	foreign key([customer_id]) references [Customer],
+	foreign key([sale_staff_id]) references [Staff],
+	foreign key([production_staff_id]) references [Staff],
+	foreign key([design_staff_id]) references [Staff]
 )
 /*
 	1. wait_sale_staff - no price (staff handle)
@@ -221,24 +232,25 @@ create table [Order] (
 	"from_design"
 */
 go
-INSERT INTO [Order]([customer_id],[product_id],[status],[order_date],[order_type],[budget],[design_file],[description],[q_diamond_price],[q_material_price],[q_date],[o_diamond_price],[o_material_price],[o_date],[model_file],[model_feedback],[product_image],[shipping_fee],[tax_fee],[discount])
+INSERT INTO [Order]([customer_id],[product_id],[status],[order_date],[order_type],[budget],[design_file],[description],[q_diamond_price],[q_material_price],[q_date],[o_diamond_price],[o_material_price],[o_date],[model_file],[model_feedback],[product_image],[shipping_fee],[tax_fee],[discount],
+[total_amount],[sale_staff_id],[design_staff_id],[production_staff_id],[e_diamond_price],[e_material_price],[production_price],[markup_rate])
 VALUES
-(1, null, 'wait_sale_staff', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 2, 'wait_manager', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 3, 'manager_approved', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 4, 'wait_customer', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 5, 'customer_accept', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', NULL, NULL, NULL, 1000000, 2000000, 10),
-(1, 6, 'designing', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', NULL, NULL, NULL, 1000000, 2000000, 10),
-(1, 7, 'designing', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'old_model_1', 'it is too ugly', NULL, 1000000, 2000000, 10),
-(1, 8, 'pending_design', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', NULL, NULL, 1000000, 2000000, 10),
-(1, 13, 'pending_payment', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', NULL, NULL, 1000000, 2000000, 10),
-(1, 1, 'payment_confirmed', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', NULL, NULL, 1000000, 2000000, 10),
-(1, 9, 'production', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', 'all good', NULL, 1000000, 2000000, 10),
-(1, 14, 'pending_payment', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 5500000, 6500000, '2024-05-27 15:16:00', NULL, NULL, NULL, 1300000, 2300000, 40),
-(1, 15, 'payment_confirmed', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 5500000, 6500000, '2024-05-27 15:16:00', NULL, NULL, NULL, 1300000, 2300000, 40),
-(1, 11, 'production', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 5500000, 6500000, '2024-05-27 15:16:00', NULL, NULL, NULL, 1300000, 2300000, 40),
-(1, 12, 'completed', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 6000000, 7000000, '2024-05-27 15:16:00', NULL, NULL, 'product_image_1', 1400000, 2400000, 50),
-(1, 10, 'completed', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', 'all good', 'completed_product_image_1', 1000000, 2000000, 10)
+(1, null, 'wait_sale_staff', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
+(1, 2, 'wait_manager', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
+(1, 3, 'manager_approved', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
+(1, 4, 'wait_customer', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
+(1, 5, 'customer_accept', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', NULL, NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
+(1, 6, 'designing', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', NULL, NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
+(1, 7, 'designing', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'old_model_1', 'it is too ugly', NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
+(1, 8, 'pending_design', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
+(1, 13, 'pending_payment', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
+(1, 1, 'payment_confirmed', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
+(1, 9, 'production', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', 'all good', NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
+(1, 14, 'pending_payment', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 5500000, 6500000, '2024-05-27 15:16:00', NULL, NULL, NULL, 1300000, 2300000, 40,null, null, null, null, null, null, null, null),
+(1, 15, 'payment_confirmed', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 5500000, 6500000, '2024-05-27 15:16:00', NULL, NULL, NULL, 1300000, 2300000, 40,null, null, null, null, null, null, null, null),
+(1, 11, 'production', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 5500000, 6500000, '2024-05-27 15:16:00', NULL, NULL, NULL, 1300000, 2300000, 40,null, null, null, null, null, null, null, null),
+(1, 12, 'completed', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 6000000, 7000000, '2024-05-27 15:16:00', NULL, NULL, 'product_image_1', 1400000, 2400000, 50,null, null, null, null, null, null, null, null),
+(1, 10, 'completed', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', 'all good', 'completed_product_image_1', 1000000, 2000000, 10,null, null, null, null, null, null, null, null)
 go
 create table [Payment] (
 	[payment_id] int identity(1,1),
@@ -394,6 +406,7 @@ VALUES
 go
 create table [Diamond] (
 	[diamond_id] int identity(1,1),
+	[diamond_code] varchar(255),
 	[diamond_name] varchar(255),
 	
 	[shape] varchar(8),
@@ -408,6 +421,7 @@ create table [Diamond] (
 	[color] varchar(1),
 	[clarity] varchar(4),
 	[carat_weight] decimal(19,4),
+	[note] varchar(255),
 	
 	[active] bit,
 	primary key([diamond_id])
@@ -426,29 +440,29 @@ create table [Diamond] (
 */
 go
 insert into [Diamond] ([diamond_name],[shape],[origin],[proportions],[fluorescence],
-[symmetry],[polish],[cut],[color],[clarity],[carat_weight],[active])
+[symmetry],[polish],[cut],[color],[clarity],[carat_weight],[active],[diamond_code],[note])
 values
-('1.01 Carat Round Diamond','round','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Excellent','Excellent','Excellent','H','VS2',1.01,1),
-('1.0 Carat Round Diamond','round','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','D','FL',1.0,1),
-('1.0 Carat Princess Diamond','princess','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','E','IF',1.0,1),
-('1.0 Carat Cushion Diamond','cushion','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','F','VVS1',1.0,0),
-('1.0 Carat Emerald Diamond','emerald','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','G','VVS2',1.0,0),
-('1.0 Carat Oval Diamond','oval','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','H','VS1',1.0,0),
-('1.0 Carat Radiant Diamond','radiant','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','I','VS2',1.0,1),
-('1.0 Carat Asscher Diamond','asscher','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','J','SI1',1.0,1),
-('1.0 Carat Marquise Diamond','marquise','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','K','SI2',1.0,0),
-('1.0 Carat Heart Diamond','heart','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','L','I1',1.0,0),
-('1.0 Carat Pear Diamond','pear','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','M','I2',1.0,0),
-('1.0 Carat Round Diamond','round','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','N','I3',1.0,1),
-('1.0 Carat Princess Diamond','princess','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','O','FL',1.0,1),
-('1.0 Carat Cushion Diamond','cushion','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','P','IF',1.0,0),
-('1.0 Carat Emerald Diamond','emerald','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','Q','VVS1',1.0,0),
-('1.0 Carat Oval Diamond','oval','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','R','VVS2',1.0,0),
-('1.0 Carat Radiant Diamond','radiant','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','S','VS1',1.0,1),
-('1.0 Carat Asscher Diamond','asscher','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','T','VS2',1.0,1),
-('1.0 Carat Marquise Diamond','marquise','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','U','SI1',1.0,0),
-('1.0 Carat Heart Diamond','heart','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','V','SI2',1.0,0),
-('1.0 Carat Pear Diamond','pear','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','W','I1',1.0,0);
+('1.01 Carat Round Diamond','round','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Excellent','Excellent','Excellent','H','VS2',1.01,1,null,null),
+('1.0 Carat Round Diamond','round','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','D','FL',1.0,1,null,null),
+('1.0 Carat Princess Diamond','princess','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','E','IF',1.0,1,null,null),
+('1.0 Carat Cushion Diamond','cushion','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','F','VVS1',1.0,0,null,null),
+('1.0 Carat Emerald Diamond','emerald','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','G','VVS2',1.0,0,null,null),
+('1.0 Carat Oval Diamond','oval','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','H','VS1',1.0,0,null,null),
+('1.0 Carat Radiant Diamond','radiant','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','I','VS2',1.0,1,null,null),
+('1.0 Carat Asscher Diamond','asscher','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','J','SI1',1.0,1,null,null),
+('1.0 Carat Marquise Diamond','marquise','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','K','SI2',1.0,0,null,null),
+('1.0 Carat Heart Diamond','heart','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','L','I1',1.0,0,null,null),
+('1.0 Carat Pear Diamond','pear','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','M','I2',1.0,0,null,null),
+('1.0 Carat Round Diamond','round','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','N','I3',1.0,1,null,null),
+('1.0 Carat Princess Diamond','princess','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','O','FL',1.0,1,null,null),
+('1.0 Carat Cushion Diamond','cushion','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','P','IF',1.0,0,null,null),
+('1.0 Carat Emerald Diamond','emerald','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','Q','VVS1',1.0,0,null,null),
+('1.0 Carat Oval Diamond','oval','Namibia','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','R','VVS2',1.0,0,null,null),
+('1.0 Carat Radiant Diamond','radiant','Botswana','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','None','Excellent','Excellent','Excellent','S','VS1',1.0,1,null,null),
+('1.0 Carat Asscher Diamond','asscher','Lesotho','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Faint','Very Good','Very Good','Very Good','T','VS2',1.0,1,null,null),
+('1.0 Carat Marquise Diamond','marquise','South Africa','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Medium','Good','Good','Good','U','SI1',1.0,0,null,null),
+('1.0 Carat Heart Diamond','heart','Canada','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Strong','Fair','Fair','Fair','V','SI2',1.0,0,null,null),
+('1.0 Carat Pear Diamond','pear','Angola','https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg','Very Strong','Poor','Poor','Poor','W','I1',1.0,0,null,null);
 go
 create table [DiamondPriceList] (
 	[diamond_price_id] int identity(1,1),
