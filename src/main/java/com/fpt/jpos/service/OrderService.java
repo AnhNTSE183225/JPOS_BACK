@@ -6,11 +6,8 @@ import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.repository.ICustomerRepository;
 import com.fpt.jpos.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class OrderService implements IOrderService {
@@ -25,10 +22,7 @@ public class OrderService implements IOrderService {
         orderRepository = theIOrderRepository;
         customerRepository = theICustomerRepository;
     }
-
-    @Override
-    @Transactional
-    public String handleManagerResponse(int id, boolean managerApproval) {
+    public String handleManagerResponse(Long id, boolean managerApproval) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
@@ -42,12 +36,18 @@ public class OrderService implements IOrderService {
         return order.getStatus();
     }
 
-    @Override
-    public List<Order> getOrdersForSaleStaffs(int saleStaffId) {
 
-        return orderRepository.findAllByStatusAndStaff(saleStaffId);
+//    @Override
+//    public Order insertOrder(Order theOrder, int customerId) {
+//        Order order = new Order();
+//
+//        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
+//
+//        order.setCustomer(customer);
+//
+//        return orderRepository.save(order);
+//    }
 
-    }
 
     @Override
     @Transactional
@@ -66,6 +66,4 @@ public class OrderService implements IOrderService {
         orderRepository.save(theOrder);
         return theOrder;
     }
-
-
 }
