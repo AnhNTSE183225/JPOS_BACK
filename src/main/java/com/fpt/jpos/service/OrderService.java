@@ -34,13 +34,13 @@ public class OrderService implements IOrderService {
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
         if (managerApproval) {
-            order.setStatus(OrderStatus.manager_approved.name());
+            order.setStatus(OrderStatus.manager_approved);
         } else {
-            order.setStatus(OrderStatus.wait_manager.name());
+            order.setStatus(OrderStatus.wait_manager);
         }
 
         orderRepository.save(order);
-        return order.getStatus();
+        return order.getStatus().name();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class OrderService implements IOrderService {
         theOrder.setBudget(customerRequest.getBudget());
         theOrder.setOrderType("customize");
         theOrder.setDescription(customerRequest.getDescription());
-        theOrder.setStatus(OrderStatus.wait_sale_staff.name());
+        theOrder.setStatus(OrderStatus.wait_sale_staff);
         theOrder.setCustomer(customer);
 
         orderRepository.save(theOrder);

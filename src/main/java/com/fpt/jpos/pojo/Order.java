@@ -1,5 +1,6 @@
 package com.fpt.jpos.pojo;
 
+import com.fpt.jpos.pojo.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,7 +45,7 @@ public class Order {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private String status;
+    private OrderStatus status;
 
     @Column(name = "order_date")
     private Date orderDate;
