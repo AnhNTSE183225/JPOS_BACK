@@ -20,8 +20,6 @@ public class DiamondPriceService implements IDiamondPriceService {
     @Override
     public List<DiamondPrice> getDiamondPrices() {
 
-        List<DiamondPrice> diamondPriceList = diamondPriceRepository.findAll();
-
-        return diamondPriceList;
+        return diamondPriceRepository.findAll();
     }
 }
