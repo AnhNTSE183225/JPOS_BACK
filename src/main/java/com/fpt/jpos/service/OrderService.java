@@ -22,6 +22,19 @@ public class OrderService implements IOrderService {
         orderRepository = theIOrderRepository;
         customerRepository = theICustomerRepository;
     }
+    public String handleManagerResponse(Long id, boolean managerApproval) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
+
+        if (managerApproval) {
+            order.setStatus("manager_approved");
+        } else {
+            order.setStatus("wait_manager");
+        }
+
+        orderRepository.save(order);
+        return order.getStatus();
+    }
 
 
 //    @Override
