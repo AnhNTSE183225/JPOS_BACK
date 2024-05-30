@@ -30,7 +30,7 @@ public class OrderController {
         return ResponseEntity.ok(newOrder);
     }
     @PostMapping("/{id}/manager-response")
-    public ResponseEntity<String> getManagerResponse(@PathVariable Long id, @RequestParam boolean managerApproval) {
+    public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval) {
         String status = orderService.handleManagerResponse(id, managerApproval);
         return ResponseEntity.ok(status);
     }

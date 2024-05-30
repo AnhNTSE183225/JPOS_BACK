@@ -8,6 +8,6 @@ public interface IOrderService {
     Order insertOrder(CustomerRequest customerRequest);
     //Order insertOrder(Order theOrder, int customerId);
 
-	String handleManagerResponse(Long id, boolean managerApproval);
+	String handleManagerResponse(Integer id, boolean managerApproval);
 
 }

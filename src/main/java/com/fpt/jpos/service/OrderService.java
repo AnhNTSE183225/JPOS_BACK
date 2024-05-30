@@ -6,6 +6,7 @@ import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.repository.ICustomerRepository;
 import com.fpt.jpos.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,9 @@ public class OrderService implements IOrderService {
         orderRepository = theIOrderRepository;
         customerRepository = theICustomerRepository;
     }
-    public String handleManagerResponse(Long id, boolean managerApproval) {
+
+    @Override
+    public String handleManagerResponse(Integer id, boolean managerApproval) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
