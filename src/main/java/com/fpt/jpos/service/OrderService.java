@@ -3,6 +3,7 @@ package com.fpt.jpos.service;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
+import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.ICustomerRepository;
 import com.fpt.jpos.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class OrderService implements IOrderService {
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
         if (managerApproval) {
-            order.setStatus("manager_approved");
+            order.setStatus(OrderStatus.manager_approved.name());
         } else {
-            order.setStatus("wait_manager");
+            order.setStatus(OrderStatus.wait_manager.name());
         }
 
         orderRepository.save(order);
@@ -46,19 +47,6 @@ public class OrderService implements IOrderService {
     public List<Order> getOrdersByStatusAndStaffs(int id) {
         return orderRepository.findAllByStatusAndStaff(id);
     }
-
-
-//    @Override
-//    public Order insertOrder(Order theOrder, int customerId) {
-//        Order order = new Order();
-//
-//        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
-//
-//        order.setCustomer(customer);
-//
-//        return orderRepository.save(order);
-//    }
-
 
     @Override
     @Transactional
@@ -71,7 +59,7 @@ public class OrderService implements IOrderService {
         theOrder.setBudget(customerRequest.getBudget());
         theOrder.setOrderType("customize");
         theOrder.setDescription(customerRequest.getDescription());
-        theOrder.setStatus("wait_sale_staff");
+        theOrder.setStatus(OrderStatus.wait_sale_staff.name());
         theOrder.setCustomer(customer);
 
         orderRepository.save(theOrder);
