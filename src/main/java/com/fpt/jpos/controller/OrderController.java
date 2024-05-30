@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class OrderController {
@@ -29,9 +31,16 @@ public class OrderController {
 
         return ResponseEntity.ok(newOrder);
     }
+
     @PostMapping("/{id}/manager-response")
-    public ResponseEntity<String> getManagerResponse(@PathVariable Long id, @RequestParam boolean managerApproval) {
+    public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval) {
         String status = orderService.handleManagerResponse(id, managerApproval);
         return ResponseEntity.ok(status);
+    }
+
+    @GetMapping("/sales/orders/{id}")
+    public ResponseEntity<List<Order>> getAllOrdersForSaleStaff(@PathVariable int id) {
+        return ResponseEntity.ok(orderService.getOrdersByStatusAndStaffs(id));
+
     }
 }

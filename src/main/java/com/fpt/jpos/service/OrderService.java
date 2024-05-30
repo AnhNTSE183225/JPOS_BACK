@@ -6,8 +6,11 @@ import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.repository.ICustomerRepository;
 import com.fpt.jpos.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class OrderService implements IOrderService {
@@ -22,7 +25,10 @@ public class OrderService implements IOrderService {
         orderRepository = theIOrderRepository;
         customerRepository = theICustomerRepository;
     }
-    public String handleManagerResponse(Long id, boolean managerApproval) {
+
+    @Override
+    @Transactional
+    public String handleManagerResponse(Integer id, boolean managerApproval) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
@@ -34,6 +40,11 @@ public class OrderService implements IOrderService {
 
         orderRepository.save(order);
         return order.getStatus();
+    }
+
+    @Override
+    public List<Order> getOrdersByStatusAndStaffs(int id) {
+        return orderRepository.findAllByStatusAndStaff(id);
     }
 
 
@@ -66,4 +77,5 @@ public class OrderService implements IOrderService {
         orderRepository.save(theOrder);
         return theOrder;
     }
+
 }
