@@ -3,7 +3,6 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.service.IOrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
