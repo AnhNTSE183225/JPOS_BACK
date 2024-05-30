@@ -43,6 +43,7 @@ public class Order {
     private Staff productionStaff;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private String status;
 
     @Column(name = "order_date")
