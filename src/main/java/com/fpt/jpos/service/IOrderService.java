@@ -14,4 +14,5 @@ public interface IOrderService {
 
     List<Order> getOrdersByStatusAndStaffs(int id);
 
+    Order findById(Integer id);
 }

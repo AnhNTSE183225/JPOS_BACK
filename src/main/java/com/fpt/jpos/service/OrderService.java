@@ -49,6 +49,11 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public Order findById(Integer id) {
+        return orderRepository.findById(id).orElse(null);
+    }
+
+    @Override
     @Transactional
     public Order insertOrder(CustomerRequest customerRequest) {
         Order theOrder = new Order();

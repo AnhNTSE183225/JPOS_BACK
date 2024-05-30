@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "'Order'")
+@Table(name = "`Order`")
 @Data
 @Builder
 @NoArgsConstructor  // using Lombok
