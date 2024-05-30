@@ -3,9 +3,12 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.service.IOrderService;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -29,9 +32,21 @@ public class OrderController {
 
         return ResponseEntity.ok(newOrder);
     }
+
     @PostMapping("/{id}/manager-response")
-    public ResponseEntity<String> getManagerResponse(@PathVariable Long id, @RequestParam boolean managerApproval) {
+    public ResponseEntity<String> getManagerResponse(@PathVariable int id, @RequestParam boolean managerApproval) {
         String status = orderService.handleManagerResponse(id, managerApproval);
         return ResponseEntity.ok(status);
+    }
+
+
+    // get staff id
+    @GetMapping("/sales/orders/{id}")
+    public ResponseEntity<List<Order>> getSalesOrders(@PathVariable int id) {
+
+        List<Order> orders = orderService.getOrdersForSaleStaffs(id);
+
+        return ResponseEntity.ok(orders);
+
     }
 }
