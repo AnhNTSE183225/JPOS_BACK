@@ -71,15 +71,15 @@ public class OrderService implements IOrderService {
         return theOrder;
     }
     @Override
-    public String forwardQuotation(Long id) {
+    public OrderStatus forwardQuotation(Integer id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
-        if (!"manager_approved".equals(order.getStatus())) {
+        if (!OrderStatus.manager_approved.equals(order.getStatus())) {
             throw new IllegalStateException("Order status must be 'manager_approved' to forward quotation");
         }
 
-        order.setStatus("wait_customer");
+        order.setStatus(OrderStatus.customer_accept);
         orderRepository.save(order);
         return order.getStatus();
     }

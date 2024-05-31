@@ -2,6 +2,7 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
+import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
 import com.fpt.jpos.service.IOrderService;
 import jakarta.persistence.Table;
@@ -87,8 +88,8 @@ public class OrderController {
         }
     }
     @PostMapping("/{id}/forward-quotation")
-    public ResponseEntity<String> forwardQuotation(@PathVariable Long id) {
-        String status = orderService.forwardQuotation(id);
-        return ResponseEntity.ok(status);
+    public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
+        OrderStatus status = orderService.forwardQuotation(id);
+        return ResponseEntity.ok(status.toString());
     }	
 }
