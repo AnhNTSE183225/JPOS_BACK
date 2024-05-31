@@ -1,5 +1,8 @@
 package com.fpt.jpos.pojo;
 
+import com.fpt.jpos.pojo.enums.Clarity;
+import com.fpt.jpos.pojo.enums.Color;
+import com.fpt.jpos.pojo.enums.Cut;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,13 +27,13 @@ public class DiamondPrice {
     private Double caratWeight;
 
     @Column(name = "color")
-    private String color;
+    private Color color;
 
     @Column(name = "clarity")
-    private String clarity;
+    private Clarity clarity;
 
     @Column(name = "cut")
-    private String cut;
+    private Cut cut;
 
     @Column(name = "price")
     private Double price;

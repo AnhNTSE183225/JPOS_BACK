@@ -1,13 +1,14 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.pojo.Diamond4C;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +30,17 @@ public class DiamondPriceController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(diamondPriceList);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/get-price-by-4C")
+    public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4C diamond4C) {
+        Double mostRecentPrice = diamondPriceService.getDiamondPriceBy4C(diamond4C);
+        if(mostRecentPrice == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No prices found.");
+        } else {
+            return ResponseEntity.ok(mostRecentPrice);
         }
     }
 }

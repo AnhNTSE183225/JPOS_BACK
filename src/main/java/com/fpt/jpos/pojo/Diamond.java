@@ -68,7 +68,7 @@ public class Diamond {
     private String note;
 
     @Column(name = "active")
-    private boolean active;
+    private Boolean active;
 
     @ManyToMany(mappedBy = "productDiamond")
     Set<Product> productDiamond;
