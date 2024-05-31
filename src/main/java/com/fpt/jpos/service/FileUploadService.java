@@ -2,6 +2,7 @@ package com.fpt.jpos.service;
 
 import com.cloudinary.Cloudinary;
 import com.fpt.jpos.pojo.Order;
+import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.IOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class FileUploadService implements IFileUploadService {
     private IOrderRepository orderRepository;
 
     @Override
-    public String uploadFile(MultipartFile multipartFile, Integer orderId) throws IOException {
+    public String uploadModelDesignFile(MultipartFile multipartFile, Integer orderId) throws IOException {
         String url = cloudinary.uploader()
                 .upload(multipartFile.getBytes(),
                         Map.of("public_id", UUID.randomUUID().toString()))
@@ -30,8 +31,11 @@ public class FileUploadService implements IFileUploadService {
                 .toString();
 
         Optional<Order> order = orderRepository.findById(orderId);
-        order.ifPresent(value -> value.setDesignFile(url));
-
+        if (order.isPresent()) {
+            order.get().setDesignFile(url);
+            order.get().setStatus(OrderStatus.pending_design);
+            orderRepository.save(order.get());
+        }
         return url;
     }
 }
