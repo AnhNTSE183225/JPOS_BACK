@@ -2,6 +2,7 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
+import com.fpt.jpos.pojo.enums.OrderStatus;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface IOrderService {
     List<Order> getOrdersByStatusAndStaffs(int id);
 
     Order findById(Integer id);
+
+    Order updateOrderStatus(int orderId, OrderStatus status);
 }
