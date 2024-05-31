@@ -27,12 +27,15 @@ public class DiamondPrice {
     private Double caratWeight;
 
     @Column(name = "color")
+    @Enumerated(EnumType.STRING)
     private Color color;
 
     @Column(name = "clarity")
+    @Enumerated(EnumType.STRING)
     private Clarity clarity;
 
     @Column(name = "cut")
+    @Enumerated(EnumType.STRING)
     private Cut cut;
 
     @Column(name = "price")

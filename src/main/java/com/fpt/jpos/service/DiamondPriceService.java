@@ -35,9 +35,9 @@ public class DiamondPriceService implements IDiamondPriceService {
 
         List<DiamondPrice> diamondPriceList = diamondPriceRepository.findDiamondPriceByCaratWeightAndAndClarityAndColorAndCut(
                 diamond4C.getCaratWeight(),
-                diamond4C.getClarity(),
-                diamond4C.getColor(),
-                diamond4C.getCut());
+                diamond4C.getClarity().name(),
+                diamond4C.getColor().name(),
+                diamond4C.getCut().name());
 
         Date currentDate = new Date();
 

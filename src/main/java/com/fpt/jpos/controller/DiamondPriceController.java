@@ -26,7 +26,7 @@ public class DiamondPriceController {
     @GetMapping("/diamond-prices")
     public ResponseEntity<List<DiamondPrice>> getAllDiamondPrice() {
         List<DiamondPrice> diamondPriceList = diamondPriceService.getDiamondPrices();
-        if(diamondPriceList.isEmpty()) {
+        if (diamondPriceList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(diamondPriceList);
@@ -34,7 +34,7 @@ public class DiamondPriceController {
     }
 
     @CrossOrigin
-    @PostMapping("/get-price-by-4C")
+    @GetMapping("/get-price-by-4C")
     public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4C diamond4C) {
 
         System.out.println(diamond4C.getCut());
@@ -43,7 +43,7 @@ public class DiamondPriceController {
         System.out.println(diamond4C.getClarity());
 
         Double mostRecentPrice = diamondPriceService.getDiamondPriceBy4C(diamond4C);
-        if(mostRecentPrice == null) {
+        if (mostRecentPrice == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No prices found.");
         } else {
             return ResponseEntity.ok(mostRecentPrice);
