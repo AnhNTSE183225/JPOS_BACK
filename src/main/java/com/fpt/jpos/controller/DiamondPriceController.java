@@ -26,7 +26,7 @@ public class DiamondPriceController {
     @GetMapping("/diamond-prices")
     public ResponseEntity<List<DiamondPrice>> getAllDiamondPrice() {
         List<DiamondPrice> diamondPriceList = diamondPriceService.getDiamondPrices();
-        if (diamondPriceList.isEmpty()) {
+        if (diamondPriceList == null || diamondPriceList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(diamondPriceList);
@@ -38,8 +38,8 @@ public class DiamondPriceController {
     public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4C diamond4C) {
 
         List<DiamondPrice> diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4C);
-        if (diamondPriceList == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No prices found.");
+        if (diamondPriceList == null || diamondPriceList.isEmpty()) {
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(diamondPriceList);
         }
