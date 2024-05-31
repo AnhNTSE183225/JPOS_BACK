@@ -86,4 +86,9 @@ public class OrderController {
             return ResponseEntity.ok(imageURL);
         }
     }
+    @PostMapping("/{id}/forward-quotation")
+    public ResponseEntity<String> forwardQuotation(@PathVariable Long id) {
+        String status = orderService.forwardQuotation(id);
+        return ResponseEntity.ok(status);
+    }	
 }

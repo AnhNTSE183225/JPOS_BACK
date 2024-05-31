@@ -15,4 +15,5 @@ public interface IOrderService {
     List<Order> getOrdersByStatusAndStaffs(int id);
 
     Order findById(Integer id);
+    String forwardQuotation(Long id);
 }
