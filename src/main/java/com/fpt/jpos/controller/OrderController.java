@@ -5,7 +5,6 @@ import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
 import com.fpt.jpos.service.IOrderService;
-import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -115,5 +114,5 @@ public class OrderController {
     public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
         OrderStatus status = orderService.forwardQuotation(id);
         return ResponseEntity.ok(status.toString());
-    }
+    }	
 }
