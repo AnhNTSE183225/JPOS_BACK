@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -70,6 +71,6 @@ public class Diamond {
     @Column(name = "active")
     private boolean active;
 
-    @ManyToMany(mappedBy = "productDiamond")
-    Set<Product> productDiamond;
+    @ManyToMany(mappedBy = "diamonds")
+    Set<Product> products = new HashSet<Product>();
 }

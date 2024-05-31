@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -46,6 +47,6 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "diamond_id")
     )
-    Set<Diamond> productDiamond;
+    Set<Diamond> diamonds = new HashSet<Diamond>();
 
 }
