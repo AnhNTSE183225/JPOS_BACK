@@ -81,16 +81,16 @@ public class Order {
     private Date oDate;
 
     @Column(name = "e_diamond_price")
-    private double eDiamondPrice;
+    private Double eDiamondPrice;
 
     @Column(name = "e_material_price")
-    private double eMaterialPrice;
+    private Double eMaterialPrice;
 
     @Column(name = "production_price")
-    private double productionPrice;
+    private Double productionPrice;
 
     @Column(name = "markup_rate")
-    private double markupRate;
+    private Double markupRate;
     @Column(name = "model_file")
     private String modelFile;
 
