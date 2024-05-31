@@ -21,5 +21,5 @@ public interface IOrderService {
 
     OrderStatus forwardQuotation(Integer id);
     
-    String retrieveQuotationFromStaff(Long id);
+    String retrieveQuotationFromStaff(Integer id);
 }

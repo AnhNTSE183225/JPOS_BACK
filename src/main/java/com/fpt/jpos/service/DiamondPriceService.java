@@ -28,6 +28,11 @@ public class DiamondPriceService implements IDiamondPriceService {
     @Override
     public Double getDiamondPriceBy4C(Diamond4C diamond4C) {
 
+        System.out.println(diamond4C.getCut());
+        System.out.println(diamond4C.getCaratWeight());
+        System.out.println(diamond4C.getColor());
+        System.out.println(diamond4C.getClarity());
+
         List<DiamondPrice> diamondPriceList = diamondPriceRepository.findDiamondPriceByCaratWeightAndAndClarityAndColorAndCut(
                 diamond4C.getCaratWeight(),
                 diamond4C.getClarity(),

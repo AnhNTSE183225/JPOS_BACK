@@ -34,8 +34,14 @@ public class DiamondPriceController {
     }
 
     @CrossOrigin
-    @GetMapping("/get-price-by-4C")
+    @PostMapping("/get-price-by-4C")
     public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4C diamond4C) {
+
+        System.out.println(diamond4C.getCut());
+        System.out.println(diamond4C.getCaratWeight());
+        System.out.println(diamond4C.getColor());
+        System.out.println(diamond4C.getClarity());
+
         Double mostRecentPrice = diamondPriceService.getDiamondPriceBy4C(diamond4C);
         if(mostRecentPrice == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No prices found.");
