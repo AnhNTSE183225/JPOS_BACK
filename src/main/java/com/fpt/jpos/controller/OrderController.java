@@ -73,6 +73,7 @@ public class OrderController {
 
 
     // Upload file by design staff
+    @CrossOrigin
     @PostMapping("/designs/upload/{id}")
     @Transactional
     public ResponseEntity<?> uploadDesign(@RequestParam("file") MultipartFile file, @PathVariable Integer id) throws IOException {
