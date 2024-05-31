@@ -122,7 +122,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/accept")
-    public Order acceptOrder(@PathVariable Long id) {
+    public Order acceptOrder(@PathVariable Integer id) {
         return orderService.acceptOrder(id);
     }
 }

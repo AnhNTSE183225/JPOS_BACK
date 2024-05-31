@@ -14,5 +14,6 @@ public class Diamond4C {
     private Color color;
     private Clarity clarity;
     private Cut cut;
-    private Double caratWeight;
+    private Double fromCaratWeight;
+    private Double toCaratWeight;
 }

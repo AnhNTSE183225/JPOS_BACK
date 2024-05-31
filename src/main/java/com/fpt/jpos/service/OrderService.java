@@ -111,7 +111,7 @@ public class OrderService implements IOrderService {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
-            order.setStatus(OrderStatus.CUSTOMER_ACCEPTED);
+            order.setStatus(OrderStatus.customer_accept);
             return orderRepository.save(order);
         } else {
             throw new RuntimeException("Order not found with id: " + id);

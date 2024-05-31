@@ -34,7 +34,7 @@ public class DiamondPriceController {
     }
 
     @CrossOrigin
-    @GetMapping("/get-price-by-4C")
+    @PostMapping("/get-price-by-4C")
     public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4C diamond4C) {
 
         List<DiamondPrice> diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4C);
