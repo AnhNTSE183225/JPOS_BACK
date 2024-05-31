@@ -19,5 +19,5 @@ public interface IOrderService {
 
     Order updateOrderStatus(int orderId, OrderStatus status);
 
-    String forwardQuotation(Long id);
+    OrderStatus forwardQuotation(Integer id);
 }
