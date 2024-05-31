@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService implements IOrderService {
@@ -51,6 +52,13 @@ public class OrderService implements IOrderService {
     @Override
     public Order findById(Integer id) {
         return orderRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Order updateOrderStatus(int id, OrderStatus status) {
+        Optional<Order> theOrder = orderRepository.findById(id);
+        theOrder.ifPresent(order -> order.setStatus(status));
+        return orderRepository.save(theOrder.get());
     }
 
     @Override
