@@ -1,5 +1,6 @@
 package com.fpt.jpos.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,8 @@ public class MaterialPrice {
     @Column(name = "price")
     private Double price;
 
+
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @MapsId("materialId")
     @JoinColumn(name = "material_id")
