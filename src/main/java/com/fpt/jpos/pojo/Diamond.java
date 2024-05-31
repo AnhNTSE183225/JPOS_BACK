@@ -69,7 +69,7 @@ public class Diamond {
     private String note;
 
     @Column(name = "active")
-    private boolean active;
+    private Boolean active;
 
     @ManyToMany(mappedBy = "diamonds")
     Set<Product> products = new HashSet<Product>();

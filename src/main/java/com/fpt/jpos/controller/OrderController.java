@@ -115,4 +115,9 @@ public class OrderController {
         OrderStatus status = orderService.forwardQuotation(id);
         return ResponseEntity.ok(status.toString());
     }
+
+    public ResponseEntity<String> retrieveQuotationFromStaff(@PathVariable Long id) {
+        String status = orderService.retrieveQuotationFromStaff(id);
+        return ResponseEntity.ok(status);
+    }
 }

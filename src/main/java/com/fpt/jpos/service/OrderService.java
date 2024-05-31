@@ -93,4 +93,16 @@ public class OrderService implements IOrderService {
         return order.getStatus();
     }
 
+    @Override
+    public String retrieveQuotationFromStaff(Integer id) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
+
+        // Logic to retrieve quotation from staff goes here
+   
+
+        order.setStatus("wait_manager");
+        orderRepository.save(order);
+        return order.getStatus();
+    }
 }
