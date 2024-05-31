@@ -80,6 +80,17 @@ public class Order {
     @Column(name = "o_date")
     private Date oDate;
 
+    @Column(name = "e_diamond_price")
+    private double eDiamondPrice;
+
+    @Column(name = "e_material_price")
+    private double eMaterialPrice;
+
+    @Column(name = "production_price")
+    private double productionPrice;
+
+    @Column(name = "markup_rate")
+    private double markupRate;
     @Column(name = "model_file")
     private String modelFile;
 
