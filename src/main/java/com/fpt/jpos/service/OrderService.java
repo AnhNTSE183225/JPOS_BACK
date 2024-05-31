@@ -105,4 +105,16 @@ public class OrderService implements IOrderService {
         orderRepository.save(order);
         return order.getStatus().name();
     }
+
+    @Override
+    public Order acceptOrder(Integer id) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setStatus(OrderStatus.CUSTOMER_ACCEPTED);
+            return orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Order not found with id: " + id);
+        }
+    }
 }

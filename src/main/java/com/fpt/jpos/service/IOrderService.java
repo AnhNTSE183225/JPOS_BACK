@@ -22,4 +22,6 @@ public interface IOrderService {
     OrderStatus forwardQuotation(Integer id);
     
     String retrieveQuotationFromStaff(Integer id);
+
+    Order acceptOrder(Integer id);
 }

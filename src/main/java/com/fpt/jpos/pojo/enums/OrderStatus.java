@@ -6,6 +6,7 @@ public enum OrderStatus {
     manager_approved,
     wait_customer,
     customer_accept,
+    customer_accepted,
     designing,
     pending_design,
     production,

@@ -120,4 +120,9 @@ public class OrderController {
         String status = orderService.retrieveQuotationFromStaff(id);
         return ResponseEntity.ok(status);
     }
+
+    @PutMapping("/{id}/accept")
+    public Order acceptOrder(@PathVariable Long id) {
+        return orderService.acceptOrder(id);
+    }
 }
