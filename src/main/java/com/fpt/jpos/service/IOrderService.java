@@ -18,4 +18,6 @@ public interface IOrderService {
     Order findById(Integer id);
 
     Order updateOrderStatus(int orderId, OrderStatus status);
+
+    String forwardQuotation(Long id);
 }
