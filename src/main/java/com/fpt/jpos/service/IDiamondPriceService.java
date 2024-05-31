@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IDiamondPriceService {
     public List<DiamondPrice> getDiamondPrices();
-    public Double getDiamondPriceBy4C(Diamond4C diamond4C);
+    public List<DiamondPrice> getDiamondPricesBy4C(Diamond4C diamond4C);
 }
