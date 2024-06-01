@@ -3,10 +3,7 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.service.IMaterialPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,12 +17,16 @@ public class MaterialPriceController {
     }
 
 
+    @CrossOrigin
     @GetMapping("/materialPrices/{id}")
     public ResponseEntity<?> getLatestMaterialPriceById(@PathVariable Integer id) {
 
-        Double latestPrice = materialPriceService.getLatestPriceById(id);
-
-        return ResponseEntity.ok(latestPrice);
+        try {
+            Double latestPrice = materialPriceService.getLatestPriceById(id);
+            return ResponseEntity.ok(latestPrice);
+        } catch (Exception ex) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
 }

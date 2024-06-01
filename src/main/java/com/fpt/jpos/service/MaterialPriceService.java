@@ -29,7 +29,6 @@ public class MaterialPriceService implements IMaterialPriceService {
         Double result = 0.0;
         materialPriceList.sort((o1, o2) -> o2.getMaterialPriceId().getEffectiveDate().compareTo(o1.getMaterialPriceId().getEffectiveDate()));
 
-
         for (MaterialPrice materialPrice : materialPriceList) {
             if (materialPrice.getMaterialPriceId().getEffectiveDate().compareTo(today) <= 0) {
                 result = materialPrice.getPrice();
