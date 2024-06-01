@@ -29,6 +29,7 @@ public class OrderController {
         this.fileUploadService = fileUploadService;
     }
 
+    // Customer send request - 1st flow
     @CrossOrigin
     @PostMapping("/send-request")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequest customerRequest) {
@@ -40,13 +41,7 @@ public class OrderController {
         return ResponseEntity.ok(newOrder);
     }
 
-    @CrossOrigin
-    @PostMapping("/{id}/manager-response")
-    public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval) {
-        String status = orderService.handleManagerResponse(id, managerApproval);
-        return ResponseEntity.ok(status);
-    }
-
+    // Sale staff view orders list
     @CrossOrigin
     @GetMapping("/sales/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForSaleStaff(@PathVariable int staffId) {
@@ -59,6 +54,36 @@ public class OrderController {
             return ResponseEntity.ok(requestList);
         }
     }
+
+
+    // Manager get quotation from staff
+    @GetMapping("/{id}/retrieve-quotation")
+    public ResponseEntity<String> retrieveQuotationFromStaff(@PathVariable Integer id) {
+        String status = orderService.retrieveQuotationFromStaff(id);
+        return ResponseEntity.ok(status);
+    }
+
+    // Manager accept or decline quotation
+    @CrossOrigin
+    @PostMapping("/{id}/manager-response")
+    public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval) {
+        String status = orderService.handleManagerResponse(id, managerApproval);
+        return ResponseEntity.ok(status);
+    }
+
+    // After manager accepted, sale staff forward quotation to customer
+    @PostMapping("/{id}/forward-quotation")
+    public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
+        OrderStatus status = orderService.forwardQuotation(id);
+        return ResponseEntity.ok(status.toString());
+    }
+
+    // Customer accept quotation
+    @PutMapping("/{id}/accept")
+    public Order acceptOrder(@PathVariable Integer id) {
+        return orderService.acceptOrder(id);
+    }
+
 
     @CrossOrigin
     @GetMapping("/sales/order-select/{id}")
@@ -73,9 +98,8 @@ public class OrderController {
 
     // Update order status to designing after confirming deposit
     @PutMapping("/sales/orders/{id}/confirm-deposit")
-    @Transactional
     public ResponseEntity<?> confirmDeposit(@PathVariable int id) {
-        Order order = orderService.updateOrderStatus(id, OrderStatus.designing);
+        Order order = orderService.updateOrderStatusDesigning(id);
         if (order == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
         }
@@ -86,7 +110,6 @@ public class OrderController {
     // Upload file by design staff
     @CrossOrigin
     @PostMapping("/designs/upload/{id}")
-    @Transactional
     public ResponseEntity<?> uploadDesign(@RequestParam("file") MultipartFile file, @PathVariable Integer id) throws IOException {
 
         String imageURL = fileUploadService.uploadModelDesignFile(file, id);
@@ -100,30 +123,14 @@ public class OrderController {
 
     // Customer accept design
     @PostMapping("/customers/acceptDesign/{orderId}")
-    @Transactional
     public ResponseEntity<?> acceptDesign(@PathVariable Integer orderId) {
 
-        Order theOrder = orderService.updateOrderStatus(orderId, OrderStatus.production);
+        Order theOrder = orderService.updateOrderStatusProduction(orderId);
         if (theOrder == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
         }
         return ResponseEntity.ok(theOrder);
     }
 
-    @PostMapping("/{id}/forward-quotation")
-    public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
-        OrderStatus status = orderService.forwardQuotation(id);
-        return ResponseEntity.ok(status.toString());
-    }
 
-    @GetMapping("/{id}/retrieve-quotation")
-    public ResponseEntity<String> retrieveQuotationFromStaff(@PathVariable Integer id) {
-        String status = orderService.retrieveQuotationFromStaff(id);
-        return ResponseEntity.ok(status);
-    }
-
-    @PutMapping("/{id}/accept")
-    public Order acceptOrder(@PathVariable Integer id) {
-        return orderService.acceptOrder(id);
-    }
 }
