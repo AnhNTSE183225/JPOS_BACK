@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class DiamondPriceService implements IDiamondPriceService {
 
-    private IDiamondPriceRepository diamondPriceRepository;
+    private final IDiamondPriceRepository diamondPriceRepository;
 
     @Autowired
     public DiamondPriceService(IDiamondPriceRepository diamondPriceRepository) {

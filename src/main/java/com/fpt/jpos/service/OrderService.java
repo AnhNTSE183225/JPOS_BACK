@@ -97,10 +97,6 @@ public class OrderService implements IOrderService {
     public String retrieveQuotationFromStaff(Integer id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
-
-        // Logic to retrieve quotation from staff goes here
-   
-
         order.setStatus(OrderStatus.wait_manager);
         orderRepository.save(order);
         return order.getStatus().name();

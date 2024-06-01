@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class MaterialController {
 
-    private IMaterialService materialService;
+    private final IMaterialService materialService;
 
     @Autowired
     public MaterialController(IMaterialService materialService) {

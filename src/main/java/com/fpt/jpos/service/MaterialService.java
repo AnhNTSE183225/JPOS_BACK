@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MaterialService implements IMaterialService{
 
-    private IMaterialRepository materialRepository;
+    private final IMaterialRepository materialRepository;
 
     @Autowired
     public MaterialService(IMaterialRepository materialRepository) {

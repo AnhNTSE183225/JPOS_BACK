@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class CustomerController {
-    private ICustomerService customerService;
+    private final ICustomerService customerService;
 
     @Autowired
     public CustomerController(ICustomerService customerService) {

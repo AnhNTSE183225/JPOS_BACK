@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class StaffService implements IStaffService {
 
-    private IStaffRepository staffRepository;
-    private IAccountRepository accountRepository;
+    private final IStaffRepository staffRepository;
+    private final IAccountRepository accountRepository;
 
     @Autowired
     public StaffService(IStaffRepository staffRepository, IAccountRepository accountRepository) {
@@ -26,7 +26,7 @@ public class StaffService implements IStaffService {
             throw new RuntimeException("Account doesn't exists!");
         } else {
             Staff staff = staffRepository.findByUsername(registeredAccount.getUsername());
-            if(staff == null) {
+            if (staff == null) {
                 throw new RuntimeException("Account doesn't belong to staff");
             } else {
                 return staff;

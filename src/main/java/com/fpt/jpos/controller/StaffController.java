@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class StaffController {
 
-    private IStaffService staffService;
+    private final IStaffService staffService;
 
     @Autowired
     public StaffController(IStaffService staffService) {

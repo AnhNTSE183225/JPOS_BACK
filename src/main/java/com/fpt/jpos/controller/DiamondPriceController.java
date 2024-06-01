@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DiamondPriceController {
-    private IDiamondPriceService diamondPriceService;
+    private final IDiamondPriceService diamondPriceService;
 
     @Autowired
     public DiamondPriceController(IDiamondPriceService diamondPriceService) {

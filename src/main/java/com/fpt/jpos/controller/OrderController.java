@@ -19,9 +19,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class OrderController {
 
-    private IOrderService orderService;
+    private final IOrderService orderService;
 
-    private IFileUploadService fileUploadService;
+    private final IFileUploadService fileUploadService;
 
     @Autowired
     public OrderController(IOrderService orderService, IFileUploadService fileUploadService) {
