@@ -2,6 +2,7 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
+import com.fpt.jpos.pojo.Payment;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,7 @@ public interface IOrderService {
 
     Order findById(Integer id);
 
-    Order updateOrderStatusDesigning(int id);
+    Order updateOrderStatusDesigning(int id, Payment payment);
 
     Order updateOrderStatusProduction(int id);
 
