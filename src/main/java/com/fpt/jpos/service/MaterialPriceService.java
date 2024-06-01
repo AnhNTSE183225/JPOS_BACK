@@ -11,7 +11,6 @@ import java.util.*;
 public class MaterialPriceService implements IMaterialPriceService {
 
     private final IMaterialPriceRepository materialPriceRepository;
-    ;
 
     @Autowired
     public MaterialPriceService(IMaterialPriceRepository materialPriceRepository) {
