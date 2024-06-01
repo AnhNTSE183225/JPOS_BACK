@@ -4,9 +4,6 @@ import com.fpt.jpos.pojo.Diamond4C;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -35,7 +35,7 @@ public class CustomerService implements ICustomerService {
     @Override
     public Customer registerCustomer(CustomerRegistration customerRegistration) {
         Customer customer = null;
-        if (!accountRepository.findById(customerRegistration.getUsername()).isPresent()) {
+        if (accountRepository.findById(customerRegistration.getUsername()).isEmpty()) {
             Account newAccount = new Account();
             newAccount.setUsername(customerRegistration.getUsername());
             newAccount.setPassword(customerRegistration.getPassword());
