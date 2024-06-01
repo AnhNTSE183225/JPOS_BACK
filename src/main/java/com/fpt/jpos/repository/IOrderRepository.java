@@ -3,7 +3,6 @@ package com.fpt.jpos.repository;
 import com.fpt.jpos.pojo.Order;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
