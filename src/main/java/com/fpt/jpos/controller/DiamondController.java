@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DiamondController {
-    private IDiamondRepository diamondRepository;
+    private final IDiamondRepository diamondRepository;
 
     @Autowired
     public DiamondController(IDiamondRepository diamondRepository) {
