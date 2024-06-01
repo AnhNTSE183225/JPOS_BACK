@@ -116,7 +116,7 @@ public class OrderController {
         return ResponseEntity.ok(status.toString());
     }
 
-    @GetMapping("/retrive-quotation")
+    @GetMapping("/{id}/retrive-quotation")
     public ResponseEntity<String> retrieveQuotationFromStaff(@PathVariable Integer id) {
         String status = orderService.retrieveQuotationFromStaff(id);
         return ResponseEntity.ok(status);
