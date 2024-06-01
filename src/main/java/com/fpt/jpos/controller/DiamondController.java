@@ -28,13 +28,6 @@ public class DiamondController {
                                           @RequestParam String cut,
                                           @RequestParam String shape) {
 
-        System.out.println(fromCaratWeight);
-        System.out.println(toCaratWeight);
-        System.out.println(clarity);
-        System.out.println(color);
-        System.out.println(cut);
-        System.out.println(shape);
-
         List<Diamond> diamondList = diamondRepository.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
 
         if(diamondList == null || diamondList.isEmpty()) {
