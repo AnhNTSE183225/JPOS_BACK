@@ -1,11 +1,14 @@
 package com.fpt.jpos.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,6 +50,6 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "diamond_id")
     )
-    Set<Diamond> diamonds = new HashSet<Diamond>();
+    List<Diamond> diamonds = new ArrayList<>();
 
 }
