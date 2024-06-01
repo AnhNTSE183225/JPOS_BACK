@@ -101,7 +101,7 @@ public class OrderService implements IOrderService {
         // Logic to retrieve quotation from staff goes here
    
 
-        order.setStatus(OrderStatus.wait_sale_staff);
+        order.setStatus(OrderStatus.wait_manager);
         orderRepository.save(order);
         return order.getStatus().name();
     }
