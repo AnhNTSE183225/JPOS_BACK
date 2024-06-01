@@ -17,9 +17,9 @@ import java.util.Optional;
 @Service
 public class OrderService implements IOrderService {
 
-    private IOrderRepository orderRepository;
+    private final IOrderRepository orderRepository;
 
-    private ICustomerRepository customerRepository;
+    private final ICustomerRepository customerRepository;
 
 
     @Autowired
@@ -58,6 +58,7 @@ public class OrderService implements IOrderService {
     public Order updateOrderStatus(int id, OrderStatus status) {
         Optional<Order> theOrder = orderRepository.findById(id);
         theOrder.ifPresent(order -> order.setStatus(status));
+
         return orderRepository.save(theOrder.get());
     }
 
