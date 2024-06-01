@@ -48,10 +48,10 @@ public class OrderController {
     }
 
     @CrossOrigin
-    @GetMapping("/sales/orders/{id}")
-    public ResponseEntity<?> getAllOrdersForSaleStaff(@PathVariable int id) {
+    @GetMapping("/sales/orders/{staffId}")
+    public ResponseEntity<?> getAllOrdersForSaleStaff(@PathVariable int staffId) {
 
-        List<Order> requestList = orderService.getOrdersByStatusAndStaffs(id);
+        List<Order> requestList = orderService.getOrdersByStatusAndStaffs(staffId);
 
         if (requestList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No requests found");
