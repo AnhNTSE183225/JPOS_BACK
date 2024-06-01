@@ -55,11 +55,31 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order updateOrderStatus(int id, OrderStatus status) {
+    @Transactional
+    public Order updateOrderStatusDesigning(int id) {
         Optional<Order> theOrder = orderRepository.findById(id);
-        theOrder.ifPresent(order -> order.setStatus(status));
+        //theOrder.ifPresent(order -> order.setStatus(OrderStatus.production));
+        if (theOrder.isPresent()) {
+            Order order = theOrder.get();
+            order.setStatus(OrderStatus.designing);
+            return orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Order not found with id: " + id);
+        }
+    }
 
-        return orderRepository.save(theOrder.get());
+    @Override
+    @Transactional
+    public Order updateOrderStatusProduction(int id) {
+        Optional<Order> theOrder = orderRepository.findById(id);
+        //theOrder.ifPresent(order -> order.setStatus(OrderStatus.production));
+        if (theOrder.isPresent()) {
+            Order order = theOrder.get();
+            order.setStatus(OrderStatus.production);
+            return orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Order not found with id: " + id);
+        }
     }
 
     @Override
@@ -81,6 +101,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Transactional
     public OrderStatus forwardQuotation(Integer id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
@@ -95,6 +116,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Transactional
     public String retrieveQuotationFromStaff(Integer id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
@@ -104,6 +126,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Transactional
     public Order acceptOrder(Integer id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isPresent()) {
