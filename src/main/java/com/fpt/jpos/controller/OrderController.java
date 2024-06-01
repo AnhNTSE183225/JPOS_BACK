@@ -2,6 +2,7 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.CustomerRequest;
 import com.fpt.jpos.pojo.Order;
+import com.fpt.jpos.pojo.Payment;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
 import com.fpt.jpos.service.IOrderService;
@@ -98,8 +99,8 @@ public class OrderController {
 
     // Update order status to designing after confirming deposit
     @PutMapping("/sales/orders/{id}/confirm-deposit")
-    public ResponseEntity<?> confirmDeposit(@PathVariable int id) {
-        Order order = orderService.updateOrderStatusDesigning(id);
+    public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody Payment payment) {
+        Order order = orderService.updateOrderStatusDesigning(id, payment);
         if (order == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
         }
