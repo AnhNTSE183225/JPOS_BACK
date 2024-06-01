@@ -2,6 +2,8 @@ package com.fpt.jpos.pojo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +23,6 @@ public class MaterialPriceId implements Serializable {
     private Integer materialId;
 
     @Column(name = "effective_date")
+    @Temporal(TemporalType.DATE)
     private Date effectiveDate;
 }

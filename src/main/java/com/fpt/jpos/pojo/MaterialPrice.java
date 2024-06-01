@@ -18,11 +18,10 @@ import java.util.Date;
 public class MaterialPrice {
 
     @EmbeddedId
-    private MaterialPriceId id;
+    private MaterialPriceId materialPriceId;
 
     @Column(name = "price")
     private Double price;
-
 
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})

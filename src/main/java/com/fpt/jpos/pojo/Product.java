@@ -49,4 +49,13 @@ public class Product {
     )
     List<Diamond> diamonds = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "ProductMaterial",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "material_id")
+    )
+    List<Material> materials = new ArrayList<>();
+
+
 }

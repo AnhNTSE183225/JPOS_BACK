@@ -29,4 +29,7 @@ public class Material {
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<MaterialPrice> materialPrices;
 
+    @ManyToMany(mappedBy = "materials")
+    @JsonIgnore
+    private List<Product> products;
 }
