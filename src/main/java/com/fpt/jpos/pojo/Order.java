@@ -1,5 +1,6 @@
 package com.fpt.jpos.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "`Order`")
@@ -109,4 +111,8 @@ public class Order {
     @Column(name = "discount")
     private Double discount;
 
+
+    @OneToMany(mappedBy = "order")
+    @JsonIgnore
+    List<Payment> payments;
 }
