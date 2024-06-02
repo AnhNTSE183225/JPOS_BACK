@@ -11,6 +11,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,6 +98,7 @@ public class OrderService implements IOrderService {
 
         Customer customer = customerRepository.findById(customerRequest.getCustomerId()).orElseThrow(() -> new RuntimeException("Customer not found"));
 
+        theOrder.setOrderDate(new Date());
         theOrder.setDesignFile(customerRequest.getDesignFile());
         theOrder.setBudget(customerRequest.getBudget());
         theOrder.setOrderType("customize");

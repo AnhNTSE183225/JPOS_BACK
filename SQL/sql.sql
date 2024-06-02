@@ -37,9 +37,9 @@ go
 /*
 status: enabled(1)/disabled(0)
 role:
-	+ customer (0)
-	+ staff (1)
-	+ admin (2)
+	+ customer
+	+ staff
+	+ admin
 */
 create table [Staff] (
 	[staff_id] int identity(1,1),
@@ -160,24 +160,6 @@ create table [Product] (
 	foreign key([product_design_id]) references [ProductDesign]
 )
 go
-insert into [Product]
-values
-('Diamond Necklace 1', 2000000, 3000000, 4000000, 10, 'Necklace', NULL),
-('Diamond Ring 1', 2500000, 3500000, 4500000, 15, 'Ring', NULL),
-('Diamond Bracelet 1', 3000000, 4000000, 5000000, 20, 'Bracelet', NULL),
-('Diamond Earring 1', 3500000, 4500000, 5500000, 25, 'Earring', NULL),
-('Diamond Necklace 2', 4000000, 5000000, 6000000, 30, 'Necklace', NULL),
-('Diamond Ring 2', 4500000, 5500000, 6500000, 35, 'Ring', NULL),
-('Diamond Bracelet 2', 5000000, 6000000, 7000000, 40, 'Bracelet', NULL),
-('Diamond Earring 2', 5500000, 6500000, 7500000, 45, 'Earring', NULL),
-('Diamond Necklace 3', 6000000, 7000000, 8000000, 50, 'Necklace', NULL),
-('Diamond Ring 3', 6500000, 7500000, 8500000, 55, 'Ring', NULL),
-('Diamond Necklace 4', 6000000, 7000000, 8000000, 50, 'Necklace', 18),
-('Diamond Ring 4', 6500000, 7500000, 8500000, 55, 'Ring', 20),
-('Diamond Bracelet 3', 5000000, 6000000, 7000000, 40, 'Bracelet', NULL),
-('Diamond Necklace 5', 6000000, 7000000, 8000000, 50, 'Necklace', 18),
-('Diamond Ring 6', 6500000, 7500000, 8500000, 55, 'Ring', 20)
-go
 create table [Order] (
 	[order_id] int identity(1,1),
 	[customer_id] int,
@@ -232,22 +214,6 @@ create table [Order] (
 	"from_design"
 */
 go
-INSERT INTO [Order]([customer_id],[product_id],[status],[order_date],[order_type],[budget],[design_file],[description],[q_diamond_price],[q_material_price],[q_date],[o_diamond_price],[o_material_price],[o_date],[model_file],[model_feedback],[product_image],[shipping_fee],[tax_fee],[discount],
-[total_amount],[sale_staff_id],[design_staff_id],[production_staff_id],[e_diamond_price],[e_material_price],[production_price],[markup_rate])
-VALUES
-(1, null, 'wait_sale_staff', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
-(1, 2, 'wait_manager', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
-(1, 3, 'manager_approved', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
-(1, 4, 'wait_customer', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,null, null, null, null, null, null, null, null),
-(1, 5, 'customer_accept', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', NULL, NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
-(1, 6, 'designing', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', NULL, NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
-(1, 7, 'designing', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'old_model_1', 'it is too ugly', NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
-(1, 8, 'pending_design', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', NULL, NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
-(1, 9, 'production', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', 'all good', NULL, 1000000, 2000000, 10,null, null, null, null, null, null, null, null),
-(1, 11, 'production', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 5500000, 6500000, '2024-05-27 15:16:00', NULL, NULL, NULL, 1300000, 2300000, 40,null, null, null, null, null, null, null, null),
-(1, 12, 'completed', '2024-05-27 15:16:00', 'from_design', NULL, NULL, NULL, NULL, NULL, NULL, 6000000, 7000000, '2024-05-27 15:16:00', NULL, NULL, 'product_image_1', 1400000, 2400000, 50,null, null, null, null, null, null, null, null),
-(1, 10, 'completed', '2024-05-27 15:16:00', 'customize', '5000000', 'design_file_1', 'description_1', 2500000, 3500000, '2024-05-28 15:16:00', 4000000, 5000000, '2024-05-29 15:16:00', 'model_file_1', 'all good', 'completed_product_image_1', 1000000, 2000000, 10,null, null, null, null, null, null, null, null)
-go
 create table [Payment] (
 	[payment_id] int identity(1,1),
 	[order_id] int,
@@ -260,17 +226,6 @@ create table [Payment] (
 	foreign key([order_id]) references [Order]
 )
 go
-insert into [Payment]([order_id],[payment_date],[payment_method],[payment_status],[amount_paid],[amount_total])
-values
-(5, '2024-05-30 15:16:00', 'Credit Card', 'Paid', 4000000, 5000000),
-(6, '2024-05-31 15:16:00', 'Debit Card', 'Paid', 4000000, 5000000),
-(7, '2024-06-01 15:16:00', 'Bank Transfer', 'Pending', NULL, 5000000),
-(8, '2024-06-02 15:16:00', 'Credit Card', 'Paid', 4000000, 5000000),
-(9, '2024-06-03 15:16:00', 'Debit Card', 'Paid', 4000000, 5000000),
-(10, '2024-06-04 15:16:00', 'Bank Transfer', 'Paid', 4000000, 5000000),
-(11, '2024-06-05 15:16:00', 'Credit Card', 'Pending', NULL, 6500000),
-(12, '2024-06-06 15:16:00', 'Debit Card', 'Paid', 6000000, 7000000)
-go
 create table [Warranty] (
 	[warranty_id] int identity(1,1),
 	[customer_id] int,
@@ -282,17 +237,6 @@ create table [Warranty] (
 	foreign key([customer_id]) references [Customer],
 	foreign key([product_id]) references [Product]
 )
-go
-insert into [Warranty]([customer_id],[product_id],[purchase_date],[end_of_support_date],[terms])
-values
-(1,5,'2024-05-29 15:16:00','2028-05-29 15:16:00','terms_1'),
-(1,6,'2024-05-29 15:16:00','2028-05-29 15:16:00','terms_1'),
-(1,7,'2024-05-29 15:16:00','2028-05-29 15:16:00','terms_1'),
-(1,8,'2024-05-29 15:16:00','2028-05-29 15:16:00','terms_1'),
-(1,9,'2024-05-29 15:16:00','2028-05-29 15:16:00','terms_1'),
-(1,10,'2024-05-29 15:16:00','2028-05-29 15:16:00','terms_1'),
-(1,11,'2024-05-27 15:16:00','2028-05-27 15:16:00','terms_1'),
-(1,12,'2024-05-27 15:16:00','2028-05-27 15:16:00','terms_1')
 go
 create table [Material] (
 	[material_id] int identity(1,1),
@@ -318,22 +262,6 @@ create table [ProductMaterial] (
 	foreign key([product_id]) references [Product],
 	foreign key([material_id]) references [Material]
 )
-go
-INSERT INTO [ProductMaterial] ([product_id], [material_id], [weight])
-VALUES
-(1, 1, 10), -- Diamond Necklace 1
-(1, 2, 5), -- Diamond Necklace 1
-(2, 3, 8), -- Diamond Ring 1
-(3, 4, 12), -- Diamond Bracelet 1
-(4, 5, 15), -- Diamond Earring 1
-(5, 6, 10), -- Diamond Necklace 2
-(6, 7, 8), -- Diamond Ring 2
-(7, 1, 12), -- Diamond Bracelet 2
-(8, 2, 15), -- Diamond Earring 2
-(9, 3, 10), -- Diamond Necklace 3
-(10, 4, 8), -- Diamond Ring 3
-(11, 7, 10), -- Diamond Necklace 4
-(12, 7, 8) -- Diamond Ring 4
 go
 create table [MaterialPriceList] (
 	[material_id] int,
@@ -434,32 +362,29 @@ create table [Diamond] (
 	clarity: I3, I2, I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL
 	carat_weight: 0 to 30
 */
-go
 INSERT INTO [Diamond] 
-([diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [active], [diamond_code], [note])
-VALUES
-('1.01 Carat Round Diamond', 'round', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Excellent', 'Excellent', 'Excellent', 'H', 'VS2', 1.01, 1, 'D001', 'First batch'),
-('1.0 Carat Round Diamond', 'round', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.0, 1, 'D002', 'New arrival'),
-('1.0 Carat Princess Diamond', 'princess', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'E', 'IF', 1.0, 1, 'D003', 'High quality'),
-('1.0 Carat Cushion Diamond', 'cushion', 'Namibia', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'F', 'VVS1', 1.0, 0, 'D004', 'Good value'),
-('1.0 Carat Emerald Diamond', 'emerald', 'Botswana', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'G', 'VVS2', 1.0, 0, 'D005', 'Special offer'),
-('1.0 Carat Oval Diamond', 'oval', 'Lesotho', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'H', 'VS1', 1.0, 0, 'D006', 'Clearance'),
-('1.0 Carat Radiant Diamond', 'radiant', 'South_Africa', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'I', 'VS2', 1.0, 1, 'D007', 'Best seller'),
-('1.0 Carat Asscher Diamond', 'asscher', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'J', 'SI1', 1.0, 1, 'D008', 'Unique cut'),
-('1.0 Carat Marquise Diamond', 'marquise', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'K', 'SI2', 1.0, 0, 'D009', 'Vintage style'),
-('1.0 Carat Heart Diamond', 'heart', 'Namibia', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'L', 'I1', 1.0, 0, 'D010', 'Romantic choice'),
-('1.0 Carat Pear Diamond', 'pear', 'Botswana', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'M', 'I2', 1.0, 0, 'D011', 'Distinctive shape'),
-('1.0 Carat Round Diamond', 'round', 'Lesotho', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'N', 'I3', 1.0, 1, 'D012', 'Budget option'),
-('1.0 Carat Princess Diamond', 'princess', 'South_Africa', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'O', 'FL', 1.0, 1, 'D013', 'Luxurious feel'),
-('1.0 Carat Cushion Diamond', 'cushion', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'P', 'IF', 1.0, 0, 'D014', 'Designer choice'),
-('1.0 Carat Emerald Diamond', 'emerald', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'Q', 'VVS1', 1.0, 0, 'D015', 'Exquisite clarity'),
-('1.0 Carat Oval Diamond', 'oval', 'Namibia', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'R', 'VVS2', 1.0, 0, 'D016', 'Elegant cut'),
-('1.0 Carat Radiant Diamond', 'radiant', 'Botswana', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'S', 'VS1', 1.0, 1, 'D017', 'Sparkling brilliance'),
-('1.0 Carat Asscher Diamond', 'asscher', 'Lesotho', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'T', 'VS2', 1.0, 1, 'D018', 'Sophisticated design'),
-('1.0 Carat Marquise Diamond', 'marquise', 'South_Africa', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Medium', 'Good', 'Good', 'Good', 'U', 'SI1', 1.0, 0, 'D019', 'Timeless piece'),
-('1.0 Carat Heart Diamond', 'heart', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 1.0, 0, 'D020', 'Symbol of love'),
-('1.0 Carat Pear Diamond', 'pear', 'Angola', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'W', 'I1', 1.0, 0, 'D021', 'Graceful shape');
-
+([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [active]) 
+VALUES 
+('D001', 'Brilliant Star', 'round', 'Canada', 'http://example.com/proportions1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.2000, 'Perfect diamond', 1),
+('D002', 'Sparkling Heart', 'heart', 'South Africa', 'http://example.com/proportions2', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'G', 'VVS1', 0.7500, 'Heart-shaped diamond', 1),
+('D003', 'Radiant Beauty', 'radiant', 'Botswana', 'http://example.com/proportions3', 'Medium', 'Good', 'Good', 'Good', 'J', 'SI1', 2.5000, 'Radiant cut diamond', 1),
+('D004', 'Princess Charm', 'princess', 'Namibia', 'http://example.com/proportions4', 'Strong', 'Fair', 'Fair', 'Fair', 'E', 'VS2', 1.0000, 'Princess cut diamond', 1),
+('D005', 'Cushion Delight', 'cushion', 'Lesotho', 'http://example.com/proportions5', 'Very Strong', 'Poor', 'Poor', 'Poor', 'H', 'I1', 3.0000, 'Cushion cut diamond', 1),
+('D006', 'Oval Grace', 'oval', 'Angola', 'http://example.com/proportions6', 'None', 'Very Good', 'Very Good', 'Very Good', 'I', 'IF', 1.5000, 'Oval cut diamond', 1),
+('D007', 'Emerald Elegance', 'emerald', 'South Africa', 'http://example.com/proportions7', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'F', 'VVS2', 2.2000, 'Emerald cut diamond', 1),
+('D008', 'Marquise Splendor', 'marquise', 'Botswana', 'http://example.com/proportions8', 'Medium', 'Good', 'Good', 'Good', 'K', 'VS1', 0.9000, 'Marquise cut diamond', 1),
+('D009', 'Asscher Radiance', 'asscher', 'Canada', 'http://example.com/proportions9', 'Strong', 'Fair', 'Fair', 'Fair', 'L', 'SI2', 1.8000, 'Asscher cut diamond', 1),
+('D010', 'Pear Spark', 'pear', 'Namibia', 'http://example.com/proportions10', 'Very Strong', 'Poor', 'Poor', 'Poor', 'M', 'I2', 2.7500, 'Pear cut diamond', 1),
+('D011', 'Brilliant Gem', 'round', 'Lesotho', 'http://example.com/proportions11', 'None', 'Excellent', 'Excellent', 'Excellent', 'N', 'FL', 1.3500, 'Another perfect diamond', 1),
+('D012', 'Radiant Star', 'radiant', 'Angola', 'http://example.com/proportions12', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'O', 'VVS1', 0.6500, 'Radiant star diamond', 1),
+('D013', 'Princess Beauty', 'princess', 'South Africa', 'http://example.com/proportions13', 'Medium', 'Good', 'Good', 'Good', 'P', 'SI1', 2.0000, 'Beautiful princess cut', 1),
+('D014', 'Cushion Charm', 'cushion', 'Botswana', 'http://example.com/proportions14', 'Strong', 'Fair', 'Fair', 'Fair', 'Q', 'VS2', 0.8000, 'Charming cushion cut', 1),
+('D015', 'Oval Delight', 'oval', 'Canada', 'http://example.com/proportions15', 'Very Strong', 'Poor', 'Poor', 'Poor', 'R', 'I1', 1.7000, 'Delightful oval cut', 1),
+('D016', 'Emerald Grace', 'emerald', 'Namibia', 'http://example.com/proportions16', 'None', 'Very Good', 'Very Good', 'Very Good', 'S', 'IF', 2.4000, 'Graceful emerald cut', 1),
+('D017', 'Marquise Radiance', 'marquise', 'Lesotho', 'http://example.com/proportions17', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'T', 'VVS2', 1.1000, 'Radiant marquise cut', 1),
+('D018', 'Asscher Splendor', 'asscher', 'Angola', 'http://example.com/proportions18', 'Medium', 'Good', 'Good', 'Good', 'U', 'VS1', 2.9000, 'Splendid asscher cut', 1),
+('D019', 'Pear Elegance', 'pear', 'South Africa', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 3.5000, 'Elegant pear cut', 1),
+('D020', 'Brilliant Sparkle', 'round', 'Botswana', 'http://example.com/proportions20', 'Very Strong', 'Poor', 'Poor', 'Poor', 'W', 'I2', 1.9500, 'Sparkling brilliant cut', 1);
 go
 create table [DiamondPriceList] (
 	[diamond_price_id] int identity(1,1),
@@ -473,52 +398,30 @@ create table [DiamondPriceList] (
 	primary key([diamond_price_id])
 )
 go
-insert into [DiamondPriceList]([origin],[carat_weight],[color],[clarity],[cut],[price],[effective_date])
-values
-('Canada',1.01,'D','IF','Excellent',182200000,'2024-05-27 15:16:00'),
-('Canada',1.00,'E','IF','Excellent',175500000,'2024-05-27 15:16:00'),
-('Angola',1.02,'F','VVS1','Very_Good',185000000,'2024-05-27 15:16:00'),
-('Namibia',1.03,'G','VVS2','Good',190000000,'2024-05-27 15:16:00'),
-('Botswana',1.04,'H','VS1','Fair',195000000,'2024-05-27 15:16:00'),
-('Lesotho',1.05,'I','VS2','Poor',200000000,'2024-05-27 15:16:00'),
-('South_Africa',1.06,'J','SI1','Excellent',205000000,'2024-05-27 15:16:00'),
-('Canada',1.07,'K','SI2','Very_Good',210000000,'2024-05-27 15:16:00'),
-('Angola',1.08,'L','I1','Good',215000000,'2024-05-27 15:16:00'),
-('Namibia',1.09,'M','I2','Fair',220000000,'2024-05-27 15:16:00'),
-('Botswana',1.10,'N','I3','Poor',225000000,'2024-05-27 15:16:00'),
-('Lesotho',1.11,'D','FL','Excellent',230000000,'2024-05-27 15:16:00'),
-('South Africa',1.12,'E','IF','Very Good',235000000,'2024-05-27 15:16:00'),
-('Canada',1.13,'F','VVS1','Good',240000000,'2024-05-27 15:16:00'),
-('Angola',1.14,'G','VVS2','Fair',245000000,'2024-05-27 15:16:00'),
-('Namibia',1.15,'H','VS1','Poor',250000000,'2024-05-27 15:16:00'),
-('Botswana',1.16,'I','VS2','Excellent',255000000,'2024-05-27 15:16:00'),
-('Lesotho',1.17,'J','SI1','Very Good',260000000,'2024-05-27 15:16:00'),
-('South_Africa',1.18,'K','SI2','Good',265000000,'2024-05-27 15:16:00'),
-('Canada',1.19,'L','I1','Fair',270000000,'2024-05-27 15:16:00'),
-('Angola',1.20,'M','I2','Poor',275000000,'2024-05-27 15:16:00'),
-('Namibia',1.21,'N','I3','Excellent',280000000,'2024-05-27 15:16:00'),
-('Canada', 1.01, 'H', 'VS2', 'Excellent', 182200000, '2024-05-27 15:16:00'),
-('Canada', 1.00, 'D', 'FL', 'Excellent', 175500000, '2024-05-27 15:16:00'),
-('Angola', 1.00, 'E', 'IF', 'Very Good', 185000000, '2024-05-27 15:16:00'),
-('Namibia', 1.00, 'F', 'VVS1', 'Good', 190000000, '2024-05-27 15:16:00'),
-('Botswana', 1.00, 'G', 'VVS2', 'Fair', 195000000, '2024-05-27 15:16:00'),
-('Lesotho', 1.00, 'H', 'VS1', 'Poor', 200000000, '2024-05-27 15:16:00'),
-('South Africa', 1.00, 'I', 'VS2', 'Excellent', 205000000, '2024-05-27 15:16:00'),
-('Canada', 1.00, 'J', 'SI1', 'Very Good', 210000000, '2024-05-27 15:16:00'),
-('Angola', 1.00, 'K', 'SI2', 'Good', 215000000, '2024-05-27 15:16:00'),
-('Namibia', 1.00, 'L', 'I1', 'Fair', 220000000, '2024-05-27 15:16:00'),
-('Botswana', 1.00, 'M', 'I2', 'Poor', 225000000, '2024-05-27 15:16:00'),
-('Lesotho', 1.00, 'N', 'I3', 'Excellent', 230000000, '2024-05-27 15:16:00'),
-('South Africa', 1.00, 'O', 'FL', 'Very Good', 235000000, '2024-05-27 15:16:00'),
-('Canada', 1.00, 'P', 'IF', 'Good', 240000000, '2024-05-27 15:16:00'),
-('Angola', 1.00, 'Q', 'VVS1', 'Fair', 245000000, '2024-05-27 15:16:00'),
-('Namibia', 1.00, 'R', 'VVS2', 'Poor', 250000000, '2024-05-27 15:16:00'),
-('Botswana', 1.00, 'S', 'VS1', 'Excellent', 255000000, '2024-05-27 15:16:00'),
-('Lesotho', 1.00, 'T', 'VS2', 'Very Good', 260000000, '2024-05-27 15:16:00'),
-('South Africa', 1.00, 'U', 'SI1', 'Good', 265000000, '2024-05-27 15:16:00'),
-('Canada', 1.00, 'V', 'SI2', 'Fair', 270000000, '2024-05-27 15:16:00'),
-('Angola', 1.00, 'W', 'I1', 'Poor', 275000000, '2024-05-27 15:16:00')
-go
+INSERT INTO [DiamondPriceList] 
+([origin], [carat_weight], [color], [clarity], [cut], [price], [effective_date]) 
+VALUES 
+('Canada', 1.2000, 'D', 'FL', 'Excellent', 12000.00, GETDATE()),
+('South Africa', 0.7500, 'G', 'VVS1', 'Very Good', 7500.00, GETDATE()),
+('Botswana', 2.5000, 'J', 'SI1', 'Good', 25000.00, GETDATE()),
+('Namibia', 1.0000, 'E', 'VS2', 'Fair', 10000.00, GETDATE()),
+('Lesotho', 3.0000, 'H', 'I1', 'Poor', 3000.00, GETDATE()),
+('Angola', 1.5000, 'I', 'IF', 'Very Good', 15000.00, GETDATE()),
+('South Africa', 2.2000, 'F', 'VVS2', 'Excellent', 22000.00, GETDATE()),
+('Botswana', 0.9000, 'K', 'VS1', 'Good', 9000.00, GETDATE()),
+('Canada', 1.8000, 'L', 'SI2', 'Fair', 18000.00, GETDATE()),
+('Namibia', 2.7500, 'M', 'I2', 'Poor', 2750.00, GETDATE()),
+('Lesotho', 1.3500, 'N', 'FL', 'Excellent', 13500.00, GETDATE()),
+('Angola', 0.6500, 'O', 'VVS1', 'Very Good', 6500.00, GETDATE()),
+('South Africa', 2.0000, 'P', 'SI1', 'Good', 20000.00, GETDATE()),
+('Botswana', 0.8000, 'Q', 'VS2', 'Fair', 8000.00, GETDATE()),
+('Canada', 1.7000, 'R', 'I1', 'Poor', 1700.00, GETDATE()),
+('Namibia', 2.4000, 'S', 'IF', 'Very Good', 24000.00, GETDATE()),
+('Lesotho', 1.1000, 'T', 'VVS2', 'Excellent', 11000.00, GETDATE()),
+('Angola', 2.9000, 'U', 'VS1', 'Good', 29000.00, GETDATE()),
+('South Africa', 3.5000, 'V', 'SI2', 'Fair', 35000.00, GETDATE()),
+('Botswana', 1.9500, 'W', 'I2', 'Poor', 1950.00, GETDATE());
+GO
 create table [ProductDiamond] (
 	[product_id] int,
 	[diamond_id] int,
@@ -526,24 +429,6 @@ create table [ProductDiamond] (
 	foreign key([product_id]) references [Product],
 	foreign key([diamond_id]) references [Diamond]
 )
-go
-insert into [ProductDiamond] ([product_id], [diamond_id])
-values
-(1, 1), -- Diamond Necklace 1
-(2, 2), -- Diamond Ring 1
-(3, 3), -- Diamond Bracelet 1
-(4, 4), -- Diamond Earring 1
-(5, 5), -- Diamond Necklace 2
-(6, 6), -- Diamond Ring 2
-(7, 7), -- Diamond Bracelet 2
-(8, 8), -- Diamond Earring 2
-(9, 9), -- Diamond Necklace 3
-(10, 10), -- Diamond Ring 3
-(11, 11), -- Diamond Necklace 4
-(11, 12), -- Diamond Necklace 4
-(11, 13), -- Diamond Necklace 4
-(11, 14), -- Diamond Necklace 4
-(12, 15) -- Diamond Ring 4
 go
 select * from [Account]
 select * from [Customer]

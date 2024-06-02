@@ -31,7 +31,7 @@ public class DiamondController {
         List<Diamond> diamondList = diamondRepository.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
 
         if (diamondList == null || diamondList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No data found");
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(diamondList);
         }

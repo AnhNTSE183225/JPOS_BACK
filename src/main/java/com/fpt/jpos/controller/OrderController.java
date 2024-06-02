@@ -35,8 +35,6 @@ public class OrderController {
     @PostMapping("/send-request")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequest customerRequest) {
 
-        System.out.println(customerRequest.getCustomerId());
-
         Order newOrder = orderService.insertOrder(customerRequest);
 
         return ResponseEntity.ok(newOrder);
@@ -50,7 +48,7 @@ public class OrderController {
         List<Order> requestList = orderService.getOrdersByStatusAndStaffs(staffId);
 
         if (requestList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No requests found");
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(requestList);
         }
