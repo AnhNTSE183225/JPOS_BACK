@@ -152,6 +152,9 @@ public class OrderController {
         }
         return ResponseEntity.ok(theOrder);
     }
-
-
+    @PostMapping("/{id}/complete-product")
+    public ResponseEntity<Order> completeProduct(@PathVariable Integer id, @RequestParam String imageUrl, @RequestParam Integer productionStaffId) {
+        Order order = orderService.completeProduct(id, imageUrl, productionStaffId);
+        return ResponseEntity.ok(order);
+    }
 }
