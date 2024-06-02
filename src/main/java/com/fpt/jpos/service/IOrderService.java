@@ -1,6 +1,6 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.pojo.CustomerRequest;
+import com.fpt.jpos.pojo.CustomerRequestDTO;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.Payment;
 import com.fpt.jpos.pojo.enums.OrderStatus;
@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface IOrderService {
 
-    Order insertOrder(CustomerRequest customerRequest);
+    List<Order> findAll();
+
+    Order insertOrder(CustomerRequestDTO customerRequestDTO);
 
     String handleManagerResponse(Integer id, boolean managerApproval);
 

@@ -2,7 +2,7 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.pojo.CustomerRegistration;
+import com.fpt.jpos.pojo.CustomerRegistrationDTO;
 import com.fpt.jpos.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,8 +32,8 @@ public class CustomerController {
 
     @CrossOrigin
     @PostMapping("/customer-register")
-    public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistration customerRegistration) {
-        Customer newCustomer = customerService.registerCustomer(customerRegistration);
+    public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistrationDTO customerRegistrationDTO) {
+        Customer newCustomer = customerService.registerCustomer(customerRegistrationDTO);
         if(newCustomer != null) {
             return ResponseEntity.ok(newCustomer);
         } else {

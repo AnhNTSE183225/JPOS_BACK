@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class ProductMaterial {
 
     @EmbeddedId
+    @JsonIgnore
     private ProductMaterialId id;
 
     @JsonIgnore
@@ -22,7 +23,7 @@ public class ProductMaterial {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    
+
     @ManyToOne
     @MapsId("materialId")
     @JoinColumn(name = "material_id")

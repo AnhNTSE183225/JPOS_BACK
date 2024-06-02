@@ -1,6 +1,6 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.pojo.CustomerRequest;
+import com.fpt.jpos.pojo.CustomerRequestDTO;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.Payment;
 import com.fpt.jpos.pojo.enums.OrderStatus;
@@ -9,7 +9,6 @@ import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,18 +23,27 @@ public class OrderController {
 
     private final IFileUploadService fileUploadService;
 
+
+
     @Autowired
     public OrderController(IOrderService orderService, IFileUploadService fileUploadService) {
         this.orderService = orderService;
         this.fileUploadService = fileUploadService;
     }
 
+    //Test - get all Orders
+    @CrossOrigin
+    @GetMapping("/order/all")
+    public ResponseEntity<?> getAllOrders() {
+        return ResponseEntity.ok(orderService.findAll());
+    }
+
     // Customer send request - 1st flow
     @CrossOrigin
     @PostMapping("/send-request")
-    public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequest customerRequest) {
+    public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequestDTO customerRequestDTO) {
 
-        Order newOrder = orderService.insertOrder(customerRequest);
+        Order newOrder = orderService.insertOrder(customerRequestDTO);
 
         return ResponseEntity.ok(newOrder);
     }

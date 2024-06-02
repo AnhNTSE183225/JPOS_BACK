@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class CustomerRequest {
+public class CustomerRequestDTO {
     private int customerId;
     private String designFile;
     private String description;

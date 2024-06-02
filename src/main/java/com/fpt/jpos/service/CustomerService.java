@@ -2,7 +2,7 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.pojo.CustomerRegistration;
+import com.fpt.jpos.pojo.CustomerRegistrationDTO;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +33,19 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer registerCustomer(CustomerRegistration customerRegistration) {
+    public Customer registerCustomer(CustomerRegistrationDTO customerRegistrationDTO) {
         Customer customer = null;
-        if (accountRepository.findById(customerRegistration.getUsername()).isEmpty()) {
+        if (accountRepository.findById(customerRegistrationDTO.getUsername()).isEmpty()) {
             Account newAccount = new Account();
-            newAccount.setUsername(customerRegistration.getUsername());
-            newAccount.setPassword(customerRegistration.getPassword());
+            newAccount.setUsername(customerRegistrationDTO.getUsername());
+            newAccount.setPassword(customerRegistrationDTO.getPassword());
             newAccount.setRole("customer");
             newAccount.setStatus(true);
             accountRepository.save(newAccount);
             customer = new Customer();
             customer.setUsername(newAccount.getUsername());
-            customer.setName(customerRegistration.getName());
-            customer.setAddress(customerRegistration.getAddress());
+            customer.setName(customerRegistrationDTO.getName());
+            customer.setAddress(customerRegistrationDTO.getAddress());
             customer = customerRepository.save(customer);
         }
         return customer;

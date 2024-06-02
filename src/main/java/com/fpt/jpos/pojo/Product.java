@@ -58,6 +58,6 @@ public class Product {
 //    List<Material> materials = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private List<ProductMaterial> productMaterials;
+    private List<ProductMaterial> materials;
 
 }

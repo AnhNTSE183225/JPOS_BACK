@@ -92,17 +92,22 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
+
+    @Override
     @Transactional
-    public Order insertOrder(CustomerRequest customerRequest) {
+    public Order insertOrder(CustomerRequestDTO customerRequestDTO) {
         Order theOrder = new Order();
 
-        Customer customer = customerRepository.findById(customerRequest.getCustomerId()).orElseThrow(() -> new RuntimeException("Customer not found"));
+        Customer customer = customerRepository.findById(customerRequestDTO.getCustomerId()).orElseThrow(() -> new RuntimeException("Customer not found"));
 
         theOrder.setOrderDate(new Date());
-        theOrder.setDesignFile(customerRequest.getDesignFile());
-        theOrder.setBudget(customerRequest.getBudget());
+        theOrder.setDesignFile(customerRequestDTO.getDesignFile());
+        theOrder.setBudget(customerRequestDTO.getBudget());
         theOrder.setOrderType("customize");
-        theOrder.setDescription(customerRequest.getDescription());
+        theOrder.setDescription(customerRequestDTO.getDescription());
         theOrder.setStatus(OrderStatus.wait_sale_staff);
         theOrder.setCustomer(customer);
 
