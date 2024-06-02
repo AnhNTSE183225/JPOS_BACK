@@ -29,7 +29,7 @@ public interface IOrderService {
 
     Order retrieveQuotationFromStaff(Order order, Integer productId, Integer saleStaffId);
 
-    Order acceptOrder(Integer id);
+    Order acceptOrder(Order order);
 
     Order updateOrderStatusDesigning(Integer id, PaymentDTO paymentDTO);
 

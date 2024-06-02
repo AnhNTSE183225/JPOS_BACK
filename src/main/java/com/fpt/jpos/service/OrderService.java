@@ -166,22 +166,17 @@ public class OrderService implements IOrderService {
             throw new IllegalStateException("Order status must be 'manager_approved' to forward quotation");
         }
 
-        order.setStatus(OrderStatus.customer_accept);
+        order.setStatus(OrderStatus.wait_customer);
         orderRepository.save(order);
         return order.getStatus();
     }
 
     @Override
     @Transactional
-    public Order acceptOrder(Integer id) {
-        Optional<Order> optionalOrder = orderRepository.findById(id);
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.setStatus(OrderStatus.customer_accept);
-            return orderRepository.save(order);
-        } else {
-            throw new RuntimeException("Order not found with id: " + id);
-        }
+    public Order acceptOrder(Order order) {
+        order.setStatus(OrderStatus.customer_accept);
+        order.setODate(new Date());
+        return orderRepository.save(order);
     }
 
     @Override

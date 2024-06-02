@@ -107,6 +107,7 @@ public class OrderController {
     }
 
     // After manager accepted, sale staff forward quotation to customer
+    @CrossOrigin
     @PostMapping("/{id}/forward-quotation")
     public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
         OrderStatus status = orderService.forwardQuotation(id);
@@ -114,11 +115,15 @@ public class OrderController {
     }
 
     // Customer accept quotation
-    @PutMapping("/{id}/accept")
-    public Order acceptOrder(@PathVariable Integer id) {
-        return orderService.acceptOrder(id);
+    @CrossOrigin
+    @PutMapping("/accept-order")
+    public ResponseEntity<?> acceptOrder(@RequestBody Order order) {
+        try {
+            return ResponseEntity.ok(orderService.acceptOrder(order));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
     }
-
 
     @CrossOrigin
     @GetMapping("/sales/order-select/{id}")

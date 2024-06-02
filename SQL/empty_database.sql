@@ -250,7 +250,7 @@ create table [Diamond] (
 )
 /*
 	shape: round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear
-	origin: Canada, Angola, Namibia, Botswana, Lesotho, South Africa, 
+	origin: Canada, Angola, Namibia, Botswana, Lesotho, South_Africa, 
 	proportions: image link
 	fluorescence: None, Faint, Medium, Strong, Very_Strong
 	symmetry: Poor, Fair, Good, Very_Good, Excellent
@@ -264,7 +264,7 @@ INSERT INTO [Diamond]
 ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [active]) 
 VALUES 
 ('D001', 'Brilliant Star', 'round', 'Canada', 'http://example.com/proportions1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.2000, 'Perfect diamond', 1),
-('D002', 'Sparkling Heart', 'heart', 'South Africa', 'http://example.com/proportions2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'G', 'VVS1', 0.7500, 'Heart-shaped diamond', 1),
+('D002', 'Sparkling Heart', 'heart', 'South_Africa', 'http://example.com/proportions2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'G', 'VVS1', 0.7500, 'Heart-shaped diamond', 1),
 ('D003', 'Radiant Beauty', 'radiant', 'Botswana', 'http://example.com/proportions3', 'Medium', 'Good', 'Good', 'Good', 'J', 'SI1', 2.5000, 'Radiant cut diamond', 1),
 ('D004', 'Princess Charm', 'princess', 'Namibia', 'http://example.com/proportions4', 'Strong', 'Fair', 'Fair', 'Fair', 'E', 'VS2', 1.0000, 'Princess cut diamond', 1),
 ('D005', 'Cushion Delight', 'cushion', 'Lesotho', 'http://example.com/proportions5', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'H', 'I1', 3.0000, 'Cushion cut diamond', 1),
@@ -281,7 +281,7 @@ VALUES
 ('D016', 'Emerald Grace', 'emerald', 'Namibia', 'http://example.com/proportions16', 'None', 'Very_Good', 'Very_Good', 'Very_Good', 'S', 'IF', 2.4000, 'Graceful emerald cut', 1),
 ('D017', 'Marquise Radiance', 'marquise', 'Lesotho', 'http://example.com/proportions17', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'T', 'VVS2', 1.1000, 'Radiant marquise cut', 1),
 ('D018', 'Asscher Splendor', 'asscher', 'Angola', 'http://example.com/proportions18', 'Medium', 'Good', 'Good', 'Good', 'U', 'VS1', 2.9000, 'Splendid asscher cut', 1),
-('D019', 'Pear Elegance', 'pear', 'South Africa', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 3.5000, 'Elegant pear cut', 1),
+('D019', 'Pear Elegance', 'pear', 'South_Africa', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 3.5000, 'Elegant pear cut', 1),
 ('D020', 'Brilliant Sparkle', 'round', 'Botswana', 'http://example.com/proportions20', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'W', 'I2', 1.9500, 'Sparkling brilliant cut', 1);
 go
 create table [DiamondPriceList] (
@@ -300,24 +300,24 @@ INSERT INTO [DiamondPriceList]
 ([origin], [carat_weight], [color], [clarity], [cut], [price], [effective_date]) 
 VALUES 
 ('Canada', 1.2000, 'D', 'FL', 'Excellent', 12000.00, GETDATE()),
-('South Africa', 0.7500, 'G', 'VVS1', 'Very_Good', 7500.00, GETDATE()),
+('South_Africa', 0.7500, 'G', 'VVS1', 'Very_Good', 7500.00, GETDATE()),
 ('Botswana', 2.5000, 'J', 'SI1', 'Good', 25000.00, GETDATE()),
 ('Namibia', 1.0000, 'E', 'VS2', 'Fair', 10000.00, GETDATE()),
 ('Lesotho', 3.0000, 'H', 'I1', 'Poor', 3000.00, GETDATE()),
 ('Angola', 1.5000, 'I', 'IF', 'Very_Good', 15000.00, GETDATE()),
-('South Africa', 2.2000, 'F', 'VVS2', 'Excellent', 22000.00, GETDATE()),
+('South_Africa', 2.2000, 'F', 'VVS2', 'Excellent', 22000.00, GETDATE()),
 ('Botswana', 0.9000, 'K', 'VS1', 'Good', 9000.00, GETDATE()),
 ('Canada', 1.8000, 'L', 'SI2', 'Fair', 18000.00, GETDATE()),
 ('Namibia', 2.7500, 'M', 'I2', 'Poor', 2750.00, GETDATE()),
 ('Lesotho', 1.3500, 'N', 'FL', 'Excellent', 13500.00, GETDATE()),
 ('Angola', 0.6500, 'O', 'VVS1', 'Very_Good', 6500.00, GETDATE()),
-('South Africa', 2.0000, 'P', 'SI1', 'Good', 20000.00, GETDATE()),
+('South_Africa', 2.0000, 'P', 'SI1', 'Good', 20000.00, GETDATE()),
 ('Botswana', 0.8000, 'Q', 'VS2', 'Fair', 8000.00, GETDATE()),
 ('Canada', 1.7000, 'R', 'I1', 'Poor', 1700.00, GETDATE()),
 ('Namibia', 2.4000, 'S', 'IF', 'Very_Good', 24000.00, GETDATE()),
 ('Lesotho', 1.1000, 'T', 'VVS2', 'Excellent', 11000.00, GETDATE()),
 ('Angola', 2.9000, 'U', 'VS1', 'Good', 29000.00, GETDATE()),
-('South Africa', 3.5000, 'V', 'SI2', 'Fair', 35000.00, GETDATE()),
+('South_Africa', 3.5000, 'V', 'SI2', 'Fair', 35000.00, GETDATE()),
 ('Botswana', 1.9500, 'W', 'I2', 'Poor', 1950.00, GETDATE());
 GO
 create table [ProductDiamond] (
