@@ -37,7 +37,14 @@ public class ProductService implements IProductService {
     @Transactional
     public Product saveProduct(ProductDTO productDTO) {
 
-        Product product = modelMapper.map(productDTO, Product.class);
+//        Product product = modelMapper.map(productDTO, Product.class);
+        Product product = new Product();
+        product.setProductName(productDTO.getProductName());
+        product.setProductType(productDTO.getProductType());
+        product.setEDiamondPrice(productDTO.getEMaterialPrice());
+        product.setEMaterialPrice(productDTO.getEDiamondPrice());
+        product.setMarkupRate(productDTO.getMarkupRate());
+        product.setProductionPrice(productDTO.getProductionPrice());
 
         product = productRepository.save(product);
 
