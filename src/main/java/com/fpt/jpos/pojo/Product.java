@@ -38,9 +38,6 @@ public class Product {
     @Column(name = "product_type")
     private String productType;
 
-    @Column(name = "product_design_id")
-    private String productDesignId;
-
     @ManyToMany
     @JoinTable(
             name = "ProductDiamond",

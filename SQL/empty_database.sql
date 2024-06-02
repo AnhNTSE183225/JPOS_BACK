@@ -80,73 +80,6 @@ values
 ('user_customer_02','Binh','234 New York'),
 ('user_customer_03','Hannah','999 6th Avenue')
 go
-create table [ProductShellDesign] (
-	[product_shell_design_id] int identity(1,1),
-	[shell_name] varchar(255),
-	[diamond_quantity] int,
-	[e_diamond_price] decimal(19,4),
-	[e_material_price] decimal(19,4),
-	[production_price] decimal(19,4)
-	primary key([product_shell_design_id])
-)
-go
-insert into [ProductShellDesign]([shell_name],[diamond_quantity],[e_diamond_price],[e_material_price],[production_price])
-values
-('Fall Collection Necklace Silver Shell',3,1230000,1000000,3000000),
-('Winter Collection Necklace Gold Shell',4,2000000,1500000,4000000),
-('Spring Collection Bracelet Silver Shell',2,1500000,1200000,3500000),
-('Summer Collection Ring Gold Shell',1,1800000,1300000,3200000),
-('Autumn Collection Earring Silver Shell',3,2100000,1600000,4200000),
-('Holiday Collection Necklace Gold Shell',5,2200000,1700000,4500000),
-('Valentine Collection Bracelet Gold Shell',2,2300000,1800000,4600000),
-('Easter Collection Ring Silver Shell',1,2400000,1900000,4700000),
-('Halloween Collection Earring Gold Shell',3,2500000,2000000,4800000),
-('Thanksgiving Collection Necklace Silver Shell',4,2600000,2100000,4900000),
-('Christmas Collection Bracelet Gold Shell',2,2700000,2200000,5000000),
-('New Year Collection Ring Gold Shell',1,2800000,2300000,5100000),
-('Anniversary Collection Earring Silver Shell',3,2900000,2400000,5200000),
-('Birthday Collection Necklace Gold Shell',4,3000000,2500000,5300000),
-('Mothers Day Collection Bracelet Silver Shell',2,3100000,2600000,5400000),
-('Fathers Day Collection Ring Diamond Shell',1,3200000,2700000,5500000),
-('Graduation Collection Earring Gold Shell',3,3300000,2800000,5600000),
-('Wedding Collection Necklace Silver Shell',4,3400000,2900000,5700000),
-('Engagement Collection Bracelet Gold Shell',2,3500000,3000000,5800000),
-('Baby Shower Collection Ring Silver Shell',1,3600000,3100000,5900000),
-('Housewarming Collection Earring Gold Shell',3,3700000,3200000,6000000)
-go
-create table [ProductDesign] (
-	[product_design_id] int identity(1,1),
-	[product_shell_design_id] int,
-	[design_name] varchar(255),
-	[design_type] varchar(255),
-	primary key([product_design_id]),
-	foreign key([product_shell_design_id]) references [ProductShellDesign]
-)
-go
-insert into [ProductDesign]
-values
-(1, 'Fall Collection Necklace Silver', 'Necklace'),
-(2, 'Winter Collection Necklace Gold', 'Necklace'),
-(3, 'Spring Collection Bracelet Silver', 'Bracelet'),
-(4, 'Summer Collection Ring Gold', 'Ring'),
-(5, 'Autumn Collection Earring Silver', 'Earring'),
-(6, 'Holiday Collection Necklace Gold', 'Necklace'),
-(7, 'Valentine Collection Bracelet Gold', 'Bracelet'),
-(8, 'Easter Collection Ring Silver', 'Ring'),
-(9, 'Halloween Collection Earring Gold', 'Earring'),
-(10, 'Thanksgiving Collection Necklace Silver', 'Necklace'),
-(11, 'Christmas Collection Bracelet Gold', 'Bracelet'),
-(12, 'New Year Collection Ring Gold', 'Ring'),
-(13, 'Anniversary Collection Earring Silver', 'Earring'),
-(14, 'Birthday Collection Necklace Gold', 'Necklace'),
-(15, 'Mothers Day Collection Bracelet Silver', 'Bracelet'),
-(16, 'Fathers Day Collection Ring Gold', 'Ring'),
-(17, 'Graduation Collection Earring Gold', 'Earring'),
-(18, 'Wedding Collection Necklace Silver', 'Necklace'),
-(19, 'Engagement Collection Bracelet Gold', 'Bracelet'),
-(20, 'Baby Shower Collection Ring Silver', 'Ring'),
-(21, 'Housewarming Collection Earring Gold', 'Earring')
-go
 create table [Product] (
 	[product_id] int identity(1,1),
 	[product_name] varchar(255),
@@ -155,9 +88,7 @@ create table [Product] (
 	[production_price] decimal(19,4),
 	[markup_rate] decimal(19,4),
 	[product_type] varchar(255),
-	[product_design_id] int,
-	primary key([product_id]),
-	foreign key([product_design_id]) references [ProductDesign]
+	primary key([product_id])
 )
 go
 create table [Order] (
@@ -295,39 +226,6 @@ values
 (2,'2024-05-30 15:16:00',4800000),
 (7,'2024-05-30 15:16:00',3000000)
 go
-create table [ProductShellMaterial] (
-	[product_shell_design_id] int,
-	[material_id] int,
-	[weight] decimal(19,4),
-	primary key([product_shell_design_id], [material_id]),
-	foreign key([material_id]) references [Material],
-	foreign key([product_shell_design_id]) references [ProductShellDesign]
-)
-go
-INSERT INTO [ProductShellMaterial]
-VALUES
-(1, 1, 1.2),
-(2, 2, 1.5),
-(3, 7, 1.3),
-(4, 1, 1.1),
-(5, 7, 1.4),
-(6, 2, 1.6),
-(7, 1, 1.2),
-(8, 7, 1.3),
-(9, 2, 1.4),
-(10, 7, 1.5),
-(11, 1, 1.2),
-(12, 2, 1.3),
-(13, 7, 1.4),
-(14, 1, 1.5),
-(15, 7, 1.2),
-(16, 2, 1.3),
-(17, 1, 1.4),
-(18, 7, 1.5),
-(19, 1, 1.2),
-(20, 7, 1.3),
-(21, 2, 1.4)
-go
 create table [Diamond] (
 	[diamond_id] int identity(1,1),
 	[diamond_code] varchar(255),
@@ -428,6 +326,34 @@ create table [ProductDiamond] (
 	primary key([product_id], [diamond_id]),
 	foreign key([product_id]) references [Product],
 	foreign key([diamond_id]) references [Diamond]
+)
+go
+create table [ProductDesign] (
+	[product_design_id] int identity(1,1),
+	[design_name] varchar(255),
+	[design_type] varchar(255),
+	primary key([product_design_id])
+)
+go
+create table [ProductShellDesign] (
+	[shell_id] int identity(1,1),
+	[product_design_id] int,
+	[shell_name] varchar(255),
+	[diamond_quantity] int,
+	[e_diamond_price] decimal(19,4),
+	[e_material_price] decimal(19,4),
+	[production_price] decimal(19,4)
+	primary key([shell_id]),
+	foreign key([product_design_id]) references [ProductDesign]
+)
+go
+create table [ProductShellMaterial] (
+	[shell_id] int,
+	[material_id] int,
+	[weight] decimal(19,4),
+	primary key([shell_id], [material_id]),
+	foreign key([material_id]) references [Material],
+	foreign key([shell_id]) references [ProductShellDesign]
 )
 go
 select * from [Account]
