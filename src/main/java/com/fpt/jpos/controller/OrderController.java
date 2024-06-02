@@ -24,7 +24,6 @@ public class OrderController {
     private final IFileUploadService fileUploadService;
 
 
-
     @Autowired
     public OrderController(IOrderService orderService, IFileUploadService fileUploadService) {
         this.orderService = orderService;
@@ -62,12 +61,16 @@ public class OrderController {
         }
     }
 
-
     // Manager get quotation from staff
-    @GetMapping("/sales/orders/{staffId}/{id}")
-    public ResponseEntity<Order> retrieveQuotationFromStaff(@PathVariable Integer id, @PathVariable int staffId) {
-        Order order = orderService.retrieveQuotationFromStaff(id, staffId);
-        return ResponseEntity.ok(order);
+    @CrossOrigin
+    @PostMapping("/sales/orders/{staffId}/{productId}")
+    public ResponseEntity<?> retrieveQuotationFromStaff(@RequestBody Order order, @PathVariable Integer productId, @PathVariable int staffId) {
+        try {
+            Order quotedOrder = orderService.retrieveQuotationFromStaff(order, productId, staffId);
+            return ResponseEntity.ok(quotedOrder);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     // Manager accept or decline quotation

@@ -21,7 +21,7 @@ public interface IOrderService {
 
     OrderStatus forwardQuotation(Integer id);
 
-    Order retrieveQuotationFromStaff(Integer id, Integer saleStaffId);
+    Order retrieveQuotationFromStaff(Order order, Integer productId, Integer saleStaffId);
 
     Order acceptOrder(Integer id);
 

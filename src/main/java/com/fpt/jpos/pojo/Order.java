@@ -93,6 +93,10 @@ public class Order {
 
     @Column(name = "markup_rate")
     private Double markupRate;
+
+    @Column(name = "total_amount")
+    private Double totalAmount;
+
     @Column(name = "model_file")
     private String modelFile;
 

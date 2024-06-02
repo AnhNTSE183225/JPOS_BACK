@@ -29,7 +29,7 @@ public class ProductController {
         try {
             System.out.println(productDTO.toString());
             Product product = productService.saveProduct(productDTO);
-            return ResponseEntity.ok(product);
+            return ResponseEntity.ok(product.getProductId());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.noContent().build();

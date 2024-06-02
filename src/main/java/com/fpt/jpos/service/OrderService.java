@@ -2,10 +2,7 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
-import com.fpt.jpos.repository.ICustomerRepository;
-import com.fpt.jpos.repository.IOrderRepository;
-import com.fpt.jpos.repository.IPaymentRepository;
-import com.fpt.jpos.repository.IStaffRepository;
+import com.fpt.jpos.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -26,15 +23,19 @@ public class OrderService implements IOrderService {
 
     private final IPaymentRepository paymentRepository;
 
+    private final IProductRepository productRepository;
+
     @Autowired
     public OrderService(IOrderRepository theIOrderRepository,
                         ICustomerRepository theICustomerRepository,
                         IPaymentRepository theIPaymentRepository,
-                        IStaffRepository theIStaffRepository) {
+                        IStaffRepository theIStaffRepository,
+                        IProductRepository theIProductRepository) {
         orderRepository = theIOrderRepository;
         customerRepository = theICustomerRepository;
         paymentRepository = theIPaymentRepository;
         staffRepository = theIStaffRepository;
+        productRepository = theIProductRepository;
     }
 
     @Override
@@ -117,6 +118,24 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
+    public Order retrieveQuotationFromStaff(Order order, Integer productId, Integer staffId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        Optional<Staff> optionalStaff = staffRepository.findById(staffId);
+        if (optionalProduct.isPresent() && optionalStaff.isPresent()) {
+            Product product = optionalProduct.get();
+            Staff staff = optionalStaff.get();
+            order.setProduct(product);
+            order.setStatus(OrderStatus.wait_manager);
+            order.setSaleStaff(staff);
+            order.setQDate(new Date());
+            return orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Product not found with id: " + productId);
+        }
+    }
+
+    @Override
+    @Transactional
     public OrderStatus forwardQuotation(Integer id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
@@ -128,22 +147,6 @@ public class OrderService implements IOrderService {
         order.setStatus(OrderStatus.customer_accept);
         orderRepository.save(order);
         return order.getStatus();
-    }
-
-    @Override
-    @Transactional
-    public Order retrieveQuotationFromStaff(Integer id, Integer staffId) {
-        Optional<Order> optionalOrder = orderRepository.findById(id);
-        Optional<Staff> optionalStaff = staffRepository.findById(staffId);
-        if (optionalOrder.isPresent() && optionalStaff.isPresent()) {
-            Order order = optionalOrder.get();
-            Staff staff = optionalStaff.get();
-            order.setStatus(OrderStatus.wait_manager);
-            order.setSaleStaff(staff);
-            return orderRepository.save(order);
-        } else {
-            throw new RuntimeException("Order not found with id: " + id);
-        }
     }
 
     @Override
