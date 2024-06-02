@@ -37,6 +37,18 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findAll());
     }
 
+    //User uploads image
+    @CrossOrigin
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file) {
+        try {
+            return ResponseEntity.ok(fileUploadService.upload(file));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     // Customer send request - 1st flow
     @CrossOrigin
     @PostMapping("/send-request")
