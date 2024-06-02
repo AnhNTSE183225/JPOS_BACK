@@ -424,12 +424,12 @@ create table [Diamond] (
 )
 /*
 	shape: round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear
-	origin: Canada, Angola, Namibia, Botswana, Lesotho, South Africa, 
+	origin: Canada, Angola, Namibia, Botswana, Lesotho, South_Africa, 
 	proportions: image link
-	fluorescence: None, Faint, Medium, Strong, Very Strong
-	symmetry: Poor, Fair, Good, Very Good, Excellent
-	polish: Poor, Fair, Good, Very Good, Excellent
-	cut: Poor, Fair, Good, Very Good, Excellent
+	fluorescence: None, Faint, Medium, Strong, Very_Strong
+	symmetry: Poor, Fair, Good, Very_Good, Excellent
+	polish: Poor, Fair, Good, Very_Good, Excellent
+	cut: Poor, Fair, Good, Very_Good, Excellent
 	color: Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D
 	clarity: I3, I2, I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL
 	carat_weight: 0 to 30
@@ -487,35 +487,35 @@ values
 ('Namibia',1.09,'M','I2','Fair',220000000,'2024-05-27 15:16:00'),
 ('Botswana',1.10,'N','I3','Poor',225000000,'2024-05-27 15:16:00'),
 ('Lesotho',1.11,'D','FL','Excellent',230000000,'2024-05-27 15:16:00'),
-('South Africa',1.12,'E','IF','Very Good',235000000,'2024-05-27 15:16:00'),
+('South_Africa',1.12,'E','IF','Very_Good',235000000,'2024-05-27 15:16:00'),
 ('Canada',1.13,'F','VVS1','Good',240000000,'2024-05-27 15:16:00'),
 ('Angola',1.14,'G','VVS2','Fair',245000000,'2024-05-27 15:16:00'),
 ('Namibia',1.15,'H','VS1','Poor',250000000,'2024-05-27 15:16:00'),
 ('Botswana',1.16,'I','VS2','Excellent',255000000,'2024-05-27 15:16:00'),
-('Lesotho',1.17,'J','SI1','Very Good',260000000,'2024-05-27 15:16:00'),
+('Lesotho',1.17,'J','SI1','Very_Good',260000000,'2024-05-27 15:16:00'),
 ('South_Africa',1.18,'K','SI2','Good',265000000,'2024-05-27 15:16:00'),
 ('Canada',1.19,'L','I1','Fair',270000000,'2024-05-27 15:16:00'),
 ('Angola',1.20,'M','I2','Poor',275000000,'2024-05-27 15:16:00'),
 ('Namibia',1.21,'N','I3','Excellent',280000000,'2024-05-27 15:16:00'),
 ('Canada', 1.01, 'H', 'VS2', 'Excellent', 182200000, '2024-05-27 15:16:00'),
 ('Canada', 1.00, 'D', 'FL', 'Excellent', 175500000, '2024-05-27 15:16:00'),
-('Angola', 1.00, 'E', 'IF', 'Very Good', 185000000, '2024-05-27 15:16:00'),
+('Angola', 1.00, 'E', 'IF', 'Very_Good', 185000000, '2024-05-27 15:16:00'),
 ('Namibia', 1.00, 'F', 'VVS1', 'Good', 190000000, '2024-05-27 15:16:00'),
 ('Botswana', 1.00, 'G', 'VVS2', 'Fair', 195000000, '2024-05-27 15:16:00'),
 ('Lesotho', 1.00, 'H', 'VS1', 'Poor', 200000000, '2024-05-27 15:16:00'),
-('South Africa', 1.00, 'I', 'VS2', 'Excellent', 205000000, '2024-05-27 15:16:00'),
-('Canada', 1.00, 'J', 'SI1', 'Very Good', 210000000, '2024-05-27 15:16:00'),
+('South_Africa', 1.00, 'I', 'VS2', 'Excellent', 205000000, '2024-05-27 15:16:00'),
+('Canada', 1.00, 'J', 'SI1', 'Very_Good', 210000000, '2024-05-27 15:16:00'),
 ('Angola', 1.00, 'K', 'SI2', 'Good', 215000000, '2024-05-27 15:16:00'),
 ('Namibia', 1.00, 'L', 'I1', 'Fair', 220000000, '2024-05-27 15:16:00'),
 ('Botswana', 1.00, 'M', 'I2', 'Poor', 225000000, '2024-05-27 15:16:00'),
 ('Lesotho', 1.00, 'N', 'I3', 'Excellent', 230000000, '2024-05-27 15:16:00'),
-('South Africa', 1.00, 'O', 'FL', 'Very Good', 235000000, '2024-05-27 15:16:00'),
+('South_Africa', 1.00, 'O', 'FL', 'Very_Good', 235000000, '2024-05-27 15:16:00'),
 ('Canada', 1.00, 'P', 'IF', 'Good', 240000000, '2024-05-27 15:16:00'),
 ('Angola', 1.00, 'Q', 'VVS1', 'Fair', 245000000, '2024-05-27 15:16:00'),
 ('Namibia', 1.00, 'R', 'VVS2', 'Poor', 250000000, '2024-05-27 15:16:00'),
 ('Botswana', 1.00, 'S', 'VS1', 'Excellent', 255000000, '2024-05-27 15:16:00'),
-('Lesotho', 1.00, 'T', 'VS2', 'Very Good', 260000000, '2024-05-27 15:16:00'),
-('South Africa', 1.00, 'U', 'SI1', 'Good', 265000000, '2024-05-27 15:16:00'),
+('Lesotho', 1.00, 'T', 'VS2', 'Very_Good', 260000000, '2024-05-27 15:16:00'),
+('South_Africa', 1.00, 'U', 'SI1', 'Good', 265000000, '2024-05-27 15:16:00'),
 ('Canada', 1.00, 'V', 'SI2', 'Fair', 270000000, '2024-05-27 15:16:00'),
 ('Angola', 1.00, 'W', 'I1', 'Poor', 275000000, '2024-05-27 15:16:00')
 go
