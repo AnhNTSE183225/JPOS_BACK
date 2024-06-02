@@ -143,7 +143,7 @@ public class OrderController {
 
     //  design staff view orders list
     @CrossOrigin
-    @GetMapping("/sales/orders/{staffId}")
+    @GetMapping("/designs/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForDesignStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForDesignStaff(staffId);
 
@@ -179,9 +179,9 @@ public class OrderController {
         return ResponseEntity.ok(theOrder);
     }
 
-    //  design staff view orders list
+    //  production staff view orders list
     @CrossOrigin
-    @GetMapping("/sales/orders/{staffId}")
+    @GetMapping("/production/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForProductionStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForProductionStaff(staffId);
 
