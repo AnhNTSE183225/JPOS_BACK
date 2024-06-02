@@ -62,7 +62,7 @@ public class OrderController {
 
     // Get all orders for customer
     @GetMapping("/customers/{customerId}/orders")
-    public ResponseEntity<?> getOrdersForCustomer(@RequestParam int customerId) {
+    public ResponseEntity<?> getOrdersForCustomer(@PathVariable int customerId) {
         List<Order> requestList = orderService.getOrdersByCustomerId(customerId);
         if (requestList.isEmpty()) {
             return ResponseEntity.noContent().build();
