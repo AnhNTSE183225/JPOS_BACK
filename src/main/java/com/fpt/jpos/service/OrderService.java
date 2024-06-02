@@ -60,9 +60,25 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> getOrdersByStatusAndStaffs(int id) {
+    public List<Order> getOrdersByCustomerId(Integer customerId) {
+        return orderRepository.findOrdersForCustomer(customerId);
+    }
+
+    @Override
+    public List<Order> getOrdersByStatusAndStaffs(Integer id) {
         return orderRepository.findAllByStatusAndStaff(id);
     }
+
+    @Override
+    public List<Order> getOrderForDesignStaff(Integer id) {
+        return orderRepository.findOrdersForDesignStaff(id);
+    }
+
+    @Override
+    public List<Order> getOrderForProductionStaff(Integer id) {
+        return orderRepository.findOrdersForProductionStaff(id);
+    }
+
 
     @Override
     public Order findById(Integer id) {

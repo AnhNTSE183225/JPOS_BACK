@@ -15,7 +15,13 @@ public interface IOrderService {
 
     String handleManagerResponse(Integer id, boolean managerApproval);
 
-    List<Order> getOrdersByStatusAndStaffs(int id);
+    List<Order> getOrdersByCustomerId(Integer customerId);
+
+    List<Order> getOrdersByStatusAndStaffs(Integer id);
+
+    List<Order> getOrderForDesignStaff(Integer id);
+
+    List<Order> getOrderForProductionStaff(Integer id);
 
     Order findById(Integer id);
 
@@ -32,6 +38,7 @@ public interface IOrderService {
     Order completeProduct(Integer id, String imageUrl, Integer productionStaffId);
 
     Order completeOrder(PaymentDTO paymentDTO, Integer orderId);
+
 
     //TODO Update production staff id when production staff select delivered
 }
