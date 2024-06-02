@@ -1,8 +1,10 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.dto.PaymentDTO;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class OrderService implements IOrderService {
     private final IPaymentRepository paymentRepository;
 
     private final IProductRepository productRepository;
+
+    ModelMapper modelMapper = new ModelMapper();
+
 
     @Autowired
     public OrderService(IOrderRepository theIOrderRepository,
@@ -66,8 +71,9 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order updateOrderStatusDesigning(Integer id, Payment payment) {
+    public Order updateOrderStatusDesigning(Integer id, PaymentDTO paymentDTO) {
         Optional<Order> theOrder = orderRepository.findById(id);
+        Payment payment = modelMapper.map(paymentDTO, Payment.class);
 
         if (theOrder.isPresent()) {
             Order order = theOrder.get();
@@ -161,6 +167,7 @@ public class OrderService implements IOrderService {
             throw new RuntimeException("Order not found with id: " + id);
         }
     }
+
     @Override
     public Order completeProduct(Integer id, String imageUrl, Integer productionStaffId) {
         Order order = orderRepository.findById(id)
@@ -177,5 +184,27 @@ public class OrderService implements IOrderService {
         order.setProductImage(imageUrl);
         order.setProductionStaff(productionStaff); // Gán productionStaffId vào order
         return orderRepository.save(order);
+    }
+
+    @Override
+    @Transactional
+    public Order completeOrder(PaymentDTO paymentDTO, Integer orderId) {
+
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        Payment payment = modelMapper.map(paymentDTO, Payment.class);
+        Payment depositPayment = paymentRepository.findPaymentByOrderId(orderId);
+
+        double sum = depositPayment.getAmount_paid() + payment.getAmount_paid();
+
+        if (sum == payment.getAmount_total()) {
+            paymentRepository.save(payment);
+        }
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setStatus(OrderStatus.completed);
+            return orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Order not found with id: " + orderId);
+        }
     }
 }
