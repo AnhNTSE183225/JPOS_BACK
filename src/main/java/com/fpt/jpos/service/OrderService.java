@@ -1,13 +1,11 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.pojo.CustomerRequest;
-import com.fpt.jpos.pojo.Order;
-import com.fpt.jpos.pojo.Payment;
+import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.ICustomerRepository;
 import com.fpt.jpos.repository.IOrderRepository;
 import com.fpt.jpos.repository.IPaymentRepository;
+import com.fpt.jpos.repository.IStaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,13 +21,19 @@ public class OrderService implements IOrderService {
 
     private final ICustomerRepository customerRepository;
 
+    private final IStaffRepository staffRepository;
+
     private final IPaymentRepository paymentRepository;
 
     @Autowired
-    public OrderService(IOrderRepository theIOrderRepository, ICustomerRepository theICustomerRepository, IPaymentRepository theIPaymentRepository) {
+    public OrderService(IOrderRepository theIOrderRepository,
+                        ICustomerRepository theICustomerRepository,
+                        IPaymentRepository theIPaymentRepository,
+                        IStaffRepository theIStaffRepository) {
         orderRepository = theIOrderRepository;
         customerRepository = theICustomerRepository;
         paymentRepository = theIPaymentRepository;
+        staffRepository = theIStaffRepository;
     }
 
     @Override
@@ -60,8 +64,9 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order updateOrderStatusDesigning(int id, Payment payment) {
+    public Order updateOrderStatusDesigning(Integer id, Payment payment) {
         Optional<Order> theOrder = orderRepository.findById(id);
+
         if (theOrder.isPresent()) {
             Order order = theOrder.get();
             order.setStatus(OrderStatus.designing);
@@ -74,9 +79,8 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order updateOrderStatusProduction(int id) {
+    public Order updateOrderStatusProduction(Integer id) {
         Optional<Order> theOrder = orderRepository.findById(id);
-        //theOrder.ifPresent(order -> order.setStatus(OrderStatus.production));
         if (theOrder.isPresent()) {
             Order order = theOrder.get();
             order.setStatus(OrderStatus.production);
@@ -121,12 +125,18 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public String retrieveQuotationFromStaff(Integer id) {
-        Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
-        order.setStatus(OrderStatus.wait_manager);
-        orderRepository.save(order);
-        return order.getStatus().name();
+    public Order retrieveQuotationFromStaff(Integer id, Integer staffId) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        Optional<Staff> optionalStaff = staffRepository.findById(staffId);
+        if (optionalOrder.isPresent() && optionalStaff.isPresent()) {
+            Order order = optionalOrder.get();
+            Staff staff = optionalStaff.get();
+            order.setStatus(OrderStatus.wait_manager);
+            order.setSaleStaff(staff);
+            return orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Order not found with id: " + id);
+        }
     }
 
     @Override

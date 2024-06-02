@@ -2,8 +2,10 @@ package com.fpt.jpos.service;
 
 import com.cloudinary.Cloudinary;
 import com.fpt.jpos.pojo.Order;
+import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.IOrderRepository;
+import com.fpt.jpos.repository.IStaffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,21 +22,28 @@ public class FileUploadService implements IFileUploadService {
 
     private final Cloudinary cloudinary;
 
-    private IOrderRepository orderRepository;
+    private final IOrderRepository orderRepository;
+
+    private final IStaffRepository staffRepository;
+
 
     @Override
-    public String uploadModelDesignFile(MultipartFile multipartFile, Integer orderId) throws IOException {
+    public String uploadModelDesignFile(MultipartFile multipartFile, Integer orderId, Integer designStaffId) throws IOException {
         String url = cloudinary.uploader()
                 .upload(multipartFile.getBytes(),
                         Map.of("public_id", UUID.randomUUID().toString()))
                 .get("url")
                 .toString();
 
-        Optional<Order> order = orderRepository.findById(orderId);
-        if (order.isPresent()) {
-            order.get().setDesignFile(url);
-            order.get().setStatus(OrderStatus.pending_design);
-            orderRepository.save(order.get());
+        Optional<Order> theOrder = orderRepository.findById(orderId);
+        Optional<Staff> theStaff = staffRepository.findById(designStaffId);
+        if (theOrder.isPresent() && theStaff.isPresent()) {
+            Order order = theOrder.get();
+            Staff staff = theStaff.get();
+            order.setDesignFile(url);
+            order.setStatus(OrderStatus.pending_design);
+            order.setDesignStaff(staff);
+            orderRepository.save(order);
         }
         return url;
     }

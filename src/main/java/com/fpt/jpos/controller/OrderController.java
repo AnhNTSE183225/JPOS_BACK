@@ -58,10 +58,10 @@ public class OrderController {
 
 
     // Manager get quotation from staff
-    @GetMapping("/{id}/retrieve-quotation")
-    public ResponseEntity<String> retrieveQuotationFromStaff(@PathVariable Integer id) {
-        String status = orderService.retrieveQuotationFromStaff(id);
-        return ResponseEntity.ok(status);
+    @GetMapping("/sales/orders/{staffId}/{id}")
+    public ResponseEntity<Order> retrieveQuotationFromStaff(@PathVariable Integer id, @PathVariable int staffId) {
+        Order order = orderService.retrieveQuotationFromStaff(id, staffId);
+        return ResponseEntity.ok(order);
     }
 
     // Manager accept or decline quotation
@@ -110,10 +110,10 @@ public class OrderController {
 
     // Upload file by design staff
     @CrossOrigin
-    @PostMapping("/designs/upload/{id}")
-    public ResponseEntity<?> uploadDesign(@RequestParam("file") MultipartFile file, @PathVariable Integer id) throws IOException {
+    @PostMapping("/designs/upload/{staffId}/{orderId}")
+    public ResponseEntity<?> uploadDesign(@RequestParam("file") MultipartFile file, @PathVariable Integer orderId, @PathVariable Integer staffId) throws IOException {
 
-        String imageURL = fileUploadService.uploadModelDesignFile(file, id);
+        String imageURL = fileUploadService.uploadModelDesignFile(file, orderId, staffId);
 
         if (imageURL == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image is not found");
@@ -123,9 +123,8 @@ public class OrderController {
     }
 
     // Customer accept design
-    @PostMapping("/customers/acceptDesign/{orderId}")
+    @PostMapping("/customers/{orderId}/acceptDesign")
     public ResponseEntity<?> acceptDesign(@PathVariable Integer orderId) {
-
         Order theOrder = orderService.updateOrderStatusProduction(orderId);
         if (theOrder == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
