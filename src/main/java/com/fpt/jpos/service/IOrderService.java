@@ -29,5 +29,7 @@ public interface IOrderService {
 
     Order updateOrderStatusProduction(Integer id);
 
+    Order completeProduct(Integer id, String imageUrl, Integer productionStaffId);
+
     //TODO Update production staff id when production staff select delivered
 }

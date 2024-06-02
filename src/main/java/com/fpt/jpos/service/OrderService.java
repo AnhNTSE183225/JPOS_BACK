@@ -161,4 +161,21 @@ public class OrderService implements IOrderService {
             throw new RuntimeException("Order not found with id: " + id);
         }
     }
+    @Override
+    public Order completeProduct(Integer id, String imageUrl, Integer productionStaffId) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
+
+        if (!OrderStatus.production.equals(order.getStatus())) {
+            throw new IllegalStateException("Order status must be 'production' to complete the product");
+        }
+
+        Staff productionStaff = staffRepository.findById(productionStaffId)
+                .orElseThrow(() -> new ResourceNotFoundException("Staff not found for this id :: " + productionStaffId));
+
+        order.setStatus(OrderStatus.delivered);
+        order.setProductImage(imageUrl);
+        order.setProductionStaff(productionStaff); // Gán productionStaffId vào order
+        return orderRepository.save(order);
+    }
 }
