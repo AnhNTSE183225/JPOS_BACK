@@ -25,11 +25,16 @@ public class Material {
     @Column(name = "material_name")
     private String materialName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "material",
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<MaterialPrice> materialPrices;
 
-    @ManyToMany(mappedBy = "materials")
+//    @ManyToMany(mappedBy = "materials")
+//    @JsonIgnore
+//    private List<Product> products;
+
     @JsonIgnore
-    private List<Product> products;
+    @OneToMany(mappedBy = "material")
+    private List<ProductMaterial> productMaterials;
 }

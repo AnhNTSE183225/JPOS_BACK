@@ -24,4 +24,11 @@ public class ProductController {
     public ResponseEntity<?> saveProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productService.saveProduct(product));
     }
+
+    //Test
+    @CrossOrigin
+    @GetMapping("/product/all")
+    public ResponseEntity<?> getAllProduct() {
+        return ResponseEntity.ok(productService.findAll());
+    }
 }
