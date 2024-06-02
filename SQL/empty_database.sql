@@ -354,10 +354,10 @@ create table [Diamond] (
 	shape: round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear
 	origin: Canada, Angola, Namibia, Botswana, Lesotho, South Africa, 
 	proportions: image link
-	fluorescence: None, Faint, Medium, Strong, Very Strong
-	symmetry: Poor, Fair, Good, Very Good, Excellent
-	polish: Poor, Fair, Good, Very Good, Excellent
-	cut: Poor, Fair, Good, Very Good, Excellent
+	fluorescence: None, Faint, Medium, Strong, Very_Strong
+	symmetry: Poor, Fair, Good, Very_Good, Excellent
+	polish: Poor, Fair, Good, Very_Good, Excellent
+	cut: Poor, Fair, Good, Very_Good, Excellent
 	color: Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D
 	clarity: I3, I2, I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL
 	carat_weight: 0 to 30
@@ -366,25 +366,25 @@ INSERT INTO [Diamond]
 ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [active]) 
 VALUES 
 ('D001', 'Brilliant Star', 'round', 'Canada', 'http://example.com/proportions1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.2000, 'Perfect diamond', 1),
-('D002', 'Sparkling Heart', 'heart', 'South Africa', 'http://example.com/proportions2', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'G', 'VVS1', 0.7500, 'Heart-shaped diamond', 1),
+('D002', 'Sparkling Heart', 'heart', 'South Africa', 'http://example.com/proportions2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'G', 'VVS1', 0.7500, 'Heart-shaped diamond', 1),
 ('D003', 'Radiant Beauty', 'radiant', 'Botswana', 'http://example.com/proportions3', 'Medium', 'Good', 'Good', 'Good', 'J', 'SI1', 2.5000, 'Radiant cut diamond', 1),
 ('D004', 'Princess Charm', 'princess', 'Namibia', 'http://example.com/proportions4', 'Strong', 'Fair', 'Fair', 'Fair', 'E', 'VS2', 1.0000, 'Princess cut diamond', 1),
-('D005', 'Cushion Delight', 'cushion', 'Lesotho', 'http://example.com/proportions5', 'Very Strong', 'Poor', 'Poor', 'Poor', 'H', 'I1', 3.0000, 'Cushion cut diamond', 1),
-('D006', 'Oval Grace', 'oval', 'Angola', 'http://example.com/proportions6', 'None', 'Very Good', 'Very Good', 'Very Good', 'I', 'IF', 1.5000, 'Oval cut diamond', 1),
-('D007', 'Emerald Elegance', 'emerald', 'South Africa', 'http://example.com/proportions7', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'F', 'VVS2', 2.2000, 'Emerald cut diamond', 1),
+('D005', 'Cushion Delight', 'cushion', 'Lesotho', 'http://example.com/proportions5', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'H', 'I1', 3.0000, 'Cushion cut diamond', 1),
+('D006', 'Oval Grace', 'oval', 'Angola', 'http://example.com/proportions6', 'None', 'Very_Good', 'Very_Good', 'Very_Good', 'I', 'IF', 1.5000, 'Oval cut diamond', 1),
+('D007', 'Emerald Elegance', 'emerald', 'South_Africa', 'http://example.com/proportions7', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'F', 'VVS2', 2.2000, 'Emerald cut diamond', 1),
 ('D008', 'Marquise Splendor', 'marquise', 'Botswana', 'http://example.com/proportions8', 'Medium', 'Good', 'Good', 'Good', 'K', 'VS1', 0.9000, 'Marquise cut diamond', 1),
 ('D009', 'Asscher Radiance', 'asscher', 'Canada', 'http://example.com/proportions9', 'Strong', 'Fair', 'Fair', 'Fair', 'L', 'SI2', 1.8000, 'Asscher cut diamond', 1),
-('D010', 'Pear Spark', 'pear', 'Namibia', 'http://example.com/proportions10', 'Very Strong', 'Poor', 'Poor', 'Poor', 'M', 'I2', 2.7500, 'Pear cut diamond', 1),
+('D010', 'Pear Spark', 'pear', 'Namibia', 'http://example.com/proportions10', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'M', 'I2', 2.7500, 'Pear cut diamond', 1),
 ('D011', 'Brilliant Gem', 'round', 'Lesotho', 'http://example.com/proportions11', 'None', 'Excellent', 'Excellent', 'Excellent', 'N', 'FL', 1.3500, 'Another perfect diamond', 1),
-('D012', 'Radiant Star', 'radiant', 'Angola', 'http://example.com/proportions12', 'Faint', 'Very Good', 'Very Good', 'Very Good', 'O', 'VVS1', 0.6500, 'Radiant star diamond', 1),
-('D013', 'Princess Beauty', 'princess', 'South Africa', 'http://example.com/proportions13', 'Medium', 'Good', 'Good', 'Good', 'P', 'SI1', 2.0000, 'Beautiful princess cut', 1),
+('D012', 'Radiant Star', 'radiant', 'Angola', 'http://example.com/proportions12', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'O', 'VVS1', 0.6500, 'Radiant star diamond', 1),
+('D013', 'Princess Beauty', 'princess', 'South_Africa', 'http://example.com/proportions13', 'Medium', 'Good', 'Good', 'Good', 'P', 'SI1', 2.0000, 'Beautiful princess cut', 1),
 ('D014', 'Cushion Charm', 'cushion', 'Botswana', 'http://example.com/proportions14', 'Strong', 'Fair', 'Fair', 'Fair', 'Q', 'VS2', 0.8000, 'Charming cushion cut', 1),
-('D015', 'Oval Delight', 'oval', 'Canada', 'http://example.com/proportions15', 'Very Strong', 'Poor', 'Poor', 'Poor', 'R', 'I1', 1.7000, 'Delightful oval cut', 1),
-('D016', 'Emerald Grace', 'emerald', 'Namibia', 'http://example.com/proportions16', 'None', 'Very Good', 'Very Good', 'Very Good', 'S', 'IF', 2.4000, 'Graceful emerald cut', 1),
+('D015', 'Oval Delight', 'oval', 'Canada', 'http://example.com/proportions15', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'R', 'I1', 1.7000, 'Delightful oval cut', 1),
+('D016', 'Emerald Grace', 'emerald', 'Namibia', 'http://example.com/proportions16', 'None', 'Very_Good', 'Very_Good', 'Very_Good', 'S', 'IF', 2.4000, 'Graceful emerald cut', 1),
 ('D017', 'Marquise Radiance', 'marquise', 'Lesotho', 'http://example.com/proportions17', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'T', 'VVS2', 1.1000, 'Radiant marquise cut', 1),
 ('D018', 'Asscher Splendor', 'asscher', 'Angola', 'http://example.com/proportions18', 'Medium', 'Good', 'Good', 'Good', 'U', 'VS1', 2.9000, 'Splendid asscher cut', 1),
 ('D019', 'Pear Elegance', 'pear', 'South Africa', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 3.5000, 'Elegant pear cut', 1),
-('D020', 'Brilliant Sparkle', 'round', 'Botswana', 'http://example.com/proportions20', 'Very Strong', 'Poor', 'Poor', 'Poor', 'W', 'I2', 1.9500, 'Sparkling brilliant cut', 1);
+('D020', 'Brilliant Sparkle', 'round', 'Botswana', 'http://example.com/proportions20', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'W', 'I2', 1.9500, 'Sparkling brilliant cut', 1);
 go
 create table [DiamondPriceList] (
 	[diamond_price_id] int identity(1,1),
@@ -402,21 +402,21 @@ INSERT INTO [DiamondPriceList]
 ([origin], [carat_weight], [color], [clarity], [cut], [price], [effective_date]) 
 VALUES 
 ('Canada', 1.2000, 'D', 'FL', 'Excellent', 12000.00, GETDATE()),
-('South Africa', 0.7500, 'G', 'VVS1', 'Very Good', 7500.00, GETDATE()),
+('South Africa', 0.7500, 'G', 'VVS1', 'Very_Good', 7500.00, GETDATE()),
 ('Botswana', 2.5000, 'J', 'SI1', 'Good', 25000.00, GETDATE()),
 ('Namibia', 1.0000, 'E', 'VS2', 'Fair', 10000.00, GETDATE()),
 ('Lesotho', 3.0000, 'H', 'I1', 'Poor', 3000.00, GETDATE()),
-('Angola', 1.5000, 'I', 'IF', 'Very Good', 15000.00, GETDATE()),
+('Angola', 1.5000, 'I', 'IF', 'Very_Good', 15000.00, GETDATE()),
 ('South Africa', 2.2000, 'F', 'VVS2', 'Excellent', 22000.00, GETDATE()),
 ('Botswana', 0.9000, 'K', 'VS1', 'Good', 9000.00, GETDATE()),
 ('Canada', 1.8000, 'L', 'SI2', 'Fair', 18000.00, GETDATE()),
 ('Namibia', 2.7500, 'M', 'I2', 'Poor', 2750.00, GETDATE()),
 ('Lesotho', 1.3500, 'N', 'FL', 'Excellent', 13500.00, GETDATE()),
-('Angola', 0.6500, 'O', 'VVS1', 'Very Good', 6500.00, GETDATE()),
+('Angola', 0.6500, 'O', 'VVS1', 'Very_Good', 6500.00, GETDATE()),
 ('South Africa', 2.0000, 'P', 'SI1', 'Good', 20000.00, GETDATE()),
 ('Botswana', 0.8000, 'Q', 'VS2', 'Fair', 8000.00, GETDATE()),
 ('Canada', 1.7000, 'R', 'I1', 'Poor', 1700.00, GETDATE()),
-('Namibia', 2.4000, 'S', 'IF', 'Very Good', 24000.00, GETDATE()),
+('Namibia', 2.4000, 'S', 'IF', 'Very_Good', 24000.00, GETDATE()),
 ('Lesotho', 1.1000, 'T', 'VVS2', 'Excellent', 11000.00, GETDATE()),
 ('Angola', 2.9000, 'U', 'VS1', 'Good', 29000.00, GETDATE()),
 ('South Africa', 3.5000, 'V', 'SI2', 'Fair', 35000.00, GETDATE()),
