@@ -61,8 +61,9 @@ public class OrderController {
     }
 
     // Get all orders for customer
+    @CrossOrigin
     @GetMapping("/customers/{customerId}/orders")
-    public ResponseEntity<?> getOrdersForCustomer(@PathVariable int customerId) {
+    public ResponseEntity<?> getOrdersForCustomer(@PathVariable Integer customerId) {
         List<Order> requestList = orderService.getOrdersByCustomerId(customerId);
         if (requestList.isEmpty()) {
             return ResponseEntity.noContent().build();
