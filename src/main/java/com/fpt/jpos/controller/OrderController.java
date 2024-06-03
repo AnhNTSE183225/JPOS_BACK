@@ -137,6 +137,7 @@ public class OrderController {
     }
 
     // Update order status to designing after confirming deposit
+    @CrossOrigin
     @PutMapping("/sales/orders/{id}/confirm-deposit")
     public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentDTO payment) {
         Order order = orderService.updateOrderStatusDesigning(id, payment);
