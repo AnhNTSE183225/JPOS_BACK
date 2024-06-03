@@ -34,11 +34,7 @@ public class DiamondPriceController {
     @PostMapping("/get-price-by-4C")
     public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4CDTO diamond4CDTO) {
 
-        List<DiamondPrice> diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4CDTO);
-        if (diamondPriceList == null || diamondPriceList.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamondPriceList);
-        }
+        double diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4CDTO);
+        return ResponseEntity.ok(diamondPriceList); // thrown exception in service
     }
 }

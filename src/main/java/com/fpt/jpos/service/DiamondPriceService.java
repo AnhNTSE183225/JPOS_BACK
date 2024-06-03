@@ -6,6 +6,8 @@ import com.fpt.jpos.repository.IDiamondPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,7 +26,7 @@ public class DiamondPriceService implements IDiamondPriceService {
     }
 
     @Override
-    public List<DiamondPrice> getDiamondPricesBy4C(Diamond4CDTO diamond4CDTO) {
+    public Double getDiamondPricesBy4C(Diamond4CDTO diamond4CDTO) {
 
         List<DiamondPrice> diamondPriceList = diamondPriceRepository.findDiamondPriceByCaratWeightAndAndClarityAndColorAndCut(
                 diamond4CDTO.getFromCaratWeight(),
@@ -33,9 +35,22 @@ public class DiamondPriceService implements IDiamondPriceService {
                 diamond4CDTO.getColor().name(),
                 diamond4CDTO.getCut().name());
 
+        Date today = Calendar.getInstance().getTime(); // get today time
+
         // Sort the list by date in descending order so the most recent date comes first
         diamondPriceList.sort((p1, p2) -> p2.getEffectiveDate().compareTo(p1.getEffectiveDate()));
 
-        return diamondPriceList;
+        double result = 0;
+
+        for (DiamondPrice diamondPrice : diamondPriceList) {
+            if (diamondPrice.getEffectiveDate().compareTo(today) <= 0) {
+                result = diamondPrice.getPrice();
+                break;
+            }
+        }
+        if (diamondPriceList.isEmpty() || result == 0.0) {
+            throw new RuntimeException("Diamond Price not found");
+        }
+        return result;
     }
 }
