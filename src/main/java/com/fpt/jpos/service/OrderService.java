@@ -206,9 +206,9 @@ public class OrderService implements IOrderService {
         Payment payment = modelMapper.map(paymentDTO, Payment.class);
         Payment depositPayment = paymentRepository.findPaymentByOrderId(orderId);
 
-        double sum = depositPayment.getAmount_paid() + payment.getAmount_paid();
+        double sum = depositPayment.getAmountPaid() + payment.getAmountPaid();
 
-        if (sum == payment.getAmount_total()) {
+        if (sum == payment.getAmountTotal()) {
             paymentRepository.save(payment);
         }
         if (optionalOrder.isPresent()) {

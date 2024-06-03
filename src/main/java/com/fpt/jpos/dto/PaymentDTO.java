@@ -14,8 +14,8 @@ import java.util.Date;
 @Builder
 public class PaymentDTO {
     private Date paymentDate;
-    private String payment_method;
-    private String payment_status;
-    private Double amount_paid;
-    private Double amount_total;
+    private String paymentMethod;
+    private String paymentStatus;
+    private Double amountPaid;
+    private Double amountTotal;
 }

@@ -28,12 +28,12 @@ public class Payment {
     @Column(name = "payment_date")
     private Date paymentDate;
     @Column(name = "payment_method")
-    private String payment_method;
+    private String paymentMethod;
     @Column(name = "payment_status")
-    private String payment_status;
+    private String paymentStatus;
     @Column(name = "amount_paid")
-    private Double amount_paid;
+    private Double amountPaid;
     @Column(name = "amount_total")
-    private Double amount_total;
+    private Double amountTotal;
 
 }
