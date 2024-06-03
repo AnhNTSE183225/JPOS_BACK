@@ -22,8 +22,8 @@ public class ProductShellMaterial {
 
     @JsonIgnore
     @ManyToOne
-    @MapsId("productShellDesignId")
-    @JoinColumn(name = "product_shell_design_id")
+    @MapsId("shellId")
+    @JoinColumn(name = "shell_id")
     private ProductShellDesign productShellDesign;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
@@ -31,6 +31,7 @@ public class ProductShellMaterial {
     @JoinColumn(name = "material_id")
     private Material material;
 
-    private double weight;
+    @JoinColumn(name = "weight")
+    private Double weight;
 
 }

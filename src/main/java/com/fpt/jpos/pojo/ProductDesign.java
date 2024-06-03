@@ -30,7 +30,6 @@ public class ProductDesign {
     @OneToMany(
             mappedBy = "productDesign"
     )
-    @JoinColumn(name = "product_design_id")
     private List<ProductShellDesign> productShellDesigns;
 
 

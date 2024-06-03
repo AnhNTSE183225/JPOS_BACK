@@ -1,4 +1,4 @@
-package com.fpt.jpos.pojo;
+package com.fpt.jpos.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -14,8 +14,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductShellMaterialId implements Serializable {
-    @Column(name = "product_shell_design_id")
-    private int productShelDesignId;
+    @Column(name = "shell_id")
+    private int shellId;
 
     @Column(name = "material_id")
     private int materialId;

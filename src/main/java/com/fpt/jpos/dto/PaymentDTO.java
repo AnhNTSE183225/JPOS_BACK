@@ -13,8 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class PaymentDTO {
-    private int id;
-    private Order order;
     private Date paymentDate;
     private String payment_method;
     private String payment_status;

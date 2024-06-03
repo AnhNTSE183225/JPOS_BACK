@@ -1,7 +1,7 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.Product;
-import com.fpt.jpos.pojo.ProductDTO;
+import com.fpt.jpos.dto.ProductDTO;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.dto.CustomerRequestDTO;
 import com.fpt.jpos.dto.PaymentDTO;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;

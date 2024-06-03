@@ -1,7 +1,7 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.dto.PaymentDTO;
-import com.fpt.jpos.pojo.CustomerRequestDTO;
+import com.fpt.jpos.dto.CustomerRequestDTO;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
@@ -141,7 +141,7 @@ public class OrderController {
     public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentDTO payment) {
         Order order = orderService.updateOrderStatusDesigning(id, payment);
         if (order == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(order);
 

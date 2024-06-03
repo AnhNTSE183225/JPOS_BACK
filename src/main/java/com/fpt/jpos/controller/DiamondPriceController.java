@@ -1,6 +1,6 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.pojo.Diamond4C;
+import com.fpt.jpos.dto.Diamond4CDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ public class DiamondPriceController {
 
     @CrossOrigin
     @PostMapping("/get-price-by-4C")
-    public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4C diamond4C) {
+    public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4CDTO diamond4CDTO) {
 
-        List<DiamondPrice> diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4C);
+        List<DiamondPrice> diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4CDTO);
         if (diamondPriceList == null || diamondPriceList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {

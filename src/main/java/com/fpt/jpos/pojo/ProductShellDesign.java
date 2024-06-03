@@ -35,7 +35,6 @@ public class ProductShellDesign {
     private Double productionPrice;
 
     @ManyToOne
-    @MapsId("productDesignId")
     @JoinColumn(name = "product_design_id")
     private ProductDesign productDesign;
 
