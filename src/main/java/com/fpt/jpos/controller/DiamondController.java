@@ -2,6 +2,8 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.Diamond;
 import com.fpt.jpos.repository.IDiamondRepository;
+import com.fpt.jpos.service.DiamondService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,4 +38,12 @@ public class DiamondController {
             return ResponseEntity.ok(diamondList);
         }
     }
+    @Autowired
+    private DiamondService diamondService;
+
+    @GetMapping
+    public List<Diamond> getAllDiamonds() {
+        return diamondService.getAllDiamonds();
+    }
+
 }

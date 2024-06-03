@@ -2,6 +2,7 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.NoteDTO;
 import com.fpt.jpos.dto.PaymentDTO;
+import com.fpt.jpos.dto.ProductDesignDTO;
 import com.fpt.jpos.dto.CustomerRequestDTO;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.enums.OrderStatus;
@@ -43,6 +44,8 @@ public interface IOrderService {
     Order completeProduct(Integer id, String imageUrl, Integer productionStaffId);
 
     Order completeOrder(PaymentDTO paymentDTO, Integer orderId);
+    
+    Order addProductDesignToOrder(ProductDesignDTO productDesignDTO);
 
 
     //TODO Update production staff id when production staff select delivered

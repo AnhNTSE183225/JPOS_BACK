@@ -2,6 +2,7 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.dto.NoteDTO;
 import com.fpt.jpos.dto.PaymentDTO;
+import com.fpt.jpos.dto.ProductDesignDTO;
 import com.fpt.jpos.dto.CustomerRequestDTO;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.enums.OrderStatus;
@@ -239,6 +240,11 @@ public class OrderController {
         Order order = orderService.completeOrder(paymentDTO, orderId);
         return ResponseEntity.ok(order);
 
+    }
+    @PostMapping("/add-product-design")
+    public ResponseEntity<Order> addProductDesignToOrder(@RequestBody ProductDesignDTO productDesignDTO) {
+        Order order = orderService.addProductDesignToOrder(productDesignDTO);
+        return ResponseEntity.ok(order);
     }
 
 }
