@@ -4,6 +4,7 @@ import com.fpt.jpos.pojo.Diamond;
 import com.fpt.jpos.repository.IDiamondRepository;
 import com.fpt.jpos.service.DiamondService;
 
+import com.fpt.jpos.service.IDiamondService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DiamondController {
-    private final IDiamondRepository diamondRepository;
+
+
+    private final IDiamondService diamondService;
 
     @Autowired
-    public DiamondController(IDiamondRepository diamondRepository) {
-        this.diamondRepository = diamondRepository;
+    public DiamondController(IDiamondService diamondService) {
+        this.diamondService = diamondService;
     }
 
     @CrossOrigin
@@ -30,7 +33,7 @@ public class DiamondController {
                                              @RequestParam String cut,
                                              @RequestParam String shape) {
 
-        List<Diamond> diamondList = diamondRepository.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
+        List<Diamond> diamondList = diamondService.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
 
         if (diamondList == null || diamondList.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -38,8 +41,6 @@ public class DiamondController {
             return ResponseEntity.ok(diamondList);
         }
     }
-    @Autowired
-    private DiamondService diamondService;
 
     @GetMapping
     public List<Diamond> getAllDiamonds() {
