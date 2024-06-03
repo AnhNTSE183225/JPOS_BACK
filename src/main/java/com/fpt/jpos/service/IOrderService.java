@@ -1,5 +1,6 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.dto.NoteDTO;
 import com.fpt.jpos.dto.PaymentDTO;
 import com.fpt.jpos.dto.CustomerRequestDTO;
 import com.fpt.jpos.pojo.Order;
@@ -32,6 +33,8 @@ public interface IOrderService {
     Order acceptOrder(Order order);
 
     Order updateOrderStatusDesigning(Integer id, PaymentDTO paymentDTO);
+
+    Order updateOrderStatusDesigning(Integer id, NoteDTO noteDTO);
 
     Order updateOrderStatusProduction(Integer id);
 

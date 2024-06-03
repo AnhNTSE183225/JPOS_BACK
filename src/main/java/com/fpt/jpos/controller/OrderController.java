@@ -1,5 +1,6 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.dto.NoteDTO;
 import com.fpt.jpos.dto.PaymentDTO;
 import com.fpt.jpos.dto.CustomerRequestDTO;
 import com.fpt.jpos.pojo.Order;
@@ -177,11 +178,23 @@ public class OrderController {
     }
 
     // Customer accept design
+    @CrossOrigin
     @PostMapping("/customers/{orderId}/acceptDesign")
     public ResponseEntity<?> acceptDesign(@PathVariable Integer orderId) {
         Order theOrder = orderService.updateOrderStatusProduction(orderId);
         if (theOrder == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(theOrder);
+    }
+
+    //Customer refuses design
+    @CrossOrigin
+    @PostMapping("/customers/{orderId}/refuseDesign")
+    public ResponseEntity<?> refuseDesign(@PathVariable Integer orderId, @RequestBody NoteDTO noteDTO) {
+        Order theOrder = orderService.updateOrderStatusDesigning(orderId, noteDTO);
+        if (theOrder == null) {
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(theOrder);
     }
@@ -199,10 +212,15 @@ public class OrderController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/{id}/complete-product")
-    public ResponseEntity<Order> completeProduct(@PathVariable Integer id, @RequestParam String imageUrl, @RequestParam Integer productionStaffId) {
-        Order order = orderService.completeProduct(id, imageUrl, productionStaffId);
-        return ResponseEntity.ok(order);
+    public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestParam String imageUrl, @RequestParam Integer productionStaffId) {
+        try {
+            return ResponseEntity.ok(orderService.completeProduct(id, imageUrl, productionStaffId));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @PostMapping("/orders/{orderId}/complete")

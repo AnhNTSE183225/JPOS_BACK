@@ -27,6 +27,9 @@ public class ProductDesign {
     @Column(name = "design_type")
     private String designType;
 
+    @Column(name = "design_file")
+    private String designFile;
+
     @OneToMany(
             mappedBy = "productDesign"
     )

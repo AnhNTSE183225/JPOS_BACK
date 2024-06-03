@@ -340,6 +340,7 @@ create table [ProductShellDesign] (
 	[product_design_id] int,
 	[shell_name] varchar(255),
 	[diamond_quantity] int,
+	[design_file] varchar(MAX),
 	[e_diamond_price] decimal(19,4),
 	[e_material_price] decimal(19,4),
 	[production_price] decimal(19,4)

@@ -1,6 +1,7 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.CustomerRequestDTO;
+import com.fpt.jpos.dto.NoteDTO;
 import com.fpt.jpos.dto.PaymentDTO;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
@@ -95,7 +96,22 @@ public class OrderService implements IOrderService {
         if (theOrder.isPresent()) {
             Order order = theOrder.get();
             order.setStatus(OrderStatus.designing);
+            payment.setOrder(order);
             paymentRepository.save(payment);
+            return orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Order not found with id: " + id);
+        }
+    }
+
+    @Override
+    @Transactional
+    public Order updateOrderStatusDesigning(Integer id, NoteDTO noteDTO) {
+        Optional<Order> theOrder = orderRepository.findById(id);
+        if (theOrder.isPresent()) {
+            Order order = theOrder.get();
+            order.setStatus(OrderStatus.designing);
+            order.setModelFeedback(noteDTO.getNote());
             return orderRepository.save(order);
         } else {
             throw new RuntimeException("Order not found with id: " + id);
