@@ -404,21 +404,21 @@ create table [Diamond] (
 	[diamond_id] int identity(1,1),
 	[diamond_code] varchar(255),
 	[diamond_name] varchar(255),
-	
+
 	[shape] varchar(8),
-	
+
 	[origin] varchar(12),
 	[proportions] varchar(255),
 	[fluorescence] varchar(11),
 	[symmetry] varchar(9),
 	[polish] varchar(9),
-	
+
 	[cut] varchar(9),
 	[color] varchar(1),
 	[clarity] varchar(4),
 	[carat_weight] decimal(19,4),
 	[note] varchar(255),
-	
+
 	[active] bit,
 	primary key([diamond_id])
 )
@@ -435,7 +435,7 @@ create table [Diamond] (
 	carat_weight: 0 to 30
 */
 go
-INSERT INTO [Diamond] 
+INSERT INTO [Diamond]
 ([diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [active], [diamond_code], [note])
 VALUES
 ('1.01 Carat Round Diamond', 'round', 'Canada', 'https://4cs.gia.edu/wp-content/uploads/2014/04/Proportions.jpg', 'Strong', 'Excellent', 'Excellent', 'Excellent', 'H', 'VS2', 1.01, 1, 'D001', 'First batch'),
