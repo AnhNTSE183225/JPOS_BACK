@@ -115,7 +115,6 @@ public class Order {
     @Column(name = "discount")
     private Double discount;
 
-
     @OneToMany(mappedBy = "order")
     @JsonIgnore
     List<Payment> payments;
