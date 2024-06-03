@@ -241,36 +241,36 @@ public class OrderService implements IOrderService {
             throw new RuntimeException("Order not found with id: " + orderId);
         }
     }
-    
-    @Override
-    public Order addProductDesignToOrder(ProductDesignDTO productDesignDTO) {
-        // Get the product shell design
-        Optional<ProductShellDesign> productShellDesignOptional = productShellDesignRepository.findById(productDesignDTO.getProductShellId());
-        if (productShellDesignOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Product shell design not found for this id :: " + productDesignDTO.getProductShellId());
-        }
-        ProductShellDesign productShellDesign = productShellDesignOptional.get();
 
-        // Get diamonds
-        List<Diamond> diamonds = diamondRepository.findAllById(productDesignDTO.getDiamondIds());
-
-        // Create new ProductDesign and set its properties
-        ProductDesign productDesign = ProductDesign.builder()
-                .productShellDesign(productShellDesign)
-                .diamonds(diamonds)
-                .build();
-
-        // Save the product design
-        productDesign = productDesignRepository.save(productDesign);
-
-        // Create new Order and set its properties
-        Order order = new Order();
-        order.setStatus(OrderStatus.wait_sale_staff);
-        order.setOrderDate(new Date());
-        order.setProductDesign(productDesign);
-        // Add other necessary order details
-
-        // Save the order
-        return orderRepository.save(order);
-    }
+//    @Override
+//    public Order addProductDesignToOrder(ProductDesignDTO productDesignDTO) {
+//        // Get the product shell design
+//        Optional<ProductShellDesign> productShellDesignOptional = productShellDesignRepository.findById(productDesignDTO.getProductShellId());
+//        if (productShellDesignOptional.isEmpty()) {
+//            throw new ResourceNotFoundException("Product shell design not found for this id :: " + productDesignDTO.getProductShellId());
+//        }
+//        ProductShellDesign productShellDesign = productShellDesignOptional.get();
+//
+//        // Get diamonds
+//        List<Diamond> diamonds = diamondRepository.findAllById(productDesignDTO.getDiamondIds());
+//
+//        // Create new ProductDesign and set its properties
+//        ProductDesign productDesign = ProductDesign.builder()
+//                .productShellDesign(productShellDesign)
+//                .diamonds(diamonds)
+//                .build();
+//
+//        // Save the product design
+//        productDesign = productDesignRepository.save(productDesign);
+//
+//        // Create new Order and set its properties
+//        Order order = new Order();
+//        order.setStatus(OrderStatus.wait_sale_staff);
+//        order.setOrderDate(new Date());
+//        order.setProductDesign(productDesign);
+//        // Add other necessary order details
+//
+//        // Save the order
+//        return orderRepository.save(order);
+//    }
 }

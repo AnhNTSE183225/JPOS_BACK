@@ -235,16 +235,17 @@ public class OrderController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/orders/{orderId}/complete")
     public ResponseEntity<Order> completeOrder(@RequestBody PaymentDTO paymentDTO, @PathVariable Integer orderId) {
         Order order = orderService.completeOrder(paymentDTO, orderId);
         return ResponseEntity.ok(order);
 
     }
-    @PostMapping("/add-product-design")
-    public ResponseEntity<Order> addProductDesignToOrder(@RequestBody ProductDesignDTO productDesignDTO) {
-        Order order = orderService.addProductDesignToOrder(productDesignDTO);
-        return ResponseEntity.ok(order);
-    }
+//    @PostMapping("/add-product-design")
+//    public ResponseEntity<Order> addProductDesignToOrder(@RequestBody ProductDesignDTO productDesignDTO) {
+//        Order order = orderService.addProductDesignToOrder(productDesignDTO);
+//        return ResponseEntity.ok(order);
+//    }
 
 }
