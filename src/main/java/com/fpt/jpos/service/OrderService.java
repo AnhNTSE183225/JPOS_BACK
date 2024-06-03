@@ -67,8 +67,8 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> getOrdersByStatusAndStaffs(Integer id) {
-        return orderRepository.findAllByStatusAndStaff(id);
+    public List<Order> getOrderForSalesStaff(Integer id) {
+        return orderRepository.findOrderForSalesStaff(id);
     }
 
     @Override
@@ -79,6 +79,11 @@ public class OrderService implements IOrderService {
     @Override
     public List<Order> getOrderForProductionStaff(Integer id) {
         return orderRepository.findOrdersForProductionStaff(id);
+    }
+
+    @Override
+    public List<Order> getOrderForManager() {
+        return orderRepository.findOrdersForManager();
     }
 
 

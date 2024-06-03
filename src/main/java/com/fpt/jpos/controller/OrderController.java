@@ -78,7 +78,7 @@ public class OrderController {
     @GetMapping("/sales/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForSaleStaff(@PathVariable int staffId) {
 
-        List<Order> requestList = orderService.getOrdersByStatusAndStaffs(staffId);
+        List<Order> requestList = orderService.getOrderForSalesStaff(staffId);
 
         if (requestList.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -87,7 +87,7 @@ public class OrderController {
         }
     }
 
-    // Manager get quotation from staff
+    // Staff sends quotation to manager
     @CrossOrigin
     @PostMapping("/sales/orders/{staffId}/{productId}")
     public ResponseEntity<?> retrieveQuotationFromStaff(@RequestBody Order order, @PathVariable Integer productId, @PathVariable int staffId) {
@@ -96,6 +96,17 @@ public class OrderController {
             return ResponseEntity.ok(quotedOrder);
         } catch (RuntimeException e) {
             return ResponseEntity.noContent().build();
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/manager/orders")
+    public ResponseEntity<?> getOrderForManager() {
+        List<Order> orderList = orderService.getOrderForManager();
+        if (orderList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(orderList);
         }
     }
 

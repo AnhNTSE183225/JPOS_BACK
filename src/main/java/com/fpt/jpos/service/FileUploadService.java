@@ -49,7 +49,7 @@ public class FileUploadService implements IFileUploadService {
         if (theOrder.isPresent() && theStaff.isPresent()) {
             Order order = theOrder.get();
             Staff staff = theStaff.get();
-            order.setDesignFile(url);
+            order.setModelFile(url);
             order.setStatus(OrderStatus.pending_design);
             order.setDesignStaff(staff);
             orderRepository.save(order);

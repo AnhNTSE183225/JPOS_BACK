@@ -18,11 +18,13 @@ public interface IOrderService {
 
     List<Order> getOrdersByCustomerId(Integer customerId);
 
-    List<Order> getOrdersByStatusAndStaffs(Integer id);
+    List<Order> getOrderForSalesStaff(Integer id);
 
     List<Order> getOrderForDesignStaff(Integer id);
 
     List<Order> getOrderForProductionStaff(Integer id);
+
+    List<Order> getOrderForManager();
 
     Order findById(Integer id);
 
