@@ -42,8 +42,8 @@ public class ProductService implements IProductService {
         Product product = new Product();
         product.setProductName(productDTO.getProductName());
         product.setProductType(productDTO.getProductType());
-        product.setEDiamondPrice(productDTO.getEMaterialPrice());
-        product.setEMaterialPrice(productDTO.getEDiamondPrice());
+        product.setEDiamondPrice(productDTO.getEDiamondPrice());
+        product.setEMaterialPrice(productDTO.getEMaterialPrice());
         product.setMarkupRate(productDTO.getMarkupRate());
         product.setProductionPrice(productDTO.getProductionPrice());
 

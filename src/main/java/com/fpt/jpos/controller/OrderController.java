@@ -247,5 +247,16 @@ public class OrderController {
 //        Order order = orderService.addProductDesignToOrder(productDesignDTO);
 //        return ResponseEntity.ok(order);
 //    }
-
+    @CrossOrigin
+    @PostMapping("/create-order-from-design")
+    public ResponseEntity<?> createOrderFromDesign(@RequestBody ProductDesignDTO productDesignDTO) {
+        try {
+            System.out.println("Controller");
+            System.out.println(productDesignDTO.toString());
+            return ResponseEntity.ok(orderService.createOrderFromDesign(productDesignDTO).getId());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.noContent().build();
+        }
+    }
 }

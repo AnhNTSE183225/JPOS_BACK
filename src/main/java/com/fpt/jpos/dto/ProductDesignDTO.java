@@ -16,5 +16,5 @@ public class ProductDesignDTO {
     private Integer productDesignId;
     private Integer productShellId;
     private List<Integer> diamondIds;
-
+    private Integer customerId;
 }

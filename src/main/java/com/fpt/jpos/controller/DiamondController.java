@@ -5,6 +5,7 @@ import com.fpt.jpos.repository.IDiamondRepository;
 import com.fpt.jpos.service.DiamondService;
 
 import com.fpt.jpos.service.IDiamondService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,9 +43,14 @@ public class DiamondController {
         }
     }
 
-    @GetMapping
-    public List<Diamond> getAllDiamonds() {
-        return diamondService.getAllDiamonds();
+    @CrossOrigin
+    @GetMapping("/diamonds/all")
+    public ResponseEntity<?> getAllDiamonds() {
+        try {
+            return ResponseEntity.ok(diamondService.getAllDiamonds());
+        } catch (Exception ex) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
 }

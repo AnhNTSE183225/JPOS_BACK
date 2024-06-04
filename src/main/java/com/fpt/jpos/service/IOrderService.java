@@ -47,6 +47,7 @@ public interface IOrderService {
     
     //Order addProductDesignToOrder(ProductDesignDTO productDesignDTO);
 
+    Order createOrderFromDesign(ProductDesignDTO productDesignDTO);
 
     //TODO Update production staff id when production staff select delivered
 }

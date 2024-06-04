@@ -1,5 +1,6 @@
 package com.fpt.jpos.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ public class ProductShellDesign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_shell_design_id")
+    @Column(name = "shell_id")
     private int productShellDesignId;
 
     @Column(name = "shell_name")
@@ -34,6 +35,7 @@ public class ProductShellDesign {
     @Column(name = "production_price")
     private Double productionPrice;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_design_id")
     private ProductDesign productDesign;

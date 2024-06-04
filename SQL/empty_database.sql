@@ -332,15 +332,38 @@ create table [ProductDesign] (
 	[product_design_id] int identity(1,1),
 	[design_name] varchar(255),
 	[design_type] varchar(255),
+	[design_file] varchar(MAX),
 	primary key([product_design_id])
 )
+go
+insert into [ProductDesign]
+values
+('design_1', 'necklace', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_2', 'bracelet', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_3', 'earrings', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_4', 'ring', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_5', 'pendant', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_6', 'brooch', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_7', 'anklet', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_8', 'cufflinks', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_9', 'hairpin', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_10', 'bangle', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_11', 'tie clip', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_12', 'charm', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_13', 'medallion', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_14', 'stud', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_15', 'hoop earrings', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_16', 'collar pin', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_17', 'belt buckle', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_18', 'lapel pin', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_19', 'bead', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg'),
+('design_20', 'diadem', 'https://ion.bluenile.com/sets/Jewelry-bn/195273/RND/Images/gallery.jpg');
 go
 create table [ProductShellDesign] (
 	[shell_id] int identity(1,1),
 	[product_design_id] int,
 	[shell_name] varchar(255),
 	[diamond_quantity] int,
-	[design_file] varchar(MAX),
 	[e_diamond_price] decimal(19,4),
 	[e_material_price] decimal(19,4),
 	[production_price] decimal(19,4)
@@ -357,6 +380,35 @@ create table [ProductShellMaterial] (
 	foreign key([shell_id]) references [ProductShellDesign]
 )
 go
+-- Insert into ProductShellDesign
+DECLARE @design_id INT = 1;
+
+WHILE @design_id <= 20
+BEGIN
+    INSERT INTO [ProductShellDesign] ([product_design_id], [shell_name], [diamond_quantity], [e_diamond_price], [e_material_price], [production_price])
+    VALUES 
+    (@design_id, 'gold shell', 1, 100.00, 200.00, 300.00),
+    (@design_id, 'platinum shell', 2, 120.00, 250.00, 350.00),
+    (@design_id, 'silver shell', 3, 80.00, 150.00, 250.00);
+    
+    SET @design_id = @design_id + 1;
+END;
+GO
+
+-- Insert into ProductShellMaterial
+DECLARE @shell_id INT = 1;
+
+WHILE @shell_id <= 60  -- 20 designs * 3 shells each
+BEGIN
+    INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
+    VALUES 
+    (@shell_id, 1, 15.5), -- gold
+    (@shell_id + 1, 3, 10.0), -- platinum
+    (@shell_id + 2, 7, 12.3); -- silver
+    
+    SET @shell_id = @shell_id + 3;
+END;
+GO
 select * from [Account]
 select * from [Customer]
 select * from [Diamond]

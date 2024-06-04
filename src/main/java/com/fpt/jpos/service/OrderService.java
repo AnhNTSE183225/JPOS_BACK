@@ -1,18 +1,17 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.dto.CustomerRequestDTO;
-import com.fpt.jpos.dto.NoteDTO;
-import com.fpt.jpos.dto.PaymentDTO;
-import com.fpt.jpos.dto.ProductDesignDTO;
+import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +29,21 @@ public class OrderService implements IOrderService {
 
     private final IProductRepository productRepository;
 
+    private final IProductShellDesignRepository productShellDesignRepository;
+
+    private final IProductDesignRepository productDesignRepository;
+
+    private final IProductShellMaterialRepository productShellMaterialRepository;
+
+    private final IProductMaterialRepository productMaterialRepository;
+
+    private final IDiamondRepository diamondRepository;
+
+    private final IDiamondPriceService diamondPriceService;
+
+    private final IMaterialPriceService materialPriceService;
+    private final ProductService productService;
+
     ModelMapper modelMapper = new ModelMapper();
 
 
@@ -38,12 +52,27 @@ public class OrderService implements IOrderService {
                         ICustomerRepository theICustomerRepository,
                         IPaymentRepository theIPaymentRepository,
                         IStaffRepository theIStaffRepository,
-                        IProductRepository theIProductRepository) {
+                        IProductRepository theIProductRepository,
+                        IProductShellDesignRepository productShellDesignRepository,
+                        IProductDesignRepository productDesignRepository,
+                        IProductShellMaterialRepository productShellMaterialRepository,
+                        IProductMaterialRepository productMaterialRepository,
+                        IDiamondRepository diamondRepository,
+                        IDiamondPriceService diamondPriceService,
+                        IMaterialPriceService materialPriceService, ProductService productService) {
         orderRepository = theIOrderRepository;
         customerRepository = theICustomerRepository;
         paymentRepository = theIPaymentRepository;
         staffRepository = theIStaffRepository;
         productRepository = theIProductRepository;
+        this.productShellDesignRepository = productShellDesignRepository;
+        this.productDesignRepository = productDesignRepository;
+        this.productShellMaterialRepository = productShellMaterialRepository;
+        this.productMaterialRepository = productMaterialRepository;
+        this.diamondRepository = diamondRepository;
+        this.diamondPriceService = diamondPriceService;
+        this.materialPriceService = materialPriceService;
+        this.productService = productService;
     }
 
     @Override
@@ -228,7 +257,12 @@ public class OrderService implements IOrderService {
         Payment payment = modelMapper.map(paymentDTO, Payment.class);
         Payment depositPayment = paymentRepository.findPaymentByOrderId(orderId);
 
-        double sum = depositPayment.getAmountPaid() + payment.getAmountPaid();
+        Double depositMoney = 0.0;
+
+        if(depositPayment != null) {
+            depositMoney = depositPayment.getAmountPaid();
+        }
+        double sum = depositMoney + payment.getAmountPaid();
 
         if (sum == payment.getAmountTotal()) {
             paymentRepository.save(payment);
@@ -240,6 +274,67 @@ public class OrderService implements IOrderService {
         } else {
             throw new RuntimeException("Order not found with id: " + orderId);
         }
+    }
+
+    @Override
+    @Transactional
+    public Order createOrderFromDesign(ProductDesignDTO productDesignDTO) {
+        ProductShellDesign productShellDesign = productShellDesignRepository.findById(productDesignDTO.getProductShellId()).orElseThrow();
+        ProductDesign productDesign = productDesignRepository.findById(productDesignDTO.getProductDesignId()).orElseThrow();
+        List<ProductShellMaterial> productShellMaterialList = productShellMaterialRepository.findByShellId(productShellDesign.getProductShellDesignId());
+        List<Diamond> diamonds = new ArrayList<>();
+        Double diamondPrice = 0.0;
+        double materialPrice = 0.0;
+
+        Product product = new Product();
+        product.setProductName(productDesign.getDesignName() + " - " +  productShellDesign.getShellName());
+        product.setProductType(productDesign.getDesignType());
+        product.setEDiamondPrice(productShellDesign.getEDiamondPrice());
+        product.setEMaterialPrice(productShellDesign.getEMaterialPrice());
+        product.setMarkupRate(1.0);
+        product.setProductionPrice(productShellDesign.getProductionPrice());
+
+        product = productRepository.save(product);
+
+        for (ProductShellMaterial productShellMaterial : productShellMaterialList) {
+            Material material = productShellMaterial.getMaterial();
+
+            ProductMaterialId productMaterialId = new ProductMaterialId(product.getProductId(), material.getMaterialId());
+
+            ProductMaterial productMaterial = new ProductMaterial();
+            productMaterial.setId(productMaterialId);
+            productMaterial.setMaterial(material);
+            productMaterial.setProduct(product);
+            productMaterial.setWeight(productShellMaterial.getWeight());
+
+            materialPrice += productShellMaterial.getWeight()*materialPriceService.getLatestPriceById(material.getMaterialId());
+            productMaterialRepository.save(productMaterial);
+        }
+
+        for (Integer id : productDesignDTO.getDiamondIds()) {
+            Diamond diamond = diamondRepository.findById(id).orElseThrow();
+            diamonds.add(diamond);
+            diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(),diamond.getClarity(),diamond.getCut(),diamond.getCaratWeight(),diamond.getCaratWeight()));
+        }
+        product.setDiamonds(diamonds);
+
+
+        product = productRepository.save(product);
+
+        Order order = new Order();
+        order.setProduct(product);
+        order.setStatus(OrderStatus.production);
+        order.setCustomer(customerRepository.findById(productDesignDTO.getCustomerId()).orElseThrow());
+        order.setOrderDate(new Date());
+        order.setOrderType("from_design");
+        order.setProductionPrice(productShellDesign.getProductionPrice());
+        order.setMarkupRate(1.0);
+        order.setODiamondPrice(diamondPrice);
+        order.setOMaterialPrice(materialPrice);
+        order.setEDiamondPrice(productShellDesign.getEDiamondPrice());
+        order.setEMaterialPrice(productShellDesign.getEMaterialPrice());
+        order.setTotalAmount(diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice());
+        return orderRepository.save(order);
     }
 
 //    @Override

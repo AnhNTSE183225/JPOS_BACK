@@ -4,10 +4,7 @@ import com.fpt.jpos.pojo.ProductDesign;
 import com.fpt.jpos.service.ProductDesignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,11 +19,12 @@ public class ProductDesignController {
         this.productDesignService = productDesignService;
     }
 
-    @GetMapping
+    @CrossOrigin
+    @GetMapping("/all")
     public ResponseEntity<List<ProductDesign>> getAllProductDesigns() {
         List<ProductDesign> productDesigns = productDesignService.getProductDesigns();
         if (productDesigns.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(productDesigns);
     }
