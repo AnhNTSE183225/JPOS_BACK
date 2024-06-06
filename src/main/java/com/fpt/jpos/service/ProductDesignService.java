@@ -34,4 +34,9 @@ public class ProductDesignService implements IProductDesignService {
             return new ArrayList<>();
         }
     }
+
+    @Override
+    public ProductDesign findById(Integer productDesignId) {
+        return productDesignRepository.findById(productDesignId).orElseThrow();
+    }
 }

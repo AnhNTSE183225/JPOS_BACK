@@ -10,4 +10,6 @@ public interface IProductDesignService {
 
     List<ProductDesign> getProductDesignsByCategory(String category);
 
+    ProductDesign findById(Integer productDesignId);
+
 }

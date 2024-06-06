@@ -29,12 +29,22 @@ public class ProductDesignController {
         return ResponseEntity.ok(productDesigns);
     }
 
-    @GetMapping("/{designType}")
+    @GetMapping("filter/{designType}")
     public ResponseEntity<List<ProductDesign>> getProductDesigns(@PathVariable String designType) {
         List<ProductDesign> productDesigns = productDesignService.getProductDesignsByCategory(designType);
         if (productDesigns.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(productDesigns);
+    }
+
+    @CrossOrigin
+    @GetMapping("/{productDesignId}")
+    public ResponseEntity<?> findById(@PathVariable Integer productDesignId) {
+        try {
+            return ResponseEntity.ok(productDesignService.findById(productDesignId));
+        } catch (Exception ex) {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
