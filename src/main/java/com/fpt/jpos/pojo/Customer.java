@@ -1,5 +1,6 @@
 package com.fpt.jpos.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer",
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Order> orderList;
 
 }
