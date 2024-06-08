@@ -1,16 +1,25 @@
 package com.fpt.jpos.pojo;
 
+import com.fpt.jpos.pojo.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "Account")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
+@Builder
+public class Account implements UserDetails {
 
     @Id
     @Column(name = "username")

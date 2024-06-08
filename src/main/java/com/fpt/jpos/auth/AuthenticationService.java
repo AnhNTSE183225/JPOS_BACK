@@ -1,15 +1,12 @@
 package com.fpt.jpos.auth;
 
 import com.fpt.jpos.pojo.Account;
-import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.pojo.Role;
+import com.fpt.jpos.pojo.enums.Role;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
