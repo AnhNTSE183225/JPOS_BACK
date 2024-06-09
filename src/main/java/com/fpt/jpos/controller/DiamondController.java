@@ -53,4 +53,13 @@ public class DiamondController {
         }
     }
 
+    @CrossOrigin
+    @GetMapping("/diamonds/{diamondId}")
+    public ResponseEntity<?> getDiamondById(@PathVariable Integer diamondId) {
+        try {
+            return ResponseEntity.ok(diamondService.findById(diamondId));
+        } catch (Exception ex) {
+            return ResponseEntity.noContent().build();
+        }
+    }
 }
