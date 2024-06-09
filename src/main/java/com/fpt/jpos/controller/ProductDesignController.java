@@ -29,7 +29,7 @@ public class ProductDesignController {
         return ResponseEntity.ok(productDesigns);
     }
 
-    @GetMapping("filter/{designType}")
+    @GetMapping("/filter/{designType}")
     public ResponseEntity<List<ProductDesign>> getProductDesigns(@PathVariable String designType) {
         List<ProductDesign> productDesigns = productDesignService.getProductDesignsByCategory(designType);
         if (productDesigns.isEmpty()) {
