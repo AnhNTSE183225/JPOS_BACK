@@ -26,7 +26,7 @@ public class ProductShellMaterial {
     @JoinColumn(name = "shell_id")
     private ProductShellDesign productShellDesign;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @MapsId("materialId")
     @JoinColumn(name = "material_id")
     private Material material;

@@ -69,6 +69,9 @@ public class Diamond {
     @Column(name = "note")
     private String note;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "active")
     private Boolean active;
 

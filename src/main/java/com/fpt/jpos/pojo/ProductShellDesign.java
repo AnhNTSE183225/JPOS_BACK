@@ -35,6 +35,9 @@ public class ProductShellDesign {
     @Column(name = "production_price")
     private Double productionPrice;
 
+    @Column(name = "markup_rate")
+    private Double markupRate;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_design_id")
