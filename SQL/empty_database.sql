@@ -387,7 +387,7 @@ go
 -- Insert into ProductShellDesign
 DECLARE @design_id INT = 1;
 
-WHILE @design_id <= 20
+WHILE @design_id <= 21
 BEGIN
     INSERT INTO [ProductShellDesign] ([product_design_id], [shell_name], [diamond_quantity], [e_diamond_price], [e_material_price], [production_price], [markup_rate])
     VALUES 
@@ -402,7 +402,7 @@ GO
 -- Insert into ProductShellMaterial
 DECLARE @shell_id INT = 1;
 
-WHILE @shell_id <= 60  -- 20 designs * 3 shells each
+WHILE @shell_id <= 63  -- 21 designs * 3 shells each
 BEGIN
     INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
     VALUES 
