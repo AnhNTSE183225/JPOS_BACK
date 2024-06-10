@@ -291,7 +291,7 @@ public class OrderService implements IOrderService {
         product.setProductType(productDesign.getDesignType());
         product.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         product.setEMaterialPrice(productShellDesign.getEMaterialPrice());
-        product.setMarkupRate(1.0);
+        product.setMarkupRate(productShellDesign.getMarkupRate());
         product.setProductionPrice(productShellDesign.getProductionPrice());
 
         product = productRepository.save(product);
@@ -311,13 +311,13 @@ public class OrderService implements IOrderService {
             productMaterialRepository.save(productMaterial);
         }
 
+
         for (Integer id : productDesignDTO.getDiamondIds()) {
             Diamond diamond = diamondRepository.findById(id).orElseThrow();
             diamonds.add(diamond);
             diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(),diamond.getClarity(),diamond.getCut(),diamond.getCaratWeight(),diamond.getCaratWeight()));
         }
         product.setDiamonds(diamonds);
-
 
         product = productRepository.save(product);
 
@@ -328,12 +328,12 @@ public class OrderService implements IOrderService {
         order.setOrderDate(new Date());
         order.setOrderType("from_design");
         order.setProductionPrice(productShellDesign.getProductionPrice());
-        order.setMarkupRate(1.0);
+        order.setMarkupRate(productShellDesign.getMarkupRate());
         order.setODiamondPrice(diamondPrice);
         order.setOMaterialPrice(materialPrice);
         order.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         order.setEMaterialPrice(productShellDesign.getEMaterialPrice());
-        order.setTotalAmount(diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice());
+        order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate());
         return orderRepository.save(order);
     }
 
