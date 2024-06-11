@@ -23,6 +23,11 @@ public class DiamondService implements IDiamondService{
     }
 
     @Override
+    public Diamond findById(Integer diamondId) {
+        return diamondRepository.findById(diamondId).orElseThrow();
+    }
+
+    @Override
     public List<Diamond> findDiamondsBy4C(Double fromCaratWeight, Double toCaratWeight, String clarity, String color, String cut, String shape) {
         return diamondRepository.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
     }

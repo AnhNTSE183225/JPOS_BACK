@@ -245,6 +245,8 @@ create table [Diamond] (
 	[carat_weight] decimal(19,4),
 	[note] varchar(255),
 	
+	[image] varchar(MAX),
+
 	[active] bit,
 	primary key([diamond_id])
 )
@@ -261,28 +263,28 @@ create table [Diamond] (
 	carat_weight: 0 to 30
 */
 INSERT INTO [Diamond] 
-([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [active]) 
+([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [image] ,[active]) 
 VALUES 
-('D001', 'Brilliant Star', 'round', 'Canada', 'http://example.com/proportions1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.2000, 'Perfect diamond', 1),
-('D002', 'Sparkling Heart', 'heart', 'South_Africa', 'http://example.com/proportions2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'G', 'VVS1', 0.7500, 'Heart-shaped diamond', 1),
-('D003', 'Radiant Beauty', 'radiant', 'Botswana', 'http://example.com/proportions3', 'Medium', 'Good', 'Good', 'Good', 'J', 'SI1', 2.5000, 'Radiant cut diamond', 1),
-('D004', 'Princess Charm', 'princess', 'Namibia', 'http://example.com/proportions4', 'Strong', 'Fair', 'Fair', 'Fair', 'E', 'VS2', 1.0000, 'Princess cut diamond', 1),
-('D005', 'Cushion Delight', 'cushion', 'Lesotho', 'http://example.com/proportions5', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'H', 'I1', 3.0000, 'Cushion cut diamond', 1),
-('D006', 'Oval Grace', 'oval', 'Angola', 'http://example.com/proportions6', 'None', 'Very_Good', 'Very_Good', 'Very_Good', 'I', 'IF', 1.5000, 'Oval cut diamond', 1),
-('D007', 'Emerald Elegance', 'emerald', 'South_Africa', 'http://example.com/proportions7', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'F', 'VVS2', 2.2000, 'Emerald cut diamond', 1),
-('D008', 'Marquise Splendor', 'marquise', 'Botswana', 'http://example.com/proportions8', 'Medium', 'Good', 'Good', 'Good', 'K', 'VS1', 0.9000, 'Marquise cut diamond', 1),
-('D009', 'Asscher Radiance', 'asscher', 'Canada', 'http://example.com/proportions9', 'Strong', 'Fair', 'Fair', 'Fair', 'L', 'SI2', 1.8000, 'Asscher cut diamond', 1),
-('D010', 'Pear Spark', 'pear', 'Namibia', 'http://example.com/proportions10', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'M', 'I2', 2.7500, 'Pear cut diamond', 1),
-('D011', 'Brilliant Gem', 'round', 'Lesotho', 'http://example.com/proportions11', 'None', 'Excellent', 'Excellent', 'Excellent', 'N', 'FL', 1.3500, 'Another perfect diamond', 1),
-('D012', 'Radiant Star', 'radiant', 'Angola', 'http://example.com/proportions12', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'O', 'VVS1', 0.6500, 'Radiant star diamond', 1),
-('D013', 'Princess Beauty', 'princess', 'South_Africa', 'http://example.com/proportions13', 'Medium', 'Good', 'Good', 'Good', 'P', 'SI1', 2.0000, 'Beautiful princess cut', 1),
-('D014', 'Cushion Charm', 'cushion', 'Botswana', 'http://example.com/proportions14', 'Strong', 'Fair', 'Fair', 'Fair', 'Q', 'VS2', 0.8000, 'Charming cushion cut', 1),
-('D015', 'Oval Delight', 'oval', 'Canada', 'http://example.com/proportions15', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'R', 'I1', 1.7000, 'Delightful oval cut', 1),
-('D016', 'Emerald Grace', 'emerald', 'Namibia', 'http://example.com/proportions16', 'None', 'Very_Good', 'Very_Good', 'Very_Good', 'S', 'IF', 2.4000, 'Graceful emerald cut', 1),
-('D017', 'Marquise Radiance', 'marquise', 'Lesotho', 'http://example.com/proportions17', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'T', 'VVS2', 1.1000, 'Radiant marquise cut', 1),
-('D018', 'Asscher Splendor', 'asscher', 'Angola', 'http://example.com/proportions18', 'Medium', 'Good', 'Good', 'Good', 'U', 'VS1', 2.9000, 'Splendid asscher cut', 1),
-('D019', 'Pear Elegance', 'pear', 'South_Africa', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 3.5000, 'Elegant pear cut', 1),
-('D020', 'Brilliant Sparkle', 'round', 'Botswana', 'http://example.com/proportions20', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'W', 'I2', 1.9500, 'Sparkling brilliant cut', 1);
+('D001', 'Brilliant Star', 'round', 'Canada', 'http://example.com/proportions1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.2000, 'Perfect diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ybul65wajinvijcqfsrm.jpg',  1),
+('D002', 'Sparkling Heart', 'heart', 'South_Africa', 'http://example.com/proportions2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'G', 'VVS1', 0.7500, 'Heart-shaped diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/qafryf1zk6kptdmojo2g.jpg', 1),
+('D003', 'Radiant Beauty', 'radiant', 'Botswana', 'http://example.com/proportions3', 'Medium', 'Good', 'Good', 'Good', 'J', 'SI1', 2.5000, 'Radiant cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ojrayiy4ta0xaqhfk4od.jpg', 1),
+('D004', 'Princess Charm', 'princess', 'Namibia', 'http://example.com/proportions4', 'Strong', 'Fair', 'Fair', 'Fair', 'E', 'VS2', 1.0000, 'Princess cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/woondzemluk9v0fz3lns.jpg', 1),
+('D005', 'Cushion Delight', 'cushion', 'Lesotho', 'http://example.com/proportions5', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'H', 'I1', 3.0000, 'Cushion cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/kqfdlvjgqx0frjzsn7yq.jpg', 1),
+('D006', 'Oval Grace', 'oval', 'Angola', 'http://example.com/proportions6', 'None', 'Very_Good', 'Very_Good', 'Very_Good', 'I', 'IF', 1.5000, 'Oval cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/yscrkl1o3vwicmpccxhf.jpg', 1),
+('D007', 'Emerald Elegance', 'emerald', 'South_Africa', 'http://example.com/proportions7', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'F', 'VVS2', 2.2000, 'Emerald cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/bwo1q43ptsfbeusxst1y.jpg', 1),
+('D008', 'Marquise Splendor', 'marquise', 'Botswana', 'http://example.com/proportions8', 'Medium', 'Good', 'Good', 'Good', 'K', 'VS1', 0.9000, 'Marquise cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/viokaja8fyb3c6ww2wlg.jpg', 1),
+('D009', 'Asscher Radiance', 'asscher', 'Canada', 'http://example.com/proportions9', 'Strong', 'Fair', 'Fair', 'Fair', 'L', 'SI2', 1.8000, 'Asscher cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/im3jp4dsqv7jselgeif0.jpg', 1),
+('D010', 'Pear Spark', 'pear', 'Namibia', 'http://example.com/proportions10', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'M', 'I2', 2.7500, 'Pear cut diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/tqefwyvc1fvyobsvlrbz.jpg', 1),
+('D011', 'Brilliant Gem', 'round', 'Lesotho', 'http://example.com/proportions11', 'None', 'Excellent', 'Excellent', 'Excellent', 'N', 'FL', 1.3500, 'Another perfect diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ybul65wajinvijcqfsrm.jpg', 1),
+('D012', 'Radiant Star', 'radiant', 'Angola', 'http://example.com/proportions12', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'O', 'VVS1', 0.6500, 'Radiant star diamond', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ojrayiy4ta0xaqhfk4od.jpg', 1),
+('D013', 'Princess Beauty', 'princess', 'South_Africa', 'http://example.com/proportions13', 'Medium', 'Good', 'Good', 'Good', 'P', 'SI1', 2.0000, 'Beautiful princess cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/woondzemluk9v0fz3lns.jpg', 1),
+('D014', 'Cushion Charm', 'cushion', 'Botswana', 'http://example.com/proportions14', 'Strong', 'Fair', 'Fair', 'Fair', 'Q', 'VS2', 0.8000, 'Charming cushion cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/kqfdlvjgqx0frjzsn7yq.jpg', 1),
+('D015', 'Oval Delight', 'oval', 'Canada', 'http://example.com/proportions15', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'R', 'I1', 1.7000, 'Delightful oval cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/yscrkl1o3vwicmpccxhf.jpg', 1),
+('D016', 'Emerald Grace', 'emerald', 'Namibia', 'http://example.com/proportions16', 'None', 'Very_Good', 'Very_Good', 'Very_Good', 'S', 'IF', 2.4000, 'Graceful emerald cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/bwo1q43ptsfbeusxst1y.jpg', 1),
+('D017', 'Marquise Radiance', 'marquise', 'Lesotho', 'http://example.com/proportions17', 'Faint', 'Excellent', 'Excellent', 'Excellent', 'T', 'VVS2', 1.1000, 'Radiant marquise cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/viokaja8fyb3c6ww2wlg.jpg', 1),
+('D018', 'Asscher Splendor', 'asscher', 'Angola', 'http://example.com/proportions18', 'Medium', 'Good', 'Good', 'Good', 'U', 'VS1', 2.9000, 'Splendid asscher cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/im3jp4dsqv7jselgeif0.jpg', 1),
+('D019', 'Pear Elegance', 'pear', 'South_Africa', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair', 'Fair', 'V', 'SI2', 3.5000, 'Elegant pear cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/tqefwyvc1fvyobsvlrbz.jpg', 1),
+('D020', 'Brilliant Sparkle', 'round', 'Botswana', 'http://example.com/proportions20', 'Very_Strong', 'Poor', 'Poor', 'Poor', 'W', 'I2', 1.9500, 'Sparkling brilliant cut', 'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ybul65wajinvijcqfsrm.jpg', 1);
 go
 create table [DiamondPriceList] (
 	[diamond_price_id] int identity(1,1),
@@ -367,7 +369,8 @@ create table [ProductShellDesign] (
 	[diamond_quantity] int,
 	[e_diamond_price] decimal(19,4),
 	[e_material_price] decimal(19,4),
-	[production_price] decimal(19,4)
+	[production_price] decimal(19,4),
+	[markup_rate] decimal(19,4)
 	primary key([shell_id]),
 	foreign key([product_design_id]) references [ProductDesign]
 )
@@ -384,13 +387,13 @@ go
 -- Insert into ProductShellDesign
 DECLARE @design_id INT = 1;
 
-WHILE @design_id <= 20
+WHILE @design_id <= 21
 BEGIN
-    INSERT INTO [ProductShellDesign] ([product_design_id], [shell_name], [diamond_quantity], [e_diamond_price], [e_material_price], [production_price])
+    INSERT INTO [ProductShellDesign] ([product_design_id], [shell_name], [diamond_quantity], [e_diamond_price], [e_material_price], [production_price], [markup_rate])
     VALUES 
-    (@design_id, 'gold shell', 1, 100.00, 200.00, 300.00),
-    (@design_id, 'platinum shell', 2, 120.00, 250.00, 350.00),
-    (@design_id, 'silver shell', 3, 80.00, 150.00, 250.00);
+    (@design_id, 'gold shell', 1, 100.00, 200.00, 300.00, 1.0),
+    (@design_id, 'platinum shell', 2, 120.00, 250.00, 350.00, 1.0),
+    (@design_id, 'silver shell', 3, 80.00, 150.00, 250.00, 1.0);
     
     SET @design_id = @design_id + 1;
 END;
@@ -399,7 +402,7 @@ GO
 -- Insert into ProductShellMaterial
 DECLARE @shell_id INT = 1;
 
-WHILE @shell_id <= 60  -- 20 designs * 3 shells each
+WHILE @shell_id <= 63  -- 21 designs * 3 shells each
 BEGIN
     INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
     VALUES 
