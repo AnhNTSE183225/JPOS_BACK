@@ -130,7 +130,11 @@ public class OrderService implements IOrderService {
 
         if (theOrder.isPresent()) {
             Order order = theOrder.get();
-            order.setStatus(OrderStatus.designing);
+            if(order.getOrderType().equals("from_design")) {
+                order.setStatus(OrderStatus.production);
+            } else {
+                order.setStatus(OrderStatus.designing);
+            }
             payment.setOrder(order);
             paymentRepository.save(payment);
             return orderRepository.save(order);
@@ -323,7 +327,11 @@ public class OrderService implements IOrderService {
 
         Order order = new Order();
         order.setProduct(product);
-        order.setStatus(OrderStatus.production);
+        if(productDesignDTO.getHavePaid()) {
+            order.setStatus(OrderStatus.production);
+        } else {
+            order.setStatus(OrderStatus.customer_accept);
+        }
         order.setCustomer(customerRepository.findById(productDesignDTO.getCustomerId()).orElseThrow());
         order.setOrderDate(new Date());
         order.setOrderType("from_design");
@@ -331,6 +339,7 @@ public class OrderService implements IOrderService {
         order.setMarkupRate(productShellDesign.getMarkupRate());
         order.setODiamondPrice(diamondPrice);
         order.setOMaterialPrice(materialPrice);
+        order.setDesignFile(productDesign.getDesignFile());
         order.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         order.setEMaterialPrice(productShellDesign.getEMaterialPrice());
         order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate());
