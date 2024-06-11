@@ -1,9 +1,6 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.dto.NoteDTO;
-import com.fpt.jpos.dto.PaymentDTO;
-import com.fpt.jpos.dto.ProductDesignDTO;
-import com.fpt.jpos.dto.CustomerRequestDTO;
+import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 
@@ -15,7 +12,7 @@ public interface IOrderService {
 
     Order insertOrder(CustomerRequestDTO customerRequestDTO);
 
-    String handleManagerResponse(Integer id, boolean managerApproval);
+    String handleManagerResponse(Integer id, boolean managerApproval, ManagerResponseDTO managerResponseDTO);
 
     List<Order> getOrdersByCustomerId(Integer customerId);
 
@@ -33,7 +30,7 @@ public interface IOrderService {
 
     Order retrieveQuotationFromStaff(Order order, Integer productId, Integer saleStaffId);
 
-    Order acceptOrder(Order order);
+    Integer acceptOrder(Order order);
 
     Order updateOrderStatusDesigning(Integer id, PaymentDTO paymentDTO);
 

@@ -77,11 +77,13 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public String handleManagerResponse(Integer id, boolean managerApproval) {
+    public String handleManagerResponse(Integer id, boolean managerApproval, ManagerResponseDTO managerResponseDTO) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
         if (managerApproval) {
+            order.setMarkupRate(managerResponseDTO.getMarkupRate());
+            order.setTotalAmount(managerResponseDTO.getTotalAmount());
             order.setStatus(OrderStatus.manager_approved);
         } else {
             order.setStatus(OrderStatus.wait_manager);
@@ -229,10 +231,10 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order acceptOrder(Order order) {
+    public Integer acceptOrder(Order order) {
         order.setStatus(OrderStatus.customer_accept);
         order.setODate(new Date());
-        return orderRepository.save(order);
+        return orderRepository.save(order).getId();
     }
 
     @Override
@@ -342,7 +344,8 @@ public class OrderService implements IOrderService {
         order.setDesignFile(productDesign.getDesignFile());
         order.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         order.setEMaterialPrice(productShellDesign.getEMaterialPrice());
-        order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate());
+        order.setTaxFee((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate()*0.1);
+        order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate() + order.getTaxFee());
         return orderRepository.save(order);
     }
 
