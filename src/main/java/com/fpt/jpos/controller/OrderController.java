@@ -1,9 +1,6 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.dto.NoteDTO;
-import com.fpt.jpos.dto.PaymentDTO;
-import com.fpt.jpos.dto.ProductDesignDTO;
-import com.fpt.jpos.dto.CustomerRequestDTO;
+import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
@@ -114,8 +111,8 @@ public class OrderController {
     // Manager accept or decline quotation
     @CrossOrigin
     @PostMapping("/{id}/manager-response")
-    public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval) {
-        String status = orderService.handleManagerResponse(id, managerApproval);
+    public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval, @RequestBody ManagerResponseDTO managerResponseDTO) {
+        String status = orderService.handleManagerResponse(id, managerApproval, managerResponseDTO);
         return ResponseEntity.ok(status);
     }
 
