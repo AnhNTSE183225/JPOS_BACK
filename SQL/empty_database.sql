@@ -204,27 +204,27 @@ create table [MaterialPriceList] (
 go
 insert into [MaterialPriceList]
 values
-(1,'2024-05-27 15:16:00',5000000),
-(2,'2024-05-27 15:16:00',4500000),
-(3,'2024-05-27 15:16:00',9000000),
-(4,'2024-05-27 15:16:00',3500000),
-(5,'2024-05-27 15:16:00',4000000),
-(6,'2024-05-27 15:16:00',3000000),
-(1,'2024-05-28 15:16:00',5100000),
-(2,'2024-05-28 15:16:00',4600000),
-(3,'2024-05-28 15:16:00',9100000),
-(4,'2024-05-28 15:16:00',3600000),
-(5,'2024-05-28 15:16:00',4100000),
-(6,'2024-05-28 15:16:00',3100000),
-(1,'2024-05-29 15:16:00',5200000),
-(2,'2024-05-29 15:16:00',4700000),
-(3,'2024-05-29 15:16:00',9200000),
-(4,'2024-05-29 15:16:00',3700000),
-(5,'2024-05-29 15:16:00',4200000),
-(6,'2024-05-29 15:16:00',3200000),
-(1,'2024-05-30 15:16:00',5300000),
-(2,'2024-05-30 15:16:00',4800000),
-(7,'2024-05-30 15:16:00',3000000)
+(1,'2024-05-27 15:16:00',5525),
+(2,'2024-05-27 15:16:00',5200),
+(3,'2024-05-27 15:16:00',7700),
+(4,'2024-05-27 15:16:00',5300),
+(5,'2024-05-27 15:16:00',5450),
+(6,'2024-05-27 15:16:00',5000),
+(1,'2024-05-28 15:16:00',5500),
+(2,'2024-05-28 15:16:00',5250),
+(3,'2024-05-28 15:16:00',7690),
+(4,'2024-05-28 15:16:00',5330),
+(5,'2024-05-28 15:16:00',5500),
+(6,'2024-05-28 15:16:00',5120),
+(1,'2024-05-29 15:16:00',5555),
+(2,'2024-05-29 15:16:00',5274),
+(3,'2024-05-29 15:16:00',7780),
+(4,'2024-05-29 15:16:00',5385),
+(5,'2024-05-29 15:16:00',5621),
+(6,'2024-05-29 15:16:00',5234),
+(1,'2024-05-30 15:16:00',5543),
+(2,'2024-05-30 15:16:00',5301),
+(7,'2024-05-30 15:16:00',1000)
 go
 create table [Diamond] (
 	[diamond_id] int identity(1,1),
@@ -301,25 +301,25 @@ go
 INSERT INTO [DiamondPriceList] 
 ([origin], [carat_weight], [color], [clarity], [cut], [price], [effective_date]) 
 VALUES 
-('Canada', 1.2000, 'D', 'FL', 'Excellent', 12000.00, GETDATE()),
+('Canada', 1.2000, 'D', 'FL', 'Excellent', 15000.00, GETDATE()),
 ('South_Africa', 0.7500, 'G', 'VVS1', 'Very_Good', 7500.00, GETDATE()),
-('Botswana', 2.5000, 'J', 'SI1', 'Good', 25000.00, GETDATE()),
-('Namibia', 1.0000, 'E', 'VS2', 'Fair', 10000.00, GETDATE()),
-('Lesotho', 3.0000, 'H', 'I1', 'Poor', 3000.00, GETDATE()),
+('Botswana', 2.5000, 'J', 'SI1', 'Good', 3800.00, GETDATE()),
+('Namibia', 1.0000, 'E', 'VS2', 'Fair', 3000.00, GETDATE()),
+('Lesotho', 3.0000, 'H', 'I1', 'Poor', 2200.00, GETDATE()),
 ('Angola', 1.5000, 'I', 'IF', 'Very_Good', 15000.00, GETDATE()),
-('South_Africa', 2.2000, 'F', 'VVS2', 'Excellent', 22000.00, GETDATE()),
+('South_Africa', 2.2000, 'F', 'VVS2', 'Excellent', 2000.00, GETDATE()),
 ('Botswana', 0.9000, 'K', 'VS1', 'Good', 9000.00, GETDATE()),
 ('Canada', 1.8000, 'L', 'SI2', 'Fair', 18000.00, GETDATE()),
 ('Namibia', 2.7500, 'M', 'I2', 'Poor', 2750.00, GETDATE()),
-('Lesotho', 1.3500, 'N', 'FL', 'Excellent', 13500.00, GETDATE()),
+('Lesotho', 1.3500, 'N', 'FL', 'Excellent', 1500.00, GETDATE()),
 ('Angola', 0.6500, 'O', 'VVS1', 'Very_Good', 6500.00, GETDATE()),
-('South_Africa', 2.0000, 'P', 'SI1', 'Good', 20000.00, GETDATE()),
+('South_Africa', 2.0000, 'P', 'SI1', 'Good', 2000.00, GETDATE()),
 ('Botswana', 0.8000, 'Q', 'VS2', 'Fair', 8000.00, GETDATE()),
 ('Canada', 1.7000, 'R', 'I1', 'Poor', 1700.00, GETDATE()),
-('Namibia', 2.4000, 'S', 'IF', 'Very_Good', 24000.00, GETDATE()),
-('Lesotho', 1.1000, 'T', 'VVS2', 'Excellent', 11000.00, GETDATE()),
-('Angola', 2.9000, 'U', 'VS1', 'Good', 29000.00, GETDATE()),
-('South_Africa', 3.5000, 'V', 'SI2', 'Fair', 35000.00, GETDATE()),
+('Namibia', 2.4000, 'S', 'IF', 'Very_Good', 2400.00, GETDATE()),
+('Lesotho', 1.1000, 'T', 'VVS2', 'Excellent', 1100.00, GETDATE()),
+('Angola', 2.9000, 'U', 'VS1', 'Good', 2900.00, GETDATE()),
+('South_Africa', 3.5000, 'V', 'SI2', 'Fair', 3500.00, GETDATE()),
 ('Botswana', 1.9500, 'W', 'I2', 'Poor', 1950.00, GETDATE());
 GO
 create table [ProductDiamond] (
@@ -406,9 +406,9 @@ WHILE @shell_id <= 63  -- 21 designs * 3 shells each
 BEGIN
     INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
     VALUES 
-    (@shell_id, 1, 15.5), -- gold
-    (@shell_id + 1, 3, 10.0), -- platinum
-    (@shell_id + 2, 7, 12.3); -- silver
+    (@shell_id, 1, 0.96), -- gold
+    (@shell_id + 1, 3, 0.96), -- platinum
+    (@shell_id + 2, 7, 0.96); -- silver
     
     SET @shell_id = @shell_id + 3;
 END;
