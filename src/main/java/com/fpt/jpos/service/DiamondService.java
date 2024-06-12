@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DiamondService implements IDiamondService{
+public class DiamondService implements IDiamondService {
 
     private final IDiamondRepository diamondRepository;
 
@@ -32,7 +32,4 @@ public class DiamondService implements IDiamondService{
         return diamondRepository.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
     }
 
-//    public List<Diamond> getDiamondsByCategory(String category) {
-//        return diamondRepository.findByCategory(category);
-//    }
 }

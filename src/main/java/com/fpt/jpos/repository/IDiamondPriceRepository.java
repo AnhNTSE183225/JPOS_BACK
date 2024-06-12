@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface IDiamondPriceRepository extends JpaRepository<DiamondPrice, Integer> {
 
-    @Query(value = "Select * from [DiamondPriceList] where carat_weight >= ?1 and carat_weight <= ?2 and clarity = ?3 and color = ?4 and cut = ?5", nativeQuery = true)
-    List<DiamondPrice> findDiamondPriceByCaratWeightAndAndClarityAndColorAndCut(Double fromCaratWeight, Double toCaratWeight, String clarity, String color, String cut);
+    @Query(value = "Select * from [DiamondPriceList] where carat_weight_from >= ?1 and carat_weight_to <= ?1 and clarity = ?3 and color = ?4 and cut = ?5", nativeQuery = true)
+    List<DiamondPrice> findDiamondPriceByCaratWeightAndAndClarityAndColorAndCut(Double caratWeight, String clarity, String color, String cut);
 }

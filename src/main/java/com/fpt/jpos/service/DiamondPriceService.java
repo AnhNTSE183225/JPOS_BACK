@@ -29,8 +29,7 @@ public class DiamondPriceService implements IDiamondPriceService {
     public Double getDiamondPricesBy4C(Diamond4CDTO diamond4CDTO) {
 
         List<DiamondPrice> diamondPriceList = diamondPriceRepository.findDiamondPriceByCaratWeightAndAndClarityAndColorAndCut(
-                diamond4CDTO.getFromCaratWeight(),
-                diamond4CDTO.getToCaratWeight(),
+                diamond4CDTO.getCaratWeight(),
                 diamond4CDTO.getClarity().name(),
                 diamond4CDTO.getColor().name(),
                 diamond4CDTO.getCut().name());

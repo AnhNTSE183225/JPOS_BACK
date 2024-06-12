@@ -23,8 +23,11 @@ public class DiamondPrice {
     @Column(name = "origin")
     private String origin;
 
-    @Column(name = "carat_weight")
-    private Double caratWeight;
+    @Column(name = "carat_weight_from")
+    private Double caratWeightFrom;
+
+    @Column(name = "carat_weight_to")
+    private Double caratWeightTo;
 
     @Column(name = "color")
     @Enumerated(EnumType.STRING)
