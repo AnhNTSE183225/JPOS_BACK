@@ -265,7 +265,7 @@ public class OrderService implements IOrderService {
 
         Double depositMoney = 0.0;
 
-        if(depositPayment != null) {
+        if (depositPayment != null) {
             depositMoney = depositPayment.getAmountPaid();
         }
         double sum = depositMoney + payment.getAmountPaid();
@@ -293,7 +293,7 @@ public class OrderService implements IOrderService {
         double materialPrice = 0.0;
 
         Product product = new Product();
-        product.setProductName(productDesign.getDesignName() + " - " +  productShellDesign.getShellName());
+        product.setProductName(productDesign.getDesignName() + " - " + productShellDesign.getShellName());
         product.setProductType(productDesign.getDesignType());
         product.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         product.setEMaterialPrice(productShellDesign.getEMaterialPrice());
@@ -313,7 +313,7 @@ public class OrderService implements IOrderService {
             productMaterial.setProduct(product);
             productMaterial.setWeight(productShellMaterial.getWeight());
 
-            materialPrice += productShellMaterial.getWeight()*materialPriceService.getLatestPriceById(material.getMaterialId());
+            materialPrice += productShellMaterial.getWeight() * materialPriceService.getLatestPriceById(material.getMaterialId());
             productMaterialRepository.save(productMaterial);
         }
 
@@ -321,7 +321,7 @@ public class OrderService implements IOrderService {
         for (Integer id : productDesignDTO.getDiamondIds()) {
             Diamond diamond = diamondRepository.findById(id).orElseThrow();
             diamonds.add(diamond);
-            diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(),diamond.getClarity(),diamond.getCut(),diamond.getCaratWeight(),diamond.getCaratWeight()));
+            diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(), diamond.getClarity(), diamond.getCut(), diamond.getCaratWeight()));
         }
         product.setDiamonds(diamonds);
 
@@ -349,35 +349,4 @@ public class OrderService implements IOrderService {
         return orderRepository.save(order);
     }
 
-//    @Override
-//    public Order addProductDesignToOrder(ProductDesignDTO productDesignDTO) {
-//        // Get the product shell design
-//        Optional<ProductShellDesign> productShellDesignOptional = productShellDesignRepository.findById(productDesignDTO.getProductShellId());
-//        if (productShellDesignOptional.isEmpty()) {
-//            throw new ResourceNotFoundException("Product shell design not found for this id :: " + productDesignDTO.getProductShellId());
-//        }
-//        ProductShellDesign productShellDesign = productShellDesignOptional.get();
-//
-//        // Get diamonds
-//        List<Diamond> diamonds = diamondRepository.findAllById(productDesignDTO.getDiamondIds());
-//
-//        // Create new ProductDesign and set its properties
-//        ProductDesign productDesign = ProductDesign.builder()
-//                .productShellDesign(productShellDesign)
-//                .diamonds(diamonds)
-//                .build();
-//
-//        // Save the product design
-//        productDesign = productDesignRepository.save(productDesign);
-//
-//        // Create new Order and set its properties
-//        Order order = new Order();
-//        order.setStatus(OrderStatus.wait_sale_staff);
-//        order.setOrderDate(new Date());
-//        order.setProductDesign(productDesign);
-//        // Add other necessary order details
-//
-//        // Save the order
-//        return orderRepository.save(order);
-//    }
 }
