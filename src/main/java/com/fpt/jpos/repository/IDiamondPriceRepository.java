@@ -1,9 +1,6 @@
 package com.fpt.jpos.repository;
 
 import com.fpt.jpos.pojo.DiamondPrice;
-import com.fpt.jpos.pojo.enums.Clarity;
-import com.fpt.jpos.pojo.enums.Color;
-import com.fpt.jpos.pojo.enums.Cut;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
