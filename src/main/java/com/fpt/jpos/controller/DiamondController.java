@@ -44,7 +44,7 @@ public class DiamondController {
     }
 
     @CrossOrigin
-    @GetMapping("/diamonds/all")
+    @GetMapping("/diamonds")
     public ResponseEntity<?> getAllDiamonds() {
         try {
             return ResponseEntity.ok(diamondService.getAllDiamonds());

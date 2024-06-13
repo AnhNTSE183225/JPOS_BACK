@@ -208,27 +208,28 @@ create table [MaterialPriceList]
 )
 go
 insert into [MaterialPriceList]
-values (1, '2024-05-27 15:16:00', 5000000),
-       (2, '2024-05-27 15:16:00', 4500000),
-       (3, '2024-05-27 15:16:00', 9000000),
-       (4, '2024-05-27 15:16:00', 3500000),
-       (5, '2024-05-27 15:16:00', 4000000),
-       (6, '2024-05-27 15:16:00', 3000000),
-       (1, '2024-05-28 15:16:00', 5100000),
-       (2, '2024-05-28 15:16:00', 4600000),
-       (3, '2024-05-28 15:16:00', 9100000),
-       (4, '2024-05-28 15:16:00', 3600000),
-       (5, '2024-05-28 15:16:00', 4100000),
-       (6, '2024-05-28 15:16:00', 3100000),
-       (1, '2024-05-29 15:16:00', 5200000),
-       (2, '2024-05-29 15:16:00', 4700000),
-       (3, '2024-05-29 15:16:00', 9200000),
-       (4, '2024-05-29 15:16:00', 3700000),
-       (5, '2024-05-29 15:16:00', 4200000),
-       (6, '2024-05-29 15:16:00', 3200000),
-       (1, '2024-05-30 15:16:00', 5300000),
-       (2, '2024-05-30 15:16:00', 4800000),
-       (7, '2024-05-30 15:16:00', 3000000)
+values
+(1,'2024-05-27 15:16:00',5525),
+(2,'2024-05-27 15:16:00',5200),
+(3,'2024-05-27 15:16:00',7700),
+(4,'2024-05-27 15:16:00',5300),
+(5,'2024-05-27 15:16:00',5450),
+(6,'2024-05-27 15:16:00',5000),
+(1,'2024-05-28 15:16:00',5500),
+(2,'2024-05-28 15:16:00',5250),
+(3,'2024-05-28 15:16:00',7690),
+(4,'2024-05-28 15:16:00',5330),
+(5,'2024-05-28 15:16:00',5500),
+(6,'2024-05-28 15:16:00',5120),
+(1,'2024-05-29 15:16:00',5555),
+(2,'2024-05-29 15:16:00',5274),
+(3,'2024-05-29 15:16:00',7780),
+(4,'2024-05-29 15:16:00',5385),
+(5,'2024-05-29 15:16:00',5621),
+(6,'2024-05-29 15:16:00',5234),
+(1,'2024-05-30 15:16:00',5543),
+(2,'2024-05-30 15:16:00',5301),
+(7,'2024-05-30 15:16:00',1000)
 go
 create table [Diamond]
 (
@@ -285,10 +286,11 @@ VALUES ('D001', 'Brilliant Star', 'round', 'Canada', 'http://example.com/proport
        ('D005', 'Cushion Delight', 'cushion', 'Lesotho', 'http://example.com/proportions5', 'Very_Strong', 'Poor',
         'Poor', 'Poor', 'H', 'I1', 3.0000, 'Cushion cut diamond',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/kqfdlvjgqx0frjzsn7yq.jpg', 1),
-       ('D006', 'Oval Grace', 'oval', 'Angola', 'http://example.com/proportions6', 'None', 'Very_Good', 'Very_Good',
+       ('D006', 'Oval Grace', 'oval', 'NATURAL', 'http://example.com/proportions6', 'None', 'Very_Good', 'Very_Good',
         'Very_Good', 'I', 'IF', 1.5000, 'Oval cut diamond',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/yscrkl1o3vwicmpccxhf.jpg', 1),
        ('D007', 'Emerald Elegance', 'emerald', 'South_Africa', 'http://example.com/proportions7', 'Faint', 'Excellent',
+       ('D007', 'Emerald Elegance', 'emerald', 'NATURAL', 'http://example.com/proportions7', 'Faint', 'Excellent',
         'Excellent', 'Excellent', 'F', 'VVS2', 2.2000, 'Emerald cut diamond',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/bwo1q43ptsfbeusxst1y.jpg', 1),
        ('D008', 'Marquise Splendor', 'marquise', 'Botswana', 'http://example.com/proportions8', 'Medium', 'Good',
@@ -297,37 +299,37 @@ VALUES ('D001', 'Brilliant Star', 'round', 'Canada', 'http://example.com/proport
        ('D009', 'Asscher Radiance', 'asscher', 'Canada', 'http://example.com/proportions9', 'Strong', 'Fair', 'Fair',
         'Fair', 'L', 'SI2', 1.8000, 'Asscher cut diamond',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/im3jp4dsqv7jselgeif0.jpg', 1),
-       ('D010', 'Pear Spark', 'pear', 'Namibia', 'http://example.com/proportions10', 'Very_Strong', 'Poor', 'Poor',
+       ('D010', 'Pear Spark', 'pear', 'NATURAL', 'http://example.com/proportions10', 'Very_Strong', 'Poor', 'Poor',
         'Poor', 'M', 'I2', 2.7500, 'Pear cut diamond',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/tqefwyvc1fvyobsvlrbz.jpg', 1),
-       ('D011', 'Brilliant Gem', 'round', 'Lesotho', 'http://example.com/proportions11', 'None', 'Excellent',
+       ('D011', 'Brilliant Gem', 'round', 'NATURAL', 'http://example.com/proportions11', 'None', 'Excellent',
         'Excellent', 'Excellent', 'N', 'FL', 1.3500, 'Another perfect diamond',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ybul65wajinvijcqfsrm.jpg', 1),
-       ('D012', 'Radiant Star', 'radiant', 'Angola', 'http://example.com/proportions12', 'Faint', 'Very_Good',
+       ('D012', 'Radiant Star', 'radiant', 'NATURAL', 'http://example.com/proportions12', 'Faint', 'Very_Good',
         'Very_Good', 'Very_Good', 'O', 'VVS1', 0.6500, 'Radiant star diamond',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ojrayiy4ta0xaqhfk4od.jpg', 1),
-       ('D013', 'Princess Beauty', 'princess', 'South_Africa', 'http://example.com/proportions13', 'Medium', 'Good',
+       ('D013', 'Princess Beauty', 'princess', 'NATURAL', 'http://example.com/proportions13', 'Medium', 'Good',
         'Good', 'Good', 'P', 'SI1', 2.0000, 'Beautiful princess cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/woondzemluk9v0fz3lns.jpg', 1),
-       ('D014', 'Cushion Charm', 'cushion', 'Botswana', 'http://example.com/proportions14', 'Strong', 'Fair', 'Fair',
+       ('D014', 'Cushion Charm', 'cushion', 'NATURAL', 'http://example.com/proportions14', 'Strong', 'Fair', 'Fair',
         'Fair', 'Q', 'VS2', 0.8000, 'Charming cushion cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/kqfdlvjgqx0frjzsn7yq.jpg', 1),
-       ('D015', 'Oval Delight', 'oval', 'Canada', 'http://example.com/proportions15', 'Very_Strong', 'Poor', 'Poor',
+       ('D015', 'Oval Delight', 'oval', 'NATURAL', 'http://example.com/proportions15', 'Very_Strong', 'Poor', 'Poor',
         'Poor', 'R', 'I1', 1.7000, 'Delightful oval cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/yscrkl1o3vwicmpccxhf.jpg', 1),
-       ('D016', 'Emerald Grace', 'emerald', 'Namibia', 'http://example.com/proportions16', 'None', 'Very_Good',
+       ('D016', 'Emerald Grace', 'emerald', 'NATURAL', 'http://example.com/proportions16', 'None', 'Very_Good',
         'Very_Good', 'Very_Good', 'S', 'IF', 2.4000, 'Graceful emerald cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/bwo1q43ptsfbeusxst1y.jpg', 1),
-       ('D017', 'Marquise Radiance', 'marquise', 'Lesotho', 'http://example.com/proportions17', 'Faint', 'Excellent',
+       ('D017', 'Marquise Radiance', 'marquise', 'NATURAL', 'http://example.com/proportions17', 'Faint', 'Excellent',
         'Excellent', 'Excellent', 'T', 'VVS2', 1.1000, 'Radiant marquise cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/viokaja8fyb3c6ww2wlg.jpg', 1),
-       ('D018', 'Asscher Splendor', 'asscher', 'Angola', 'http://example.com/proportions18', 'Medium', 'Good', 'Good',
+       ('D018', 'Asscher Splendor', 'asscher', 'NATURAL', 'http://example.com/proportions18', 'Medium', 'Good', 'Good',
         'Good', 'U', 'VS1', 2.9000, 'Splendid asscher cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/im3jp4dsqv7jselgeif0.jpg', 1),
-       ('D019', 'Pear Elegance', 'pear', 'South_Africa', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair',
+       ('D019', 'Pear Elegance', 'pear', 'NATURAL', 'http://example.com/proportions19', 'Strong', 'Fair', 'Fair',
         'Fair', 'V', 'SI2', 3.5000, 'Elegant pear cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001575/diamonds/tqefwyvc1fvyobsvlrbz.jpg', 1),
-       ('D020', 'Brilliant Sparkle', 'round', 'Botswana', 'http://example.com/proportions20', 'Very_Strong', 'Poor',
+       ('D020', 'Brilliant Sparkle', 'round', 'NATURAL', 'http://example.com/proportions20', 'Very_Strong', 'Poor',
         'Poor', 'Poor', 'W', 'I2', 1.9500, 'Sparkling brilliant cut',
         'https://res.cloudinary.com/dbfbigo0e/image/upload/v1718001574/diamonds/ybul65wajinvijcqfsrm.jpg', 1);
 go
@@ -335,39 +337,53 @@ create table [DiamondPriceList]
 (
     [diamond_price_id]  int identity (1,1),
     [origin]            varchar(255),
-    [carat_weight_from] decimal(19, 4),
-    [carat_weight_to]   decimal(19, 4),
+	[shape]				varchar(255),
+    [carat_weight]		decimal(19, 4),
     [color]             varchar(255),
     [clarity]           varchar(255),
     [cut]               varchar(255),
     [price]             decimal(19, 4),
     [effective_date]    datetime
-        primary key ([diamond_price_id])
+    primary key ([diamond_price_id])
 )
-go
-INSERT INTO [DiamondPriceList]
-([origin], [carat_weight_from], [carat_weight_to], [color], [clarity], [cut], [price], [effective_date])
-VALUES ('NATURAL', 0.100, 0.300, 'D', 'FL', 'Excellent', 12000.00, GETDATE()),
-       ('NATURAL', 0.700, 0.900, 'G', 'VVS1', 'Very_Good', 7500.00, GETDATE()),
-       ('NATURAL', 2.5000, 2.700, 'J', 'SI1', 'Good', 25000.00, GETDATE()),
-       ('NATURAL', 1.0000, 1.300, 'E', 'VS2', 'Fair', 10000.00, GETDATE()),
-       ('NATURAL', 2.900, 3.300, 'H', 'I1', 'Poor', 3000.00, GETDATE()),
-       ('NATURAL', 1.5000, 1.700, 'I', 'IF', 'Very_Good', 15000.00, GETDATE()),
-       ('NATURAL', 2.1000, 2.300, 'F', 'VVS2', 'Excellent', 22000.00, GETDATE()),
-       ('NATURAL', 0.9000, 1.1, 'K', 'VS1', 'Good', 9000.00, GETDATE()),
-       ('NATURAL', 1.8000, 1.8500, 'L', 'SI2', 'Fair', 18000.00, GETDATE()),
-       ('NATURAL', 2.7500, 2.8000, 'M', 'I2', 'Poor', 2750.00, GETDATE()),
-       ('NATURAL', 1.3500, 1.4000, 'N', 'FL', 'Excellent', 13500.00, GETDATE()),
-       ('LAB_GROWN', 0.6500, 0.8000, 'O', 'VVS1', 'Very_Good', 6500.00, GETDATE()),
-       ('LAB_GROWN', 2.0000, 2.0500, 'P', 'SI1', 'Good', 20000.00, GETDATE()),
-       ('LAB_GROWN', 0.8000, 0.8500, 'Q', 'VS2', 'Fair', 8000.00, GETDATE()),
-       ('LAB_GROWN', 1.7000, 1.7500, 'R', 'I1', 'Poor', 1700.00, GETDATE()),
-       ('LAB_GROWN', 2.4000, 2.4500, 'S', 'IF', 'Very_Good', 24000.00, GETDATE()),
-       ('LAB_GROWN', 1.1000, 1.1500, 'T', 'VVS2', 'Excellent', 11000.00, GETDATE()),
-       ('LAB_GROWN', 2.9000, 2.9500, 'U', 'VS1', 'Good', 29000.00, GETDATE()),
-       ('LAB_GROWN', 3.5000, 3.5500, 'V', 'SI2', 'Fair', 35000.00, GETDATE()),
-       ('LAB_GROWN', 1.9500, 2.0000, 'W', 'I2', 'Poor', 1950.00, GETDATE());
 GO
+/************************************************************************************************************************************/
+DECLARE @diamond_id int;
+    DECLARE @origin varchar(12);
+    DECLARE @shape varchar(8);
+    DECLARE @carat_weight decimal(19, 4);
+    DECLARE @color varchar(1);
+    DECLARE @clarity varchar(4);
+    DECLARE @cut varchar(9);
+    DECLARE @price decimal(19, 4);
+    DECLARE @effective_date datetime;
+
+    DECLARE diamond_cursor CURSOR FOR SELECT diamond_id, origin, shape, carat_weight, color, clarity, cut FROM Diamond;
+    OPEN diamond_cursor;
+
+    FETCH NEXT FROM diamond_cursor INTO @diamond_id, @origin, @shape, @carat_weight, @color, @clarity, @cut;
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        SET @price = @carat_weight * 1000; -- Set the price based on carat weight, adjust this as needed
+        SET @effective_date = GETDATE();
+
+        -- Insert current price
+        INSERT INTO DiamondPriceList (origin, shape, carat_weight, color, clarity, cut, price, effective_date)
+        VALUES (@origin, @shape, @carat_weight, @color, @clarity, @cut, @price, @effective_date);
+
+        -- Insert past price
+        SET @price = @price * 2; -- Double the price for the past record, adjust this as needed
+        SET @effective_date = DATEADD(day, -30, @effective_date); -- Set the past date to 30 days ago, adjust this as needed
+        INSERT INTO DiamondPriceList (origin, shape, carat_weight, color, clarity, cut, price, effective_date)
+        VALUES (@origin, @shape, @carat_weight, @color, @clarity, @cut, @price, @effective_date);
+
+        FETCH NEXT FROM diamond_cursor INTO @diamond_id, @origin, @shape, @carat_weight, @color, @clarity, @cut;
+    END;
+
+    CLOSE diamond_cursor;
+    DEALLOCATE diamond_cursor;
+GO
+/************************************************************************************************************************************/
 create table [ProductDiamond]
 (
     [product_id] int,
@@ -472,46 +488,31 @@ GO
 -- Insert into ProductShellMaterial
 DECLARE @shell_id INT = 1;
 
-WHILE @shell_id <= 63 -- 21 designs * 3 shells each
-    BEGIN
-        INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
-        VALUES (@shell_id, 1, 15.5),     -- gold
-               (@shell_id + 1, 3, 10.0), -- platinum
-               (@shell_id + 2, 7, 12.3); -- silver
-
-        SET @shell_id = @shell_id + 3;
-    END;
+WHILE @shell_id <= 63  -- 21 designs * 3 shells each
+BEGIN
+    INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
+    VALUES 
+    (@shell_id, 1, 0.96), -- gold
+    (@shell_id + 1, 3, 0.96), -- platinum
+    (@shell_id + 2, 7, 0.96); -- silver
+    
+    SET @shell_id = @shell_id + 3;
+END;
 GO
-select *
-from [Account]
-select *
-from [Customer]
-select *
-from [Diamond]
-select *
-from [DiamondPriceList]
-select *
-from [Material]
-select *
-from [MaterialPriceList]
-select *
-from [Order]
-select *
-from [Payment]
-select *
-from [Product]
-select *
-from [ProductDesign]
-select *
-from [ProductDiamond]
-select *
-from [ProductMaterial]
-select *
-from [ProductShellDesign]
-select *
-from [ProductShellMaterial]
-select *
-from [Staff]
-select *
-from [Warranty]
+select * from [Account]
+select * from [Customer]
+select * from [Diamond]
+select * from [DiamondPriceList]
+select * from [Material]
+select * from [MaterialPriceList]
+select * from [Order]
+select * from [Payment]
+select * from [Product]
+select * from [ProductDesign]
+select * from [ProductDiamond]
+select * from [ProductMaterial]
+select * from [ProductShellDesign]
+select * from [ProductShellMaterial]
+select * from [Staff]
+select * from [Warranty]
 go

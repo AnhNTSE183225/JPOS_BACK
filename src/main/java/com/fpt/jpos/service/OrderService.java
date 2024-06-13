@@ -320,7 +320,7 @@ public class OrderService implements IOrderService {
         for (Integer id : productDesignDTO.getDiamondIds()) {
             Diamond diamond = diamondRepository.findById(id).orElseThrow();
             diamonds.add(diamond);
-            diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(), diamond.getClarity(), diamond.getCut(), diamond.getCaratWeight()));
+            diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(), diamond.getClarity(), diamond.getCut(), diamond.getCaratWeight(), diamond.getShape()));
         }
         product.setDiamonds(diamonds);
 
