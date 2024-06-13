@@ -5,16 +5,19 @@ import com.fpt.jpos.pojo.enums.Color;
 import com.fpt.jpos.pojo.enums.Cut;
 import com.fpt.jpos.pojo.enums.Shape;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Diamond4CDTO {
+@NoArgsConstructor
+@Builder
+public class DiamondPriceDisplayDTO {
     private Color color;
     private Clarity clarity;
     private Cut cut;
-    private Double caratWeight;
+    private String caratWeightRange;
     private Shape shape;
+    private Double price;
 }
