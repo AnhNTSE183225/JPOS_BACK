@@ -234,22 +234,22 @@ go
 create table [Diamond]
 (
     [diamond_id]   int identity (1,1),
-    [diamond_code] varchar(255),
-    [diamond_name] varchar(255),
+    [diamond_code] varchar(MAX),
+    [diamond_name] varchar(MAX),
 
-    [shape]        varchar(8),
+    [shape]        varchar(MAX),
 
-    [origin]       varchar(12),
-    [proportions]  varchar(255),
-    [fluorescence] varchar(11),
-    [symmetry]     varchar(9),
-    [polish]       varchar(9),
+    [origin]       varchar(MAX),
+    [proportions]  varchar(MAX),
+    [fluorescence] varchar(MAX),
+    [symmetry]     varchar(MAX),
+    [polish]       varchar(MAX),
 
-    [cut]          varchar(9),
-    [color]        varchar(1),
-    [clarity]      varchar(4),
+    [cut]          varchar(MAX),
+    [color]        varchar(MAX),
+    [clarity]      varchar(MAX),
     [carat_weight] decimal(19, 4),
-    [note]         varchar(255),
+    [note]         varchar(MAX),
 
     [image]        varchar(MAX),
 
@@ -264,11 +264,12 @@ create table [Diamond]
 	symmetry: Poor, Fair, Good, Very_Good, Excellent
 	polish: Poor, Fair, Good, Very_Good, Excellent
 	cut: Poor, Fair, Good, Very_Good, Excellent
-	color: Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D
+	color: Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D (start from K)
 	clarity: I3, I2, I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL
-	carat_weight: 0 to 30
+	carat_weight: 0 to 5 (increment by 0.2)
 */
 /************************************************************************************************************************************/
+/*
 DECLARE @shape TABLE(value varchar(MAX))
 DECLARE @origin TABLE(value varchar(MAX))
 DECLARE @cut TABLE(value varchar(MAX))
@@ -289,22 +290,24 @@ CROSS JOIN @cut c
 CROSS JOIN @color co
 CROSS JOIN @clarity cl
 CROSS JOIN (VALUES (0.2), (0.4), (0.6), (0.8), (1.0), (1.2), (1.4), (1.6), (1.8), (2.0), (2.2), (2.4), (2.6), (2.8), (3.0), (3.2), (3.4), (3.6), (3.8), (4.0), (4.2), (4.4), (4.6), (4.8), (5.0)) AS weights(i);
+*/
 /************************************************************************************************************************************/
 create table [DiamondPriceList]
 (
     [diamond_price_id]  int identity (1,1),
-    [origin]            varchar(255),
-	[shape]				varchar(255),
+    [origin]            varchar(MAX),
+	[shape]				varchar(MAX),
     [carat_weight]		decimal(19, 4),
-    [color]             varchar(255),
-    [clarity]           varchar(255),
-    [cut]               varchar(255),
+    [color]             varchar(MAX),
+    [clarity]           varchar(MAX),
+    [cut]               varchar(MAX),
     [price]             decimal(19, 4),
     [effective_date]    datetime
     primary key ([diamond_price_id])
 )
 GO
 /************************************************************************************************************************************/
+/*
 DECLARE @diamond_id int;
     DECLARE @origin varchar(12);
     DECLARE @shape varchar(8);
@@ -340,6 +343,7 @@ DECLARE @diamond_id int;
     CLOSE diamond_cursor;
     DEALLOCATE diamond_cursor;
 GO
+*/
 /************************************************************************************************************************************/
 create table [ProductDiamond]
 (

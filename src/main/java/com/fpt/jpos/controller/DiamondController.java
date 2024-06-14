@@ -42,7 +42,10 @@ public class DiamondController {
 
     @CrossOrigin
     @GetMapping("/diamonds")
-    public ResponseEntity<?> getAllDiamonds(@RequestParam int pageNo, @RequestParam int pageSize) {
+    public ResponseEntity<?> getAllDiamonds(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ) {
         try {
             return ResponseEntity.ok(diamondService.getAllDiamonds(pageNo, pageSize));
         } catch (Exception ex) {

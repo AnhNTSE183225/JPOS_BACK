@@ -36,7 +36,16 @@ public class DiamondService implements IDiamondService {
     @Override
     public List<Diamond> diamondQuery(DiamondQuery diamondQuery, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Diamond> page = diamondRepository.diamondQuery(diamondQuery.getOrigin(),diamondQuery.getCaratWeight(),diamondQuery.getColorList(),diamondQuery.getClarityList(),diamondQuery.getCutList(),diamondQuery.getShapeList(),diamondQuery.getPrice(),pageable);
+
+        Page<Diamond> page = diamondRepository.diamondQuery(
+                diamondQuery.getCaratWeight(),
+                diamondQuery.getShapeList(),
+                diamondQuery.getColorList(),
+                diamondQuery.getCutList(),
+                diamondQuery.getClarityList(),
+                diamondQuery.getPrice(),
+                pageable
+        );
         return page.getContent();
     }
 
