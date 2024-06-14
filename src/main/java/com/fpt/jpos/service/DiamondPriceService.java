@@ -1,6 +1,7 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.Diamond4CDTO;
+import com.fpt.jpos.dto.DiamondPriceProjection;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.repository.IDiamondPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,10 @@ public class DiamondPriceService implements IDiamondPriceService {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<DiamondPrice> page = diamondPriceRepository.findAll(pageable);
         return page.getContent();
+    }
+
+    @Override
+    public List<DiamondPriceProjection> getDiamondPrices() {
+        return diamondPriceRepository.getDiamondPrices();
     }
 }
