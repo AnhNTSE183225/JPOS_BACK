@@ -1,5 +1,6 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.dto.DiamondQuery;
 import com.fpt.jpos.pojo.Diamond;
 import com.fpt.jpos.repository.IDiamondRepository;
 import com.fpt.jpos.service.DiamondService;
@@ -45,11 +46,33 @@ public class DiamondController {
 
     @CrossOrigin
     @GetMapping("/diamonds")
-    public ResponseEntity<?> getAllDiamonds() {
+    public ResponseEntity<?> getAllDiamonds(@RequestParam int pageNo, @RequestParam int pageSize) {
         try {
-            return ResponseEntity.ok(diamondService.getAllDiamonds());
+            return ResponseEntity.ok(diamondService.getAllDiamonds(pageNo, pageSize));
         } catch (Exception ex) {
             return ResponseEntity.noContent().build();
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping("/diamonds/query")
+    public ResponseEntity<?> diamondQuery(@RequestBody DiamondQuery diamondQuery, @RequestParam int pageNo, @RequestParam int pageSize) {
+        List<Diamond> diamonds = diamondService.diamondQuery(diamondQuery, pageNo, pageSize);
+        if (diamonds == null || diamonds.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(diamonds);
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping("/get-multiple-diamonds-by-id")
+    public ResponseEntity<?> getMultipleDiamondsById(@RequestBody List<Integer> diamondIds) {
+        List<Diamond> diamondList = diamondService.getDiamondsById(diamondIds);
+        if(diamondList == null || diamondList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(diamondList);
         }
     }
 

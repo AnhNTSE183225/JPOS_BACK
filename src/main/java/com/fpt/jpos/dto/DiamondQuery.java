@@ -9,15 +9,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DiamondPriceDisplayDTO {
-    private Color color;
-    private Clarity clarity;
-    private Cut cut;
-    private String caratWeightRange;
-    private Shape shape;
-    private Double price;
+public class DiamondQuery {
+    private Double caratWeight;
+    private List<String> colorList;
+    private List<String> clarityList;
+    private List<String> cutList;
+    private List<String> shapeList;
 }

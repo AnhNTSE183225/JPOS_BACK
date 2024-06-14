@@ -1,18 +1,14 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.Diamond4CDTO;
-import com.fpt.jpos.dto.DiamondPriceDisplayDTO;
-import com.fpt.jpos.pojo.Diamond;
 import com.fpt.jpos.pojo.DiamondPrice;
-import com.fpt.jpos.pojo.enums.Clarity;
-import com.fpt.jpos.pojo.enums.Color;
-import com.fpt.jpos.pojo.enums.Cut;
-import com.fpt.jpos.pojo.enums.Shape;
 import com.fpt.jpos.repository.IDiamondPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -53,29 +49,9 @@ public class DiamondPriceService implements IDiamondPriceService {
     }
 
     @Override
-    public List<DiamondPrice> getDiamondPrices() {
-//        Double maxPrice = diamondPriceRepository.getMaximumCaratWeight();
-//        List<DiamondPriceDisplayDTO> result = new ArrayList<>();
-//        double carat = 0.0;
-//
-//        while(carat < maxPrice) {
-//
-//            for(Color color : Color.values()) {
-//                for(Clarity clarity : Clarity.values()) {
-//                    for(Cut cut : Cut.values()) {
-//                        for(Shape shape: Shape.values()) {
-//                            Double price = diamondPriceRepository.findDiamondBy4CInRange(carat,carat+0.2,clarity.name(),color.name(),cut.name(),shape.name());
-//                            if(price != null && price > 0) {
-//                                DiamondPriceDisplayDTO priceListing = new DiamondPriceDisplayDTO(color, clarity, cut, String.format("%s - %s",carat,carat+0.2),shape,price);
-//                                result.add(priceListing);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//
-//            carat += 0.2;
-//        }
-        return diamondPriceRepository.findAll();
+    public List<DiamondPrice> getDiamondPrices(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<DiamondPrice> page = diamondPriceRepository.findAll(pageable);
+        return page.getContent();
     }
 }

@@ -1,7 +1,6 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.dto.Diamond4CDTO;
-import com.fpt.jpos.dto.DiamondPriceDisplayDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,11 @@ public class DiamondPriceController {
 
     @CrossOrigin
     @GetMapping("/diamond-prices")
-    public ResponseEntity<?> getAllDiamondPrice() {
-        List<DiamondPrice> diamondPriceListing = diamondPriceService.getDiamondPrices();
+    public ResponseEntity<?> getAllDiamondPrice(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ) {
+        List<DiamondPrice> diamondPriceListing = diamondPriceService.getDiamondPrices(pageNo, pageSize);
         if(diamondPriceListing.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
