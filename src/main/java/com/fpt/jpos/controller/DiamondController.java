@@ -2,13 +2,9 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.dto.DiamondQuery;
 import com.fpt.jpos.pojo.Diamond;
-import com.fpt.jpos.repository.IDiamondRepository;
-import com.fpt.jpos.service.DiamondService;
 
 import com.fpt.jpos.service.IDiamondService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -17,6 +17,8 @@ import java.util.List;
 @Builder
 public class DiamondQuery {
     private Double caratWeight;
+    private Double price;
+    private String origin;
     private List<String> colorList;
     private List<String> clarityList;
     private List<String> cutList;
