@@ -32,7 +32,7 @@ public interface IOrderService {
 
     Integer acceptOrder(Order order);
 
-    Order updateOrderStatusDesigning(Integer id, PaymentDTO paymentDTO);
+    Order updateOrderStatusDesigning(Integer id, PaymentRestDTO.PaymentRequest paymentDTO);
 
     Order updateOrderStatusDesigning(Integer id, NoteDTO noteDTO);
 
@@ -40,8 +40,8 @@ public interface IOrderService {
 
     Order completeProduct(Integer id, String imageUrl, Integer productionStaffId);
 
-    Order completeOrder(PaymentDTO paymentDTO, Integer orderId);
-    
+    Order completeOrder(PaymentRestDTO.PaymentRequest paymentDTO, Integer orderId);
+
     //Order addProductDesignToOrder(ProductDesignDTO productDesignDTO);
 
     Order createOrderFromDesign(ProductDesignDTO productDesignDTO);
