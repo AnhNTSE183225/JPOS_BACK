@@ -37,8 +37,17 @@ public class StaffService implements IStaffService {
         }
     }
     @Override
-    public List<Staff> getStaffByType(String staffType) {
-        return staffRepository.findByStaffType(staffType);
+    public List<Staff> getDesignStaff() {
+        return staffRepository.findByStaffType("design");
     }
-    
+
+    @Override
+    public List<Staff> getSaleStaff() {
+        return staffRepository.findByStaffType("sale");
+    }
+
+    @Override
+    public List<Staff> getProductionStaff() {
+        return staffRepository.findByStaffType("produce");
+    }
 }

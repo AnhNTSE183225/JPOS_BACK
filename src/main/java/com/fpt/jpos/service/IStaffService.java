@@ -7,6 +7,9 @@ import com.fpt.jpos.pojo.Staff;
 
 public interface IStaffService {
     public Staff getStaffByAccount(Account account);
-    List<Staff> getStaffByType(String staffType);
+    List<Staff> getDesignStaff();
 
+    List<Staff> getSaleStaff();
+
+    List<Staff> getProductionStaff();
 }
