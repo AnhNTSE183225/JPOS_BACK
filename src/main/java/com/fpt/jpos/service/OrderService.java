@@ -328,11 +328,7 @@ public class OrderService implements IOrderService {
 
         Order order = new Order();
         order.setProduct(product);
-        if(productDesignDTO.getHavePaid()) {
-            order.setStatus(OrderStatus.production);
-        } else {
-            order.setStatus(OrderStatus.customer_accept);
-        }
+        order.setStatus(OrderStatus.wait_payment);
         order.setCustomer(customerRepository.findById(productDesignDTO.getCustomerId()).orElseThrow());
         order.setOrderDate(new Date());
         order.setOrderType("from_design");

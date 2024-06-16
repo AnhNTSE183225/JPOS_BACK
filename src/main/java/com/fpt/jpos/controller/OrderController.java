@@ -250,7 +250,7 @@ public class OrderController {
         try {
             System.out.println("Controller");
             System.out.println(productDesignDTO.toString());
-            return ResponseEntity.ok(orderService.createOrderFromDesign(productDesignDTO).getId());
+            return ResponseEntity.ok(orderService.createOrderFromDesign(productDesignDTO).getTotalAmount());
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.noContent().build();
