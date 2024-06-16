@@ -4,6 +4,9 @@ import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.IStaffRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +35,19 @@ public class StaffService implements IStaffService {
                 return staff;
             }
         }
+    }
+    @Override
+    public List<Staff> getDesignStaff() {
+        return staffRepository.findByStaffType("design");
+    }
+
+    @Override
+    public List<Staff> getSaleStaff() {
+        return staffRepository.findByStaffType("sale");
+    }
+
+    @Override
+    public List<Staff> getProductionStaff() {
+        return staffRepository.findByStaffType("produce");
     }
 }

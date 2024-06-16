@@ -10,5 +10,6 @@ public enum OrderStatus {
     pending_design,
     production,
     delivered,
+    wait_payment,
     completed
 }
