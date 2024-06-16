@@ -3,6 +3,9 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.service.IStaffService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +31,10 @@ public class StaffController {
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error " + ex.getMessage());
         }
+    }
+    @GetMapping
+    public ResponseEntity<List<Staff>> getStaffByType(@RequestParam("type") String staffType) {
+        List<Staff> staffs = staffService.getStaffByType(staffType);
+        return ResponseEntity.ok(staffs);
     }
 }
