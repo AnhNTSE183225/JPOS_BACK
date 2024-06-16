@@ -4,8 +4,8 @@ import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService implements IOrderService {
 
     private final IOrderRepository orderRepository;
@@ -41,38 +42,12 @@ public class OrderService implements IOrderService {
     private final IDiamondPriceService diamondPriceService;
 
     private final IMaterialPriceService materialPriceService;
+
     private final ProductService productService;
+    private final PaymentService paymentService;
 
     ModelMapper modelMapper = new ModelMapper();
 
-
-    @Autowired
-    public OrderService(IOrderRepository theIOrderRepository,
-                        ICustomerRepository theICustomerRepository,
-                        IPaymentRepository theIPaymentRepository,
-                        IStaffRepository theIStaffRepository,
-                        IProductRepository theIProductRepository,
-                        IProductShellDesignRepository productShellDesignRepository,
-                        IProductDesignRepository productDesignRepository,
-                        IProductShellMaterialRepository productShellMaterialRepository,
-                        IProductMaterialRepository productMaterialRepository,
-                        IDiamondRepository diamondRepository,
-                        IDiamondPriceService diamondPriceService,
-                        IMaterialPriceService materialPriceService, ProductService productService) {
-        orderRepository = theIOrderRepository;
-        customerRepository = theICustomerRepository;
-        paymentRepository = theIPaymentRepository;
-        staffRepository = theIStaffRepository;
-        productRepository = theIProductRepository;
-        this.productShellDesignRepository = productShellDesignRepository;
-        this.productDesignRepository = productDesignRepository;
-        this.productShellMaterialRepository = productShellMaterialRepository;
-        this.productMaterialRepository = productMaterialRepository;
-        this.diamondRepository = diamondRepository;
-        this.diamondPriceService = diamondPriceService;
-        this.materialPriceService = materialPriceService;
-        this.productService = productService;
-    }
 
     @Override
     @Transactional
@@ -125,13 +100,13 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order updateOrderStatusDesigning(Integer id, PaymentDTO paymentDTO) {
+    public Order updateOrderStatusDesigning(Integer id, PaymentRestDTO.PaymentRequest paymentDTO) {
         Optional<Order> theOrder = orderRepository.findById(id);
         Payment payment = modelMapper.map(paymentDTO, Payment.class);
 
         if (theOrder.isPresent()) {
             Order order = theOrder.get();
-            if(order.getOrderType().equals("from_design")) {
+            if (order.getOrderType().equals("from_design")) {
                 order.setStatus(OrderStatus.production);
             } else {
                 order.setStatus(OrderStatus.designing);
@@ -143,6 +118,7 @@ public class OrderService implements IOrderService {
             throw new RuntimeException("Order not found with id: " + id);
         }
     }
+
 
     @Override
     @Transactional
@@ -256,7 +232,7 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order completeOrder(PaymentDTO paymentDTO, Integer orderId) {
+    public Order completeOrder(PaymentRestDTO.PaymentRequest paymentDTO, Integer orderId) {
 
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
         Payment payment = modelMapper.map(paymentDTO, Payment.class);
@@ -328,7 +304,7 @@ public class OrderService implements IOrderService {
 
         Order order = new Order();
         order.setProduct(product);
-        if(productDesignDTO.getHavePaid()) {
+        if (productDesignDTO.getHavePaid()) {
             order.setStatus(OrderStatus.production);
         } else {
             order.setStatus(OrderStatus.customer_accept);
@@ -343,8 +319,8 @@ public class OrderService implements IOrderService {
         order.setDesignFile(productDesign.getDesignFile());
         order.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         order.setEMaterialPrice(productShellDesign.getEMaterialPrice());
-        order.setTaxFee((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate()*0.1);
-        order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate() + order.getTaxFee());
+        order.setTaxFee((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() * 0.1);
+        order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() + order.getTaxFee());
         return orderRepository.save(order);
     }
 

@@ -149,7 +149,7 @@ public class OrderController {
     // Update order status to designing after confirming deposit
     @CrossOrigin
     @PutMapping("/sales/orders/{id}/confirm-deposit")
-    public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentDTO payment) {
+    public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentRestDTO.PaymentRequest payment) {
         Order order = orderService.updateOrderStatusDesigning(id, payment);
         if (order == null) {
             return ResponseEntity.noContent().build();
@@ -234,7 +234,7 @@ public class OrderController {
 
     @CrossOrigin
     @PostMapping("/orders/{orderId}/complete")
-    public ResponseEntity<Order> completeOrder(@RequestBody PaymentDTO paymentDTO, @PathVariable Integer orderId) {
+    public ResponseEntity<Order> completeOrder(@RequestBody PaymentRestDTO.PaymentRequest  paymentDTO, @PathVariable Integer orderId) {
         Order order = orderService.completeOrder(paymentDTO, orderId);
         return ResponseEntity.ok(order);
 
