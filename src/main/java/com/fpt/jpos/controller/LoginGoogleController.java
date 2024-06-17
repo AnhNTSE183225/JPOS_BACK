@@ -26,6 +26,12 @@ public class LoginGoogleController {
     }
 
     @CrossOrigin
+    @GetMapping("/get-google-account")
+    public Map<String, Object> currentUser(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
+        return oAuth2AuthenticationToken.getPrincipal().getAttributes();
+    }
+
+    @CrossOrigin
     @PostMapping("/customer-google-login")
     public ResponseEntity<Customer> login(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
         Account account = new Account();
