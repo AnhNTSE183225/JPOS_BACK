@@ -44,7 +44,7 @@ public class OrderController {
         try {
             return ResponseEntity.ok(fileUploadService.upload(file));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();
         }
     }
@@ -126,10 +126,10 @@ public class OrderController {
 
     // Customer accept quotation
     @CrossOrigin
-    @PutMapping("/accept-order")
-    public ResponseEntity<?> acceptOrder(@RequestBody Order order) {
+    @PutMapping("/accept-quotation")
+    public ResponseEntity<?> acceptQuotation(@RequestParam Integer orderId) {
         try {
-            return ResponseEntity.ok(orderService.acceptOrder(order));
+            return ResponseEntity.ok(orderService.acceptQuotation(orderId));
         } catch (Exception e) {
             return ResponseEntity.noContent().build();
         }
@@ -140,7 +140,7 @@ public class OrderController {
     public ResponseEntity<?> findOrderById(@PathVariable int id) {
         Order order = orderService.findById(id);
         if (order == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(order);
         }
@@ -227,32 +227,26 @@ public class OrderController {
         try {
             return ResponseEntity.ok(orderService.completeProduct(id, imageUrl, productionStaffId));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();
         }
     }
 
     @CrossOrigin
     @PostMapping("/orders/{orderId}/complete")
-    public ResponseEntity<Order> completeOrder(@RequestBody PaymentRestDTO.PaymentRequest  paymentDTO, @PathVariable Integer orderId) {
-        Order order = orderService.completeOrder(paymentDTO, orderId);
+    public ResponseEntity<Order> completeOrder(@PathVariable Integer orderId) {
+        Order order = orderService.completeOrder(orderId);
         return ResponseEntity.ok(order);
 
     }
-//    @PostMapping("/add-product-design")
-//    public ResponseEntity<Order> addProductDesignToOrder(@RequestBody ProductDesignDTO productDesignDTO) {
-//        Order order = orderService.addProductDesignToOrder(productDesignDTO);
-//        return ResponseEntity.ok(order);
-//    }
+
     @CrossOrigin
     @PostMapping("/create-order-from-design")
     public ResponseEntity<?> createOrderFromDesign(@RequestBody ProductDesignDTO productDesignDTO) {
         try {
-            System.out.println("Controller");
-            System.out.println(productDesignDTO.toString());
-            return ResponseEntity.ok(orderService.createOrderFromDesign(productDesignDTO).getTotalAmount());
+            return ResponseEntity.ok(orderService.createOrderFromDesign(productDesignDTO).getId());
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();
         }
     }

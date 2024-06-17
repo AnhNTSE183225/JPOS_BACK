@@ -1,6 +1,7 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.dto.PaymentRestDTO;
+import com.fpt.jpos.service.IOrderService;
 import com.fpt.jpos.service.IPaymentService;
 import com.fpt.jpos.utils.response.ResponseObject;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
     private final IPaymentService paymentService;
+    private final IOrderService orderService;
 
     @CrossOrigin
     @GetMapping("/{orderId}")
@@ -22,6 +24,7 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.getPaidAmountByOrder(orderId));
     }
 
+    @CrossOrigin
     @GetMapping("/vn-pay")
     public ResponseObject<PaymentRestDTO.VNPayResponse> pay(HttpServletRequest request) {
         return new ResponseObject<>(HttpStatus.OK, "Success", paymentService.createVnPayPayment(request));
@@ -29,10 +32,12 @@ public class PaymentController {
 
 
     // Trên frontend if code == 00 thì gọi api như luồng kia
+    @CrossOrigin
     @GetMapping("/vn-pay-callback")
-    public ResponseObject<PaymentRestDTO.VNPayResponse> payCallbackHandler(@RequestParam String vnp_ResponseCode
+    public ResponseObject<PaymentRestDTO.VNPayResponse> payCallbackHandler(@RequestParam String vnp_ResponseCode, @RequestParam Integer orderId, @RequestParam String orderType
     ) {
         if (vnp_ResponseCode.equals("00")) {
+            orderService.confirmPaymentSuccess(orderId, orderType);
             return new ResponseObject<>(HttpStatus.OK, "Success", PaymentRestDTO.VNPayResponse.builder().
                     code("00")
                     .message("Success")

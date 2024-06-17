@@ -30,7 +30,7 @@ public interface IOrderService {
 
     Order retrieveQuotationFromStaff(Order order, Integer productId, Integer saleStaffId);
 
-    Integer acceptOrder(Order order);
+    Integer acceptQuotation(Integer orderId);
 
     Order updateOrderStatusDesigning(Integer id, PaymentRestDTO.PaymentRequest paymentDTO);
 
@@ -40,11 +40,13 @@ public interface IOrderService {
 
     Order completeProduct(Integer id, String imageUrl, Integer productionStaffId);
 
-    Order completeOrder(PaymentRestDTO.PaymentRequest paymentDTO, Integer orderId);
+    Order completeOrder(Integer orderId);
 
     //Order addProductDesignToOrder(ProductDesignDTO productDesignDTO);
 
     Order createOrderFromDesign(ProductDesignDTO productDesignDTO);
+
+    void confirmPaymentSuccess(Integer orderId, String orderType);
 
     //TODO Update production staff id when production staff select delivered
 }

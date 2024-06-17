@@ -43,9 +43,6 @@ public class OrderService implements IOrderService {
 
     private final IMaterialPriceService materialPriceService;
 
-    private final ProductService productService;
-    private final PaymentService paymentService;
-
     ModelMapper modelMapper = new ModelMapper();
 
 
@@ -206,9 +203,27 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Integer acceptOrder(Order order) {
-        order.setStatus(OrderStatus.customer_accept);
-        order.setODate(new Date());
+    public Integer acceptQuotation(Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+
+        double oDiamondPrice = 0.0;
+        double oMaterialPrice = 0.0;
+        for(Diamond diamond : order.getProduct().getDiamonds()) {
+            oDiamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(),diamond.getClarity(),diamond.getCut(),diamond.getCaratWeight(),diamond.getShape()));
+        }
+        for(ProductMaterial material : order.getProduct().getMaterials()) {
+            oMaterialPrice += materialPriceService.getLatestPriceById(material.getMaterial().getMaterialId())*material.getWeight();
+        }
+        double totalAmount = (oMaterialPrice + oDiamondPrice + order.getEMaterialPrice() + order.getEDiamondPrice() + order.getProductionPrice()) * order.getMarkupRate() * 1.1;
+        double taxFee = (oMaterialPrice + oDiamondPrice + order.getEMaterialPrice() + order.getEDiamondPrice() + order.getProductionPrice()) * order.getMarkupRate() * 0.1;
+
+        order.setOrderDate(new Date());
+        order.setTaxFee(taxFee);
+        order.setTotalAmount(totalAmount);
+        order.setODiamondPrice(oDiamondPrice);
+        order.setOMaterialPrice(oMaterialPrice);
+        order.setStatus(OrderStatus.wait_payment);
+
         return orderRepository.save(order).getId();
     }
 
@@ -232,29 +247,17 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order completeOrder(PaymentRestDTO.PaymentRequest paymentDTO, Integer orderId) {
+    public Order completeOrder(Integer orderId) {
 
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        Payment payment = modelMapper.map(paymentDTO, Payment.class);
-        Payment depositPayment = paymentRepository.findPaymentByOrderId(orderId);
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        Payment payment = paymentRepository.findPaymentByOrderId(orderId);
 
-        Double depositMoney = 0.0;
+        payment.setAmountPaid(order.getTotalAmount());
+        payment.setPaymentStatus("Fully paid");
+        paymentRepository.save(payment);
 
-        if (depositPayment != null) {
-            depositMoney = depositPayment.getAmountPaid();
-        }
-        double sum = depositMoney + payment.getAmountPaid();
-
-        if (sum == payment.getAmountTotal()) {
-            paymentRepository.save(payment);
-        }
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.setStatus(OrderStatus.completed);
-            return orderRepository.save(order);
-        } else {
-            throw new RuntimeException("Order not found with id: " + orderId);
-        }
+        order.setStatus(OrderStatus.completed);
+        return orderRepository.save(order);
     }
 
     @Override
@@ -318,6 +321,25 @@ public class OrderService implements IOrderService {
         order.setTaxFee((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() * 0.1);
         order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() + order.getTaxFee());
         return orderRepository.save(order);
+    }
+
+    @Override
+    public void confirmPaymentSuccess(Integer orderId, String orderType) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        Payment payment = new Payment();
+        payment.setOrder(order);
+        payment.setPaymentDate(new Date());
+        payment.setPaymentStatus("30% Paid");
+        payment.setAmountPaid(order.getTotalAmount() * 0.3);
+        payment.setAmountTotal(order.getTotalAmount());
+        payment.setPaymentMethod("VN-PAY");
+        paymentRepository.save(payment);
+        if (orderType.equals("from_design")) {
+            order.setStatus(OrderStatus.production);
+        } else {
+            order.setStatus(OrderStatus.designing);
+        }
+        orderRepository.save(order);
     }
 
 }

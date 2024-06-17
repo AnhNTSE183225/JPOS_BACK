@@ -33,10 +33,14 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public PaymentRestDTO.VNPayResponse createVnPayPayment(HttpServletRequest request) {
-        long amount = Integer.parseInt(request.getParameter("amount")) * 100L;
+        double d = Double.parseDouble(request.getParameter("amount")) * 25455.50 / 1000; //Conversion rate
+        int i = (int) Math.ceil(d);
+        long l = i * 100L;
+        String s = String.valueOf(l);
+
         String bankCode = request.getParameter("bankCode");
         Map<String, String> vnpParamsMap = vnPayConfig.getVNPayConfig();
-        vnpParamsMap.put("vnp_Amount", String.valueOf(amount));
+        vnpParamsMap.put("vnp_Amount", s);
         if (bankCode != null && !bankCode.isEmpty()) {
             vnpParamsMap.put("vnp_BankCode", bankCode);
         }
