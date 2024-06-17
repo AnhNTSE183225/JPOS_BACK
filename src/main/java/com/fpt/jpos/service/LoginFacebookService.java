@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class LoginGoogleService implements ILoginGoogleService {
+public class LoginFacebookService implements ILoginFacebookService {
 
     private final IAccountRepository accountRepository;
     private final ICustomerRepository customerRepository;
 
     @Autowired
-    public LoginGoogleService(IAccountRepository accountRepository, ICustomerRepository customerRepository) {
+    public LoginFacebookService(IAccountRepository accountRepository, ICustomerRepository customerRepository) {
         this.accountRepository = accountRepository;
         this.customerRepository = customerRepository;
     }

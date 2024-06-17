@@ -3,7 +3,7 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
-import com.fpt.jpos.service.ILoginGoogleService;
+import com.fpt.jpos.service.ILoginFacebookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,11 +17,11 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 
 @RestController
 @RequestMapping("/api")
-public class LoginGoogleController {
-    private final ILoginGoogleService loginGoogleService;
+public class LoginFacebookController {
+    private final ILoginFacebookService loginGoogleService;
 
     @Autowired
-    public LoginGoogleController(ILoginGoogleService loginGoogleService) {
+    public LoginFacebookController(ILoginFacebookService loginGoogleService) {
         this.loginGoogleService = loginGoogleService;
     }
 
