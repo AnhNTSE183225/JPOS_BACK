@@ -342,4 +342,26 @@ public class OrderService implements IOrderService {
         orderRepository.save(order);
     }
 
+    @Override
+    public Integer assign(Integer orderId, Integer saleStaffId, Integer designStaffId, Integer productionStaffId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+
+        if(saleStaffId != null) {
+            Staff staff = staffRepository.findById(saleStaffId).orElseThrow();
+            order.setSaleStaff(staff);
+        }
+
+        if(designStaffId != null) {
+            Staff staff = staffRepository.findById(designStaffId).orElseThrow();
+            order.setDesignStaff(staff);
+        }
+
+        if(productionStaffId != null) {
+            Staff staff = staffRepository.findById(productionStaffId).orElseThrow();
+            order.setProductionStaff(staff);
+        }
+
+        return orderRepository.save(order).getId();
+    }
+
 }

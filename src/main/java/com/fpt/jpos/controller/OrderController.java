@@ -250,4 +250,18 @@ public class OrderController {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @CrossOrigin
+    @PostMapping
+    public ResponseEntity<?> assign(@RequestParam int orderId,
+                                    @RequestParam(required = false) Integer  saleStaffId,
+                                    @RequestParam(required = false) Integer designStaffId,
+                                    @RequestParam(required = false) Integer productionStaffId) {
+        try {
+            return ResponseEntity.ok(orderService.assign(orderId, saleStaffId, designStaffId, productionStaffId));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+            return ResponseEntity.noContent().build();
+        }
+    }
 }

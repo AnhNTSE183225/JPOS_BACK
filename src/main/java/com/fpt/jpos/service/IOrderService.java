@@ -48,5 +48,7 @@ public interface IOrderService {
 
     void confirmPaymentSuccess(Integer orderId, String orderType);
 
+    Integer assign(Integer orderId, Integer saleStaffId, Integer designStaffId, Integer productionStaffId);
+
     //TODO Update production staff id when production staff select delivered
 }
