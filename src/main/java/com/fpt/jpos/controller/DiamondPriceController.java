@@ -4,6 +4,7 @@ import com.fpt.jpos.dto.Diamond4CDTO;
 import com.fpt.jpos.dto.DiamondPriceProjection;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +38,22 @@ public class DiamondPriceController {
     @CrossOrigin
     @PostMapping("/get-price-by-4C")
     public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4CDTO diamond4CDTO) {
+        try {
+            double diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4CDTO);
+            return ResponseEntity.ok(diamondPriceList);
+        } catch (Exception ex) {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
-        double diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4CDTO);
-        return ResponseEntity.ok(diamondPriceList); // thrown exception in service
+    @CrossOrigin
+    @PostMapping("/update-diamond-price")
+    public ResponseEntity<?> updateDiamondPrice(@RequestParam Integer diamondPriceId, @RequestParam Double newPrice) {
+        try {
+            return ResponseEntity.ok(diamondPriceService.updateDiamondPrice(diamondPriceId,newPrice));
+        } catch (Exception ex) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @CrossOrigin

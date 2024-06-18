@@ -16,8 +16,8 @@ public interface IDiamondPriceRepository extends JpaRepository<DiamondPrice, Int
     @Query(value = "Select * from [DiamondPriceList] where carat_weight = ?1 and clarity = ?2 and color = ?3 and cut = ?4 and shape =?5", nativeQuery = true)
     List<DiamondPrice> findDiamondBy4C(Double caratWeight, String clarity, String color, String cut, String shape);
 
-//    @Query(value = "Select AVG([price]) from [DiamondPriceList] where carat_weight >= ?1 and carat_weight <= ?2 and clarity = ?3 and color = ?4 and cut = ?5 and shape =?6", nativeQuery = true)
-//    Double findDiamondBy4CInRange(Double caratWeightFrom, Double caratWeightTo, String clarity, String color, String cut, String shape);
+    @Query(value = "SELECT * FROM [DiamondPriceList] ORDER BY [effective_date] DESC",nativeQuery = true)
+    Page<DiamondPrice> findAllOrderByEffectiveDateDesc(Pageable pageable);
 
     @Query(value = "SELECT MAX([carat_weight]) FROM [DiamondPriceList]",nativeQuery = true)
     Double getMaximumCaratWeight();

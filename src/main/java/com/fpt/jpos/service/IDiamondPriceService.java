@@ -12,4 +12,6 @@ public interface IDiamondPriceService {
     public List<DiamondPrice> getDiamondPrices(int pageNo, int pageSize);
 
     public List<DiamondPriceProjection> getDiamondPrices();
+
+    public DiamondPrice updateDiamondPrice(Integer diamondPriceId, Double newPrice);
 }

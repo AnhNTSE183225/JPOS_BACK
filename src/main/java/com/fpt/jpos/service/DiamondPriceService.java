@@ -52,12 +52,27 @@ public class DiamondPriceService implements IDiamondPriceService {
     @Override
     public List<DiamondPrice> getDiamondPrices(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<DiamondPrice> page = diamondPriceRepository.findAll(pageable);
+        Page<DiamondPrice> page = diamondPriceRepository.findAllOrderByEffectiveDateDesc(pageable);
         return page.getContent();
     }
 
     @Override
     public List<DiamondPriceProjection> getDiamondPrices() {
         return diamondPriceRepository.getDiamondPrices();
+    }
+
+    @Override
+    public DiamondPrice updateDiamondPrice(Integer diamondPriceId, Double newPrice) {
+        DiamondPrice diamondPrice = diamondPriceRepository.findById(diamondPriceId).orElseThrow();
+        DiamondPrice newDiamondPrice = new DiamondPrice();
+        newDiamondPrice.setCut(diamondPrice.getCut());
+        newDiamondPrice.setColor(diamondPrice.getColor());
+        newDiamondPrice.setEffectiveDate(new Date());
+        newDiamondPrice.setOrigin(diamondPrice.getOrigin());
+        newDiamondPrice.setClarity(diamondPrice.getClarity());
+        newDiamondPrice.setShape(diamondPrice.getShape());
+        newDiamondPrice.setCaratWeight(diamondPrice.getCaratWeight());
+        newDiamondPrice.setPrice(newPrice);
+        return diamondPriceRepository.save(newDiamondPrice);
     }
 }
