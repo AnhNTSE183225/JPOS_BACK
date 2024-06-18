@@ -252,7 +252,7 @@ public class OrderController {
     }
 
     @CrossOrigin
-    @PostMapping
+    @PostMapping("/assign")
     public ResponseEntity<?> assign(@RequestParam int orderId,
                                     @RequestParam(required = false) Integer  saleStaffId,
                                     @RequestParam(required = false) Integer designStaffId,

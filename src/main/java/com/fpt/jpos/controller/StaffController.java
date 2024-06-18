@@ -32,18 +32,21 @@ public class StaffController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error " + ex.getMessage());
         }
     }
+    @CrossOrigin
     @GetMapping("/staff-design")
     public ResponseEntity<List<Staff>> getDesignStaff() {
         List<Staff> staffs = staffService.getDesignStaff();
         return ResponseEntity.ok(staffs);
     }
 
+    @CrossOrigin
     @GetMapping("/staff-sale")
     public ResponseEntity<List<Staff>> getSaleStaff() {
         List<Staff> staffs = staffService.getSaleStaff();
         return ResponseEntity.ok(staffs);
     }
 
+    @CrossOrigin
     @GetMapping("/staff-production")
     public ResponseEntity<List<Staff>> getProductionStaff() {
         List<Staff> staffs = staffService.getProductionStaff();
