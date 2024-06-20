@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="tuandatfpt123 &lt;datntse171588@fpt.edu.vn&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="google_branch" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nctbinh&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AnhNTSE183225/JPOS_BACK.git&quot;,
+    &quot;accountId&quot;: &quot;423ac62a-7e07-4380-ba38-814bbe9aa779&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadAnnotationsAutomatically" value="true" />
+        <option name="workspaceImportForciblyTurnedOn" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2h257PrVxGggILtYGf1C1zs6e5L" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Database Script.empty_database.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.full_database.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.procedure_diamond.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.procedure_diamond_price_list.sql.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.JewelryProductionOrderSystemApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;N:/ThanhBinh/Study/FPT/Subject/Semester05_SU24/SWP391/Project/vnpay-integration&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;7ced2e4c-747a-4567-a06b-712fd20a5689&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.fpt.jpos.auth" />
+      <recent name="com.fpt.jpos.service" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.fpt.jpos.dto" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.fpt.jpos.utils.response" />
+      <recent name="com.fpt.jpos.config" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.JewelryProductionOrderSystemApplication">
+    <configuration name="SQLQuery2.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/SQL/SQLQuery2.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
+    <configuration name="empty_database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/SQL/empty_database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="7ced2e4c-747a-4567-a06b-712fd20a5689" />
+      <method v="2" />
+    </configuration>
+    <configuration name="full_database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/SQL/full_database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="7ced2e4c-747a-4567-a06b-712fd20a5689" />
+      <method v="2" />
+    </configuration>
+    <configuration name="procedure_diamond_price_list.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/SQL/procedure_diamond_price_list.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="7ced2e4c-747a-4567-a06b-712fd20a5689" />
+      <method v="2" />
+    </configuration>
+    <configuration name="procedure_diamond.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/SQL/procedure_diamond.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="7ced2e4c-747a-4567-a06b-712fd20a5689" />
+      <method v="2" />
+    </configuration>
+    <configuration name="DemoApiSpringBootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="DemoAPISpringBoot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApiSpringBootApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JewelryProductionOrderSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="jpos" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.fpt.jpos.JewelryProductionOrderSystemApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Database Script.full_database.sql" />
+        <item itemvalue="Database Script.empty_database.sql" />
+        <item itemvalue="Database Script.SQLQuery2.sql" />
+        <item itemvalue="Database Script.procedure_diamond_price_list.sql" />
+        <item itemvalue="Database Script.procedure_diamond.sql" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="" />
+      <created>1716779166254</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716779166254</updated>
+      <workItem from="1716779168651" duration="5203000" />
+      <workItem from="1716799812445" duration="7504000" />
+      <workItem from="1716808510315" duration="633000" />
+      <workItem from="1716813406614" duration="427000" />
+      <workItem from="1716855051074" duration="12517000" />
+      <workItem from="1716885520661" duration="7213000" />
+      <workItem from="1716892803640" duration="1126000" />
+      <workItem from="1716941146499" duration="4761000" />
+      <workItem from="1716986170144" duration="72000" />
+      <workItem from="1717068679187" duration="9410000" />
+      <workItem from="1717124385912" duration="2888000" />
+      <workItem from="1717127633653" duration="13377000" />
+      <workItem from="1717199660589" duration="13275000" />
+      <workItem from="1717215929933" duration="985000" />
+      <workItem from="1717253349527" duration="3960000" />
+      <workItem from="1717285480015" duration="3154000" />
+      <workItem from="1717319694758" duration="10213000" />
+      <workItem from="1717381239059" duration="5734000" />
+      <workItem from="1717401967479" duration="7167000" />
+      <workItem from="1717420282582" duration="3410000" />
+      <workItem from="1717466736244" duration="13692000" />
+      <workItem from="1717545524048" duration="1023000" />
+      <workItem from="1717554188080" duration="1613000" />
+      <workItem from="1717806544763" duration="4054000" />
+      <workItem from="1717854296977" duration="594000" />
+      <workItem from="1717918925975" duration="721000" />
+      <workItem from="1717926225485" duration="2000000" />
+      <workItem from="1718010922066" duration="36000" />
+      <workItem from="1718010970675" duration="510000" />
+      <workItem from="1718032195044" duration="468000" />
+      <workItem from="1718094306149" duration="3494000" />
+      <workItem from="1718120169953" duration="378000" />
+      <workItem from="1718149989168" duration="1398000" />
+      <workItem from="1718152770534" duration="3402000" />
+      <workItem from="1718159922778" duration="2918000" />
+      <workItem from="1718205431083" duration="3863000" />
+      <workItem from="1718293182653" duration="610000" />
+      <workItem from="1718336100675" duration="3051000" />
+      <workItem from="1718377826154" duration="34000" />
+      <workItem from="1718408800456" duration="4259000" />
+      <workItem from="1718415021444" duration="2413000" />
+      <workItem from="1718418602837" duration="1621000" />
+      <workItem from="1718423410599" duration="1746000" />
+      <workItem from="1718428821161" duration="952000" />
+      <workItem from="1718510065622" duration="8795000" />
+      <workItem from="1718528884077" duration="5602000" />
+      <workItem from="1718719688943" duration="674000" />
+      <workItem from="1718755847033" duration="1756000" />
+      <workItem from="1718765388500" duration="18000" />
+      <workItem from="1718874807663" duration="2336000" />
+      <workItem from="1718878917715" duration="632000" />
+    </task>
+    <task id="LOCAL-00028" summary="Add updateOrderStatus() method">
+      <option name="closed" value="true" />
+      <created>1717142639590</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1717142639590</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Fix">
+      <option name="closed" value="true" />
+      <created>1717143590666</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1717143590666</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Fix enum">
+      <option name="closed" value="true" />
+      <created>1717145396673</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1717145396673</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Add @ManyToMany">
+      <option name="closed" value="true" />
+      <created>1717150685085</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1717150685085</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Change Set to List, Add JsonIgnore annotation">
+      <option name="closed" value="true" />
+      <created>1717201232325</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1717201232325</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Remove unused method">
+      <option name="closed" value="true" />
+      <created>1717201254424</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1717201254424</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Change id to staffId">
+      <option name="closed" value="true" />
+      <created>1717201271197</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1717201271197</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Change Set to List">
+      <option name="closed" value="true" />
+      <created>1717201283114</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1717201283114</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Remove unused import">
+      <option name="closed" value="true" />
+      <created>1717201371519</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1717201371519</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Minor fix">
+      <option name="closed" value="true" />
+      <created>1717202291325</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1717202291325</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Minor fix">
+      <option name="closed" value="true" />
+      <created>1717202302082</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1717202302082</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Make fields final">
+      <option name="closed" value="true" />
+      <created>1717202498988</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1717202498988</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Make fields final">
+      <option name="closed" value="true" />
+      <created>1717202536802</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1717202536802</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Remove unused import">
+      <option name="closed" value="true" />
+      <created>1717202729814</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1717202729814</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Make fields final">
+      <option name="closed" value="true" />
+      <created>1717202744388</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1717202744388</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Create IMaterialPriceRepository">
+      <option name="closed" value="true" />
+      <created>1717213105810</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1717213105810</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Remove unused import">
+      <option name="closed" value="true" />
+      <created>1717213140827</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1717213140827</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Remove unused import">
+      <option name="closed" value="true" />
+      <created>1717215443027</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1717215443027</updated>
+    </task>
+    <task id="LOCAL-00046" summary="refactor: split updateOrderStatus to two method">
+      <option name="closed" value="true" />
+      <created>1717255652153</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1717255652153</updated>
+    </task>
+    <task id="LOCAL-00047" summary="refactor: rearrange code base on core flow">
+      <option name="closed" value="true" />
+      <created>1717255757466</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1717255757466</updated>
+    </task>
+    <task id="LOCAL-00048" summary="refactor: split updateOrderStatus to two method">
+      <option name="closed" value="true" />
+      <created>1717255777719</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1717255777719</updated>
+    </task>
+    <task id="LOCAL-00049" summary="feat: Add Payment method">
+      <option name="closed" value="true" />
+      <created>1717257175685</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1717257175685</updated>
+    </task>
+    <task id="LOCAL-00050" summary="feat: Add Payment method">
+      <option name="closed" value="true" />
+      <created>1717257224582</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1717257224582</updated>
+    </task>
+    <task id="LOCAL-00051" summary="feat: Add Payment field">
+      <option name="closed" value="true" />
+      <created>1717257234288</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1717257234288</updated>
+    </task>
+    <task id="LOCAL-00052" summary="feat: Add Payment entity">
+      <option name="closed" value="true" />
+      <created>1717257256039</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1717257256039</updated>
+    </task>
+    <task id="LOCAL-00053" summary="feat: Add Payment service">
+      <option name="closed" value="true" />
+      <created>1717257263940</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1717257263940</updated>
+    </task>
+    <task id="LOCAL-00054" summary="feat: Add Payment information">
+      <option name="closed" value="true" />
+      <created>1717257286012</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1717257286012</updated>
+    </task>
+    <task id="LOCAL-00055" summary="fix: Add Staff information to order">
+      <option name="closed" value="true" />
+      <created>1717293663837</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1717293663837</updated>
+    </task>
+    <task id="LOCAL-00056" summary="feat: Add ModelMapper dependencies">
+      <option name="closed" value="true" />
+      <created>1717321808302</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1717321808303</updated>
+    </task>
+    <task id="LOCAL-00057" summary="refactor: Using ModelMapper library">
+      <option name="closed" value="true" />
+      <created>1717321821913</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1717321821914</updated>
+    </task>
+    <task id="LOCAL-00058" summary="feat: add completeOrder - back 14">
+      <option name="closed" value="true" />
+      <created>1717323819810</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1717323819810</updated>
+    </task>
+    <task id="LOCAL-00059" summary="feat: add 3 functions&#10;- findOrdersForCustomer&#10;- findOrdersForCustomer&#10;- findOrdersForCustomer">
+      <option name="closed" value="true" />
+      <created>1717326376433</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1717326376433</updated>
+    </task>
+    <task id="LOCAL-00060" summary="refactor: remove unused import">
+      <option name="closed" value="true" />
+      <created>1717326410619</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1717326410620</updated>
+    </task>
+    <task id="LOCAL-00061" summary="fix: fix 2 endpoints">
+      <option name="closed" value="true" />
+      <created>1717326507678</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1717326507678</updated>
+    </task>
+    <task id="LOCAL-00062" summary="refactor: reformat code">
+      <option name="closed" value="true" />
+      <created>1717391434642</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1717391434643</updated>
+    </task>
+    <task id="LOCAL-00063" summary="feat: add pojo and repository classes">
+      <option name="closed" value="true" />
+      <created>1717391468759</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1717391468760</updated>
+    </task>
+    <task id="LOCAL-00064" summary="feat: add get diamond price by 4c">
+      <option name="closed" value="true" />
+      <created>1717403753544</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1717403753544</updated>
+    </task>
+    <task id="LOCAL-00065" summary="feat: add get all design and by type">
+      <option name="closed" value="true" />
+      <created>1717406297216</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1717406297216</updated>
+    </task>
+    <task id="LOCAL-00066" summary="fix: add ProductMaterial to Product">
+      <option name="closed" value="true" />
+      <created>1717473533287</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1717473533288</updated>
+    </task>
+    <task id="LOCAL-00067" summary="fix: fix Spring Security Authenticate bug">
+      <option name="closed" value="true" />
+      <created>1717809520216</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1717809520217</updated>
+    </task>
+    <task id="LOCAL-00068" summary="refactor: Move Role to enums package">
+      <option name="closed" value="true" />
+      <created>1717809579289</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1717809579289</updated>
+    </task>
+    <task id="LOCAL-00069" summary="feat: find ProductMaterial By ShellId">
+      <option name="closed" value="true" />
+      <created>1717927584871</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1717927584872</updated>
+    </task>
+    <task id="LOCAL-00070" summary="update:  database&#10;- Update origin&#10;- Update caratweight">
+      <option name="closed" value="true" />
+      <created>1718207222754</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1718207222755</updated>
+    </task>
+    <task id="LOCAL-00071" summary="refactor&#10;- Update Diamond4CDTO, pojo, service,">
+      <option name="closed" value="true" />
+      <created>1718208262703</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1718208262704</updated>
+    </task>
+    <task id="LOCAL-00072" summary="refactor&#10;- Update Diamond4CDTO, pojo, service,">
+      <option name="closed" value="true" />
+      <created>1718208329698</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1718208329698</updated>
+    </task>
+    <task id="LOCAL-00073" summary="feat: add Security utilities">
+      <option name="closed" value="true" />
+      <created>1718410300579</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1718410300580</updated>
+    </task>
+    <task id="LOCAL-00074" summary="refactor:  modify spring security fit jpos">
+      <option name="closed" value="true" />
+      <created>1718410324098</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1718410324098</updated>
+    </task>
+    <task id="LOCAL-00075" summary="feat: add VNPay payment method">
+      <option name="closed" value="true" />
+      <created>1718429685289</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1718429685289</updated>
+    </task>
+    <task id="LOCAL-00076" summary="refactor: fix VNPay payment method">
+      <option name="closed" value="true" />
+      <created>1718527195029</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1718527195029</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: Add Payment field" />
+    <MESSAGE value="feat: Add Payment entity" />
+    <MESSAGE value="feat: Add Payment service" />
+    <MESSAGE value="feat: Add Payment information" />
+    <MESSAGE value="fix: Add Staff information to order" />
+    <MESSAGE value="feat: Add ModelMapper dependencies" />
+    <MESSAGE value="refactor: Using ModelMapper library" />
+    <MESSAGE value="feat: add completeOrder - back 14" />
+    <MESSAGE value="feat: add 3 functions&#10;- findOrdersForCustomer&#10;- findOrdersForCustomer&#10;- findOrdersForCustomer" />
+    <MESSAGE value="refactor: remove unused import" />
+    <MESSAGE value="fix: fix 2 endpoints" />
+    <MESSAGE value="refactor: reformat code" />
+    <MESSAGE value="feat: add pojo and repository classes" />
+    <MESSAGE value="feat: add get diamond price by 4c" />
+    <MESSAGE value="feat: add get all design and by type" />
+    <MESSAGE value="fix: add ProductMaterial to Product" />
+    <MESSAGE value="fix: fix Spring Security Authenticate bug" />
+    <MESSAGE value="refactor: Move Role to enums package" />
+    <MESSAGE value="feat: find ProductMaterial By ShellId" />
+    <MESSAGE value="update:  database&#10;- Update origin&#10;- Update caratweight" />
+    <MESSAGE value="refactor&#10;- Update Diamond4CDTO, pojo, service," />
+    <MESSAGE value="feat: add Security utilities" />
+    <MESSAGE value="refactor:  modify spring security fit jpos" />
+    <MESSAGE value="feat: add VNPay payment method" />
+    <MESSAGE value="refactor: fix VNPay payment method" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: fix VNPay payment method" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="((HeaderWriterRequest)request).response" language="JAVA" custom="org.springframework.security.web.header.HeaderWriterFilter.HeaderWriterRequest" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

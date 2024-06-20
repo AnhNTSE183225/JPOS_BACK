@@ -1,0 +1,55 @@
+Index: src/main/java/com/fpt/jpos/service/CustomerRequestService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fpt.jpos.service;\r\n\r\nimport java.util.Optional;\r\n\r\nimport com.fpt.jpos.controller.CustomerRequest;\r\nimport com.fpt.jpos.pojo.Order;\r\nimport com.fpt.jpos.repository.ICustomerRequestRepository;\r\nimport com.fpt.jpos.repository.IOrderRepository;\r\n\r\nimport jakarta.transaction.Transactional;\r\n\r\npublic class CustomerRequestService implements ICustomerRequestService {\r\n\r\n    private IOrderRepository orderRepository;\r\n\t\r\n\tprivate ICustomerRequestRepository customerRequestRepository;\r\n\t\r\n\tpublic CustomerRequestService(IOrderRepository theOrderRepository, ICustomerRequestRepository theCustomerRequestRepository) {\r\n\t\torderRepository = theOrderRepository;\r\n\t\tcustomerRequestRepository = theCustomerRequestRepository;\r\n\t}\r\n\r\n\t@Override\r\n\t@Transactional\r\n\tpublic Order handleRequest(int customerId) {\r\n\t\tOrder customer = customerRequestRepository.findById((int) customerId)\r\n                .orElseThrow(() -> new RuntimeException(\"Customer not found\"));\r\n\t\t\r\n        Optional<Order> existingOrder = orderRepository.findByCustomerAndStatus(customer, \"wait_sale_staff\");\r\n\r\n        if (existingOrder.isPresent()) {\r\n            return existingOrder.get();\r\n        } else {\r\n        \treturn null;\r\n        }\r\n\t}\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/com/fpt/jpos/service/CustomerRequestService.java b/src/main/java/com/fpt/jpos/service/CustomerRequestService.java
+--- a/src/main/java/com/fpt/jpos/service/CustomerRequestService.java	
++++ b/src/main/java/com/fpt/jpos/service/CustomerRequestService.java	
+@@ -8,30 +8,32 @@
+ import com.fpt.jpos.repository.IOrderRepository;
+ 
+ import jakarta.transaction.Transactional;
++import org.springframework.stereotype.Service;
+ 
++@Service
+ public class CustomerRequestService implements ICustomerRequestService {
+ 
+     private IOrderRepository orderRepository;
+-	
+-	private ICustomerRequestRepository customerRequestRepository;
+-	
+-	public CustomerRequestService(IOrderRepository theOrderRepository, ICustomerRequestRepository theCustomerRequestRepository) {
+-		orderRepository = theOrderRepository;
+-		customerRequestRepository = theCustomerRequestRepository;
+-	}
++
++    private ICustomerRequestRepository customerRequestRepository;
++
++    public CustomerRequestService(IOrderRepository theOrderRepository, ICustomerRequestRepository theCustomerRequestRepository) {
++        orderRepository = theOrderRepository;
++        customerRequestRepository = theCustomerRequestRepository;
++    }
+ 
+-	@Override
+-	@Transactional
+-	public Order handleRequest(int customerId) {
+-		Order customer = customerRequestRepository.findById((int) customerId)
++    @Override
++    @Transactional
++    public Order handleRequest(int customerId) {
++        Order customer = customerRequestRepository.findById((int) customerId)
+                 .orElseThrow(() -> new RuntimeException("Customer not found"));
+-		
++
+         Optional<Order> existingOrder = orderRepository.findByCustomerAndStatus(customer, "wait_sale_staff");
+ 
+         if (existingOrder.isPresent()) {
+             return existingOrder.get();
+         } else {
+-        	return null;
++            return null;
+         }
+-	}
++    }
+ }
