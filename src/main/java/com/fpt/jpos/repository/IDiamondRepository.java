@@ -1,5 +1,6 @@
 package com.fpt.jpos.repository;
 
+import com.fpt.jpos.dto.DiamondQueryResponseDTO;
 import com.fpt.jpos.pojo.Diamond;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,12 +12,22 @@ import java.util.List;
 
 @Repository
 public interface IDiamondRepository extends JpaRepository<Diamond, Integer> {
-    @Query(value = "Select distinct * from [Diamond] where carat_weight >= ?1 and carat_weight <= ?2 and clarity = ?3 and color = ?4 and cut = ?5 and shape = ?6 and [active] = 1 order by [diamond_id]", nativeQuery = true)
-    List<Diamond> findDiamondsBy4C(Double fromCaratWeight, Double toCaratWeight, String clarity, String color, String cut, String shape);
 
-    @Query(value = "SELECT distinct * FROM [Diamond] WHERE [diamond_id] IN (?1) and [active]=1 order by [diamond_id]",nativeQuery = true)
-    List<Diamond> getDiamondsByIds(List<Integer> ids);
-
-    @Query(value="select DISTINCT [d].[diamond_id], [d].[diamond_code], [d].[diamond_name], [d].[shape], [d].[origin], [d].[proportions], [d].[fluorescence], [d].[symmetry], [d].[polish], [d].[cut], [d].[color], [d].[clarity], [d].[carat_weight], [d].[note], [d].[image], [d].[active], [pl].[price], [pl].[effective_date] from [Diamond] [d] join [DiamondPriceList] [pl] on [d].[origin] = [pl].[origin] and [d].[shape] = [pl].[shape] and [d].[carat_weight] = [pl].[carat_weight] and [d].[color] = [pl].[color] and [d].[clarity] = [pl].[clarity] and [d].[cut] = [pl].[cut] where [d].[carat_weight] >= (?1) and [d].[shape] in (?2) and [d].[color] in (?3) and [d].[cut] in (?4) and [d].[clarity] in (?5) and [pl].[price] >= (?6) and [pl].[effective_date] = (select top 1 max([effective_date]) from [DiamondPriceList] [pl2] where [pl2].[shape] = [pl].[shape] and [pl2].[origin] = [pl].[origin] and [pl2].[carat_weight] = [pl].[carat_weight] and [pl2].[color] = [pl].[color] and [pl2].[clarity] = [pl].[clarity] and [pl2].[cut] = [pl].[cut]) order by [d].[diamond_id]",nativeQuery = true)
-    Page<Diamond> diamondQuery(Double caratWeight, List<String> shape, List<String> color, List<String> cut, List<String> clarity, Double price, Pageable pageable);
+    @Query(value = """
+            select d.*, dp.price, dp.latest_date from Diamond d
+            left join
+            (
+            	select p.origin, p.shape, p.carat_weight_from, p.carat_weight_to, p.color, p.clarity, p.cut, p.price, pp.latest_date from DiamondPriceList p
+            	inner join
+            	(
+            		select origin, shape, carat_weight_from, carat_weight_to, color, clarity, cut, MAX(effective_date) as latest_date from DiamondPriceList
+            		where effective_date <= GETDATE()
+            		group by origin, shape, carat_weight_from, carat_weight_to, color, clarity, cut
+            	) pp
+            	on p.effective_date = pp.latest_date and p.origin = pp.origin and p.shape = pp.shape and p.carat_weight_from = pp.carat_weight_from and p.carat_weight_to = pp.carat_weight_to and p.color = pp.color and p.cut = pp.cut and p.clarity = pp.clarity
+            ) dp
+            on d.origin = dp.origin and d.shape = dp.shape and d.carat_weight > dp.carat_weight_from and d.carat_weight <= dp.carat_weight_to and d.color = dp.color and d.clarity = dp.clarity and d.cut = dp.cut
+            where d.origin = ?1 and d.shape in ?2 and dp.price >= ?3 and dp.price <= ?4 and d.carat_weight >= ?5 and d.carat_weight <= ?6 and d.color in ?7 and d.clarity in ?8 and d.cut in ?9
+            """, nativeQuery = true)
+    Page<Object[]> getDiamondWithPriceBy4C(String origin, List<String> shapeList, Double minPrice, Double maxPrice, Double minCarat, Double maxCarat, List<String> colorList, List<String> clarityList, List<String> cutList, Pageable pageable);
 }

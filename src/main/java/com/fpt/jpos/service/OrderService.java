@@ -209,7 +209,15 @@ public class OrderService implements IOrderService {
         double oDiamondPrice = 0.0;
         double oMaterialPrice = 0.0;
         for(Diamond diamond : order.getProduct().getDiamonds()) {
-            oDiamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(),diamond.getClarity(),diamond.getCut(),diamond.getCaratWeight(),diamond.getShape()));
+            DiamondPriceQueryDTO query = new DiamondPriceQueryDTO(
+                    diamond.getOrigin(),
+                    diamond.getShape(),
+                    diamond.getCaratWeight(),
+                    diamond.getColor(),
+                    diamond.getClarity(),
+                    diamond.getCut()
+            );
+            oDiamondPrice += diamondPriceService.getSingleDiamondPrice(query);
         }
         for(ProductMaterial material : order.getProduct().getMaterials()) {
             oMaterialPrice += materialPriceService.getLatestPriceById(material.getMaterial().getMaterialId())*material.getWeight();
@@ -299,7 +307,15 @@ public class OrderService implements IOrderService {
         for (Integer id : productDesignDTO.getDiamondIds()) {
             Diamond diamond = diamondRepository.findById(id).orElseThrow();
             diamonds.add(diamond);
-            diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(), diamond.getClarity(), diamond.getCut(), diamond.getCaratWeight(), diamond.getShape()));
+            DiamondPriceQueryDTO query = new DiamondPriceQueryDTO(
+                    diamond.getOrigin(),
+                    diamond.getShape(),
+                    diamond.getCaratWeight(),
+                    diamond.getColor(),
+                    diamond.getClarity(),
+                    diamond.getCut()
+            );
+            diamondPrice += diamondPriceService.getSingleDiamondPrice(query);
         }
         product.setDiamonds(diamonds);
 
