@@ -242,9 +242,9 @@ INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [propo
 ('DC006', 'Diamond F', 'radiant', 'NATURAL', 'https://example.com/image6', 'None', 'Excellent', 'Excellent', 'Excellent', 'I', 'VS2', 2.5000, 'A radiant cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC007', 'Diamond G', 'asscher', 'LAB_GROWN', 'https://example.com/image7', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'J', 'SI1', 1.8000, 'An asscher cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC008', 'Diamond H', 'marquise', 'NATURAL', 'https://example.com/image8', 'Medium', 'Good', 'Good', 'Good', 'K', 'SI2', 1.0000, 'A marquise cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC009', 'Diamond I', 'heart', 'LAB_GROWN', 'https://example.com/image9', 'Strong', 'Fair', 'Fair', 'Fair', 'D', 'I1', 0.9000, 'A heart cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC010', 'Diamond J', 'pear', 'NATURAL', 'https://example.com/image10', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'E', 'I2', 1.7500, 'A pear cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC011', 'Diamond K', 'round', 'LAB_GROWN', 'https://example.com/image11', 'None', 'Excellent', 'Excellent', 'Excellent', 'F', 'I3', 0.8500, 'A beautiful round lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
+('DC009', 'Diamond I', 'heart', 'LAB_GROWN', 'https://example.com/image9', 'Strong', 'Fair', 'Fair', 'Fair', 'D', 'VS1', 0.9000, 'A heart cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
+('DC010', 'Diamond J', 'pear', 'NATURAL', 'https://example.com/image10', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'E', 'VS2', 1.7500, 'A pear cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
+('DC011', 'Diamond K', 'round', 'LAB_GROWN', 'https://example.com/image11', 'None', 'Excellent', 'Excellent', 'Excellent', 'F', 'VS2', 0.8500, 'A beautiful round lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC012', 'Diamond L', 'princess', 'NATURAL', 'https://example.com/image12', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'G', 'FL', 1.4000, 'A princess cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC013', 'Diamond M', 'cushion', 'LAB_GROWN', 'https://example.com/image13', 'Medium', 'Good', 'Good', 'Good', 'H', 'IF', 2.2000, 'A cushion cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC014', 'Diamond N', 'emerald', 'NATURAL', 'https://example.com/image14', 'Strong', 'Fair', 'Fair', 'Fair', 'I', 'VVS1', 2.1000, 'An emerald cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
@@ -253,7 +253,7 @@ INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [propo
 ('DC017', 'Diamond Q', 'asscher', 'LAB_GROWN', 'https://example.com/image17', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'D', 'VS2', 1.6000, 'An asscher cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC018', 'Diamond R', 'marquise', 'NATURAL', 'https://example.com/image18', 'Medium', 'Good', 'Good', 'Good', 'E', 'SI1', 1.3000, 'A marquise cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC019', 'Diamond S', 'heart', 'LAB_GROWN', 'https://example.com/image19', 'Strong', 'Fair', 'Fair', 'Fair', 'F', 'SI2', 2.6000, 'A heart cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC020', 'Diamond T', 'pear', 'NATURAL', 'https://example.com/image20', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'G', 'I1', 1.2000, 'A pear cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1);
+('DC020', 'Diamond T', 'pear', 'NATURAL', 'https://example.com/image20', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'G', 'VS1', 1.2000, 'A pear cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1);
 
 -- Inserting into DiamondPriceList table
 INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_weight_to], [color], [clarity], [cut], [price], [effective_date]) VALUES
@@ -269,11 +269,11 @@ INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_w
 ('NATURAL', 'radiant', 2.0000, 3.0000, 'I', 'VS2', 'Excellent', 9000.00, '2024-06-01'),
 ('LAB_GROWN', 'asscher', 1.5000, 2.0000, 'J', 'SI1', 'Very_Good', 5500.00, '2024-05-01'),
 ('NATURAL', 'marquise', 0.5000, 1.0000, 'K', 'SI2', 'Good', 2000.00, '2024-05-01'),
-('LAB_GROWN', 'heart', 0.7500, 1.0000, 'D', 'I1', 'Fair', 1800.00, '2024-05-01'),
-('NATURAL', 'pear', 1.0000, 2.0000, 'E', 'I2', 'Fair', 2200.00, '2024-05-01'),
-('LAB_GROWN', 'round', 0.5000, 1.0000, 'F', 'I3', 'Excellent', 3500.00, '2024-05-01'),
+('LAB_GROWN', 'heart', 0.7500, 1.0000, 'D', 'VS1', 'Fair', 1800.00, '2024-05-01'),
+('NATURAL', 'pear', 1.0000, 2.0000, 'E', 'VS2', 'Fair', 2200.00, '2024-05-01'),
+('LAB_GROWN', 'round', 0.5000, 1.0000, 'F', 'VS2', 'Excellent', 3500.00, '2024-05-01'),
 ('NATURAL', 'princess', 1.0000, 1.5000, 'G', 'FL', 'Very_Good', 6500.00, '2024-05-01'),
-('LAB_GROWN', 'round', 0.5000, 1.0000, 'F', 'I3', 'Excellent', 350000.00, '2026-11-01'),
+('LAB_GROWN', 'round', 0.5000, 1.0000, 'F', 'VS2', 'Excellent', 350000.00, '2026-11-01'),
 ('NATURAL', 'princess', 1.0000, 1.5000, 'G', 'FL', 'Very_Good', 650000.00, '2026-12-01'),
 ('LAB_GROWN', 'cushion', 2.0000, 2.5000, 'H', 'IF', 'Good', 10000.00, '2025-01-01'),
 ('NATURAL', 'emerald', 1.5000, 2.5000, 'I', 'VVS1', 'Fair', 8500.00, '2025-02-01'),
@@ -282,7 +282,7 @@ INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_w
 ('LAB_GROWN', 'asscher', 1.0000, 2.0000, 'D', 'VS2', 'Very_Good', 7000.00, '2025-05-01'),
 ('NATURAL', 'marquise', 1.0000, 1.5000, 'E', 'SI1', 'Good', 4800.00, '2025-06-01'),
 ('LAB_GROWN', 'heart', 2.0000, 3.0000, 'F', 'SI2', 'Fair', 11000.00, '2025-07-01'),
-('NATURAL', 'pear', 1.0000, 1.5000, 'G', 'I1', 'Fair', 3200.00, '2025-08-01'),
+('NATURAL', 'pear', 1.0000, 1.5000, 'G', 'VS1', 'Fair', 3200.00, '2025-08-01'),
 
 ('LAB_GROWN', 'cushion', 2.0000, 2.5000, 'H', 'IF', 'Good', 9999.00, '2024-01-01'),
 ('NATURAL', 'emerald', 1.5000, 2.5000, 'I', 'VVS1', 'Fair', 8499.00, '2024-02-01'),
@@ -291,7 +291,7 @@ INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_w
 ('LAB_GROWN', 'asscher', 1.0000, 2.0000, 'D', 'VS2', 'Very_Good', 6999.00, '2024-05-01'),
 ('NATURAL', 'marquise', 1.0000, 1.5000, 'E', 'SI1', 'Good', 4799.00, '2024-05-01'),
 ('LAB_GROWN', 'heart', 2.0000, 3.0000, 'F', 'SI2', 'Fair', 10999.00, '2024-05-01'),
-('NATURAL', 'pear', 1.0000, 1.5000, 'G', 'I1', 'Fair', 3199.00, '2024-05-01')
+('NATURAL', 'pear', 1.0000, 1.5000, 'G', 'VS1', 'Fair', 3199.00, '2024-05-01')
 go
 insert into [Account]
 values ('user_admin', '{bcrypt}$2a$12$EXmafYMsWPDLj0CS5BdHgOzV.739rBEm8uiui/SEtdAylspWuWJJq', 1, 'admin'),

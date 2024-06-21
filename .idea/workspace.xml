@@ -5,47 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/DiamondQueryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/DiamondQueryResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_06_2024_10_37_CH__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_06_2024_10_37_CH__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_06_2024_8_22_SA__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_06_2024_8_22_SA__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_05_2024_7_07_SA__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_05_2024_7_07_SA__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_06_2024_7_01_SA__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_06_2024_7_01_SA__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL/empty_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/empty_database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/DiamondController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/DiamondController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/DiamondPriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/DiamondPriceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/Diamond4CDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/DiamondPriceQueryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/DiamondPriceProjection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/DiamondQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Diamond.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Diamond.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/DiamondPrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/DiamondPrice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IDiamondPriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IDiamondPriceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IDiamondRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IDiamondRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/DiamondPriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/DiamondPriceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/DiamondService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/DiamondService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IDiamondPriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IDiamondPriceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IDiamondService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IDiamondService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/DiamondController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/DiamondController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/DiamondPriceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/DiamondPriceController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/dto/Diamond4CDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/dto/DiamondPriceProjection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/dto/DiamondQuery$DiamondQueryBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/dto/DiamondQuery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/DiamondPrice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/DiamondPrice.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/repository/IDiamondPriceRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/repository/IDiamondPriceRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/repository/IDiamondRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/repository/IDiamondRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/DiamondPriceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/DiamondPriceService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/DiamondService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/DiamondService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IDiamondPriceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IDiamondPriceService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IDiamondService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IDiamondService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/OrderService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,7 +257,7 @@
       <workItem from="1718874807663" duration="2336000" />
       <workItem from="1718878917715" duration="1823000" />
       <workItem from="1718895070425" duration="6031000" />
-      <workItem from="1718939039695" duration="5690000" />
+      <workItem from="1718939039695" duration="7681000" />
     </task>
     <task id="LOCAL-00028" summary="Add updateOrderStatus() method">
       <option name="closed" value="true" />
