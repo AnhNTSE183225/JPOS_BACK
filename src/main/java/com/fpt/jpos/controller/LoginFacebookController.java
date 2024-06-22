@@ -35,7 +35,7 @@ public class LoginFacebookController {
     @PostMapping("/customer-facebook-login")
     public ResponseEntity<Customer> login(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
         Account account = new Account();
-        account.setUsername((String) oAuth2AuthenticationToken.getPrincipal().getAttributes().get("sub"));
+        account.setUsername((String) oAuth2AuthenticationToken.getPrincipal().getAttributes().get("id"));
         account.setPassword("no");
         Customer customer = loginFacebookService.loginFacebookCustomer(account);
         if (customer == null) {
