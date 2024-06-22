@@ -23,7 +23,7 @@ public class LoginFacebookService implements ILoginFacebookService {
     }
 
 	@Override
-	public Customer loginGoogleCustomer(Account userAccount) {
+	public Customer loginFacebookCustomer(Account userAccount) {
         Customer customer = null;
         
         return customer;

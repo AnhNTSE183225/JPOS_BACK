@@ -6,6 +6,6 @@ import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
 
 public interface ILoginFacebookService {
-    Customer loginGoogleCustomer(Account account);
+    Customer loginFacebookCustomer(Account account);
     Customer registerCustomer(CustomerRegistrationDTO customerRegistrationDTO);
 }

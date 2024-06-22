@@ -18,26 +18,26 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 @RestController
 @RequestMapping("/api")
 public class LoginFacebookController {
-    private final ILoginFacebookService loginGoogleService;
+    private final ILoginFacebookService loginFacebookService;
 
     @Autowired
-    public LoginFacebookController(ILoginFacebookService loginGoogleService) {
-        this.loginGoogleService = loginGoogleService;
+    public LoginFacebookController(ILoginFacebookService loginFacebookService) {
+        this.loginFacebookService = loginFacebookService;
     }
 
     @CrossOrigin
-    @GetMapping("/get-google-account")
+    @GetMapping("/get-facebook-account")
     public Map<String, Object> currentUser(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
         return oAuth2AuthenticationToken.getPrincipal().getAttributes();
     }
 
     @CrossOrigin
-    @PostMapping("/customer-google-login")
+    @PostMapping("/customer-facebook-login")
     public ResponseEntity<Customer> login(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
         Account account = new Account();
         account.setUsername((String) oAuth2AuthenticationToken.getPrincipal().getAttributes().get("sub"));
         account.setPassword("no");
-        Customer customer = loginGoogleService.loginGoogleCustomer(account);
+        Customer customer = loginFacebookService.loginFacebookCustomer(account);
         if (customer == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } else {
@@ -46,9 +46,9 @@ public class LoginFacebookController {
     }
 
     @CrossOrigin
-    @PostMapping("/customer-google-register")
+    @PostMapping("/customer-facebook-register")
     public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistrationDTO customerRegistrationDTO) {
-        Customer newCustomer = loginGoogleService.registerCustomer(customerRegistrationDTO);
+        Customer newCustomer = loginFacebookService.registerCustomer(customerRegistrationDTO);
         if(newCustomer != null) {
             return ResponseEntity.ok(newCustomer);
         } else {
