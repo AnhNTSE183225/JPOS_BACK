@@ -63,12 +63,12 @@ create table [Order]
     [sale_staff_id]       int,
     [design_staff_id]     int,
     [production_staff_id] int,
-    [status]              varchar(255), /*wait_sale_staff,wait_manager,manager_approved,wait_customer,customer_accept,designing,pending_design,production,delivered,wait_payment,completed*/
+    [status]              varchar(MAX), /*wait_sale_staff,wait_manager,manager_approved,wait_customer,customer_accept,designing,pending_design,production,delivered,wait_payment,completed*/
     [order_date]          datetime,
-    [order_type]          varchar(255), /*customize,from_design*/
-    [budget]              varchar(255),
-    [design_file]         varchar(255),
-    [description]         varchar(255),
+    [order_type]          varchar(MAX), /*customize,from_design*/
+    [budget]              varchar(MAX),
+    [design_file]         varchar(MAX),
+    [description]         varchar(MAX),
     [q_diamond_price]     decimal(19, 4),
     [q_material_price]    decimal(19, 4),
     [q_date]              datetime,
@@ -80,9 +80,9 @@ create table [Order]
     [production_price]    decimal(19, 4),
     [markup_rate]         decimal(19, 4),
     [total_amount]        decimal(19, 4),
-    [model_file]          varchar(255),
-    [model_feedback]      varchar(255),
-    [product_image]       varchar(255),
+    [model_file]          varchar(MAX),
+    [model_feedback]      varchar(MAX),
+    [product_image]       varchar(MAX),
     [shipping_fee]        decimal(19, 4),
     [tax_fee]             decimal(19, 4),
     [discount]            decimal(19, 4),

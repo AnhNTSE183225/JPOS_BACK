@@ -1,21 +1,36 @@
+import concurrent.futures
 from get_single_page import get_single_page
+from get_links import get_links
+from generate import generate_sql_inserts
+import csv
 
-links = ['https://www.allurez.com/0.17-carat-round-very-good-cut-g-color-si1-clarity-diamond/gid/4458072']
+def process_link(link):
+    result = get_single_page(link)
+    print(result)
+    return result
 
-for link in links:
-    name, diamondCode, price, shape, caratWeight, color, clarity, cut, fluorescence, polish, symmetry, proportions = get_single_page(link)
-    print(f"Name: {name}")
-    print(f"Diamond Code: {diamondCode}")
-    print(f"Price: {price}")
-    print(f"Shape: {shape}")
-    print(f"Carat Weight: {caratWeight}")
-    print(f"Color: {color}")
-    print(f"Clarity: {clarity}")
-    print(f"Cut: {cut}")
-    print(f"Fluorescence: {fluorescence}")
-    print(f"Polish: {polish}")
-    print(f"Symmetry: {symmetry}")
-    print(f"Proportions: {proportions}")
+def main():
+    links = get_links()
 
+    print('get links completed')
+    
+    file = open("result.csv","w",newline="")
+    writer = csv.writer(file)
+    writer.writerow(["diamond_code","diamond_name","shape","origin","proportions","fluorescence","symmetry","polish","cut","color","clarity","carat_weight","note","image","active"])
 
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        results = list(executor.map(process_link, links))
+
+    for result in results:
+        writer.writerow(result)
+        # print(result)
+    
+    file.close()
+    
+    print('get results complete')
+    
+    generate_sql_inserts('result.csv', 'Diamond', 'output.sql')
+
+if __name__ == "__main__":
+    main()
 
