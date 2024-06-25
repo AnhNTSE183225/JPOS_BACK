@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL/empty_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/empty_database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/ProductDesignDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/ProductDesignDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +265,8 @@
       <workItem from="1719294120416" duration="5456000" />
       <workItem from="1719213732186" duration="844000" />
       <workItem from="1719237053740" duration="3061000" />
-      <workItem from="1719334215601" duration="6980000" />
+      <workItem from="1719334215601" duration="7209000" />
+      <workItem from="1719348847485" duration="25000" />
     </task>
     <task id="LOCAL-00028" summary="Add updateOrderStatus() method">
       <option name="closed" value="true" />
