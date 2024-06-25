@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -174,16 +176,23 @@ public class OrderController {
 
     // Upload file by design staff
     @CrossOrigin
-    @PostMapping("/designs/upload/{staffId}/{orderId}")
-    public ResponseEntity<?> uploadDesign(@RequestParam("file") MultipartFile file, @PathVariable Integer orderId, @PathVariable Integer staffId) throws IOException {
+    @PostMapping("/designs/upload/{orderId}")
+    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) throws IOException {
+        ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
-        String imageURL = fileUploadService.uploadModelDesignFile(file, orderId, staffId);
+        String decodedUrls = URLDecoder.decode(imageUrls, StandardCharsets.UTF_8);
 
-        if (imageURL == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image is not found");
-        } else {
-            return ResponseEntity.ok(imageURL);
+        if (decodedUrls.endsWith("=")) {
+            decodedUrls = decodedUrls.substring(0, decodedUrls.length() - 1);
         }
+
+        try {
+            responseEntity = ResponseEntity.ok(orderService.addImage(decodedUrls, orderId));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return responseEntity;
     }
 
     // Customer accept design
@@ -223,9 +232,15 @@ public class OrderController {
 
     @CrossOrigin
     @PostMapping("/{id}/complete-product")
-    public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestParam String imageUrl, @RequestParam Integer productionStaffId) {
+    public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestBody String imageUrls) {
         try {
-            return ResponseEntity.ok(orderService.completeProduct(id, imageUrl, productionStaffId));
+            String decodedUrls = URLDecoder.decode(imageUrls, StandardCharsets.UTF_8);
+
+            if (decodedUrls.endsWith("=")) {
+                decodedUrls = decodedUrls.substring(0, decodedUrls.length() - 1);
+            }
+
+            return ResponseEntity.ok(orderService.completeProduct(id, decodedUrls));
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();

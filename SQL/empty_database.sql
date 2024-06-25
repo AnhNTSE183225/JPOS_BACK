@@ -87,6 +87,7 @@ create table [Order]
     [shipping_fee]        decimal(19, 4),
     [tax_fee]             decimal(19, 4),
     [discount]            decimal(19, 4),
+	[note]				  varchar(MAX),
     primary key ([order_id]),
     foreign key ([product_id]) references [Product],
     foreign key ([customer_id]) references [Customer],
@@ -397,12 +398,14 @@ values ('Four Stone Emerald Diamond Engagement Ring In Platinum', 'ring',
        ('Three-Stone Halo Diamond Engagement Ring In 14k White Gold', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/192274/RND/Images/gallery.jpg'),
        ('Two-Tone Intertwined Double Halo Diamond Engagement Ring In 14k White And Yellow Gold (1/2 Ct. Tw.)', 'ring',
-        'https://ion.bluenile.com/sets/Jewelry-bn/193494/RND/Images/gallery.jpg');
+        'https://ion.bluenile.com/sets/Jewelry-bn/193494/RND/Images/gallery.jpg'),
+		('SUNFLOWER DIAMOND PENDANT NECKLACE 14K YELLOW GOLD (0.19CT)', 'Necklace',
+		'https://d2d22nphq0yz8t.cloudfront.net/35aee99d-95d9-46a2-9030-ab04199b35ba/https://images.allurez.com/productimages/large/C15059-14Y.jpg')
 go
 -- Insert into ProductShellDesign
 DECLARE @design_id INT = 1;
 
-WHILE @design_id <= 21
+WHILE @design_id <= 22
     BEGIN
         INSERT INTO [ProductShellDesign] ([product_design_id], [shell_name], [diamond_quantity], [e_diamond_price],
                                           [e_material_price], [production_price], [markup_rate], [image])

@@ -38,7 +38,7 @@ public interface IOrderService {
 
     Order updateOrderStatusProduction(Integer id);
 
-    Order completeProduct(Integer id, String imageUrl, Integer productionStaffId);
+    Order completeProduct(Integer id, String imageUrls);
 
     Order completeOrder(Integer orderId);
 
@@ -49,6 +49,8 @@ public interface IOrderService {
     void confirmPaymentSuccess(Integer orderId, String orderType);
 
     Integer assign(Integer orderId, Integer saleStaffId, Integer designStaffId, Integer productionStaffId);
+
+    Order addImage(String imageUrls, Integer orderId);
 
     //TODO Update production staff id when production staff select delivered
 }

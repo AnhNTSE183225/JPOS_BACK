@@ -236,7 +236,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order completeProduct(Integer id, String imageUrl, Integer productionStaffId) {
+    public Order completeProduct(Integer id, String imageUrls) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
@@ -244,12 +244,8 @@ public class OrderService implements IOrderService {
             throw new IllegalStateException("Order status must be 'production' to complete the product");
         }
 
-        Staff productionStaff = staffRepository.findById(productionStaffId)
-                .orElseThrow(() -> new ResourceNotFoundException("Staff not found for this id :: " + productionStaffId));
-
         order.setStatus(OrderStatus.delivered);
-        order.setProductImage(imageUrl);
-        order.setProductionStaff(productionStaff); // Gán productionStaffId vào order
+        order.setProductImage(imageUrls);
         return orderRepository.save(order);
     }
 
@@ -336,6 +332,8 @@ public class OrderService implements IOrderService {
         order.setEMaterialPrice(productShellDesign.getEMaterialPrice());
         order.setTaxFee((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() * 0.1);
         order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() + order.getTaxFee());
+        order.setNote(productDesignDTO.getNote());
+
         return orderRepository.save(order);
     }
 
@@ -378,6 +376,14 @@ public class OrderService implements IOrderService {
         }
 
         return orderRepository.save(order).getId();
+    }
+
+    @Override
+    public Order addImage(String imageUrls, Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.setModelFile(imageUrls);
+        order.setStatus(OrderStatus.pending_design);
+        return orderRepository.save(order);
     }
 
 }
