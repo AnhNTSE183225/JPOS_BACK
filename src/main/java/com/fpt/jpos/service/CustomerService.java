@@ -55,4 +55,13 @@ public class CustomerService implements ICustomerService {
         return customer;
     }
 
+    @Override
+    public Customer updateCustomer(Integer customerId, String name, String email, String address) {
+        Customer customer = customerRepository.findById(customerId).orElseThrow();
+        customer.setName(name);
+        customer.getAccount().setEmail(email);
+        customer.setAddress(address);
+        return customerRepository.save(customer);
+    }
+
 }

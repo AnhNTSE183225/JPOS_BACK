@@ -29,4 +29,18 @@ public class CustomerController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @CrossOrigin
+    @PutMapping("/update")
+    public ResponseEntity<?> updateCustomer(@RequestParam Integer customerId, @RequestParam String email, @RequestParam String name, @RequestParam String address) {
+        ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
+
+        try {
+            responseEntity = ResponseEntity.ok(customerService.updateCustomer(customerId, name, email, address));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return responseEntity;
+    }
 }

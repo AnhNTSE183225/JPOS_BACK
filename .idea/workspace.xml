@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL/empty_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/empty_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/ProductShellDesign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/ProductShellDesign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/ICustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/ICustomerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/CustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/ProductShellDesign$ProductShellDesignBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/ProductShellDesign$ProductShellDesignBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/ProductShellDesign.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/ProductShellDesign.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/CustomerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/CustomerService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

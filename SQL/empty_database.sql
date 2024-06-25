@@ -210,12 +210,13 @@ create table [ProductShellDesign]
     [shell_id]          int identity (1,1),
     [product_design_id] int,
     [shell_name]        varchar(MAX),
+	[image]				varchar(MAX),
     [diamond_quantity]  int,
     [e_diamond_price]   decimal(19, 4),
     [e_material_price]  decimal(19, 4),
     [production_price]  decimal(19, 4),
     [markup_rate]       decimal(19, 4)
-        primary key ([shell_id]),
+    primary key ([shell_id]),
     foreign key ([product_design_id]) references [ProductDesign]
 )
 go
@@ -404,10 +405,10 @@ DECLARE @design_id INT = 1;
 WHILE @design_id <= 21
     BEGIN
         INSERT INTO [ProductShellDesign] ([product_design_id], [shell_name], [diamond_quantity], [e_diamond_price],
-                                          [e_material_price], [production_price], [markup_rate])
-        VALUES (@design_id, 'gold shell', 1, 100.00, 200.00, 300.00, 1.0),
-               (@design_id, 'platinum shell', 2, 120.00, 250.00, 350.00, 1.0),
-               (@design_id, 'silver shell', 3, 80.00, 150.00, 250.00, 1.0);
+                                          [e_material_price], [production_price], [markup_rate], [image])
+        VALUES (@design_id, 'gold shell', 1, 100.00, 200.00, 300.00, 1.0, null),
+               (@design_id, 'platinum shell', 2, 120.00, 250.00, 350.00, 1.0, null),
+               (@design_id, 'silver shell', 3, 80.00, 150.00, 250.00, 1.0, null);
 
         SET @design_id = @design_id + 1;
     END;
