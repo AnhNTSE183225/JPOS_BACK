@@ -5,12 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_06_2024_7_01_SA_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_06_2024_7_01_SA__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SQL/empty_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/empty_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL/python/chapva.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SQL/python/get_links.py" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/python/get_links.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SQL/python/get_single_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/python/get_single_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL/python/hrefs.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SQL/python/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/python/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL/python/output.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/python/output.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL/python/result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SQL/python/result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/StaffController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/CustomerRegistrationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/CustomerRegistrationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/ICustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/ICustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,6 +280,9 @@
       <workItem from="1718895070425" duration="6031000" />
       <workItem from="1718939039695" duration="14086000" />
       <workItem from="1718981235837" duration="4262000" />
+      <workItem from="1719263548218" duration="2441000" />
+      <workItem from="1719273990044" duration="186000" />
+      <workItem from="1719294120416" duration="2688000" />
     </task>
     <task id="LOCAL-00028" summary="Add updateOrderStatus() method">
       <option name="closed" value="true" />

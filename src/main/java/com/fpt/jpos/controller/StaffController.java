@@ -23,16 +23,6 @@ public class StaffController {
     }
 
     @CrossOrigin
-    @PostMapping("/staff-login")
-    public ResponseEntity<?> staffLogin(@RequestBody Account account) {
-        try {
-            Staff staff = staffService.getStaffByAccount(account);
-            return ResponseEntity.ok(staff);
-        } catch (RuntimeException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error " + ex.getMessage());
-        }
-    }
-    @CrossOrigin
     @GetMapping("/staff-design")
     public ResponseEntity<List<Staff>> getDesignStaff() {
         List<Staff> staffs = staffService.getDesignStaff();

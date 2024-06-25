@@ -20,17 +20,6 @@ public class CustomerController {
     }
 
     @CrossOrigin
-    @PostMapping("/customer-login")
-    public ResponseEntity<Customer> login(@RequestBody Account account) {
-        Customer customer = customerService.loginCustomer(account);
-        if (customer == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } else {
-            return ResponseEntity.ok(customer);
-        }
-    }
-
-    @CrossOrigin
     @PostMapping("/customer-register")
     public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistrationDTO customerRegistrationDTO) {
         Customer newCustomer = customerService.registerCustomer(customerRegistrationDTO);

@@ -7,6 +7,7 @@ import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -33,17 +34,20 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    @Transactional
     public Customer registerCustomer(CustomerRegistrationDTO customerRegistrationDTO) {
         Customer customer = null;
         if (accountRepository.findById(customerRegistrationDTO.getUsername()).isEmpty()) {
             Account newAccount = new Account();
             newAccount.setUsername(customerRegistrationDTO.getUsername());
+            newAccount.setEmail(customerRegistrationDTO.getEmail());
             newAccount.setPassword(customerRegistrationDTO.getPassword());
             newAccount.setRole("customer");
             newAccount.setStatus(true);
-            accountRepository.save(newAccount);
+            Account savedAccount = accountRepository.save(newAccount);
+
             customer = new Customer();
-            customer.setUsername(newAccount.getUsername());
+            customer.setAccount(savedAccount);
             customer.setName(customerRegistrationDTO.getName());
             customer.setAddress(customerRegistrationDTO.getAddress());
             customer = customerRepository.save(customer);

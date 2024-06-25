@@ -16,9 +16,10 @@ GO
 create table [Account]
 (
     [username] varchar(255) not null,
-    [password] varchar(255) not null,
+	[email] varchar(MAX) not null,
+    [password] varchar(MAX) not null,
     [status]   bit          not null,
-    [role]     varchar(255) not null, /*customer,staff,admin*/
+    [role]     varchar(MAX) not null, /*customer,staff,admin*/
     primary key ([username])
 )
 go
@@ -26,9 +27,9 @@ create table [Staff]
 (
     [staff_id]   int identity (1,1),
     [username]   varchar(255) not null,
-    [name]       varchar(255),
-    [phone]      varchar(255),
-    [staff_type] varchar(255), /*sale,design,produce,manage*/
+    [name]       varchar(MAX),
+    [phone]      varchar(MAX),
+    [staff_type] varchar(MAX), /*sale,design,produce,manage*/
     primary key ([staff_id]),
     foreign key ([username]) references [Account]
 )
@@ -37,8 +38,8 @@ create table [Customer]
 (
     [customer_id] int identity (1,1),
     [username]    varchar(255) not null,
-    [name]        varchar(255),
-    [address]     varchar(255),
+    [name]        varchar(MAX),
+    [address]     varchar(MAX),
     primary key ([customer_id]),
     foreign key ([username]) references [Account]
 )
@@ -46,12 +47,12 @@ go
 create table [Product]
 (
     [product_id]       int identity (1,1),
-    [product_name]     varchar(255),
+    [product_name]     varchar(MAX),
     [e_diamond_price]  decimal(19, 4),
     [e_material_price] decimal(19, 4),
     [production_price] decimal(19, 4),
     [markup_rate]      decimal(19, 4),
-    [product_type]     varchar(255),
+    [product_type]     varchar(MAX),
     primary key ([product_id])
 )
 go
@@ -99,8 +100,8 @@ create table [Payment]
     [payment_id]     int identity (1,1),
     [order_id]       int,
     [payment_date]   datetime,
-    [payment_method] varchar(255),
-    [payment_status] varchar(255),
+    [payment_method] varchar(MAX),
+    [payment_status] varchar(MAX),
     [amount_paid]    decimal(19, 4),
     [amount_total]   decimal(19, 4),
     primary key ([payment_id]),
@@ -114,7 +115,7 @@ create table [Warranty]
     [product_id]          int,
     [purchase_date]       datetime,
     [end_of_support_date] datetime,
-    [terms]               varchar(255),
+    [terms]               varchar(MAX),
     primary key ([warranty_id]),
     foreign key ([customer_id]) references [Customer],
     foreign key ([product_id]) references [Product]
@@ -123,7 +124,7 @@ go
 create table [Material]
 (
     [material_id]   int identity (1,1),
-    [material_name] varchar(255),
+    [material_name] varchar(MAX),
     primary key ([material_id])
 )
 go
@@ -198,8 +199,8 @@ go
 create table [ProductDesign]
 (
     [product_design_id] int identity (1,1),
-    [design_name]       varchar(255),
-    [design_type]       varchar(255),
+    [design_name]       varchar(MAX),
+    [design_type]       varchar(MAX),
     [design_file]       varchar(MAX),
     primary key ([product_design_id])
 )
@@ -208,7 +209,7 @@ create table [ProductShellDesign]
 (
     [shell_id]          int identity (1,1),
     [product_design_id] int,
-    [shell_name]        varchar(255),
+    [shell_name]        varchar(MAX),
     [diamond_quantity]  int,
     [e_diamond_price]   decimal(19, 4),
     [e_material_price]  decimal(19, 4),
@@ -233,6 +234,7 @@ go
 
 
 -- Inserting into Diamond table
+/*
 INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [image], [active]) VALUES
 ('DC001', 'Diamond A', 'round', 'LAB_GROWN', 'https://example.com/image1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.5000, 'A beautiful lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC002', 'Diamond B', 'princess', 'NATURAL', 'https://example.com/image2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'E', 'IF', 2.0000, 'A natural diamond with faint fluorescence', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
@@ -293,16 +295,17 @@ INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_w
 ('LAB_GROWN', 'heart', 2.0000, 3.0000, 'F', 'SI2', 'Fair', 10999.00, '2024-05-01'),
 ('NATURAL', 'pear', 1.0000, 1.5000, 'G', 'VS1', 'Fair', 3199.00, '2024-05-01')
 go
+*/
 insert into [Account]
-values ('user_admin', '{bcrypt}$2a$12$EXmafYMsWPDLj0CS5BdHgOzV.739rBEm8uiui/SEtdAylspWuWJJq', 1, 'admin'),
-       ('user_customer_01', '{bcrypt}$2a$12$cM74/PBTg.N6tQXsA/FL3ef.R/bLiCoLFMmsCQolQPtFoFTSm6Q4y', 1, 'customer'),
-       ('user_customer_02', '123', 1, 'customer'),
-       ('user_customer_03', '123', 1, 'customer'),
-       ('user_sale_staff', '123', 1, 'staff'),
-       ('user_design_staff', '123', 1, 'staff'),
-       ('user_manager', '123', 1, 'staff'),
-       ('user_production_staff', '123', 1, 'staff'),
-       ('disabled_user_account', '323', 0, 'customer')
+values ('user_admin','anhtnse183225@fpt.edu.vn', '123', 1, 'admin'),
+       ('user_customer_01', 'anhtnse183225@fpt.edu.vn' ,'123', 1, 'customer'),
+       ('user_customer_02','anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
+       ('user_customer_03','anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
+       ('user_sale_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
+       ('user_design_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
+       ('user_manager','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
+       ('user_production_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
+       ('disabled_user_account','anhtnse183225@fpt.edu.vn', '323', 0, 'customer')
 go
 insert into [Staff]([username], [name], [phone], [staff_type])
 values ('user_sale_staff', 'Nguyen', '0123456789', 'sale'),

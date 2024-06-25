@@ -16,9 +16,9 @@ def get_links():
     options = Options()
     options.binary_location = chrome_binary_path
     # Headless
-    # options.add_argument('--headless')
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
     # Suppress console logs
     options.add_argument('--log-level=3')
     options.add_argument('--silent')
@@ -46,7 +46,7 @@ def get_links():
     elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//div[starts-with(@class,"product-sbox")]')))
 
 
-    while click_button() and len(arr) < 10:
+    while click_button() and len(arr) < 400:
         elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//div[starts-with(@class,"product-sbox")]')))
 
         for element in elements:
@@ -61,5 +61,7 @@ def get_links():
             
             # print(link.get_attribute('href'))
             # print(f'Duplicate: {duplicate_count} | Length: {len(arr)}')
+    
+    driver.close()
 
     return arr

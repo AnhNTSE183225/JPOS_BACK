@@ -38,13 +38,15 @@ def find_properties(values):
         if "Clarity" in value.text:
             clarity = value.text.replace("Clarity","").strip()
         if "Cut Grade" in value.text:
-            cut = value.text.replace("Cut Grade","").replace(" ","_").strip()
+            cut = value.text.replace("Cut Grade","").strip().replace(" ","_")
         if "Fluorescence" in value.text:
-            fluorescence = value.text.replace("Fluorescence","").strip()
+            fluorescence = value.text.replace("Fluorescence","").strip().replace(" ","_")
+            if fluorescence not in ['None', 'Faint', 'Medium', 'Strong', 'Very_Strong']:
+                fluorescence = 'None'
         if "Polish" in value.text:
-            polish = value.text.replace("Polish","").strip()
+            polish = value.text.replace("Polish","").strip().replace(" ","_")
         if "Symmetry" in value.text:
-            symmetry = value.text.replace("Symmetry","").strip()
+            symmetry = value.text.replace("Symmetry","").strip().replace(" ","_")
         if "Measurements" in value.text:
             proportions = value.text.replace("Measurements","").strip()
         
@@ -98,7 +100,7 @@ def get_single_page(url):
         origin = 'NATURAL'
     else:
         origin = 'LAB_GROWN'
-    image = driver.find_element(By.XPATH, ".//img[starts-with(@id,'product_box_img_')]").get_attribute('src')
+    image = driver.find_element(By.XPATH, "//img[starts-with(@id,'product_box_img_')]").get_attribute('src')
     
     spinning_images = list()
     
@@ -108,8 +110,8 @@ def get_single_page(url):
         spinning_images = list()
         
     spinning_urls = list(map(lambda image: image.get_attribute('src') ,spinning_images))    
-    
         
     all_images = "|".join([image] + spinning_urls)
     
-    return [diamondCode, name, shape, origin, proportions, fluorescence, symmetry, polish, cut, color, clarity, caratWeight, "Allurez", all_images, "1"]
+    driver.close()
+    return [price, diamondCode, name, shape, origin, proportions, fluorescence, symmetry, polish, cut, color, clarity, caratWeight, "Allurez", all_images, "1"]
