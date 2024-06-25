@@ -27,7 +27,7 @@ public class DiamondService implements IDiamondService {
     }
 
     @Override
-    public List<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO, int pageNo, int pageSize) {
+    public Page<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Object[]> rawResult = diamondRepository.getDiamondWithPriceBy4C(
                 diamondQueryDTO.getOrigin(),
@@ -41,7 +41,7 @@ public class DiamondService implements IDiamondService {
                 diamondQueryDTO.getCutList(),
                 pageable
         );
-        Page<DiamondQueryResponseDTO> results = rawResult.map(row -> {
+        return rawResult.map(row -> {
 
             Diamond diamond = new Diamond();
             diamond.setDiamondId((Integer)row[0]);
@@ -63,19 +63,6 @@ public class DiamondService implements IDiamondService {
 
             return new DiamondQueryResponseDTO(diamond, ((BigDecimal)row[16]).doubleValue(), (Date) row[17]);
         });
-//        return diamondRepository.getDiamondWithPriceBy4C(
-//                diamondQueryDTO.getOrigin(),
-//                diamondQueryDTO.getShapeList(),
-//                diamondQueryDTO.getMinPrice(),
-//                diamondQueryDTO.getMaxPrice(),
-//                diamondQueryDTO.getMinCarat(),
-//                diamondQueryDTO.getMaxCarat(),
-//                diamondQueryDTO.getColorList(),
-//                diamondQueryDTO.getClarityList(),
-//                diamondQueryDTO.getCutList(),
-//                pageable
-//        ).getContent();
-        return results.getContent();
     }
 
     @Override

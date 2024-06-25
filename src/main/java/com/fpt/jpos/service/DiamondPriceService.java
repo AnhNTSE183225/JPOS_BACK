@@ -4,6 +4,7 @@ import com.fpt.jpos.dto.DiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.repository.IDiamondPriceRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,9 @@ public class DiamondPriceService implements IDiamondPriceService {
     }
 
     @Override
-    public List<DiamondPrice> getAllDiamondPrice(int pageNo, int pageSize) {
+    public Page<DiamondPrice> getAllDiamondPrice(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return diamondPriceRepository.getAllDiamondPrice(pageable).getContent();
+        return diamondPriceRepository.getAllDiamondPrice(pageable);
     }
 
     @Override
