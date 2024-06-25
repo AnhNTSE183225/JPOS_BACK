@@ -163,7 +163,7 @@ create table [Diamond]
 
     [cut]          varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
     [color]        varchar(MAX), /*Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D (only use from K to D)*/
-    [clarity]      varchar(MAX), /*I3, I2, I1, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL*/
+    [clarity]      varchar(MAX), /*I3, I2, I1, SI3, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL*/
     [carat_weight] decimal(19, 4), /* 0 to 10*/
     [note]         varchar(MAX),
 
