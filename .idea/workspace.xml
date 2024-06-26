@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/VNPAYConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/VNPAYConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,6 +267,7 @@
       <workItem from="1719237053740" duration="3061000" />
       <workItem from="1719334215601" duration="7209000" />
       <workItem from="1719348847485" duration="25000" />
+      <workItem from="1719385343853" duration="132000" />
     </task>
     <task id="LOCAL-00028" summary="Add updateOrderStatus() method">
       <option name="closed" value="true" />
