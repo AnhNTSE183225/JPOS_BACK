@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/VNPAYConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/VNPAYConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IMaterialService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IMaterialService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/MaterialService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/MaterialService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +130,7 @@
       <recent name="com.fpt.jpos.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.JewelryProductionOrderSystemApplication">
+  <component name="RunManager" selected="Database Script.empty_database.sql">
     <configuration name="SQLQuery2.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/SQL/SQLQuery2.sql" />
       <script-mode>FILE</script-mode>
@@ -182,8 +186,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Database Script.full_database.sql" />
         <item itemvalue="Database Script.empty_database.sql" />
+        <item itemvalue="Database Script.full_database.sql" />
         <item itemvalue="Database Script.SQLQuery2.sql" />
         <item itemvalue="Database Script.procedure_diamond_price_list.sql" />
         <item itemvalue="Database Script.procedure_diamond.sql" />
