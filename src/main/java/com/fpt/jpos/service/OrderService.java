@@ -4,8 +4,8 @@ import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class OrderService implements IOrderService {
 
     private final IOrderRepository orderRepository;
@@ -43,8 +42,21 @@ public class OrderService implements IOrderService {
 
     private final IMaterialPriceService materialPriceService;
 
-    ModelMapper modelMapper = new ModelMapper();
-
+    @Autowired
+    public OrderService(IOrderRepository orderRepository, ICustomerRepository customerRepository, IStaffRepository staffRepository, IPaymentRepository paymentRepository, IProductRepository productRepository, IProductShellDesignRepository productShellDesignRepository, IProductDesignRepository productDesignRepository, IProductShellMaterialRepository productShellMaterialRepository, IProductMaterialRepository productMaterialRepository, IDiamondRepository diamondRepository, IDiamondPriceService diamondPriceService, IMaterialPriceService materialPriceService) {
+        this.orderRepository = orderRepository;
+        this.customerRepository = customerRepository;
+        this.staffRepository = staffRepository;
+        this.paymentRepository = paymentRepository;
+        this.productRepository = productRepository;
+        this.productShellDesignRepository = productShellDesignRepository;
+        this.productDesignRepository = productDesignRepository;
+        this.productShellMaterialRepository = productShellMaterialRepository;
+        this.productMaterialRepository = productMaterialRepository;
+        this.diamondRepository = diamondRepository;
+        this.diamondPriceService = diamondPriceService;
+        this.materialPriceService = materialPriceService;
+    }
 
     @Override
     @Transactional
@@ -98,6 +110,7 @@ public class OrderService implements IOrderService {
     @Override
     @Transactional
     public Order updateOrderStatusDesigning(Integer id, PaymentRestDTO.PaymentRequest paymentDTO) {
+        ModelMapper modelMapper = new ModelMapper();
         Optional<Order> theOrder = orderRepository.findById(id);
         Payment payment = modelMapper.map(paymentDTO, Payment.class);
 
@@ -208,7 +221,7 @@ public class OrderService implements IOrderService {
 
         double oDiamondPrice = 0.0;
         double oMaterialPrice = 0.0;
-        for(Diamond diamond : order.getProduct().getDiamonds()) {
+        for (Diamond diamond : order.getProduct().getDiamonds()) {
             DiamondPriceQueryDTO query = new DiamondPriceQueryDTO(
                     diamond.getOrigin(),
                     diamond.getShape(),
@@ -219,8 +232,8 @@ public class OrderService implements IOrderService {
             );
             oDiamondPrice += diamondPriceService.getSingleDiamondPrice(query);
         }
-        for(ProductMaterial material : order.getProduct().getMaterials()) {
-            oMaterialPrice += materialPriceService.getLatestPriceById(material.getMaterial().getMaterialId())*material.getWeight();
+        for (ProductMaterial material : order.getProduct().getMaterials()) {
+            oMaterialPrice += materialPriceService.getLatestPriceById(material.getMaterial().getMaterialId()) * material.getWeight();
         }
         double totalAmount = (oMaterialPrice + oDiamondPrice + order.getEMaterialPrice() + order.getEDiamondPrice() + order.getProductionPrice()) * order.getMarkupRate() * 1.1;
         double taxFee = (oMaterialPrice + oDiamondPrice + order.getEMaterialPrice() + order.getEDiamondPrice() + order.getProductionPrice()) * order.getMarkupRate() * 0.1;
@@ -360,17 +373,17 @@ public class OrderService implements IOrderService {
     public Integer assign(Integer orderId, Integer saleStaffId, Integer designStaffId, Integer productionStaffId) {
         Order order = orderRepository.findById(orderId).orElseThrow();
 
-        if(saleStaffId != null) {
+        if (saleStaffId != null) {
             Staff staff = staffRepository.findById(saleStaffId).orElseThrow();
             order.setSaleStaff(staff);
         }
 
-        if(designStaffId != null) {
+        if (designStaffId != null) {
             Staff staff = staffRepository.findById(designStaffId).orElseThrow();
             order.setDesignStaff(staff);
         }
 
-        if(productionStaffId != null) {
+        if (productionStaffId != null) {
             Staff staff = staffRepository.findById(productionStaffId).orElseThrow();
             order.setProductionStaff(staff);
         }

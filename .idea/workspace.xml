@@ -4,13 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: fix VNPay payment method">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="feat: CRUD for Material">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/dto/MaterialPriceDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689/storage_v2/_src_/database/JPOS.qtkiAA/schema/dbo.sYMBAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689/storage_v2/_src_/database/JPOS.qtkiAA/schema/dbo.sYMBAA.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689/storage_v2/_src_/database/JPOS.qtkiAA/schema/dbo.sYMBAA.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IMaterialService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IMaterialService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/MaterialService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/MaterialService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialPriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialPriceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IMaterialPriceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IMaterialPriceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IDiamondPriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IDiamondPriceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IMaterialPriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IMaterialPriceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/IOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/MaterialPriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/MaterialPriceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialPriceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialPriceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IMaterialPriceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IMaterialPriceService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IMaterialService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/IMaterialService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/MaterialPriceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/MaterialPriceService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/MaterialService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/service/MaterialService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +143,7 @@
       <recent name="com.fpt.jpos.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Database Script.empty_database.sql">
+  <component name="RunManager" selected="Spring Boot.JewelryProductionOrderSystemApplication">
     <configuration name="SQLQuery2.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/SQL/SQLQuery2.sql" />
       <script-mode>FILE</script-mode>
@@ -197,8 +210,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -272,14 +285,9 @@
       <workItem from="1719334215601" duration="7209000" />
       <workItem from="1719348847485" duration="25000" />
       <workItem from="1719385343853" duration="132000" />
-    </task>
-    <task id="LOCAL-00028" summary="Add updateOrderStatus() method">
-      <option name="closed" value="true" />
-      <created>1717142639590</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1717142639590</updated>
+      <workItem from="1719485162273" duration="3432000" />
+      <workItem from="1719496701668" duration="354000" />
+      <workItem from="1719563945656" duration="4444000" />
     </task>
     <task id="LOCAL-00029" summary="Fix">
       <option name="closed" value="true" />
@@ -665,7 +673,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718527195029</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="feat: CRUD for Material">
+      <option name="closed" value="true" />
+      <created>1719482672821</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1719482672821</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,7 +699,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: Add Payment field" />
     <MESSAGE value="feat: Add Payment entity" />
     <MESSAGE value="feat: Add Payment service" />
     <MESSAGE value="feat: Add Payment information" />
@@ -708,7 +723,8 @@
     <MESSAGE value="refactor:  modify spring security fit jpos" />
     <MESSAGE value="feat: add VNPay payment method" />
     <MESSAGE value="refactor: fix VNPay payment method" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: fix VNPay payment method" />
+    <MESSAGE value="feat: CRUD for Material" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: CRUD for Material" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
