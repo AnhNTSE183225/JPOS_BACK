@@ -17,5 +17,5 @@ public class ProductDesignDTO {
     private Integer productShellId;
     private List<Integer> diamondIds;
     private Integer customerId;
-    private Boolean havePaid;
+    private String note;
 }

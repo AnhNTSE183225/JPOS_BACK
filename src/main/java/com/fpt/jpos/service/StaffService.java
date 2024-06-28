@@ -7,6 +7,8 @@ import com.fpt.jpos.repository.IStaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StaffService implements IStaffService {
 
@@ -22,15 +24,25 @@ public class StaffService implements IStaffService {
     @Override
     public Staff getStaffByAccount(Account account) {
         Account registeredAccount = accountRepository.findOneByUsernameAndPassword(account.getUsername(), account.getPassword());
-        if (registeredAccount == null) {
-            throw new RuntimeException("Account doesn't exists!");
-        } else {
-            Staff staff = staffRepository.findByUsername(registeredAccount.getUsername());
-            if (staff == null) {
-                throw new RuntimeException("Account doesn't belong to staff");
-            } else {
-                return staff;
-            }
+        Staff staff = null;
+        if (registeredAccount != null) {
+            staff = staffRepository.findByUsername(registeredAccount.getUsername());
         }
+        return staff;
+    }
+
+    @Override
+    public List<Staff> getDesignStaff() {
+        return staffRepository.findByStaffType("design");
+    }
+
+    @Override
+    public List<Staff> getSaleStaff() {
+        return staffRepository.findByStaffType("sale");
+    }
+
+    @Override
+    public List<Staff> getProductionStaff() {
+        return staffRepository.findByStaffType("produce");
     }
 }

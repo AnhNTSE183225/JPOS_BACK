@@ -22,8 +22,9 @@ public class Customer {
     @Column(name = "customer_id")
     private int customerId;
 
-    @Column(name = "username")
-    private String username;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username")
+    private Account account;
 
     @Column(name = "name")
     private String name;

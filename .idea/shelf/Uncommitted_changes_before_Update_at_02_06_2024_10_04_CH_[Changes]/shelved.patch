@@ -1,0 +1,23 @@
+Index: src/main/java/com/fpt/jpos/dto/ProductDesignDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/fpt/jpos/dto/ProductDesignDTO.java b/src/main/java/com/fpt/jpos/dto/ProductDesignDTO.java
+new file mode 100644
+--- /dev/null	(date 1717339837502)
++++ b/src/main/java/com/fpt/jpos/dto/ProductDesignDTO.java	(date 1717339837502)
+@@ -0,0 +1,13 @@
++package com.fpt.jpos.dto;
++
++import com.fpt.jpos.pojo.Diamond;
++
++import java.util.List;
++
++public class ProductDesignDTO {
++
++    private int productDesignID;
++    private int shellId;
++    private List<Integer> diamondIds;
++
++}

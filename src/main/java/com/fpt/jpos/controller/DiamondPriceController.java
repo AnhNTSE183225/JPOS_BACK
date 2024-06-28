@@ -1,41 +1,86 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.dto.Diamond4CDTO;
-import com.fpt.jpos.dto.DiamondPriceDisplayDTO;
+import com.fpt.jpos.dto.DiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/diamond-price")
+@RequiredArgsConstructor
 public class DiamondPriceController {
     private final IDiamondPriceService diamondPriceService;
 
-    @Autowired
-    public DiamondPriceController(IDiamondPriceService diamondPriceService) {
-        this.diamondPriceService = diamondPriceService;
-    }
-
     @CrossOrigin
-    @GetMapping("/diamond-prices")
-    public ResponseEntity<?> getAllDiamondPrice() {
-        List<DiamondPrice> diamondPriceListing = diamondPriceService.getDiamondPrices();
-        if(diamondPriceListing.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamondPriceListing);
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAllDiamondPrice(@RequestParam int pageNo, @RequestParam int pageSize) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice(pageNo, pageSize));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
         }
+
+        return response;
     }
 
     @CrossOrigin
-    @PostMapping("/get-price-by-4C")
-    public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4CDTO diamond4CDTO) {
+    @PostMapping("/get-single-price")
+    public ResponseEntity<?> getSingleDiamondPrice(@RequestBody DiamondPriceQueryDTO diamondPriceQueryDTO) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
 
-        double diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4CDTO);
-        return ResponseEntity.ok(diamondPriceList); // thrown exception in service
+        try {
+            response = ResponseEntity.ok(diamondPriceService.getSingleDiamondPrice(diamondPriceQueryDTO));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @CrossOrigin
+    @PostMapping("/add")
+    public ResponseEntity<?> addDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondPriceService.addDiamondPrice(diamondPrice));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @CrossOrigin
+    @PutMapping("/update")
+    public ResponseEntity<?> updateDiamondPrice(@RequestParam int diamondPriceId, @RequestParam double newPrice) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondPriceService.updateDiamondPrice(diamondPriceId, newPrice));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @CrossOrigin
+    @GetMapping("/delete")
+    public ResponseEntity<?> deleteDiamondPrice(@RequestParam int diamondPriceId) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            diamondPriceService.deletePrice(diamondPriceId);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
     }
 }

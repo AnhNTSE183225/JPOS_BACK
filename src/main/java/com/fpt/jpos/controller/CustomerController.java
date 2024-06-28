@@ -20,17 +20,6 @@ public class CustomerController {
     }
 
     @CrossOrigin
-    @PostMapping("/customer-login")
-    public ResponseEntity<Customer> login(@RequestBody Account account) {
-        Customer customer = customerService.loginCustomer(account);
-        if (customer == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } else {
-            return ResponseEntity.ok(customer);
-        }
-    }
-
-    @CrossOrigin
     @PostMapping("/customer-register")
     public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistrationDTO customerRegistrationDTO) {
         Customer newCustomer = customerService.registerCustomer(customerRegistrationDTO);
@@ -39,5 +28,19 @@ public class CustomerController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+    }
+
+    @CrossOrigin
+    @PutMapping("/update")
+    public ResponseEntity<?> updateCustomer(@RequestParam Integer customerId, @RequestParam String email, @RequestParam String name, @RequestParam String address) {
+        ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
+
+        try {
+            responseEntity = ResponseEntity.ok(customerService.updateCustomer(customerId, name, email, address));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return responseEntity;
     }
 }

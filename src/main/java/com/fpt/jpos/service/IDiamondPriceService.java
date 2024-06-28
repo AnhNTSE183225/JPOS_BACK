@@ -1,13 +1,20 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.dto.Diamond4CDTO;
-import com.fpt.jpos.dto.DiamondPriceDisplayDTO;
+import com.fpt.jpos.dto.DiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface IDiamondPriceService {
-    public Double getDiamondPricesBy4C(Diamond4CDTO diamond4CDTO);
 
-    public List<DiamondPrice> getDiamondPrices();
+    DiamondPrice addDiamondPrice(DiamondPrice diamondPrice);
+
+    DiamondPrice updateDiamondPrice(Integer diamondPriceId, Double newPrice);
+
+    void deletePrice(Integer diamondPriceId);
+
+    Page<DiamondPrice> getAllDiamondPrice(int pageNo, int pageSize);
+
+    Double getSingleDiamondPrice(DiamondPriceQueryDTO diamondPriceQueryDTO);
 }

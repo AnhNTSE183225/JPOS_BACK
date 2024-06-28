@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -44,7 +46,7 @@ public class OrderController {
         try {
             return ResponseEntity.ok(fileUploadService.upload(file));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();
         }
     }
@@ -126,10 +128,10 @@ public class OrderController {
 
     // Customer accept quotation
     @CrossOrigin
-    @PutMapping("/accept-order")
-    public ResponseEntity<?> acceptOrder(@RequestBody Order order) {
+    @PutMapping("/accept-quotation")
+    public ResponseEntity<?> acceptQuotation(@RequestParam Integer orderId) {
         try {
-            return ResponseEntity.ok(orderService.acceptOrder(order));
+            return ResponseEntity.ok(orderService.acceptQuotation(orderId));
         } catch (Exception e) {
             return ResponseEntity.noContent().build();
         }
@@ -140,7 +142,7 @@ public class OrderController {
     public ResponseEntity<?> findOrderById(@PathVariable int id) {
         Order order = orderService.findById(id);
         if (order == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(order);
         }
@@ -149,7 +151,7 @@ public class OrderController {
     // Update order status to designing after confirming deposit
     @CrossOrigin
     @PutMapping("/sales/orders/{id}/confirm-deposit")
-    public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentDTO payment) {
+    public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentRestDTO.PaymentRequest payment) {
         Order order = orderService.updateOrderStatusDesigning(id, payment);
         if (order == null) {
             return ResponseEntity.noContent().build();
@@ -174,16 +176,23 @@ public class OrderController {
 
     // Upload file by design staff
     @CrossOrigin
-    @PostMapping("/designs/upload/{staffId}/{orderId}")
-    public ResponseEntity<?> uploadDesign(@RequestParam("file") MultipartFile file, @PathVariable Integer orderId, @PathVariable Integer staffId) throws IOException {
+    @PostMapping("/designs/upload/{orderId}")
+    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) throws IOException {
+        ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
-        String imageURL = fileUploadService.uploadModelDesignFile(file, orderId, staffId);
+        String decodedUrls = URLDecoder.decode(imageUrls, StandardCharsets.UTF_8);
 
-        if (imageURL == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image is not found");
-        } else {
-            return ResponseEntity.ok(imageURL);
+        if (decodedUrls.endsWith("=")) {
+            decodedUrls = decodedUrls.substring(0, decodedUrls.length() - 1);
         }
+
+        try {
+            responseEntity = ResponseEntity.ok(orderService.addImage(decodedUrls, orderId));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return responseEntity;
     }
 
     // Customer accept design
@@ -223,36 +232,50 @@ public class OrderController {
 
     @CrossOrigin
     @PostMapping("/{id}/complete-product")
-    public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestParam String imageUrl, @RequestParam Integer productionStaffId) {
+    public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestBody String imageUrls) {
         try {
-            return ResponseEntity.ok(orderService.completeProduct(id, imageUrl, productionStaffId));
+            String decodedUrls = URLDecoder.decode(imageUrls, StandardCharsets.UTF_8);
+
+            if (decodedUrls.endsWith("=")) {
+                decodedUrls = decodedUrls.substring(0, decodedUrls.length() - 1);
+            }
+
+            return ResponseEntity.ok(orderService.completeProduct(id, decodedUrls));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();
         }
     }
 
     @CrossOrigin
     @PostMapping("/orders/{orderId}/complete")
-    public ResponseEntity<Order> completeOrder(@RequestBody PaymentDTO paymentDTO, @PathVariable Integer orderId) {
-        Order order = orderService.completeOrder(paymentDTO, orderId);
+    public ResponseEntity<Order> completeOrder(@PathVariable Integer orderId) {
+        Order order = orderService.completeOrder(orderId);
         return ResponseEntity.ok(order);
 
     }
-//    @PostMapping("/add-product-design")
-//    public ResponseEntity<Order> addProductDesignToOrder(@RequestBody ProductDesignDTO productDesignDTO) {
-//        Order order = orderService.addProductDesignToOrder(productDesignDTO);
-//        return ResponseEntity.ok(order);
-//    }
+
     @CrossOrigin
     @PostMapping("/create-order-from-design")
     public ResponseEntity<?> createOrderFromDesign(@RequestBody ProductDesignDTO productDesignDTO) {
         try {
-            System.out.println("Controller");
-            System.out.println(productDesignDTO.toString());
             return ResponseEntity.ok(orderService.createOrderFromDesign(productDesignDTO).getId());
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping("/assign")
+    public ResponseEntity<?> assign(@RequestParam int orderId,
+                                    @RequestParam(required = false) Integer  saleStaffId,
+                                    @RequestParam(required = false) Integer designStaffId,
+                                    @RequestParam(required = false) Integer productionStaffId) {
+        try {
+            return ResponseEntity.ok(orderService.assign(orderId, saleStaffId, designStaffId, productionStaffId));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();
         }
     }

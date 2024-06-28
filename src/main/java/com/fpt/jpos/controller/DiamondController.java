@@ -1,65 +1,87 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.dto.DiamondQueryDTO;
 import com.fpt.jpos.pojo.Diamond;
-import com.fpt.jpos.repository.IDiamondRepository;
-import com.fpt.jpos.service.DiamondService;
-
 import com.fpt.jpos.service.IDiamondService;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/diamond")
+@RequiredArgsConstructor
 public class DiamondController {
-
 
     private final IDiamondService diamondService;
 
-    @Autowired
-    public DiamondController(IDiamondService diamondService) {
-        this.diamondService = diamondService;
-    }
-
     @CrossOrigin
-    @GetMapping("/get-diamonds-by-4C")
-    public ResponseEntity<?> findDiamondBy4C(@RequestParam Double fromCaratWeight,
-                                             @RequestParam Double toCaratWeight,
-                                             @RequestParam String clarity,
-                                             @RequestParam String color,
-                                             @RequestParam String cut,
-                                             @RequestParam String shape) {
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAllDiamond(@RequestParam int pageNo, @RequestParam int pageSize) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
 
-        List<Diamond> diamondList = diamondService.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
-
-        if (diamondList == null || diamondList.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamondList);
-        }
-    }
-
-    @CrossOrigin
-    @GetMapping("/diamonds")
-    public ResponseEntity<?> getAllDiamonds() {
         try {
-            return ResponseEntity.ok(diamondService.getAllDiamonds());
+            response = ResponseEntity.ok(diamondService.getAllDiamond(pageNo, pageSize));
         } catch (Exception ex) {
-            return ResponseEntity.noContent().build();
+            System.out.println(ex.getLocalizedMessage());
         }
+
+        return response;
     }
 
     @CrossOrigin
-    @GetMapping("/diamonds/{diamondId}")
-    public ResponseEntity<?> getDiamondById(@PathVariable Integer diamondId) {
+    @GetMapping("/get-by-id/{diamondId}")
+    public ResponseEntity<?> getDiamondById(@PathVariable int diamondId) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
         try {
-            return ResponseEntity.ok(diamondService.findById(diamondId));
+            response = ResponseEntity.ok(diamondService.getDiamondById(diamondId));
         } catch (Exception ex) {
-            return ResponseEntity.noContent().build();
+            System.out.println(ex.getLocalizedMessage());
         }
+
+        return response;
+    }
+
+    @CrossOrigin
+    @PostMapping("/get-diamond-with-price-by-4C")
+    public ResponseEntity<?> getDiamondWithPriceBy4C(@RequestBody DiamondQueryDTO diamondQueryDTO, @RequestParam int pageNo, @RequestParam int pageSize) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondService.getDiamondWithPriceBy4C(diamondQueryDTO, pageNo, pageSize));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @CrossOrigin
+    @PutMapping("/update")
+    public ResponseEntity<?> updateDiamond(@RequestBody Diamond diamond) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondService.updateDiamond(diamond));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/delete/{diamondId}")
+    public ResponseEntity<?> deleteDiamond(@PathVariable int diamondId) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            diamondService.deleteDiamond(diamondId);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
     }
 }
