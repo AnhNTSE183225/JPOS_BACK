@@ -4,10 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="feat: CRUD for Material">
+    <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: spring security">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/SecurityConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/enums/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/utils/SecurityUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7ced2e4c-747a-4567-a06b-712fd20a5689.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IAccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IAccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/Account.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +52,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="google_branch" />
+        <entry key="$PROJECT_DIR$" value="login_branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,50 +98,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Database Script.empty_database.sql.executor": "Run",
-    "Database Script.full_database.sql.executor": "Run",
-    "Database Script.procedure_diamond.sql.executor": "Run",
-    "Database Script.procedure_diamond_price_list.sql.executor": "Run",
-    "Maven.jpos [clean,install].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.JewelryProductionOrderSystemApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "N:/ThanhBinh/Study/FPT/Subject/Semester05_SU24/SWP391/Project/vnpay-integration",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "database.query.execution",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Database Script.empty_database.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.full_database.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.procedure_diamond.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.procedure_diamond_price_list.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.jpos [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.JewelryProductionOrderSystemApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;spring__security&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;N:/ThanhBinh/Study/FPT/Subject/Semester05_SU24/SWP391/Project/jpos/src/main/java/com/fpt/jpos/config&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "RunConfigurationTargetLRU": [
-      "7ced2e4c-747a-4567-a06b-712fd20a5689"
+  &quot;keyToStringList&quot;: {
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;7ced2e4c-747a-4567-a06b-712fd20a5689&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.fpt.jpos.auth" />
       <recent name="com.fpt.jpos.service" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="N:\ThanhBinh\Study\FPT\Subject\Semester05_SU24\SWP391\Project\jpos\src\main\java\com\fpt\jpos\config" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.fpt.jpos" />
       <recent name="com.fpt.jpos.dto" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.fpt.jpos.pojo.enums" />
       <recent name="com.fpt.jpos.utils.response" />
       <recent name="com.fpt.jpos.config" />
     </key>
@@ -216,19 +239,19 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Database Script.empty_database.sql" />
-        <item itemvalue="Database Script.full_database.sql" />
-        <item itemvalue="Database Script.SQLQuery2.sql" />
         <item itemvalue="Database Script.procedure_diamond_price_list.sql" />
         <item itemvalue="Database Script.procedure_diamond.sql" />
+        <item itemvalue="Database Script.full_database.sql" />
+        <item itemvalue="Database Script.empty_database.sql" />
+        <item itemvalue="Database Script.SQLQuery2.sql" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -306,6 +329,7 @@
       <workItem from="1719496701668" duration="354000" />
       <workItem from="1719563945656" duration="4444000" />
       <workItem from="1719608938398" duration="1473000" />
+      <workItem from="1719627948424" duration="3291000" />
     </task>
     <task id="LOCAL-00029" summary="Fix">
       <option name="closed" value="true" />
@@ -749,7 +773,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/DiamondPriceController.java</url>
-          <line>10</line>
+          <line>15</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

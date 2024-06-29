@@ -3,6 +3,7 @@ package com.fpt.jpos.service;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
+import com.fpt.jpos.pojo.enums.Role;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class CustomerService implements ICustomerService {
             newAccount.setUsername(customerRegistrationDTO.getUsername());
             newAccount.setEmail(customerRegistrationDTO.getEmail());
             newAccount.setPassword(customerRegistrationDTO.getPassword());
-            newAccount.setRole("customer");
+            newAccount.setRole(Role.customer);
             newAccount.setStatus(true);
             Account savedAccount = accountRepository.save(newAccount);
 

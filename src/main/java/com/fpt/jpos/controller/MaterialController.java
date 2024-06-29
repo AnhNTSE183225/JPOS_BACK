@@ -4,6 +4,7 @@ import com.fpt.jpos.pojo.Material;
 import com.fpt.jpos.service.IMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class MaterialController {
     }
 
     @CrossOrigin
+//    @PreAuthorize("hasAuthority('customer')") -> Test
     @GetMapping("/all")
     public ResponseEntity<?> getAllMaterials() {
         List<Material> materialList = materialService.findAllMaterials();
