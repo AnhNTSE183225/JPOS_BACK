@@ -17,8 +17,9 @@ public class Staff {
     @Column(name = "staff_id")
     private Integer staffId;
 
-    @Column(name = "username")
-    private String username;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "username")
+    private Account account;
 
     @Column(name = "name")
     private String name;

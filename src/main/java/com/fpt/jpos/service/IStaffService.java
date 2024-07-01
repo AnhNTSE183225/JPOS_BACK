@@ -6,7 +6,11 @@ import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Staff;
 
 public interface IStaffService {
+
+    List<Staff> findAll();
+
     Staff getStaffByAccount(Account account);
+
     List<Staff> getDesignStaff();
 
     List<Staff> getSaleStaff();

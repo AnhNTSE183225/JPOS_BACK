@@ -4,6 +4,7 @@ import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService implements IOrderService {
 
     private final IOrderRepository orderRepository;
@@ -41,22 +43,6 @@ public class OrderService implements IOrderService {
     private final IDiamondPriceService diamondPriceService;
 
     private final IMaterialPriceService materialPriceService;
-
-    @Autowired
-    public OrderService(IOrderRepository orderRepository, ICustomerRepository customerRepository, IStaffRepository staffRepository, IPaymentRepository paymentRepository, IProductRepository productRepository, IProductShellDesignRepository productShellDesignRepository, IProductDesignRepository productDesignRepository, IProductShellMaterialRepository productShellMaterialRepository, IProductMaterialRepository productMaterialRepository, IDiamondRepository diamondRepository, IDiamondPriceService diamondPriceService, IMaterialPriceService materialPriceService) {
-        this.orderRepository = orderRepository;
-        this.customerRepository = customerRepository;
-        this.staffRepository = staffRepository;
-        this.paymentRepository = paymentRepository;
-        this.productRepository = productRepository;
-        this.productShellDesignRepository = productShellDesignRepository;
-        this.productDesignRepository = productDesignRepository;
-        this.productShellMaterialRepository = productShellMaterialRepository;
-        this.productMaterialRepository = productMaterialRepository;
-        this.diamondRepository = diamondRepository;
-        this.diamondPriceService = diamondPriceService;
-        this.materialPriceService = materialPriceService;
-    }
 
     @Override
     @Transactional
