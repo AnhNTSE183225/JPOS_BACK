@@ -16,4 +16,10 @@ public interface IStaffService {
     List<Staff> getSaleStaff();
 
     List<Staff> getProductionStaff();
+
+    Staff createStaff(Staff staff);
+
+    int updateStaff(Staff staff);
+
+    void deleteStaff(Integer staffId);
 }

@@ -4,10 +4,7 @@ import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.service.IStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,6 +46,47 @@ public class StaffController {
             response = ResponseEntity.ok(staffService.findAll());
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PostMapping("/staff/create")
+    public ResponseEntity<?> createStaff(@RequestBody Staff staff) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(staffService.createStaff(staff));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PutMapping("/staff/update")
+    public ResponseEntity<?> updateStaff(@RequestBody Staff staff) {
+        System.out.println(staff);
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(staffService.updateStaff(staff));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @DeleteMapping("/staff/delete/{id}")
+    public ResponseEntity<?> deleteStaff(@PathVariable int id) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            staffService.deleteStaff(id);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
         }
 
         return response;

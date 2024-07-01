@@ -7,6 +7,7 @@ import com.fpt.jpos.repository.IStaffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,5 +41,26 @@ public class StaffService implements IStaffService {
     @Override
     public List<Staff> getProductionStaff() {
         return staffRepository.findByStaffType("produce");
+    }
+
+    @Override
+    @Transactional
+    public Staff createStaff(Staff staff) {
+        return staffRepository.save(staff);
+    }
+
+    @Override
+    @Transactional
+    public int updateStaff(Staff staff) {
+        System.out.println(staff.getName());
+        System.out.println(staff.getPhone());
+        System.out.println(staff.getStaffId());
+        return staffRepository.updateStaff(staff.getName(), staff.getPhone(), staff.getStaffType(), staff.getStaffId());
+    }
+
+    @Override
+    @Transactional
+    public void deleteStaff(Integer staffId) {
+        staffRepository.deleteById(staffId);
     }
 }
