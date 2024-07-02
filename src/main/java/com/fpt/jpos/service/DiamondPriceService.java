@@ -23,11 +23,8 @@ public class DiamondPriceService implements IDiamondPriceService {
     }
 
     @Override
-    public DiamondPrice updateDiamondPrice(Integer diamondPriceId, Double newPrice) {
-        DiamondPrice oldDiamondPrice = diamondPriceRepository.findById(diamondPriceId).orElseThrow();
-        oldDiamondPrice.setPrice(newPrice);
-
-        return diamondPriceRepository.save(oldDiamondPrice);
+    public int updateDiamondPrice(DiamondPrice diamondPrice) {
+        return diamondPriceRepository.update(diamondPrice.getPrice(), diamondPrice.getDiamondPriceId());
     }
 
     @Override

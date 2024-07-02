@@ -57,11 +57,11 @@ public class DiamondPriceController {
 
     @CrossOrigin
     @PutMapping("/update")
-    public ResponseEntity<?> updateDiamondPrice(@RequestParam int diamondPriceId, @RequestParam double newPrice) {
+    public ResponseEntity<?> updateDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
         try {
-            response = ResponseEntity.ok(diamondPriceService.updateDiamondPrice(diamondPriceId, newPrice));
+            response = ResponseEntity.ok(diamondPriceService.updateDiamondPrice(diamondPrice));
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }
