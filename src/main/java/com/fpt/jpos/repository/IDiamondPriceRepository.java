@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface IDiamondPriceRepository extends JpaRepository<DiamondPrice, Integer> {
 
     @Query(value = "SELECT * FROM [DiamondPriceList]",nativeQuery = true)
-    Page<DiamondPrice> getAllDiamondPrice(Pageable pageable);
+    List<DiamondPrice> getAllDiamondPrice();
 
     @Query(value = "SELECT TOP 1 [price] FROM [DiamondPriceList] WHERE [origin] = ?1 AND [shape] = ?2 AND [carat_weight_from] < ?3 AND [carat_weight_to] >= ?3 AND [color] = ?4 AND [clarity] = ?5 AND [cut] = ?6 AND [effective_date] <= GETDATE() ORDER BY [effective_date] DESC",nativeQuery = true)
     Double getSingleDiamondPrice(String origin, String shape, Double caratWeight, String color, String clarity, String cut);

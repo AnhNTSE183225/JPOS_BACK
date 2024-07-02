@@ -36,9 +36,8 @@ public class DiamondPriceService implements IDiamondPriceService {
     }
 
     @Override
-    public Page<DiamondPrice> getAllDiamondPrice(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return diamondPriceRepository.getAllDiamondPrice(pageable);
+    public List<DiamondPrice> getAllDiamondPrice() {
+        return diamondPriceRepository.getAllDiamondPrice();
     }
 
     @Override

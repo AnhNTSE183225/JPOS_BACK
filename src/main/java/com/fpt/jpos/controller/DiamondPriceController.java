@@ -15,11 +15,11 @@ public class DiamondPriceController {
 
     @CrossOrigin
     @GetMapping("/get-all")
-    public ResponseEntity<?> getAllDiamondPrice(@RequestParam int pageNo, @RequestParam int pageSize) {
+    public ResponseEntity<?> getAllDiamondPrice() {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
         try {
-            response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice(pageNo, pageSize));
+            response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice());
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }

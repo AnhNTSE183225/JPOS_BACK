@@ -14,7 +14,7 @@ public interface IDiamondPriceService {
 
     void deletePrice(Integer diamondPriceId);
 
-    Page<DiamondPrice> getAllDiamondPrice(int pageNo, int pageSize);
+    List<DiamondPrice> getAllDiamondPrice();
 
     Double getSingleDiamondPrice(DiamondPriceQueryDTO diamondPriceQueryDTO);
 }
