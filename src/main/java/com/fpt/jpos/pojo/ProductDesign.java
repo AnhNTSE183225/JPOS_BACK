@@ -32,9 +32,9 @@ public class ProductDesign {
     private String designFile;
 
     @OneToMany(
-            mappedBy = "productDesign"
+            mappedBy = "productDesign",
+            cascade = CascadeType.ALL
     )
     private List<ProductShellDesign> productShellDesigns;
-
 
 }

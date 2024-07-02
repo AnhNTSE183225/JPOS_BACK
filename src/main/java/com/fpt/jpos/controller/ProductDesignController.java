@@ -2,6 +2,7 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.ProductDesign;
 import com.fpt.jpos.service.ProductDesignService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,16 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/product-designs")
+@CrossOrigin
+@RequiredArgsConstructor
 public class ProductDesignController {
 
     private final ProductDesignService productDesignService;
 
-    @Autowired
-    public ProductDesignController(ProductDesignService productDesignService) {
-        this.productDesignService = productDesignService;
-    }
-
-    @CrossOrigin
     @GetMapping("/all")
     public ResponseEntity<List<ProductDesign>> getAllProductDesigns() {
         List<ProductDesign> productDesigns = productDesignService.getProductDesigns();
@@ -38,7 +35,6 @@ public class ProductDesignController {
         return ResponseEntity.ok(productDesigns);
     }
 
-    @CrossOrigin
     @GetMapping("/{productDesignId}")
     public ResponseEntity<?> findById(@PathVariable Integer productDesignId) {
         try {

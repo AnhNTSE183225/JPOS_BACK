@@ -6,17 +6,31 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/materialPrices")
 @RequiredArgsConstructor
+@CrossOrigin
 public class MaterialPriceController {
 
     private final IMaterialPriceService materialPriceService;
 
-    @CrossOrigin
+    @GetMapping("/find-all")
+    public ResponseEntity<?> getAllMaterialPrices() {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(materialPriceService.findAll());
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getLatestMaterialPriceById(@PathVariable Integer id) {
-
         try {
             Double latestPrice = materialPriceService.getLatestPriceById(id);
             return ResponseEntity.ok(latestPrice);
@@ -26,8 +40,7 @@ public class MaterialPriceController {
     }
 
     // return true thôi chứ cũng không biết return cái gì nữa
-    @CrossOrigin
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<?> addMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceCreateResponse materialPriceCreateResponse) {
         if (materialPriceCreateResponse.materialId == null || materialPriceCreateResponse.materialPrice == null) {
             return ResponseEntity.noContent().build();
@@ -37,8 +50,7 @@ public class MaterialPriceController {
 
     // 2024-06-28 16:45:31.080
     // format ngày lấy giống trong db
-    @CrossOrigin
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<?> updateMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceUpdateResponse materialPriceUpdateResponse) {
         if (materialPriceUpdateResponse.materialId == null || materialPriceUpdateResponse.materialPrice == null) {
             return ResponseEntity.noContent().build();
