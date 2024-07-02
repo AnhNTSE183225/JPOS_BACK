@@ -1,6 +1,7 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.dto.MaterialPriceDTO;
+import com.fpt.jpos.rollbar.RollbarConfig;
 import com.fpt.jpos.service.IMaterialPriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ public class MaterialPriceController {
 
     private final IMaterialPriceService materialPriceService;
 
+    private final RollbarConfig rollbarConfig;
+
     @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<?> getLatestMaterialPriceById(@PathVariable Integer id) {
@@ -21,6 +24,7 @@ public class MaterialPriceController {
             Double latestPrice = materialPriceService.getLatestPriceById(id);
             return ResponseEntity.ok(latestPrice);
         } catch (Exception ex) {
+            rollbarConfig.rollbar().error(ex);
             return ResponseEntity.noContent().build();
         }
     }

@@ -19,7 +19,7 @@ create table [Account]
 	[email] varchar(MAX) not null,
     [password] varchar(MAX) not null,
     [status]   bit          not null,
-    [role]     varchar(MAX) not null, /*customer,staff,admin*/
+     [role]     varchar(MAX) not null, /*customer,staff,admin*/
     primary key ([username])
 )
 go
@@ -369,11 +369,11 @@ values ('Four Stone Emerald Diamond Engagement Ring In Platinum', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150541/RND/Images/gallery.jpg'),
        ('Studio Double Halo Gala Diamond Engagement Ring In Platinum (7/8 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/195312/RND/Images/gallery.jpg'),
-       (N'Crescent Fancy Pink Pavé Diamond Open Engagement Ring In 14k White Gold (1/10 Ct. Tw.)', 'ring',
+       (N'Crescent Fancy Pink Pavï¿½ Diamond Open Engagement Ring In 14k White Gold (1/10 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150524/RND/Images/gallery.jpg'),
        ('Two Stone Engagement Ring With Cushion Shaped Diamond In 14k White Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/149478/RND/Images/gallery.jpg'),
-       (N'Bella Vaughan For Blue Nile Seattle Split Shank Double Pavé Diamond Engagement Ring In Platinum (3/4 Ct. Tw.)',
+       (N'Bella Vaughan For Blue Nile Seattle Split Shank Double Pavï¿½ Diamond Engagement Ring In Platinum (3/4 Ct. Tw.)',
         'ring', 'https://ion.bluenile.com/sets/Jewelry-bn/195607/RND/Images/gallery.jpg'),
        ('Romantic Diamond Floral Halo Engagement Ring In 14k White Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150339/RND/Images/gallery.jpg'),

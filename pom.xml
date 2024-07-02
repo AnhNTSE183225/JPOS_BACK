@@ -80,6 +80,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.rollbar/rollbar-java -->
+        <dependency>
+            <groupId>com.rollbar</groupId>
+            <artifactId>rollbar-java</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
