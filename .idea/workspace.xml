@@ -5,27 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac3e5e37-bb6b-41be-af70-7464b2fa7813" name="Changes" comment="refactor: spring security">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/AuthenticationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/auth/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/ApplicationConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/config/SecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/enums/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/utils/SecurityUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_06_2024_10_37_CH__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_06_2024_10_37_CH__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_06_2024_8_22_SA__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_06_2024_8_22_SA__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_6_47_SA__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_05_2024_7_07_SA__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_05_2024_7_07_SA__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/controller/MaterialController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/pojo/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IAccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/repository/IAccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fpt/jpos/service/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/controller/MaterialController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fpt/jpos/pojo/Account.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +36,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="login_branch" />
+        <entry key="$PROJECT_DIR$" value="spring_security" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -111,7 +95,6 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.JewelryProductionOrderSystemApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;spring__security&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;N:/ThanhBinh/Study/FPT/Subject/Semester05_SU24/SWP391/Project/jpos/src/main/java/com/fpt/jpos/config&quot;,
@@ -330,6 +313,7 @@
       <workItem from="1719563945656" duration="4444000" />
       <workItem from="1719608938398" duration="1473000" />
       <workItem from="1719627948424" duration="3291000" />
+      <workItem from="1719935433403" duration="24000" />
     </task>
     <task id="LOCAL-00029" summary="Fix">
       <option name="closed" value="true" />
@@ -766,7 +750,7 @@
     <MESSAGE value="feat: add VNPay payment method" />
     <MESSAGE value="refactor: fix VNPay payment method" />
     <MESSAGE value="feat: CRUD for Material" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: CRUD for Material" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
