@@ -5,16 +5,18 @@ import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/diamond-price")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DiamondPriceController {
     private final IDiamondPriceService diamondPriceService;
 
-    @CrossOrigin
     @GetMapping("/get-all")
+    @PreAuthorize("hasAuthority('customer')")
     public ResponseEntity<?> getAllDiamondPrice() {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -27,7 +29,6 @@ public class DiamondPriceController {
         return response;
     }
 
-    @CrossOrigin
     @PostMapping("/get-single-price")
     public ResponseEntity<?> getSingleDiamondPrice(@RequestBody DiamondPriceQueryDTO diamondPriceQueryDTO) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -41,7 +42,6 @@ public class DiamondPriceController {
         return response;
     }
 
-    @CrossOrigin
     @PostMapping("/add")
     public ResponseEntity<?> addDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -55,7 +55,6 @@ public class DiamondPriceController {
         return response;
     }
 
-    @CrossOrigin
     @PutMapping("/update")
     public ResponseEntity<?> updateDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -69,7 +68,6 @@ public class DiamondPriceController {
         return response;
     }
 
-    @CrossOrigin
     @GetMapping("/delete")
     public ResponseEntity<?> deleteDiamondPrice(@RequestParam int diamondPriceId) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
