@@ -3,6 +3,7 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.service.IProductShellDesignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class ProductShellDesignController {
 
     @CrossOrigin
     @GetMapping("/shells/{productDesignId}")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> getByProductDesignId(@PathVariable Integer productDesignId) {
         try {
             return ResponseEntity.ok(productShellDesignService.getByProductDesignId(productDesignId));

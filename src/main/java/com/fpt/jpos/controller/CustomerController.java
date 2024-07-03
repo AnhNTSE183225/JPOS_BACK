@@ -7,6 +7,7 @@ import com.fpt.jpos.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,18 +21,8 @@ public class CustomerController {
     }
 
     @CrossOrigin
-    @PostMapping("/customer-register")
-    public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistrationDTO customerRegistrationDTO) {
-        Customer newCustomer = customerService.registerCustomer(customerRegistrationDTO);
-        if(newCustomer != null) {
-            return ResponseEntity.ok(newCustomer);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
-
-    @CrossOrigin
     @PutMapping("/update")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin')")
     public ResponseEntity<?> updateCustomer(@RequestParam Integer customerId, @RequestParam String email, @RequestParam String name, @RequestParam String address) {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 

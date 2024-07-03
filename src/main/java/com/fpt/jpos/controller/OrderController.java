@@ -8,6 +8,7 @@ import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,6 +42,7 @@ public class OrderController {
 
     //User uploads image
     @PostMapping("/upload")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('customer') or hasAuthority('staff')")
     public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file) {
         try {
             return ResponseEntity.ok(fileUploadService.upload(file));
@@ -52,6 +54,7 @@ public class OrderController {
 
     // Customer send request - 1st flow
     @PostMapping("/send-request")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('customer') or hasAuthority('staff')")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequestDTO customerRequestDTO) {
 
         Order newOrder = orderService.insertOrder(customerRequestDTO);
@@ -61,6 +64,7 @@ public class OrderController {
 
     // Get all orders for customer
     @GetMapping("/customers/{customerId}/orders")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('customer') or hasAuthority('staff')")
     public ResponseEntity<?> getOrdersForCustomer(@PathVariable Integer customerId) {
         List<Order> requestList = orderService.getOrdersByCustomerId(customerId);
         if (requestList.isEmpty()) {
@@ -72,6 +76,7 @@ public class OrderController {
 
     // Sale staff view orders list
     @GetMapping("/sales/orders/{staffId}")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> getAllOrdersForSaleStaff(@PathVariable int staffId) {
 
         List<Order> requestList = orderService.getOrderForSalesStaff(staffId);
@@ -84,6 +89,7 @@ public class OrderController {
     }
 
     // Staff sends quotation to manager
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/sales/orders/{staffId}/{productId}")
     public ResponseEntity<?> retrieveQuotationFromStaff(@RequestBody Order order, @PathVariable Integer productId, @PathVariable int staffId) {
         try {
@@ -94,6 +100,7 @@ public class OrderController {
         }
     }
 
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @GetMapping("/manager/orders")
     public ResponseEntity<?> getOrderForManager() {
         List<Order> orderList = orderService.getOrderForManager();
@@ -105,13 +112,15 @@ public class OrderController {
     }
 
     // Manager accept or decline quotation
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/{id}/manager-response")
     public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval, @RequestBody ManagerResponseDTO managerResponseDTO) {
         String status = orderService.handleManagerResponse(id, managerApproval, managerResponseDTO);
         return ResponseEntity.ok(status);
     }
 
-    // After manager accepted, sale staff forward quotation to customer
+    // After manager accepted, sale staff forward quotation to customer\
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/{id}/forward-quotation")
     public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
         OrderStatus status = orderService.forwardQuotation(id);
@@ -119,6 +128,7 @@ public class OrderController {
     }
 
     // Customer accept quotation
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     @PutMapping("/accept-quotation")
     public ResponseEntity<?> acceptQuotation(@RequestParam Integer orderId) {
         try {
@@ -129,6 +139,7 @@ public class OrderController {
     }
 
     @GetMapping("/sales/order-select/{id}")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> findOrderById(@PathVariable int id) {
         Order order = orderService.findById(id);
         if (order == null) {
@@ -140,6 +151,7 @@ public class OrderController {
 
     // Update order status to designing after confirming deposit
     @PutMapping("/sales/orders/{id}/confirm-deposit")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentRestDTO.PaymentRequest payment) {
         Order order = orderService.updateOrderStatusDesigning(id, payment);
         if (order == null) {
@@ -151,6 +163,7 @@ public class OrderController {
 
     //  design staff view orders list
     @GetMapping("/designs/orders/{staffId}")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> getAllOrdersForDesignStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForDesignStaff(staffId);
 
@@ -164,6 +177,7 @@ public class OrderController {
 
     // Upload file by design staff
     @PostMapping("/designs/upload/{orderId}")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) throws IOException {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
@@ -183,6 +197,7 @@ public class OrderController {
     }
 
     // Customer accept design
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/customers/{orderId}/acceptDesign")
     public ResponseEntity<?> acceptDesign(@PathVariable Integer orderId) {
         Order theOrder = orderService.updateOrderStatusProduction(orderId);
@@ -193,6 +208,7 @@ public class OrderController {
     }
 
     //Customer refuses design
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/customers/{orderId}/refuseDesign")
     public ResponseEntity<?> refuseDesign(@PathVariable Integer orderId, @RequestBody NoteDTO noteDTO) {
         Order theOrder = orderService.updateOrderStatusDesigning(orderId, noteDTO);
@@ -203,6 +219,7 @@ public class OrderController {
     }
 
     //  production staff view orders list
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @GetMapping("/production/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForProductionStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForProductionStaff(staffId);
@@ -214,6 +231,7 @@ public class OrderController {
         }
     }
 
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/{id}/complete-product")
     public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestBody String imageUrls) {
         try {
@@ -230,6 +248,7 @@ public class OrderController {
         }
     }
 
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/orders/{orderId}/complete")
     public ResponseEntity<Order> completeOrder(@PathVariable Integer orderId) {
         Order order = orderService.completeOrder(orderId);
@@ -237,6 +256,7 @@ public class OrderController {
 
     }
 
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/create-order-from-design")
     public ResponseEntity<?> createOrderFromDesign(@RequestBody ProductDesignDTO productDesignDTO) {
         try {
@@ -247,6 +267,7 @@ public class OrderController {
         }
     }
 
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/assign")
     public ResponseEntity<?> assign(@RequestParam int orderId,
                                     @RequestParam(required = false) Integer  saleStaffId,

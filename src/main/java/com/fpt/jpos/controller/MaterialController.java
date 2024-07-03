@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/material")
+@CrossOrigin
 public class MaterialController {
 
     private final IMaterialService materialService;
@@ -20,8 +21,7 @@ public class MaterialController {
         this.materialService = materialService;
     }
 
-    @CrossOrigin
-    @PreAuthorize("hasAuthority('customer')")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     @GetMapping("/all")
     public ResponseEntity<?> getAllMaterials() {
         List<Material> materialList = materialService.findAllMaterials();
@@ -33,7 +33,7 @@ public class MaterialController {
         }
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PostMapping
     public ResponseEntity<?> addMaterial(@RequestBody Material material) {
         if (material == null) {
@@ -45,7 +45,7 @@ public class MaterialController {
 
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateMaterial(@PathVariable Integer id, @RequestBody Material material) {
         if (id == null || id <= 0) {
@@ -57,7 +57,7 @@ public class MaterialController {
 
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteMaterial(@PathVariable Integer id) {
         if (id == null || id <= 0) {

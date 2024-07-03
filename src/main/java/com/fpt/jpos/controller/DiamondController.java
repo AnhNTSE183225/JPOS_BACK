@@ -5,17 +5,19 @@ import com.fpt.jpos.pojo.Diamond;
 import com.fpt.jpos.service.IDiamondService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/diamond")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DiamondController {
 
     private final IDiamondService diamondService;
 
-    @CrossOrigin
     @GetMapping("/get-all")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> getAllDiamond(@RequestParam int pageNo, @RequestParam int pageSize) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -28,8 +30,8 @@ public class DiamondController {
         return response;
     }
 
-    @CrossOrigin
     @GetMapping("/get-by-id/{diamondId}")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> getDiamondById(@PathVariable int diamondId) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -42,8 +44,8 @@ public class DiamondController {
         return response;
     }
 
-    @CrossOrigin
     @PostMapping("/get-diamond-with-price-by-4C")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> getDiamondWithPriceBy4C(@RequestBody DiamondQueryDTO diamondQueryDTO, @RequestParam int pageNo, @RequestParam int pageSize) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -56,8 +58,8 @@ public class DiamondController {
         return response;
     }
 
-    @CrossOrigin
     @PutMapping("/update")
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> updateDiamond(@RequestBody Diamond diamond) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -70,8 +72,8 @@ public class DiamondController {
         return response;
     }
 
-    @CrossOrigin
     @DeleteMapping("/delete/{diamondId}")
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> deleteDiamond(@PathVariable int diamondId) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 

@@ -4,6 +4,7 @@ import com.fpt.jpos.dto.MaterialPriceDTO;
 import com.fpt.jpos.service.IMaterialPriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class MaterialPriceController {
 
     private final IMaterialPriceService materialPriceService;
 
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     @GetMapping("/find-all")
     public ResponseEntity<?> getAllMaterialPrices() {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -29,6 +31,7 @@ public class MaterialPriceController {
         return response;
     }
 
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getLatestMaterialPriceById(@PathVariable Integer id) {
         try {
@@ -40,6 +43,7 @@ public class MaterialPriceController {
     }
 
     // return true thôi chứ cũng không biết return cái gì nữa
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PostMapping("/add")
     public ResponseEntity<?> addMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceCreateResponse materialPriceCreateResponse) {
         if (materialPriceCreateResponse.materialId == null || materialPriceCreateResponse.materialPrice == null) {
@@ -50,6 +54,7 @@ public class MaterialPriceController {
 
     // 2024-06-28 16:45:31.080
     // format ngày lấy giống trong db
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PutMapping("/update")
     public ResponseEntity<?> updateMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceUpdateResponse materialPriceUpdateResponse) {
         if (materialPriceUpdateResponse.materialId == null || materialPriceUpdateResponse.materialPrice == null) {
