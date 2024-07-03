@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class CustomerController {
     private final ICustomerService customerService;
 
@@ -16,7 +17,6 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @CrossOrigin
     @PutMapping("/update")
     @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
     public ResponseEntity<?> updateCustomer(@RequestParam Integer customerId, @RequestParam String email, @RequestParam String name, @RequestParam String address) {

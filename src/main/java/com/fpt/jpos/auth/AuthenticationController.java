@@ -1,6 +1,7 @@
 package com.fpt.jpos.auth;
 
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
+import com.fpt.jpos.dto.StaffRegistrationDTO;
 import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,23 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody CustomerRegistrationDTO request
     ) {
-        ResponseEntity<AuthenticationResponse> response = ResponseEntity.noContent().build();
+        ResponseEntity<AuthenticationResponse> response;
 
         try {
             response = ResponseEntity.ok(authenticationService.register(request));
+        } catch (AccountAlreadyExistsException ex) {
+            response = ResponseEntity.status(409).build();
+        }
+
+        return response;
+    }
+
+    @PostMapping("/staff-register")
+    public ResponseEntity<AuthenticationResponse> staffRegister(@RequestBody StaffRegistrationDTO request) {
+        ResponseEntity<AuthenticationResponse> response;
+
+        try {
+            response = ResponseEntity.ok(authenticationService.registerStaff(request));
         } catch (AccountAlreadyExistsException ex) {
             response = ResponseEntity.status(409).build();
         }

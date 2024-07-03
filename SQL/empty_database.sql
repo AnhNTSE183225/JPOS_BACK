@@ -233,9 +233,9 @@ create table [ProductShellMaterial]
 go
 
 
-
--- Inserting into Diamond table
 /*
+-- Inserting into Diamond table
+
 INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [image], [active]) VALUES
 ('DC001', 'Diamond A', 'round', 'LAB_GROWN', 'https://example.com/image1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.5000, 'A beautiful lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC002', 'Diamond B', 'princess', 'NATURAL', 'https://example.com/image2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'E', 'IF', 2.0000, 'A natural diamond with faint fluorescence', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
