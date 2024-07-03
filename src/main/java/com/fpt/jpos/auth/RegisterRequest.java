@@ -1,15 +1,15 @@
-package com.fpt.jpos.dto;
+package com.fpt.jpos.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Builder
-public class CustomerRegistrationDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class RegisterRequest {
     private String username;
     private String email;
     private String password;
