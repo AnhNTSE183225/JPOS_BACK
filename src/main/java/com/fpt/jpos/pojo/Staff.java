@@ -19,7 +19,7 @@ public class Staff {
     @Column(name = "staff_id")
     private Integer staffId;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "username")
     private Account account;
 

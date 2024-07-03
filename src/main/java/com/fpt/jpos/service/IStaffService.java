@@ -19,7 +19,7 @@ public interface IStaffService {
 
     Staff createStaff(Staff staff);
 
-    int updateStaff(Staff staff);
+    Staff updateStaff(Staff staff);
 
     void deleteStaff(Integer staffId);
 }

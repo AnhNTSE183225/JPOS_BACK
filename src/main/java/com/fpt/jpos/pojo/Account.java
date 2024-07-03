@@ -1,5 +1,6 @@
 package com.fpt.jpos.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fpt.jpos.pojo.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -48,6 +49,7 @@ public class Account implements UserDetails {
         return username;
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

@@ -70,8 +70,8 @@ public class StaffController {
         return response;
     }
 
-    @PutMapping("/staff/update")
     @PreAuthorize("hasAuthority('admin')")
+    @PutMapping("/staff/update")
     public ResponseEntity<?> updateStaff(@RequestBody Staff staff) {
         System.out.println(staff);
         ResponseEntity<?> response = ResponseEntity.noContent().build();

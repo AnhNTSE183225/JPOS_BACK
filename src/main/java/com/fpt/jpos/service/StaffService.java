@@ -50,11 +50,8 @@ public class StaffService implements IStaffService {
 
     @Override
     @Transactional
-    public int updateStaff(Staff staff) {
-        System.out.println(staff.getName());
-        System.out.println(staff.getPhone());
-        System.out.println(staff.getStaffId());
-        return staffRepository.updateStaff(staff.getName(), staff.getPhone(), staff.getStaffType(), staff.getStaffId());
+    public Staff updateStaff(Staff staff) {
+        return staffRepository.save(staff);
     }
 
     @Override

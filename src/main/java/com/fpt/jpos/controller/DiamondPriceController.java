@@ -57,7 +57,7 @@ public class DiamondPriceController {
         return response;
     }
 
-    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    @PreAuthorize("hasAnyAuthority('admin', 'staff')")
     @PutMapping("/update")
     public ResponseEntity<?> updateDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -71,7 +71,7 @@ public class DiamondPriceController {
         return response;
     }
 
-    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    @PreAuthorize("hasAnyAuthority('admin', 'staff')")
     @GetMapping("/delete")
     public ResponseEntity<?> deleteDiamondPrice(@RequestParam int diamondPriceId) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();

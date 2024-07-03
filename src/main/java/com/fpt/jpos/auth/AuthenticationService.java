@@ -1,5 +1,6 @@
 package com.fpt.jpos.auth;
 
+import com.fpt.jpos.dto.AdminRegistrationDTO;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.dto.StaffRegistrationDTO;
 import com.fpt.jpos.exception.AccountAlreadyExistsException;
@@ -81,6 +82,25 @@ public class AuthenticationService {
                 .build();
     }
 
+    public AuthenticationResponse registerAdmin(AdminRegistrationDTO adminRegistrationDTO) throws AccountAlreadyExistsException {
+        Account account = Account.builder()
+                .username(adminRegistrationDTO.getUsername())
+                .password(passwordEncoder.encode(adminRegistrationDTO.getPassword()))
+                .email(adminRegistrationDTO.getEmail())
+                .status(true)
+                .role(Role.admin)
+                .build();
+        if(accountRepository.findByUsername(account.getUsername()).isPresent()) {
+            throw new AccountAlreadyExistsException();
+        }
+        account = accountRepository.save(account);
+        var jwtToken = jwtService.generateToken(account);
+        return AuthenticationResponse.builder()
+                .account(account)
+                .token(jwtToken)
+                .build();
+    }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
@@ -93,6 +113,8 @@ public class AuthenticationService {
             authenticatedUser = customerService.loginCustomer(user);
         } else if (user.getRole() == Role.staff) {
             authenticatedUser = staffService.getStaffByAccount(user);
+        } else if(user.getRole() == Role.admin) {
+            authenticatedUser = user;
         }
         return AuthenticationResponse.builder()
                 .account(authenticatedUser)
