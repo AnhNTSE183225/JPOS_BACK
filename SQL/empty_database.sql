@@ -299,15 +299,15 @@ INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_w
 go
 */
 insert into [Account]
-values ('user_admin','anhtnse183225@fpt.edu.vn', '123', 1, 'admin'),
-       ('user_customer_01', 'anhtnse183225@fpt.edu.vn' ,'123', 1, 'customer'),
-       ('user_customer_02','anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
-       ('user_customer_03','anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
-       ('user_sale_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_design_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_manager','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_production_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('disabled_user_account','anhtnse183225@fpt.edu.vn', '323', 0, 'customer')
+values ('user_admin','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'admin'),
+       ('user_customer_01', 'anhtnse183225@fpt.edu.vn' ,'$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'customer'),
+       ('user_customer_02','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'customer'),
+       ('user_customer_03','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'customer'),
+       ('user_sale_staff','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'staff'),
+       ('user_design_staff','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'staff'),
+       ('user_manager','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'staff'),
+       ('user_production_staff','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 1, 'staff'),
+       ('disabled_user_account','anhtnse183225@fpt.edu.vn', '$2a$12$UwtxctjseEj3RlLBiTfyY.5CSrhwb4ApScv4DvwtuooqbYJVfXd0e', 0, 'customer')
 go
 insert into [Staff]([username], [name], [phone], [staff_type])
 values ('user_sale_staff', 'Nguyen', '0123456789', 'sale'),
@@ -369,11 +369,11 @@ values ('Four Stone Emerald Diamond Engagement Ring In Platinum', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150541/RND/Images/gallery.jpg'),
        ('Studio Double Halo Gala Diamond Engagement Ring In Platinum (7/8 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/195312/RND/Images/gallery.jpg'),
-       (N'Crescent Fancy Pink Pavé Diamond Open Engagement Ring In 14k White Gold (1/10 Ct. Tw.)', 'ring',
+       (N'Crescent Fancy Pink Pavï¿½ Diamond Open Engagement Ring In 14k White Gold (1/10 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150524/RND/Images/gallery.jpg'),
        ('Two Stone Engagement Ring With Cushion Shaped Diamond In 14k White Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/149478/RND/Images/gallery.jpg'),
-       (N'Bella Vaughan For Blue Nile Seattle Split Shank Double Pavé Diamond Engagement Ring In Platinum (3/4 Ct. Tw.)',
+       (N'Bella Vaughan For Blue Nile Seattle Split Shank Double Pavï¿½ Diamond Engagement Ring In Platinum (3/4 Ct. Tw.)',
         'ring', 'https://ion.bluenile.com/sets/Jewelry-bn/195607/RND/Images/gallery.jpg'),
        ('Romantic Diamond Floral Halo Engagement Ring In 14k White Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150339/RND/Images/gallery.jpg'),

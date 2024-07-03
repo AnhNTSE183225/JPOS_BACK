@@ -1,6 +1,5 @@
 package com.fpt.jpos.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,9 +31,9 @@ public class ProductDesign {
     private String designFile;
 
     @OneToMany(
-            mappedBy = "productDesign"
+            mappedBy = "productDesign",
+            cascade = CascadeType.ALL
     )
     private List<ProductShellDesign> productShellDesigns;
-
 
 }

@@ -6,7 +6,6 @@ import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
 import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class OrderController {
 
@@ -32,7 +32,6 @@ public class OrderController {
     }
 
     //Test - get all Orders
-    @CrossOrigin
     @GetMapping("/order/all")
     public ResponseEntity<?> getAllOrders() {
         return ResponseEntity.ok(orderService.findAll());
@@ -40,7 +39,6 @@ public class OrderController {
 
 
     //User uploads image
-    @CrossOrigin
     @PostMapping("/upload")
     public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file) {
         try {
@@ -52,7 +50,6 @@ public class OrderController {
     }
 
     // Customer send request - 1st flow
-    @CrossOrigin
     @PostMapping("/send-request")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequestDTO customerRequestDTO) {
 
@@ -62,7 +59,6 @@ public class OrderController {
     }
 
     // Get all orders for customer
-    @CrossOrigin
     @GetMapping("/customers/{customerId}/orders")
     public ResponseEntity<?> getOrdersForCustomer(@PathVariable Integer customerId) {
         List<Order> requestList = orderService.getOrdersByCustomerId(customerId);
@@ -74,7 +70,6 @@ public class OrderController {
     }
 
     // Sale staff view orders list
-    @CrossOrigin
     @GetMapping("/sales/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForSaleStaff(@PathVariable int staffId) {
 
@@ -88,7 +83,6 @@ public class OrderController {
     }
 
     // Staff sends quotation to manager
-    @CrossOrigin
     @PostMapping("/sales/orders/{staffId}/{productId}")
     public ResponseEntity<?> retrieveQuotationFromStaff(@RequestBody Order order, @PathVariable Integer productId, @PathVariable int staffId) {
         try {
@@ -99,7 +93,6 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
     @GetMapping("/manager/orders")
     public ResponseEntity<?> getOrderForManager() {
         List<Order> orderList = orderService.getOrderForManager();
@@ -111,7 +104,6 @@ public class OrderController {
     }
 
     // Manager accept or decline quotation
-    @CrossOrigin
     @PostMapping("/{id}/manager-response")
     public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval, @RequestBody ManagerResponseDTO managerResponseDTO) {
         String status = orderService.handleManagerResponse(id, managerApproval, managerResponseDTO);
@@ -119,7 +111,6 @@ public class OrderController {
     }
 
     // After manager accepted, sale staff forward quotation to customer
-    @CrossOrigin
     @PostMapping("/{id}/forward-quotation")
     public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
         OrderStatus status = orderService.forwardQuotation(id);
@@ -127,7 +118,6 @@ public class OrderController {
     }
 
     // Customer accept quotation
-    @CrossOrigin
     @PutMapping("/accept-quotation")
     public ResponseEntity<?> acceptQuotation(@RequestParam Integer orderId) {
         try {
@@ -137,7 +127,6 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
     @GetMapping("/sales/order-select/{id}")
     public ResponseEntity<?> findOrderById(@PathVariable int id) {
         Order order = orderService.findById(id);
@@ -149,7 +138,6 @@ public class OrderController {
     }
 
     // Update order status to designing after confirming deposit
-    @CrossOrigin
     @PutMapping("/sales/orders/{id}/confirm-deposit")
     public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentRestDTO.PaymentRequest payment) {
         Order order = orderService.updateOrderStatusDesigning(id, payment);
@@ -161,7 +149,6 @@ public class OrderController {
     }
 
     //  design staff view orders list
-    @CrossOrigin
     @GetMapping("/designs/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForDesignStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForDesignStaff(staffId);
@@ -175,7 +162,6 @@ public class OrderController {
 
 
     // Upload file by design staff
-    @CrossOrigin
     @PostMapping("/designs/upload/{orderId}")
     public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) throws IOException {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
@@ -196,7 +182,6 @@ public class OrderController {
     }
 
     // Customer accept design
-    @CrossOrigin
     @PostMapping("/customers/{orderId}/acceptDesign")
     public ResponseEntity<?> acceptDesign(@PathVariable Integer orderId) {
         Order theOrder = orderService.updateOrderStatusProduction(orderId);
@@ -207,7 +192,6 @@ public class OrderController {
     }
 
     //Customer refuses design
-    @CrossOrigin
     @PostMapping("/customers/{orderId}/refuseDesign")
     public ResponseEntity<?> refuseDesign(@PathVariable Integer orderId, @RequestBody NoteDTO noteDTO) {
         Order theOrder = orderService.updateOrderStatusDesigning(orderId, noteDTO);
@@ -218,7 +202,6 @@ public class OrderController {
     }
 
     //  production staff view orders list
-    @CrossOrigin
     @GetMapping("/production/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForProductionStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForProductionStaff(staffId);
@@ -230,7 +213,6 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
     @PostMapping("/{id}/complete-product")
     public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestBody String imageUrls) {
         try {
@@ -247,7 +229,6 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
     @PostMapping("/orders/{orderId}/complete")
     public ResponseEntity<Order> completeOrder(@PathVariable Integer orderId) {
         Order order = orderService.completeOrder(orderId);
@@ -255,7 +236,6 @@ public class OrderController {
 
     }
 
-    @CrossOrigin
     @PostMapping("/create-order-from-design")
     public ResponseEntity<?> createOrderFromDesign(@RequestBody ProductDesignDTO productDesignDTO) {
         try {
@@ -266,7 +246,6 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
     @PostMapping("/assign")
     public ResponseEntity<?> assign(@RequestParam int orderId,
                                     @RequestParam(required = false) Integer  saleStaffId,

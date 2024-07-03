@@ -1,8 +1,7 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.pojo.Account;
-import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
+import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -15,11 +15,11 @@ public class DiamondPriceController {
 
     @CrossOrigin
     @GetMapping("/get-all")
-    public ResponseEntity<?> getAllDiamondPrice(@RequestParam int pageNo, @RequestParam int pageSize) {
+    public ResponseEntity<?> getAllDiamondPrice() {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
         try {
-            response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice(pageNo, pageSize));
+            response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice());
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }
@@ -57,11 +57,11 @@ public class DiamondPriceController {
 
     @CrossOrigin
     @PutMapping("/update")
-    public ResponseEntity<?> updateDiamondPrice(@RequestParam int diamondPriceId, @RequestParam double newPrice) {
+    public ResponseEntity<?> updateDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
         try {
-            response = ResponseEntity.ok(diamondPriceService.updateDiamondPrice(diamondPriceId, newPrice));
+            response = ResponseEntity.ok(diamondPriceService.updateDiamondPrice(diamondPrice));
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }

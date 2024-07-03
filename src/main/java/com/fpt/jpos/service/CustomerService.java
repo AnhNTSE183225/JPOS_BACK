@@ -1,8 +1,8 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.pojo.enums.Role;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.ICustomerRepository;

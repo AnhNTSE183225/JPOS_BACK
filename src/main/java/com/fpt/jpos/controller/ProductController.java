@@ -1,7 +1,7 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.pojo.Product;
 import com.fpt.jpos.dto.ProductDTO;
+import com.fpt.jpos.pojo.Product;
 import com.fpt.jpos.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
