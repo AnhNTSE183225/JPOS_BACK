@@ -1,6 +1,5 @@
 package com.fpt.jpos.repository;
 
-import com.fpt.jpos.dto.DiamondQueryResponseDTO;
 import com.fpt.jpos.pojo.Diamond;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

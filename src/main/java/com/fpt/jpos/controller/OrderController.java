@@ -6,7 +6,6 @@ import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
 import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,7 @@ public class OrderController {
 
     //User uploads image
     @PostMapping("/upload")
-    @PreAuthorize("hasAuthority('admin') or hasAuthority('customer') or hasAuthority('staff')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file) {
         try {
             return ResponseEntity.ok(fileUploadService.upload(file));
@@ -54,7 +53,7 @@ public class OrderController {
 
     // Customer send request - 1st flow
     @PostMapping("/send-request")
-    @PreAuthorize("hasAuthority('admin') or hasAuthority('customer') or hasAuthority('staff')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequestDTO customerRequestDTO) {
 
         Order newOrder = orderService.insertOrder(customerRequestDTO);
@@ -64,7 +63,7 @@ public class OrderController {
 
     // Get all orders for customer
     @GetMapping("/customers/{customerId}/orders")
-    @PreAuthorize("hasAuthority('admin') or hasAuthority('customer') or hasAuthority('staff')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> getOrdersForCustomer(@PathVariable Integer customerId) {
         List<Order> requestList = orderService.getOrdersByCustomerId(customerId);
         if (requestList.isEmpty()) {
@@ -128,7 +127,7 @@ public class OrderController {
     }
 
     // Customer accept quotation
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @PutMapping("/accept-quotation")
     public ResponseEntity<?> acceptQuotation(@RequestParam Integer orderId) {
         try {
@@ -139,7 +138,7 @@ public class OrderController {
     }
 
     @GetMapping("/sales/order-select/{id}")
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> findOrderById(@PathVariable int id) {
         Order order = orderService.findById(id);
         if (order == null) {
@@ -270,7 +269,7 @@ public class OrderController {
     @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/assign")
     public ResponseEntity<?> assign(@RequestParam int orderId,
-                                    @RequestParam(required = false) Integer  saleStaffId,
+                                    @RequestParam(required = false) Integer saleStaffId,
                                     @RequestParam(required = false) Integer designStaffId,
                                     @RequestParam(required = false) Integer productionStaffId) {
         try {

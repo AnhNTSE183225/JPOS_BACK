@@ -16,7 +16,7 @@ public class DiamondPriceController {
     private final IDiamondPriceService diamondPriceService;
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> getAllDiamondPrice() {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -29,7 +29,7 @@ public class DiamondPriceController {
         return response;
     }
 
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @PostMapping("/get-single-price")
     public ResponseEntity<?> getSingleDiamondPrice(@RequestBody DiamondPriceQueryDTO diamondPriceQueryDTO) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -43,7 +43,7 @@ public class DiamondPriceController {
         return response;
     }
 
-    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @PostMapping("/add")
     public ResponseEntity<?> addDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -57,7 +57,7 @@ public class DiamondPriceController {
         return response;
     }
 
-    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @PutMapping("/update")
     public ResponseEntity<?> updateDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -71,7 +71,7 @@ public class DiamondPriceController {
         return response;
     }
 
-    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @GetMapping("/delete")
     public ResponseEntity<?> deleteDiamondPrice(@RequestParam int diamondPriceId) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();

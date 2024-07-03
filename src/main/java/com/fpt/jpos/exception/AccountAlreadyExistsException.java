@@ -1,5 +1,5 @@
 package com.fpt.jpos.exception;
 
-public class AccountAlreadyExistsException extends Exception{
+public class AccountAlreadyExistsException extends Exception {
 
 }

@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/materialPrices")
 @RequiredArgsConstructor
@@ -17,7 +15,7 @@ public class MaterialPriceController {
 
     private final IMaterialPriceService materialPriceService;
 
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @GetMapping("/find-all")
     public ResponseEntity<?> getAllMaterialPrices() {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
@@ -31,7 +29,7 @@ public class MaterialPriceController {
         return response;
     }
 
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getLatestMaterialPriceById(@PathVariable Integer id) {
         try {

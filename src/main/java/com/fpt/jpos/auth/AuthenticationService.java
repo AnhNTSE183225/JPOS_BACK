@@ -35,7 +35,7 @@ public class AuthenticationService {
                 .status(true)
                 .role(Role.customer)
                 .build();
-        if(accountRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (accountRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new AccountAlreadyExistsException();
         }
         user = accountRepository.save(user);

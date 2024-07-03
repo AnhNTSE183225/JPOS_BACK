@@ -5,7 +5,6 @@ import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.IStaffRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

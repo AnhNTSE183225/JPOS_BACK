@@ -21,7 +21,7 @@ public class MaterialController {
         this.materialService = materialService;
     }
 
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @GetMapping("/all")
     public ResponseEntity<?> getAllMaterials() {
         List<Material> materialList = materialService.findAllMaterials();

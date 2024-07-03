@@ -17,7 +17,7 @@ public class DiamondController {
     private final IDiamondService diamondService;
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> getAllDiamond(@RequestParam int pageNo, @RequestParam int pageSize) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -31,7 +31,7 @@ public class DiamondController {
     }
 
     @GetMapping("/get-by-id/{diamondId}")
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> getDiamondById(@PathVariable int diamondId) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -45,7 +45,7 @@ public class DiamondController {
     }
 
     @PostMapping("/get-diamond-with-price-by-4C")
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> getDiamondWithPriceBy4C(@RequestBody DiamondQueryDTO diamondQueryDTO, @RequestParam int pageNo, @RequestParam int pageSize) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -59,7 +59,7 @@ public class DiamondController {
     }
 
     @PutMapping("/update")
-    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> updateDiamond(@RequestBody Diamond diamond) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
@@ -73,7 +73,7 @@ public class DiamondController {
     }
 
     @DeleteMapping("/delete/{diamondId}")
-    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> deleteDiamond(@PathVariable int diamondId) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 

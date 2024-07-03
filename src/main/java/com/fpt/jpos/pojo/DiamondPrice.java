@@ -4,7 +4,9 @@ import com.fpt.jpos.pojo.enums.Clarity;
 import com.fpt.jpos.pojo.enums.Color;
 import com.fpt.jpos.pojo.enums.Cut;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 

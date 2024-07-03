@@ -20,5 +20,5 @@ public class ProductDTO {
     private Double productionPrice;
     private Double markupRate;
     private List<Integer> diamondIds;
-    private List<Pair<Integer,Double>> materialsIds;
+    private List<Pair<Integer, Double>> materialsIds;
 }
