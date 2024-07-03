@@ -1,6 +1,7 @@
 package com.fpt.jpos.auth;
 
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
+import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.enums.Role;
@@ -26,7 +27,7 @@ public class AuthenticationService {
     private final StaffService staffService;
     private final CustomerService customerService;
 
-    public AuthenticationResponse register(CustomerRegistrationDTO request) {
+    public AuthenticationResponse register(CustomerRegistrationDTO request) throws AccountAlreadyExistsException {
         var user = Account.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -34,6 +35,9 @@ public class AuthenticationService {
                 .status(true)
                 .role(Role.customer)
                 .build();
+        if(accountRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw new AccountAlreadyExistsException();
+        }
         user = accountRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         Customer customer = new Customer();
