@@ -18,7 +18,7 @@ public class CustomerController {
 
     @CrossOrigin
     @PutMapping("/update")
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
     public ResponseEntity<?> updateCustomer(@RequestParam Integer customerId, @RequestParam String email, @RequestParam String name, @RequestParam String address) {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
