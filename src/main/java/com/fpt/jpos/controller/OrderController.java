@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -163,7 +162,7 @@ public class OrderController {
 
     // Upload file by design staff
     @PostMapping("/designs/upload/{orderId}")
-    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) throws IOException {
+    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
         String decodedUrls = URLDecoder.decode(imageUrls, StandardCharsets.UTF_8);
@@ -248,7 +247,7 @@ public class OrderController {
 
     @PostMapping("/assign")
     public ResponseEntity<?> assign(@RequestParam int orderId,
-                                    @RequestParam(required = false) Integer  saleStaffId,
+                                    @RequestParam(required = false) Integer saleStaffId,
                                     @RequestParam(required = false) Integer designStaffId,
                                     @RequestParam(required = false) Integer productionStaffId) {
         try {

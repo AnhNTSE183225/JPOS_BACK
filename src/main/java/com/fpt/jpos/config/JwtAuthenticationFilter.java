@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         username = jwtService.extractUsername(jwt);
         // check if username is null or already authenticated
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username); // get userdetails from the database
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username); // get user details from the database
             if (jwtService.isTokenValid(jwt, userDetails)) { // check if user and token is valid or not
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken( // create an object UsernamePasswordAuthenticationToken
                         userDetails,

@@ -2,16 +2,16 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.ProductDesign;
 import com.fpt.jpos.repository.IProductDesignRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductDesignService implements IProductDesignService {
 
-    @Autowired
     private IProductDesignRepository productDesignRepository;
 
     @Override
