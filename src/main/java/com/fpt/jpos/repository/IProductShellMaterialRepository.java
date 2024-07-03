@@ -11,5 +11,5 @@ import java.util.List;
 public interface IProductShellMaterialRepository extends JpaRepository<ProductShellMaterial, Integer> {
 
     @Query(value = "SELECT * FROM [ProductShellMaterial] WHERE [shell_id] = ?1", nativeQuery = true)
-    public List<ProductShellMaterial> findByShellId(Integer shellId);
+    List<ProductShellMaterial> findByShellId(Integer shellId);
 }

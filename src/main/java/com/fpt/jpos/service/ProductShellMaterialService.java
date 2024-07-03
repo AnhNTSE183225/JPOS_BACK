@@ -22,7 +22,6 @@ public class ProductShellMaterialService implements IProductShellMaterialService
     @Override
     @Transactional
     public List<ProductShellMaterial> findByShellId(Integer shellId) {
-        List<ProductShellMaterial> productShellMaterials = productShellMaterialRepository.findByShellId(shellId);
-        return productShellMaterials;
+        return productShellMaterialRepository.findByShellId(shellId);
     }
 }

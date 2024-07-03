@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -177,7 +176,7 @@ public class OrderController {
     // Upload file by design staff
     @PostMapping("/designs/upload/{orderId}")
     @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
-    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) throws IOException {
+    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
         String decodedUrls = URLDecoder.decode(imageUrls, StandardCharsets.UTF_8);

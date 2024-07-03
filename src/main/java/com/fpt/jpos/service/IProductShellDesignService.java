@@ -5,5 +5,5 @@ import com.fpt.jpos.pojo.ProductShellDesign;
 import java.util.List;
 
 public interface IProductShellDesignService {
-    public List<ProductShellDesign> getByProductDesignId(Integer productDesignId);
+    List<ProductShellDesign> getByProductDesignId(Integer productDesignId);
 }

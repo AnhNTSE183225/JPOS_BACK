@@ -65,10 +65,7 @@ public class ProductService implements IProductService {
 
         List<Diamond> diamonds = new ArrayList<>();
         for (Integer id : productDTO.getDiamondIds()) {
-            Diamond diamond = diamondRepository.findById(id).orElse(null);
-            if (diamond != null) {
-                diamonds.add(diamond);
-            }
+            diamondRepository.findById(id).ifPresent(diamonds::add);
         }
         product.setDiamonds(diamonds);
 
