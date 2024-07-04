@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface IDiamondService {
-    List<Diamond> getAllDiamond(int pageNo, int pageSize);
+    List<Diamond> getAllDiamond();
 
     Page<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO, int pageNo, int pageSize);
 

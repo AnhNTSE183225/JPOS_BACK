@@ -18,11 +18,11 @@ public class DiamondController {
 
     @GetMapping("/get-all")
     @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
-    public ResponseEntity<?> getAllDiamond(@RequestParam int pageNo, @RequestParam int pageSize) {
+    public ResponseEntity<?> getAllDiamond() {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
         try {
-            response = ResponseEntity.ok(diamondService.getAllDiamond(pageNo, pageSize));
+            response = ResponseEntity.ok(diamondService.getAllDiamond());
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }

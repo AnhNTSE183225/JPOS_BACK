@@ -21,9 +21,8 @@ public class DiamondService implements IDiamondService {
     private final IDiamondRepository diamondRepository;
 
     @Override
-    public List<Diamond> getAllDiamond(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return diamondRepository.findAll(pageable).getContent();
+    public List<Diamond> getAllDiamond() {
+        return diamondRepository.findAll();
     }
 
     @Override
