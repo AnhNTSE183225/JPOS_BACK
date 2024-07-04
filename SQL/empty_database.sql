@@ -298,26 +298,15 @@ INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_w
 go
 */
 insert into [Account]
-values ('user_admin', 'anhtnse183225@fpt.edu.vn', '123', 1, 'admin'),
-       ('user_customer_01', 'anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
-       ('user_customer_02', 'anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
-       ('user_customer_03', 'anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
-       ('user_sale_staff', 'anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_design_staff', 'anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_manager', 'anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_production_staff', 'anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('disabled_user_account', 'anhtnse183225@fpt.edu.vn', '323', 0, 'customer')
+values ('admin', 'admin@gmail.com', '$2a$10$w.D7u6ER7AmFamDj7lSSHe5TCnVRkr5gtlA4Ji9JFWSFWU0WDWUUe', 1, 'admin'),
+       ('nguyen', 'nguyen@gmail.com', '$2a$10$pmL28xzaY6XueEJzEMIyzua48PIOpf9bBsXj5oF95M2ZzSWNRxunK', 1, 'customer'),
+       ('manage', 'test@gmail.com', '$2a$10$S03I4mUWnhDpn4YVAaDV6eRmg3cG2Zh1w/ZhBM8yM0ndiElfAlmkC', 1, 'staff')
 go
 insert into [Staff]([username], [name], [phone], [staff_type])
-values ('user_sale_staff', 'Nguyen', '0123456789', 'sale'),
-       ('user_design_staff', 'Tran', '0192301823', 'design'),
-       ('user_production_staff', 'Le', '08289304728', 'produce'),
-       ('user_manager', 'Thanh', '02938492893', 'manage')
+values ('manage', 'Manager', '02938492893', 'manage')
 go
 insert into [Customer]([username], [name], [address])
-values ('user_customer_01', 'Minh', '123 Becker Street'),
-       ('user_customer_02', 'Binh', '234 New York'),
-       ('user_customer_03', 'Hannah', '999 6th Avenue')
+values ('nguyen', 'Minh', '123 Becker Street')
 go
 --Insert into Material
 insert into [Material]([material_name])

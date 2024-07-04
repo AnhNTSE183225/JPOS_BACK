@@ -18,17 +18,47 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @GetMapping("/customer/get-all")
+    @PreAuthorize("hasAuthority('admin')")
+    public ResponseEntity<?> getAllCustomers() {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(customerService.findAll());
+        } catch (Exception e) {
+            response = ResponseEntity.status(400).build();
+        }
+
+        return response;
+    }
+
     @PutMapping("/update")
     @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) {
-        ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
+        ResponseEntity<?> responseEntity;
 
         try {
             responseEntity = ResponseEntity.ok(customerService.updateCustomer(customer));
         } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+            responseEntity = ResponseEntity.status(409).build();
         }
 
         return responseEntity;
+    }
+
+    @DeleteMapping("/customer/delete/{id}")
+    @PreAuthorize("hasAuthority('admin')")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+        ResponseEntity<?> response;
+
+        try {
+            customerService.delete(id);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            response = ResponseEntity.status(409).build();
+        }
+
+        return response;
     }
 }
