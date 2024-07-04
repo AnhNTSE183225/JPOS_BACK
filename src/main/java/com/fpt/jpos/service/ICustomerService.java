@@ -10,5 +10,5 @@ public interface ICustomerService {
 
     Customer registerCustomer(CustomerRegistrationDTO customerRegistrationDTO);
 
-    Customer updateCustomer(Integer customerId, String name, String email, String address);
+    Customer updateCustomer(Customer customer);
 }

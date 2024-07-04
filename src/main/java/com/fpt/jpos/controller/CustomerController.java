@@ -1,5 +1,6 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,11 @@ public class CustomerController {
 
     @PutMapping("/update")
     @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
-    public ResponseEntity<?> updateCustomer(@RequestParam Integer customerId, @RequestParam String email, @RequestParam String name, @RequestParam String address) {
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
         try {
-            responseEntity = ResponseEntity.ok(customerService.updateCustomer(customerId, name, email, address));
+            responseEntity = ResponseEntity.ok(customerService.updateCustomer(customer));
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }

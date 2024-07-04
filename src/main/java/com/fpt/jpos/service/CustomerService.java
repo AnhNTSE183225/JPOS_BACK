@@ -57,11 +57,8 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer updateCustomer(Integer customerId, String name, String email, String address) {
-        Customer customer = customerRepository.findById(customerId).orElseThrow();
-        customer.setName(name);
-        customer.getAccount().setEmail(email);
-        customer.setAddress(address);
+    @Transactional
+    public Customer updateCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 
