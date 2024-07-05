@@ -300,6 +300,8 @@ public class OrderService implements IOrderService {
 
         for (Integer id : productDesignDTO.getDiamondIds()) {
             Diamond diamond = diamondRepository.findById(id).orElseThrow();
+            diamond.setActive(false);
+            diamond = diamondRepository.save(diamond);
             diamonds.add(diamond);
             DiamondPriceQueryDTO query = new DiamondPriceQueryDTO(
                     diamond.getOrigin(),
@@ -381,6 +383,14 @@ public class OrderService implements IOrderService {
         Order order = orderRepository.findById(orderId).orElseThrow();
         order.setModelFile(imageUrls);
         order.setStatus(OrderStatus.pending_design);
+        return orderRepository.save(order);
+    }
+
+    @Override
+    @Transactional
+    public Order cancelOrder(Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.setStatus(OrderStatus.cancelled);
         return orderRepository.save(order);
     }
 

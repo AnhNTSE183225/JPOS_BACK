@@ -52,5 +52,7 @@ public interface IOrderService {
 
     Order addImage(String imageUrls, Integer orderId);
 
+    Order cancelOrder(Integer orderId);
+
     //TODO Update production staff id when production staff select delivered
 }

@@ -8,6 +8,7 @@ import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -263,6 +264,20 @@ public class OrderController {
             System.out.println(ex.getLocalizedMessage());
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
+    @PostMapping("/cancel-order/{orderId}")
+    public ResponseEntity<?> cancelOrder(@PathVariable Integer orderId) {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(orderService.cancelOrder(orderId));
+        } catch (EXception ex) {
+            response = ResponseEntity.status(400).build();
+        }
+
+        return response;
     }
 
     @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
