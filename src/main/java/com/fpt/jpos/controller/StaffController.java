@@ -1,5 +1,9 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.auth.AuthenticationResponse;
+import com.fpt.jpos.auth.AuthenticationService;
+import com.fpt.jpos.dto.StaffRegistrationDTO;
+import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.service.IStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +19,12 @@ import java.util.List;
 public class StaffController {
 
     private final IStaffService staffService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public StaffController(IStaffService staffService) {
+    public StaffController(IStaffService staffService, AuthenticationService authenticationService) {
         this.staffService = staffService;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping("/staff-design")
@@ -58,13 +64,13 @@ public class StaffController {
 
     @PostMapping("/staff/create")
     @PreAuthorize("hasAuthority('admin')")
-    public ResponseEntity<?> createStaff(@RequestBody Staff staff) {
-        ResponseEntity<?> response = ResponseEntity.noContent().build();
+    public ResponseEntity<AuthenticationResponse> createStaff(@RequestBody StaffRegistrationDTO request) {
+        ResponseEntity<AuthenticationResponse> response;
 
         try {
-            response = ResponseEntity.ok(staffService.createStaff(staff));
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
+            response = ResponseEntity.ok(authenticationService.registerStaff(request));
+        } catch (AccountAlreadyExistsException ex) {
+            response = ResponseEntity.status(409).build();
         }
 
         return response;
