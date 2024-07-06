@@ -1,9 +1,7 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.Material;
-import com.fpt.jpos.service.IDiamondPriceService;
-import com.fpt.jpos.service.IMaterialPriceService;
-import com.fpt.jpos.service.IMaterialService;
+import com.fpt.jpos.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +18,7 @@ public class PublicController {
     private final IDiamondPriceService diamondPriceService;
     private final IMaterialPriceService materialPriceService;
     private final IMaterialService materialService;
+    private final IDiamondService diamondService;
 
     @GetMapping("/diamond-price/get-all")
     public ResponseEntity<?> getAllDiamondPrice() {
@@ -66,5 +65,18 @@ public class PublicController {
         } catch (Exception ex) {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAllDiamond() {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondService.getAllDiamond());
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
     }
 }

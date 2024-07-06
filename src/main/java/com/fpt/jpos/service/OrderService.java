@@ -10,10 +10,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +39,8 @@ public class OrderService implements IOrderService {
     private final IDiamondPriceService diamondPriceService;
 
     private final IMaterialPriceService materialPriceService;
+
+    private final IWarrantyRepository warrantyRepository;
 
     @Override
     @Transactional
@@ -251,8 +250,21 @@ public class OrderService implements IOrderService {
     @Transactional
     public Order completeOrder(Integer orderId) {
 
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.YEAR, 3);
+        Date endOfSupportDate = calendar.getTime();
+
         Order order = orderRepository.findById(orderId).orElseThrow();
         Payment payment = paymentRepository.findPaymentByOrderId(orderId);
+        Warranty warranty = Warranty.builder()
+                .customer(order.getCustomer())
+                .product(order.getProduct())
+                .purchaseDate(today)
+                .endOfSupportDate(endOfSupportDate)
+                .build();
+        warrantyRepository.save(warranty);
 
         payment.setAmountPaid(order.getTotalAmount());
         payment.setPaymentStatus("Fully paid");

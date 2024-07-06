@@ -273,7 +273,7 @@ public class OrderController {
 
         try {
             response = ResponseEntity.ok(orderService.cancelOrder(orderId));
-        } catch (EXception ex) {
+        } catch (Exception ex) {
             response = ResponseEntity.status(400).build();
         }
 
