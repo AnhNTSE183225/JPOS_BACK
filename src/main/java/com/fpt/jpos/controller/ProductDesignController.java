@@ -46,4 +46,19 @@ public class ProductDesignController {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('admin','staff')")
+    public ResponseEntity<?> update(@RequestBody ProductDesign productDesign) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(productDesignService.update(productDesign));
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
 }
