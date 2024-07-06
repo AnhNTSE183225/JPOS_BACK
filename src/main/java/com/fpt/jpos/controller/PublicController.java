@@ -66,17 +66,4 @@ public class PublicController {
             return ResponseEntity.noContent().build();
         }
     }
-
-    @GetMapping("/get-all")
-    public ResponseEntity<?> getAllDiamond() {
-        ResponseEntity<?> response = ResponseEntity.noContent().build();
-
-        try {
-            response = ResponseEntity.ok(diamondService.getAllDiamond());
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-        }
-
-        return response;
-    }
 }

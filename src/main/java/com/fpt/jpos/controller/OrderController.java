@@ -207,7 +207,7 @@ public class OrderController {
     }
 
     //Customer refuses design
-    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
+    @PreAuthorize("hasAnyAuthority('admin','customer','staff')")
     @PostMapping("/customers/{orderId}/refuseDesign")
     public ResponseEntity<?> refuseDesign(@PathVariable Integer orderId, @RequestBody NoteDTO noteDTO) {
         Order theOrder = orderService.updateOrderStatusDesigning(orderId, noteDTO);

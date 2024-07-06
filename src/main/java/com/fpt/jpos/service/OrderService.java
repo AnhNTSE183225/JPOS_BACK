@@ -53,7 +53,7 @@ public class OrderService implements IOrderService {
             order.setTotalAmount(managerResponseDTO.getTotalAmount());
             order.setStatus(OrderStatus.manager_approved);
         } else {
-            order.setStatus(OrderStatus.wait_manager);
+            order.setStatus(OrderStatus.wait_sale_staff);
         }
 
         orderRepository.save(order);
