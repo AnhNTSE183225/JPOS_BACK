@@ -34,7 +34,7 @@ public class MaterialController {
     }
 
     @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<?> addMaterial(@RequestBody Material material) {
         if (material == null) {
             return ResponseEntity.noContent().build();
@@ -54,7 +54,6 @@ public class MaterialController {
         material.setMaterialId(id);
         materialService.saveOrUpdateMaterial(material);
         return ResponseEntity.ok(material);
-
     }
 
     @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
