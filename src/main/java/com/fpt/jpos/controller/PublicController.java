@@ -4,7 +4,6 @@ import com.fpt.jpos.pojo.Material;
 import com.fpt.jpos.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +27,19 @@ public class PublicController {
             response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice());
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @GetMapping("/diamond-price/{origin}/{shape}/{caratFrom}-{caratTo}")
+    public ResponseEntity<?> getDiamondPriceByOriginAndShape(@PathVariable String origin, @PathVariable String shape, @PathVariable Double caratFrom, @PathVariable Double caratTo) {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(diamondPriceService.getDiamondPriceByOriginAndShapeAndCaratRange(origin, shape, caratFrom, caratTo));
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
         }
 
         return response;

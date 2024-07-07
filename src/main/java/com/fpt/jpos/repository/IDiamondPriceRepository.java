@@ -1,6 +1,8 @@
 package com.fpt.jpos.repository;
 
 import com.fpt.jpos.pojo.DiamondPrice;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +24,18 @@ public interface IDiamondPriceRepository extends JpaRepository<DiamondPrice, Int
     @Modifying
     @Query(value = "UPDATE DiamondPriceList SET price = ?1 WHERE diamond_price_id = ?2", nativeQuery = true)
     int update(Double newPrice, Integer diamondPriceId);
+
+    @Query(value = "SELECT * FROM DiamondPriceList WHERE origin = ?1 AND shape = ?2 AND carat_weight_from >= ?3 AND carat_weight_to <= ?4", nativeQuery = true)
+    List<DiamondPrice> getDiamondPriceByOriginAndShape(String origin, String shape, Double caratFrom, Double caratTo);
+
+    @Query(value = "SELECT * FROM DiamondPriceList WHERE origin in (?1) AND shape in ?2 AND clarity in (?3) AND color in (?4) AND cut in (?5) AND carat_weight_from >= ?6 AND carat_weight_to <= ?7 ORDER BY effective_date DESC", nativeQuery = true)
+    Page<DiamondPrice> getDiamondPricesByQuery(
+            List<String> listOrigin,
+            List<String> listShape,
+            List<String> listClarity,
+            List<String> listColor,
+            List<String> listCut,
+            Double minCarat,
+            Double maxCarat,
+            Pageable pageable);
 }

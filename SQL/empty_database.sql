@@ -64,7 +64,7 @@ create table [Order]
     [sale_staff_id]       int,
     [design_staff_id]     int,
     [production_staff_id] int,
-    [status]              varchar(MAX), /*wait_sale_staff,wait_manager,manager_approved,wait_customer,customer_accept,designing,pending_design,production,delivered,wait_payment,completed*/
+    [status]              varchar(MAX), /*wait_sale_staff,wait_manager,manager_approved,wait_customer,customer_accept,designing,pending_design,production,delivered,wait_payment,completed,cancelled*/
     [order_date]          datetime,
     [order_type]          varchar(MAX), /*customize,from_design*/
     [budget]              varchar(MAX),
@@ -154,17 +154,17 @@ create table [Diamond]
     [diamond_code] varchar(MAX),
     [diamond_name] varchar(MAX),
 
-    [shape]        varchar(MAX), /*round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear*/
+    [shape]        varchar(50), /*round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear*/
 
-    [origin]       varchar(MAX), /*LAB_GROWN, NATURAL*/
+    [origin]       varchar(50), /*LAB_GROWN, NATURAL*/
     [proportions]  varchar(MAX), /*image link*/
     [fluorescence] varchar(MAX), /*None, Faint, Medium, Strong, Very_Strong*/
     [symmetry]     varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
     [polish]       varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
 
-    [cut]          varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
-    [color]        varchar(MAX), /*Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D (only use from K to D)*/
-    [clarity]      varchar(MAX), /*I3, I2, I1, SI3, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL*/
+    [cut]          varchar(50), /*(Poor,) Fair, Good, Very_Good, Excellent*/
+    [color]        varchar(50), /*(Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,) K,J,I,H,G,F,E,D (only use from K to D)*/
+    [clarity]      varchar(50), /*I3, I2, I1, SI3, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL*/
     [carat_weight] decimal(19, 4), /* 0 to 10*/
     [note]         varchar(MAX),
 
@@ -176,13 +176,13 @@ create table [Diamond]
 create table [DiamondPriceList]
 (
     [diamond_price_id]  int identity (1,1),
-    [origin]            varchar(MAX),
-    [shape]             varchar(MAX),
+    [origin]            varchar(50),
+    [shape]             varchar(50),
     [carat_weight_from] decimal(19, 4),
     [carat_weight_to]   decimal(19, 4),
-    [color]             varchar(MAX),
-    [clarity]           varchar(MAX),
-    [cut]               varchar(MAX),
+    [color]             varchar(50),
+    [clarity]           varchar(50),
+    [cut]               varchar(50),
     [price]             decimal(19, 4),
     [effective_date]    datetime
         primary key ([diamond_price_id])

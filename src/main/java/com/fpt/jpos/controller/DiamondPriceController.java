@@ -1,5 +1,6 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.dto.DiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
@@ -15,20 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class DiamondPriceController {
     private final IDiamondPriceService diamondPriceService;
 
-    @GetMapping("/get-all")
-    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
-    public ResponseEntity<?> getAllDiamondPrice() {
-        ResponseEntity<?> response = ResponseEntity.noContent().build();
-
-        try {
-            response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice());
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-        }
-
-        return response;
-    }
-
     @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @PostMapping("/get-single-price")
     public ResponseEntity<?> getSingleDiamondPrice(@RequestBody DiamondPriceQueryDTO diamondPriceQueryDTO) {
@@ -38,6 +25,29 @@ public class DiamondPriceController {
             response = ResponseEntity.ok(diamondPriceService.getSingleDiamondPrice(diamondPriceQueryDTO));
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PreAuthorize("hasAnyAuthority('staff','admin')")
+    @PostMapping("/get-diamond-prices")
+    public ResponseEntity<?> getDiamondPrices(@RequestBody ListDiamondPriceQueryDTO listDiamondPriceQueryDTO,
+                                              @RequestParam(required = false, defaultValue = "0") int pageNo,
+                                              @RequestParam(required = false, defaultValue = "50") int pageSize) {
+        ResponseEntity<?> response;
+
+        System.out.println(listDiamondPriceQueryDTO.toString());
+
+        try {
+            response = ResponseEntity.ok(diamondPriceService.getDiamondPricesByQuery(
+                    listDiamondPriceQueryDTO,
+                    pageNo,
+                    pageSize
+            ));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response = ResponseEntity.status(400).build();
         }
 
         return response;
