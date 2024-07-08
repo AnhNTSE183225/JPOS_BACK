@@ -1,5 +1,9 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.pojo.MaterialPrice;
+
+import java.util.List;
+
 public interface IMaterialPriceService {
 
     Double getLatestPriceById(Integer id);
@@ -8,4 +12,5 @@ public interface IMaterialPriceService {
 
     boolean updateMaterialPrice(Double materialPrice, Integer materialId, String effectiveDate);
 
+    List<MaterialPrice> findAll();
 }

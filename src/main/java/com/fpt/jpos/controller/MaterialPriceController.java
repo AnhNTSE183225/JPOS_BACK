@@ -5,18 +5,34 @@ import com.fpt.jpos.rollbar.RollbarConfig;
 import com.fpt.jpos.service.IMaterialPriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/materialPrices")
 @RequiredArgsConstructor
+@CrossOrigin
 public class MaterialPriceController {
 
     private final IMaterialPriceService materialPriceService;
 
     private final RollbarConfig rollbarConfig;
 
-    @CrossOrigin
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    @GetMapping("/find-all")
+    public ResponseEntity<?> getAllMaterialPrices() {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(materialPriceService.findAll());
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getLatestMaterialPriceById(@PathVariable Integer id) {
 
@@ -30,8 +46,8 @@ public class MaterialPriceController {
     }
 
     // return true thôi chứ cũng không biết return cái gì nữa
-    @CrossOrigin
-    @PostMapping
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
+    @PostMapping("/add")
     public ResponseEntity<?> addMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceCreateResponse materialPriceCreateResponse) {
         if (materialPriceCreateResponse.materialId == null || materialPriceCreateResponse.materialPrice == null) {
             return ResponseEntity.noContent().build();
@@ -41,8 +57,8 @@ public class MaterialPriceController {
 
     // 2024-06-28 16:45:31.080
     // format ngày lấy giống trong db
-    @CrossOrigin
-    @PutMapping
+    @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
+    @PutMapping("/update")
     public ResponseEntity<?> updateMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceUpdateResponse materialPriceUpdateResponse) {
         if (materialPriceUpdateResponse.materialId == null || materialPriceUpdateResponse.materialPrice == null) {
             return ResponseEntity.noContent().build();

@@ -1,5 +1,6 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.dto.DiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.repository.IDiamondPriceRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,15 +21,13 @@ public class DiamondPriceService implements IDiamondPriceService {
 
     @Override
     public DiamondPrice addDiamondPrice(DiamondPrice diamondPrice) {
+        diamondPrice.setEffectiveDate(new Date());
         return diamondPriceRepository.save(diamondPrice);
     }
 
     @Override
-    public DiamondPrice updateDiamondPrice(Integer diamondPriceId, Double newPrice) {
-        DiamondPrice oldDiamondPrice = diamondPriceRepository.findById(diamondPriceId).orElseThrow();
-        oldDiamondPrice.setPrice(newPrice);
-
-        return diamondPriceRepository.save(oldDiamondPrice);
+    public int updateDiamondPrice(DiamondPrice diamondPrice) {
+        return diamondPriceRepository.update(diamondPrice.getPrice(), diamondPrice.getDiamondPriceId());
     }
 
     @Override
@@ -36,9 +36,8 @@ public class DiamondPriceService implements IDiamondPriceService {
     }
 
     @Override
-    public Page<DiamondPrice> getAllDiamondPrice(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return diamondPriceRepository.getAllDiamondPrice(pageable);
+    public List<DiamondPrice> getAllDiamondPrice() {
+        return diamondPriceRepository.getAllDiamondPrice();
     }
 
     @Override
@@ -51,5 +50,16 @@ public class DiamondPriceService implements IDiamondPriceService {
                 diamondPriceQueryDTO.getClarity().name(),
                 diamondPriceQueryDTO.getCut().name()
         );
+    }
+
+    @Override
+    public List<DiamondPrice> getDiamondPriceByOriginAndShapeAndCaratRange(String origin, String shape, Double caratFrom, Double caratTo) {
+        return diamondPriceRepository.getDiamondPriceByOriginAndShape(origin, shape, caratFrom, caratTo);
+    }
+
+    @Override
+    public Page<DiamondPrice> getDiamondPricesByQuery(ListDiamondPriceQueryDTO listDiamondPriceQueryDTO, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        return diamondPriceRepository.getDiamondPricesByQuery(listDiamondPriceQueryDTO.getListOrigin(), listDiamondPriceQueryDTO.getListShape(), listDiamondPriceQueryDTO.getListClarity(), listDiamondPriceQueryDTO.getListColor(), listDiamondPriceQueryDTO.getListCut(), listDiamondPriceQueryDTO.getMinCarat(), listDiamondPriceQueryDTO.getMaxCarat(), pageable);
     }
 }

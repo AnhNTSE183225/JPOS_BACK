@@ -11,5 +11,6 @@ public enum OrderStatus {
     production,
     delivered,
     wait_payment,
+    cancelled,
     completed
 }

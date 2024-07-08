@@ -16,7 +16,7 @@ GO
 create table [Account]
 (
     [username] varchar(255) not null,
-	[email] varchar(MAX) not null,
+    [email]    varchar(MAX) not null,
     [password] varchar(MAX) not null,
     [status]   bit          not null,
      [role]     varchar(MAX) not null, /*customer,staff,admin*/
@@ -64,7 +64,7 @@ create table [Order]
     [sale_staff_id]       int,
     [design_staff_id]     int,
     [production_staff_id] int,
-    [status]              varchar(MAX), /*wait_sale_staff,wait_manager,manager_approved,wait_customer,customer_accept,designing,pending_design,production,delivered,wait_payment,completed*/
+    [status]              varchar(MAX), /*wait_sale_staff,wait_manager,manager_approved,wait_customer,customer_accept,designing,pending_design,production,delivered,wait_payment,completed,cancelled*/
     [order_date]          datetime,
     [order_type]          varchar(MAX), /*customize,from_design*/
     [budget]              varchar(MAX),
@@ -87,7 +87,7 @@ create table [Order]
     [shipping_fee]        decimal(19, 4),
     [tax_fee]             decimal(19, 4),
     [discount]            decimal(19, 4),
-	[note]				  varchar(MAX),
+    [note]                varchar(MAX),
     primary key ([order_id]),
     foreign key ([product_id]) references [Product],
     foreign key ([customer_id]) references [Customer],
@@ -154,17 +154,17 @@ create table [Diamond]
     [diamond_code] varchar(MAX),
     [diamond_name] varchar(MAX),
 
-    [shape]        varchar(MAX), /*round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear*/
+    [shape]        varchar(50), /*round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear*/
 
-    [origin]       varchar(MAX), /*LAB_GROWN, NATURAL*/
+    [origin]       varchar(50), /*LAB_GROWN, NATURAL*/
     [proportions]  varchar(MAX), /*image link*/
     [fluorescence] varchar(MAX), /*None, Faint, Medium, Strong, Very_Strong*/
     [symmetry]     varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
     [polish]       varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
 
-    [cut]          varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
-    [color]        varchar(MAX), /*Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,K,J,I,H,G,F,E,D (only use from K to D)*/
-    [clarity]      varchar(MAX), /*I3, I2, I1, SI3, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL*/
+    [cut]          varchar(50), /*(Poor,) Fair, Good, Very_Good, Excellent*/
+    [color]        varchar(50), /*(Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,) K,J,I,H,G,F,E,D (only use from K to D)*/
+    [clarity]      varchar(50), /*I3, I2, I1, SI3, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL*/
     [carat_weight] decimal(19, 4), /* 0 to 10*/
     [note]         varchar(MAX),
 
@@ -176,16 +176,16 @@ create table [Diamond]
 create table [DiamondPriceList]
 (
     [diamond_price_id]  int identity (1,1),
-    [origin]            varchar(MAX),
-	[shape]				varchar(MAX),
-    [carat_weight_from]	decimal(19, 4),
-	[carat_weight_to]	decimal(19,4),
-    [color]             varchar(MAX),
-    [clarity]           varchar(MAX),
-    [cut]               varchar(MAX),
+    [origin]            varchar(50),
+    [shape]             varchar(50),
+    [carat_weight_from] decimal(19, 4),
+    [carat_weight_to]   decimal(19, 4),
+    [color]             varchar(50),
+    [clarity]           varchar(50),
+    [cut]               varchar(50),
     [price]             decimal(19, 4),
     [effective_date]    datetime
-    primary key ([diamond_price_id])
+        primary key ([diamond_price_id])
 )
 GO
 create table [ProductDiamond]
@@ -211,13 +211,13 @@ create table [ProductShellDesign]
     [shell_id]          int identity (1,1),
     [product_design_id] int,
     [shell_name]        varchar(MAX),
-	[image]				varchar(MAX),
+    [image]             varchar(MAX),
     [diamond_quantity]  int,
     [e_diamond_price]   decimal(19, 4),
     [e_material_price]  decimal(19, 4),
     [production_price]  decimal(19, 4),
     [markup_rate]       decimal(19, 4)
-    primary key ([shell_id]),
+        primary key ([shell_id]),
     foreign key ([product_design_id]) references [ProductDesign]
 )
 go
@@ -233,10 +233,9 @@ create table [ProductShellMaterial]
 go
 
 
-
-
--- Inserting into Diamond table
 /*
+-- Inserting into Diamond table
+
 INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [image], [active]) VALUES
 ('DC001', 'Diamond A', 'round', 'LAB_GROWN', 'https://example.com/image1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.5000, 'A beautiful lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
 ('DC002', 'Diamond B', 'princess', 'NATURAL', 'https://example.com/image2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'E', 'IF', 2.0000, 'A natural diamond with faint fluorescence', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
@@ -299,26 +298,15 @@ INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_w
 go
 */
 insert into [Account]
-values ('user_admin','anhtnse183225@fpt.edu.vn', '123', 1, 'admin'),
-       ('user_customer_01', 'anhtnse183225@fpt.edu.vn' ,'123', 1, 'customer'),
-       ('user_customer_02','anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
-       ('user_customer_03','anhtnse183225@fpt.edu.vn', '123', 1, 'customer'),
-       ('user_sale_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_design_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_manager','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('user_production_staff','anhtnse183225@fpt.edu.vn', '123', 1, 'staff'),
-       ('disabled_user_account','anhtnse183225@fpt.edu.vn', '323', 0, 'customer')
+values ('admin', 'admin@gmail.com', '$2a$10$w.D7u6ER7AmFamDj7lSSHe5TCnVRkr5gtlA4Ji9JFWSFWU0WDWUUe', 1, 'admin'),
+       ('nguyen', 'nguyen@gmail.com', '$2a$10$pmL28xzaY6XueEJzEMIyzua48PIOpf9bBsXj5oF95M2ZzSWNRxunK', 1, 'customer'),
+       ('manage', 'test@gmail.com', '$2a$10$S03I4mUWnhDpn4YVAaDV6eRmg3cG2Zh1w/ZhBM8yM0ndiElfAlmkC', 1, 'staff')
 go
 insert into [Staff]([username], [name], [phone], [staff_type])
-values ('user_sale_staff', 'Nguyen', '0123456789', 'sale'),
-       ('user_design_staff', 'Tran', '0192301823', 'design'),
-       ('user_production_staff', 'Le', '08289304728', 'produce'),
-       ('user_manager', 'Thanh', '02938492893', 'manage')
+values ('manage', 'Manager', '02938492893', 'manage')
 go
 insert into [Customer]([username], [name], [address])
-values ('user_customer_01', 'Minh', '123 Becker Street'),
-       ('user_customer_02', 'Binh', '234 New York'),
-       ('user_customer_03', 'Hannah', '999 6th Avenue')
+values ('nguyen', 'Minh', '123 Becker Street')
 go
 --Insert into Material
 insert into [Material]([material_name])
@@ -332,28 +320,27 @@ values ('gold_sjc'),
 go
 --Insert into MaterialPriceList
 insert into [MaterialPriceList]
-values
-(1,'2024-05-27 15:16:00',5525),
-(2,'2024-05-27 15:16:00',5200),
-(3,'2024-05-27 15:16:00',7700),
-(4,'2024-05-27 15:16:00',5300),
-(5,'2024-05-27 15:16:00',5450),
-(6,'2024-05-27 15:16:00',5000),
-(1,'2024-05-28 15:16:00',5500),
-(2,'2024-05-28 15:16:00',5250),
-(3,'2024-05-28 15:16:00',7690),
-(4,'2024-05-28 15:16:00',5330),
-(5,'2024-05-28 15:16:00',5500),
-(6,'2024-05-28 15:16:00',5120),
-(1,'2024-05-29 15:16:00',5555),
-(2,'2024-05-29 15:16:00',5274),
-(3,'2024-05-29 15:16:00',7780),
-(4,'2024-05-29 15:16:00',5385),
-(5,'2024-05-29 15:16:00',5621),
-(6,'2024-05-29 15:16:00',5234),
-(1,'2024-05-30 15:16:00',5543),
-(2,'2024-05-30 15:16:00',5301),
-(7,'2024-05-30 15:16:00',1000)
+values (1, '2024-05-27 15:16:00', 5525),
+       (2, '2024-05-27 15:16:00', 5200),
+       (3, '2024-05-27 15:16:00', 7700),
+       (4, '2024-05-27 15:16:00', 5300),
+       (5, '2024-05-27 15:16:00', 5450),
+       (6, '2024-05-27 15:16:00', 5000),
+       (1, '2024-05-28 15:16:00', 5500),
+       (2, '2024-05-28 15:16:00', 5250),
+       (3, '2024-05-28 15:16:00', 7690),
+       (4, '2024-05-28 15:16:00', 5330),
+       (5, '2024-05-28 15:16:00', 5500),
+       (6, '2024-05-28 15:16:00', 5120),
+       (1, '2024-05-29 15:16:00', 5555),
+       (2, '2024-05-29 15:16:00', 5274),
+       (3, '2024-05-29 15:16:00', 7780),
+       (4, '2024-05-29 15:16:00', 5385),
+       (5, '2024-05-29 15:16:00', 5621),
+       (6, '2024-05-29 15:16:00', 5234),
+       (1, '2024-05-30 15:16:00', 5543),
+       (2, '2024-05-30 15:16:00', 5301),
+       (7, '2024-05-30 15:16:00', 1000)
 go
 --Insert into ProductDesign
 insert into [ProductDesign]
@@ -399,8 +386,8 @@ values ('Four Stone Emerald Diamond Engagement Ring In Platinum', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/192274/RND/Images/gallery.jpg'),
        ('Two-Tone Intertwined Double Halo Diamond Engagement Ring In 14k White And Yellow Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/193494/RND/Images/gallery.jpg'),
-		('SUNFLOWER DIAMOND PENDANT NECKLACE 14K YELLOW GOLD (0.19CT)', 'Necklace',
-		'https://d2d22nphq0yz8t.cloudfront.net/35aee99d-95d9-46a2-9030-ab04199b35ba/https://images.allurez.com/productimages/large/C15059-14Y.jpg')
+       ('SUNFLOWER DIAMOND PENDANT NECKLACE 14K YELLOW GOLD (0.19CT)', 'Necklace',
+        'https://d2d22nphq0yz8t.cloudfront.net/35aee99d-95d9-46a2-9030-ab04199b35ba/https://images.allurez.com/productimages/large/C15059-14Y.jpg')
 go
 -- Insert into ProductShellDesign
 DECLARE @design_id INT = 1;
@@ -420,31 +407,46 @@ GO
 -- Insert into ProductShellMaterial
 DECLARE @shell_id INT = 1;
 
-WHILE @shell_id <= 63  -- 21 designs * 3 shells each
-BEGIN
-    INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
-    VALUES 
-    (@shell_id, 1, 0.96), -- gold
-    (@shell_id + 1, 3, 0.96), -- platinum
-    (@shell_id + 2, 7, 0.96); -- silver
-    
-    SET @shell_id = @shell_id + 3;
-END;
+WHILE @shell_id <= 63 -- 21 designs * 3 shells each
+    BEGIN
+        INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
+        VALUES (@shell_id, 1, 0.96),     -- gold
+               (@shell_id + 1, 3, 0.96), -- platinum
+               (@shell_id + 2, 7, 0.96); -- silver
+
+        SET @shell_id = @shell_id + 3;
+    END;
 GO
-select * from [Account]
-select * from [Customer]
-select * from [Diamond]
-select * from [DiamondPriceList]
-select * from [Material]
-select * from [MaterialPriceList]
-select * from [Order]
-select * from [Payment]
-select * from [Product]
-select * from [ProductDesign]
-select * from [ProductDiamond]
-select * from [ProductMaterial]
-select * from [ProductShellDesign]
-select * from [ProductShellMaterial]
-select * from [Staff]
-select * from [Warranty]
+select *
+from [Account]
+select *
+from [Customer]
+select *
+from [Diamond]
+select *
+from [DiamondPriceList]
+select *
+from [Material]
+select *
+from [MaterialPriceList]
+select *
+from [Order]
+select *
+from [Payment]
+select *
+from [Product]
+select *
+from [ProductDesign]
+select *
+from [ProductDiamond]
+select *
+from [ProductMaterial]
+select *
+from [ProductShellDesign]
+select *
+from [ProductShellMaterial]
+select *
+from [Staff]
+select *
+from [Warranty]
 go

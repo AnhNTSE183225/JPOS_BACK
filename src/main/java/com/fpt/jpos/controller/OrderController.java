@@ -6,17 +6,18 @@ import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.service.IFileUploadService;
 import com.fpt.jpos.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class OrderController {
 
@@ -32,7 +33,6 @@ public class OrderController {
     }
 
     //Test - get all Orders
-    @CrossOrigin
     @GetMapping("/order/all")
     public ResponseEntity<?> getAllOrders() {
         return ResponseEntity.ok(orderService.findAll());
@@ -40,8 +40,8 @@ public class OrderController {
 
 
     //User uploads image
-    @CrossOrigin
     @PostMapping("/upload")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> uploadImage(@RequestParam MultipartFile file) {
         try {
             return ResponseEntity.ok(fileUploadService.upload(file));
@@ -52,8 +52,8 @@ public class OrderController {
     }
 
     // Customer send request - 1st flow
-    @CrossOrigin
     @PostMapping("/send-request")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<Order> saveCustomerRequest(@RequestBody CustomerRequestDTO customerRequestDTO) {
 
         Order newOrder = orderService.insertOrder(customerRequestDTO);
@@ -62,8 +62,8 @@ public class OrderController {
     }
 
     // Get all orders for customer
-    @CrossOrigin
     @GetMapping("/customers/{customerId}/orders")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> getOrdersForCustomer(@PathVariable Integer customerId) {
         List<Order> requestList = orderService.getOrdersByCustomerId(customerId);
         if (requestList.isEmpty()) {
@@ -74,8 +74,8 @@ public class OrderController {
     }
 
     // Sale staff view orders list
-    @CrossOrigin
     @GetMapping("/sales/orders/{staffId}")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> getAllOrdersForSaleStaff(@PathVariable int staffId) {
 
         List<Order> requestList = orderService.getOrderForSalesStaff(staffId);
@@ -88,7 +88,7 @@ public class OrderController {
     }
 
     // Staff sends quotation to manager
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/sales/orders/{staffId}/{productId}")
     public ResponseEntity<?> retrieveQuotationFromStaff(@RequestBody Order order, @PathVariable Integer productId, @PathVariable int staffId) {
         try {
@@ -99,7 +99,7 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @GetMapping("/manager/orders")
     public ResponseEntity<?> getOrderForManager() {
         List<Order> orderList = orderService.getOrderForManager();
@@ -111,15 +111,15 @@ public class OrderController {
     }
 
     // Manager accept or decline quotation
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/{id}/manager-response")
     public ResponseEntity<String> getManagerResponse(@PathVariable Integer id, @RequestParam boolean managerApproval, @RequestBody ManagerResponseDTO managerResponseDTO) {
         String status = orderService.handleManagerResponse(id, managerApproval, managerResponseDTO);
         return ResponseEntity.ok(status);
     }
 
-    // After manager accepted, sale staff forward quotation to customer
-    @CrossOrigin
+    // After manager accepted, sale staff forward quotation to customer\
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/{id}/forward-quotation")
     public ResponseEntity<String> forwardQuotation(@PathVariable Integer id) {
         OrderStatus status = orderService.forwardQuotation(id);
@@ -127,7 +127,7 @@ public class OrderController {
     }
 
     // Customer accept quotation
-    @CrossOrigin
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @PutMapping("/accept-quotation")
     public ResponseEntity<?> acceptQuotation(@RequestParam Integer orderId) {
         try {
@@ -137,8 +137,8 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
     @GetMapping("/sales/order-select/{id}")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<?> findOrderById(@PathVariable int id) {
         Order order = orderService.findById(id);
         if (order == null) {
@@ -149,8 +149,8 @@ public class OrderController {
     }
 
     // Update order status to designing after confirming deposit
-    @CrossOrigin
     @PutMapping("/sales/orders/{id}/confirm-deposit")
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> confirmDeposit(@PathVariable int id, @RequestBody PaymentRestDTO.PaymentRequest payment) {
         Order order = orderService.updateOrderStatusDesigning(id, payment);
         if (order == null) {
@@ -161,8 +161,8 @@ public class OrderController {
     }
 
     //  design staff view orders list
-    @CrossOrigin
     @GetMapping("/designs/orders/{staffId}")
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> getAllOrdersForDesignStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForDesignStaff(staffId);
 
@@ -175,9 +175,9 @@ public class OrderController {
 
 
     // Upload file by design staff
-    @CrossOrigin
     @PostMapping("/designs/upload/{orderId}")
-    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) throws IOException {
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
+    public ResponseEntity<?> uploadDesign(@RequestBody String imageUrls, @PathVariable Integer orderId) {
         ResponseEntity<?> responseEntity = ResponseEntity.noContent().build();
 
         String decodedUrls = URLDecoder.decode(imageUrls, StandardCharsets.UTF_8);
@@ -196,7 +196,7 @@ public class OrderController {
     }
 
     // Customer accept design
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/customers/{orderId}/acceptDesign")
     public ResponseEntity<?> acceptDesign(@PathVariable Integer orderId) {
         Order theOrder = orderService.updateOrderStatusProduction(orderId);
@@ -207,7 +207,7 @@ public class OrderController {
     }
 
     //Customer refuses design
-    @CrossOrigin
+    @PreAuthorize("hasAnyAuthority('admin','customer','staff')")
     @PostMapping("/customers/{orderId}/refuseDesign")
     public ResponseEntity<?> refuseDesign(@PathVariable Integer orderId, @RequestBody NoteDTO noteDTO) {
         Order theOrder = orderService.updateOrderStatusDesigning(orderId, noteDTO);
@@ -218,7 +218,7 @@ public class OrderController {
     }
 
     //  production staff view orders list
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @GetMapping("/production/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForProductionStaff(@PathVariable int staffId) {
         List<Order> requestList = orderService.getOrderForProductionStaff(staffId);
@@ -230,7 +230,7 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/{id}/complete-product")
     public ResponseEntity<?> completeProduct(@PathVariable Integer id, @RequestBody String imageUrls) {
         try {
@@ -247,7 +247,7 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/orders/{orderId}/complete")
     public ResponseEntity<Order> completeOrder(@PathVariable Integer orderId) {
         Order order = orderService.completeOrder(orderId);
@@ -255,7 +255,7 @@ public class OrderController {
 
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/create-order-from-design")
     public ResponseEntity<?> createOrderFromDesign(@RequestBody ProductDesignDTO productDesignDTO) {
         try {
@@ -266,10 +266,24 @@ public class OrderController {
         }
     }
 
-    @CrossOrigin
+    @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
+    @PostMapping("/cancel-order/{orderId}")
+    public ResponseEntity<?> cancelOrder(@PathVariable Integer orderId) {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(orderService.cancelOrder(orderId));
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+        }
+
+        return response;
+    }
+
+    @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/assign")
     public ResponseEntity<?> assign(@RequestParam int orderId,
-                                    @RequestParam(required = false) Integer  saleStaffId,
+                                    @RequestParam(required = false) Integer saleStaffId,
                                     @RequestParam(required = false) Integer designStaffId,
                                     @RequestParam(required = false) Integer productionStaffId) {
         try {

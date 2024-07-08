@@ -4,18 +4,16 @@ import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService implements IOrderService {
 
     private final IOrderRepository orderRepository;
@@ -42,21 +40,7 @@ public class OrderService implements IOrderService {
 
     private final IMaterialPriceService materialPriceService;
 
-    @Autowired
-    public OrderService(IOrderRepository orderRepository, ICustomerRepository customerRepository, IStaffRepository staffRepository, IPaymentRepository paymentRepository, IProductRepository productRepository, IProductShellDesignRepository productShellDesignRepository, IProductDesignRepository productDesignRepository, IProductShellMaterialRepository productShellMaterialRepository, IProductMaterialRepository productMaterialRepository, IDiamondRepository diamondRepository, IDiamondPriceService diamondPriceService, IMaterialPriceService materialPriceService) {
-        this.orderRepository = orderRepository;
-        this.customerRepository = customerRepository;
-        this.staffRepository = staffRepository;
-        this.paymentRepository = paymentRepository;
-        this.productRepository = productRepository;
-        this.productShellDesignRepository = productShellDesignRepository;
-        this.productDesignRepository = productDesignRepository;
-        this.productShellMaterialRepository = productShellMaterialRepository;
-        this.productMaterialRepository = productMaterialRepository;
-        this.diamondRepository = diamondRepository;
-        this.diamondPriceService = diamondPriceService;
-        this.materialPriceService = materialPriceService;
-    }
+    private final IWarrantyRepository warrantyRepository;
 
     @Override
     @Transactional
@@ -69,7 +53,7 @@ public class OrderService implements IOrderService {
             order.setTotalAmount(managerResponseDTO.getTotalAmount());
             order.setStatus(OrderStatus.manager_approved);
         } else {
-            order.setStatus(OrderStatus.wait_manager);
+            order.setStatus(OrderStatus.wait_sale_staff);
         }
 
         orderRepository.save(order);
@@ -266,8 +250,21 @@ public class OrderService implements IOrderService {
     @Transactional
     public Order completeOrder(Integer orderId) {
 
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.YEAR, 3);
+        Date endOfSupportDate = calendar.getTime();
+
         Order order = orderRepository.findById(orderId).orElseThrow();
         Payment payment = paymentRepository.findPaymentByOrderId(orderId);
+        Warranty warranty = Warranty.builder()
+                .customer(order.getCustomer())
+                .product(order.getProduct())
+                .purchaseDate(today)
+                .endOfSupportDate(endOfSupportDate)
+                .build();
+        warrantyRepository.save(warranty);
 
         payment.setAmountPaid(order.getTotalAmount());
         payment.setPaymentStatus("Fully paid");
@@ -315,6 +312,8 @@ public class OrderService implements IOrderService {
 
         for (Integer id : productDesignDTO.getDiamondIds()) {
             Diamond diamond = diamondRepository.findById(id).orElseThrow();
+            diamond.setActive(false);
+            diamond = diamondRepository.save(diamond);
             diamonds.add(diamond);
             DiamondPriceQueryDTO query = new DiamondPriceQueryDTO(
                     diamond.getOrigin(),
@@ -396,6 +395,14 @@ public class OrderService implements IOrderService {
         Order order = orderRepository.findById(orderId).orElseThrow();
         order.setModelFile(imageUrls);
         order.setStatus(OrderStatus.pending_design);
+        return orderRepository.save(order);
+    }
+
+    @Override
+    @Transactional
+    public Order cancelOrder(Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.setStatus(OrderStatus.cancelled);
         return orderRepository.save(order);
     }
 

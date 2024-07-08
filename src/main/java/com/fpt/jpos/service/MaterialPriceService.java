@@ -66,4 +66,9 @@ public class MaterialPriceService implements IMaterialPriceService {
         }
         return false;
     }
+
+    @Override
+    public List<MaterialPrice> findAll() {
+        return materialPriceRepository.findAll();
+    }
 }

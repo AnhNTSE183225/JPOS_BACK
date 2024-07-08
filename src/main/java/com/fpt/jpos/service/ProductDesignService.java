@@ -1,18 +1,19 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.ProductDesign;
+import com.fpt.jpos.pojo.ProductShellDesign;
 import com.fpt.jpos.repository.IProductDesignRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductDesignService implements IProductDesignService {
 
-    @Autowired
-    private IProductDesignRepository productDesignRepository;
+    private final IProductDesignRepository productDesignRepository;
 
     @Override
     public List<ProductDesign> getProductDesigns() {
@@ -38,5 +39,13 @@ public class ProductDesignService implements IProductDesignService {
     @Override
     public ProductDesign findById(Integer productDesignId) {
         return productDesignRepository.findById(productDesignId).orElseThrow();
+    }
+
+    @Override
+    public ProductDesign update(ProductDesign productDesign) {
+        for(ProductShellDesign shell : productDesign.getProductShellDesigns()) {
+            shell.setProductDesign(productDesign);
+        }
+        return productDesignRepository.save(productDesign);
     }
 }

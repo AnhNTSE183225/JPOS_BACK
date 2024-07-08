@@ -41,15 +41,27 @@ def find_properties(values):
             cut = value.text.replace("Cut Grade","").strip().replace(" ","_")
         if "Fluorescence" in value.text:
             fluorescence = value.text.replace("Fluorescence","").strip().replace(" ","_")
-            if fluorescence not in ['None', 'Faint', 'Medium', 'Strong', 'Very_Strong']:
-                fluorescence = 'None'
         if "Polish" in value.text:
             polish = value.text.replace("Polish","").strip().replace(" ","_")
         if "Symmetry" in value.text:
             symmetry = value.text.replace("Symmetry","").strip().replace(" ","_")
         if "Measurements" in value.text:
             proportions = value.text.replace("Measurements","").strip()
-        
+    
+    if fluorescence not in ['None', 'Faint', 'Medium', 'Strong', 'Very_Strong']:
+        fluorescence = 'None'
+    if shape not in ['round', 'princess', 'cushion', 'emerald', 'oval', 'radiant', 'asscher', 'marquise', 'heart', 'pear']:
+        shape = 'round'
+    if symmetry not in ['Poor', 'Fair', 'Good', 'Very_Good', 'Excellent']:
+        symmetry = 'Good'
+    if polish not in ['Poor', 'Fair', 'Good', 'Very_Good', 'Excellent']:
+        polish = 'Good'
+    if cut not in ['Poor', 'Fair', 'Good', 'Very_Good', 'Excellent']:
+        cut = 'Good'
+    if cut == 'Ideal':
+        cut = 'Excellent'
+    if clarity not in ['I3', 'I2', 'I1', 'SI3', 'SI2', 'SI1', 'VS2', 'VS1', 'VVS2', 'VVS1', 'IF', 'FL']:
+        clarity = 'SI1'
         
     return diamondCode, price, shape, caratWeight, color, clarity, cut, fluorescence, polish, symmetry, proportions
 
