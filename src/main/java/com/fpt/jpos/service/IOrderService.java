@@ -54,5 +54,6 @@ public interface IOrderService {
 
     Order cancelOrder(Integer orderId);
 
+    List<Order> findCompletedOrders();
     //TODO Update production staff id when production staff select delivered
 }

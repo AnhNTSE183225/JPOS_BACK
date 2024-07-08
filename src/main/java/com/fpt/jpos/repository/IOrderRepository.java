@@ -22,6 +22,9 @@ public interface IOrderRepository extends JpaRepository<Order, Integer> {
     @Query(value = "SELECT * FROM [Order] WHERE status = 'production' and production_staff_id = ?1", nativeQuery = true)
     List<Order> findOrdersForProductionStaff(int productionStaffId);
 
+    @Query(value= "SELECT * FROM [Order] WHERE status = 'completed'", nativeQuery=true)
+    List<Order> findCompletedOrders();
+
     @Query(value = "SELECT * FROM [Order] WHERE status = 'wait_manager'", nativeQuery = true)
     List<Order> findOrdersForManager();
 }

@@ -406,4 +406,9 @@ public class OrderService implements IOrderService {
         return orderRepository.save(order);
     }
 
+    @Override
+    public List<Order> findCompletedOrders() {
+        return orderRepository.findCompletedOrders();
+    }
+
 }

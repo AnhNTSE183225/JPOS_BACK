@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -54,5 +55,10 @@ public class PaymentService implements IPaymentService {
                 .code("ok")
                 .message("success")
                 .paymentUrl(paymentUrl).build();
+    }
+
+    @Override
+    public List<Payment> findAll() {
+        return paymentRepository.findAll();
     }
 }
