@@ -27,7 +27,7 @@ public class Material {
 
     @JsonIgnore
     @OneToMany(mappedBy = "material",
-            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<MaterialPrice> materialPrices;
 
     @JsonIgnore

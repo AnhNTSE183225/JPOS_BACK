@@ -14,10 +14,11 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
+.idea/workspace.xml
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +32,5 @@ build/
 
 ### VS Code ###
 .vscode/
+.idea/
+.idea/workspace.xml

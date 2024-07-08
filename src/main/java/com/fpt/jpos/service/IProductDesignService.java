@@ -12,4 +12,5 @@ public interface IProductDesignService {
 
     ProductDesign findById(Integer productDesignId);
 
+    ProductDesign update(ProductDesign productDesign);
 }

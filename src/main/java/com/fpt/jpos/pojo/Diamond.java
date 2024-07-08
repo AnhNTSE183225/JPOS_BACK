@@ -78,4 +78,5 @@ public class Diamond {
     @ManyToMany(mappedBy = "diamonds")
     @JsonIgnore
     List<Product> products = new ArrayList<>();
+
 }

@@ -1,63 +1,65 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.dto.Diamond4CDTO;
-import com.fpt.jpos.dto.DiamondPriceProjection;
+import com.fpt.jpos.dto.DiamondPriceQueryDTO;
+import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.repository.IDiamondPriceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DiamondPriceService implements IDiamondPriceService {
 
     private final IDiamondPriceRepository diamondPriceRepository;
 
-    @Autowired
-    public DiamondPriceService(IDiamondPriceRepository diamondPriceRepository) {
-        this.diamondPriceRepository = diamondPriceRepository;
-    }
-
-
     @Override
-    public Double getDiamondPricesBy4C(Diamond4CDTO diamond4CDTO) {
-
-        List<DiamondPrice> diamondPriceList = diamondPriceRepository.findDiamondBy4C(diamond4CDTO.getCaratWeight(), diamond4CDTO.getClarity().name(), diamond4CDTO.getColor().name(), diamond4CDTO.getCut().name(), diamond4CDTO.getShape().name());
-
-        Date today = Calendar.getInstance().getTime(); // get today time
-
-        // Sort the list by date in descending order so the most recent date comes first
-        diamondPriceList.sort((p1, p2) -> p2.getEffectiveDate().compareTo(p1.getEffectiveDate()));
-
-        double result = 0;
-
-        for (DiamondPrice diamondPrice : diamondPriceList) {
-            if (diamondPrice.getEffectiveDate().compareTo(today) <= 0) {
-                result = diamondPrice.getPrice();
-                break;
-            }
-        }
-        if (diamondPriceList.isEmpty()) {
-            throw new RuntimeException("Diamond Price not found");
-        }
-        return result;
+    public DiamondPrice addDiamondPrice(DiamondPrice diamondPrice) {
+        diamondPrice.setEffectiveDate(new Date());
+        return diamondPriceRepository.save(diamondPrice);
     }
 
     @Override
-    public List<DiamondPrice> getDiamondPrices(int pageNo, int pageSize) {
+    public int updateDiamondPrice(DiamondPrice diamondPrice) {
+        return diamondPriceRepository.update(diamondPrice.getPrice(), diamondPrice.getDiamondPriceId());
+    }
+
+    @Override
+    public void deletePrice(Integer diamondPriceId) {
+        diamondPriceRepository.deleteById(diamondPriceId);
+    }
+
+    @Override
+    public List<DiamondPrice> getAllDiamondPrice() {
+        return diamondPriceRepository.getAllDiamondPrice();
+    }
+
+    @Override
+    public Double getSingleDiamondPrice(DiamondPriceQueryDTO diamondPriceQueryDTO) {
+        return diamondPriceRepository.getSingleDiamondPrice(
+                diamondPriceQueryDTO.getOrigin().name(),
+                diamondPriceQueryDTO.getShape().name(),
+                diamondPriceQueryDTO.getCaratWeight(),
+                diamondPriceQueryDTO.getColor().name(),
+                diamondPriceQueryDTO.getClarity().name(),
+                diamondPriceQueryDTO.getCut().name()
+        );
+    }
+
+    @Override
+    public List<DiamondPrice> getDiamondPriceByOriginAndShapeAndCaratRange(String origin, String shape, Double caratFrom, Double caratTo) {
+        return diamondPriceRepository.getDiamondPriceByOriginAndShape(origin, shape, caratFrom, caratTo);
+    }
+
+    @Override
+    public Page<DiamondPrice> getDiamondPricesByQuery(ListDiamondPriceQueryDTO listDiamondPriceQueryDTO, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<DiamondPrice> page = diamondPriceRepository.findAll(pageable);
-        return page.getContent();
-    }
-
-    @Override
-    public List<DiamondPriceProjection> getDiamondPrices() {
-        return diamondPriceRepository.getDiamondPrices();
+        return diamondPriceRepository.getDiamondPricesByQuery(listDiamondPriceQueryDTO.getListOrigin(), listDiamondPriceQueryDTO.getListShape(), listDiamondPriceQueryDTO.getListClarity(), listDiamondPriceQueryDTO.getListColor(), listDiamondPriceQueryDTO.getListCut(), listDiamondPriceQueryDTO.getMinCarat(), listDiamondPriceQueryDTO.getMaxCarat(), pageable);
     }
 }

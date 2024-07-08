@@ -1,87 +1,89 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.dto.DiamondQuery;
+import com.fpt.jpos.dto.DiamondQueryDTO;
 import com.fpt.jpos.pojo.Diamond;
-
 import com.fpt.jpos.service.IDiamondService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/diamond")
+@RequiredArgsConstructor
+@CrossOrigin
 public class DiamondController {
-
 
     private final IDiamondService diamondService;
 
-    @Autowired
-    public DiamondController(IDiamondService diamondService) {
-        this.diamondService = diamondService;
-    }
+    @GetMapping("/get-all")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    public ResponseEntity<?> getAllDiamond() {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
 
-    @CrossOrigin
-    @GetMapping("/get-diamonds-by-4C")
-    public ResponseEntity<?> findDiamondBy4C(@RequestParam Double fromCaratWeight,
-                                             @RequestParam Double toCaratWeight,
-                                             @RequestParam String clarity,
-                                             @RequestParam String color,
-                                             @RequestParam String cut,
-                                             @RequestParam String shape) {
-
-        List<Diamond> diamondList = diamondService.findDiamondsBy4C(fromCaratWeight, toCaratWeight, clarity, color, cut, shape);
-
-        if (diamondList == null || diamondList.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamondList);
-        }
-    }
-
-    @CrossOrigin
-    @GetMapping("/diamonds")
-    public ResponseEntity<?> getAllDiamonds(
-            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
-    ) {
         try {
-            return ResponseEntity.ok(diamondService.getAllDiamonds(pageNo, pageSize));
+            response = ResponseEntity.ok(diamondService.getAllDiamond());
         } catch (Exception ex) {
-            return ResponseEntity.noContent().build();
+            System.out.println(ex.getLocalizedMessage());
         }
+
+        return response;
     }
 
-    @CrossOrigin
-    @PostMapping("/diamonds/query")
-    public ResponseEntity<?> diamondQuery(@RequestBody DiamondQuery diamondQuery, @RequestParam int pageNo, @RequestParam int pageSize) {
-        List<Diamond> diamonds = diamondService.diamondQuery(diamondQuery, pageNo, pageSize);
-        if (diamonds == null || diamonds.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamonds);
-        }
-    }
+    @GetMapping("/get-by-id/{diamondId}")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    public ResponseEntity<?> getDiamondById(@PathVariable int diamondId) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
 
-    @CrossOrigin
-    @PostMapping("/get-multiple-diamonds-by-id")
-    public ResponseEntity<?> getMultipleDiamondsById(@RequestBody List<Integer> diamondIds) {
-        List<Diamond> diamondList = diamondService.getDiamondsById(diamondIds);
-        if(diamondList == null || diamondList.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamondList);
-        }
-    }
-
-    @CrossOrigin
-    @GetMapping("/diamonds/{diamondId}")
-    public ResponseEntity<?> getDiamondById(@PathVariable Integer diamondId) {
         try {
-            return ResponseEntity.ok(diamondService.findById(diamondId));
+            response = ResponseEntity.ok(diamondService.getDiamondById(diamondId));
         } catch (Exception ex) {
-            return ResponseEntity.noContent().build();
+            System.out.println(ex.getLocalizedMessage());
         }
+
+        return response;
+    }
+
+    @PostMapping("/get-diamond-with-price-by-4C")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    public ResponseEntity<?> getDiamondWithPriceBy4C(@RequestBody DiamondQueryDTO diamondQueryDTO, @RequestParam int pageNo, @RequestParam int pageSize) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondService.getDiamondWithPriceBy4C(diamondQueryDTO, pageNo, pageSize));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    public ResponseEntity<?> updateDiamond(@RequestBody Diamond diamond) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondService.updateDiamond(diamond));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @DeleteMapping("/delete/{diamondId}")
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    public ResponseEntity<?> deleteDiamond(@PathVariable int diamondId) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            diamondService.deleteDiamond(diamondId);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
     }
 }

@@ -1,16 +1,15 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class CustomerController {
     private final ICustomerService customerService;
 
@@ -19,25 +18,47 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @CrossOrigin
-    @PostMapping("/customer-login")
-    public ResponseEntity<Customer> login(@RequestBody Account account) {
-        Customer customer = customerService.loginCustomer(account);
-        if (customer == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } else {
-            return ResponseEntity.ok(customer);
+    @GetMapping("/customer/get-all")
+    @PreAuthorize("hasAuthority('admin')")
+    public ResponseEntity<?> getAllCustomers() {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(customerService.findAll());
+        } catch (Exception e) {
+            response = ResponseEntity.status(400).build();
         }
+
+        return response;
     }
 
-    @CrossOrigin
-    @PostMapping("/customer-register")
-    public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistrationDTO customerRegistrationDTO) {
-        Customer newCustomer = customerService.registerCustomer(customerRegistrationDTO);
-        if(newCustomer != null) {
-            return ResponseEntity.ok(newCustomer);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) {
+        ResponseEntity<?> responseEntity;
+
+        try {
+            responseEntity = ResponseEntity.ok(customerService.updateCustomer(customer));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            responseEntity = ResponseEntity.status(409).build();
         }
+
+        return responseEntity;
+    }
+
+    @DeleteMapping("/customer/delete/{id}")
+    @PreAuthorize("hasAuthority('admin')")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+        ResponseEntity<?> response;
+
+        try {
+            customerService.delete(id);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            response = ResponseEntity.status(409).build();
+        }
+
+        return response;
     }
 }
