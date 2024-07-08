@@ -1,59 +1,42 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.pojo.Account;
-import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.service.ILoginGoogleService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.Map;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
-@RestController
-@RequestMapping("/api")
+@Controller
+@RequestMapping("/login/google")
 public class LoginGoogleController {
-    private final ILoginGoogleService loginGoogleService;
 
     @Autowired
-    public LoginGoogleController(ILoginGoogleService loginGoogleService) {
-        this.loginGoogleService = loginGoogleService;
+    private ILoginGoogleService loginGoogleService;
+
+    @GetMapping
+    public String loginWithGoogle() {
+        return "redirect:/oauth2/authorization/google";
     }
 
-    @CrossOrigin
-    @GetMapping("/get-google-account")
-    public Map<String, Object> currentUser(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
-        return oAuth2AuthenticationToken.getPrincipal().getAttributes();
-    }
+    @GetMapping("/success")
+    public String handleGoogleLogin() {
+        // Lấy thông tin người dùng từ Authentication object
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof OAuth2AuthenticationToken) {
+            OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
+            OAuth2User oAuth2User = oAuth2AuthenticationToken.getPrincipal();
 
-    @CrossOrigin
-    @PostMapping("/customer-google-login")
-    public ResponseEntity<Customer> login(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
-        Account account = new Account();
-        account.setUsername((String) oAuth2AuthenticationToken.getPrincipal().getAttributes().get("sub"));
-        account.setPassword("no");
-        Customer customer = loginGoogleService.loginGoogleCustomer(account);
-        if (customer == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } else {
-            return ResponseEntity.ok(customer);
+            // In thông tin người dùng
+            System.out.println("User's Name: " + oAuth2User.getAttribute("name"));
+            System.out.println("User's Email: " + oAuth2User.getAttribute("email"));
+            System.out.println("User's Profile Picture: " + oAuth2User.getAttribute("picture"));
         }
-    }
 
-    @CrossOrigin
-    @PostMapping("/customer-google-register")
-    public ResponseEntity<Customer> customerRegister(@RequestBody CustomerRegistrationDTO customerRegistrationDTO) {
-        Customer newCustomer = loginGoogleService.registerCustomer(customerRegistrationDTO);
-        if(newCustomer != null) {
-            return ResponseEntity.ok(newCustomer);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+        // Chuyển hướng đến trang chủ hoặc trang khác tùy ý
+        return "redirect:/";
     }
-
 }
