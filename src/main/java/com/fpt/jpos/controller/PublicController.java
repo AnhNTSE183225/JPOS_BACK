@@ -1,7 +1,10 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.Material;
-import com.fpt.jpos.service.*;
+import com.fpt.jpos.service.IDiamondPriceService;
+import com.fpt.jpos.service.IDiamondService;
+import com.fpt.jpos.service.IMaterialPriceService;
+import com.fpt.jpos.service.IMaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +20,6 @@ public class PublicController {
     private final IDiamondPriceService diamondPriceService;
     private final IMaterialPriceService materialPriceService;
     private final IMaterialService materialService;
-    private final IDiamondService diamondService;
 
     @GetMapping("/diamond-price/get-all")
     public ResponseEntity<?> getAllDiamondPrice() {

@@ -6,7 +6,6 @@ import com.fpt.jpos.pojo.MaterialPriceId;
 import com.fpt.jpos.repository.IMaterialPriceRepository;
 import com.fpt.jpos.repository.IMaterialRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

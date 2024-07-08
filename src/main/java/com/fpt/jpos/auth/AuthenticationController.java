@@ -4,7 +4,6 @@ import com.fpt.jpos.dto.AdminRegistrationDTO;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.dto.StaffRegistrationDTO;
 import com.fpt.jpos.exception.AccountAlreadyExistsException;
-import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-    private final StaffService staffService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(

@@ -1,8 +1,6 @@
 package com.fpt.jpos.service;
 
 
-import com.fpt.jpos.dto.CustomerRegistrationDTO;
-import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
 

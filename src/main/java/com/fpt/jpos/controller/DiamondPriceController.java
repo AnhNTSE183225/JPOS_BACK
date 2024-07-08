@@ -1,7 +1,7 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.dto.DiamondPriceQueryDTO;
+import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
 import lombok.RequiredArgsConstructor;

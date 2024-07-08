@@ -1,7 +1,7 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.dto.DiamondPriceQueryDTO;
+import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import org.springframework.data.domain.Page;
 
