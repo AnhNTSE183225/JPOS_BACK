@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "ProductShellDesign")
 @Data
@@ -43,4 +45,6 @@ public class ProductShellDesign {
     @JoinColumn(name = "product_design_id")
     private ProductDesign productDesign;
 
+    @OneToMany(mappedBy = "productShellDesign", cascade = CascadeType.ALL)
+    private List<ProductShellMaterial> productShellMaterials;
 }
