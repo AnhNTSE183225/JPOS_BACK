@@ -2,6 +2,8 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.ProductDesign;
 import com.fpt.jpos.pojo.ProductShellDesign;
+import com.fpt.jpos.pojo.ProductShellMaterial;
+import com.fpt.jpos.pojo.ProductShellMaterialId;
 import com.fpt.jpos.repository.IProductDesignRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,9 +45,19 @@ public class ProductDesignService implements IProductDesignService {
 
     @Override
     public ProductDesign update(ProductDesign productDesign) {
-        for(ProductShellDesign shell : productDesign.getProductShellDesigns()) {
+        for (ProductShellDesign shell : productDesign.getProductShellDesigns()) {
             shell.setProductDesign(productDesign);
+            for (ProductShellMaterial material : shell.getProductShellMaterials()) {
+                if (material.getId() == null) {
+                    material.setId(new ProductShellMaterialId(shell.getProductShellDesignId(), material.getMaterial().getMaterialId()));
+                    material.setProductShellDesign(shell);
+                }
+                System.out.println("Material ID: " + material.getId());
+            }
+            System.out.println("Shell ID: " + shell.getProductShellDesignId());
         }
+        System.out.println("ProductDesign ID: " + productDesign.getProductDesignId());
         return productDesignRepository.save(productDesign);
     }
+
 }
