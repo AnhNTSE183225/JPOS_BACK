@@ -12,25 +12,27 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-            .authorizeHttpRequests(auth -> {
-                auth.requestMatchers("/api/login", "/login/google/success").permitAll();
-                auth.anyRequest().authenticated();
-            })
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/login/google/success").permitAll()
+                .anyRequest().authenticated()
+            )
             .oauth2Login(oauth2 -> oauth2
-                .loginPage("/oauth2/authorization/google")
-                .defaultSuccessUrl("/")
+                .loginPage("/login")
+                .defaultSuccessUrl("/login/google/success", true) // Set default success URL
                 .failureUrl("/login?error=true")
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/login/google/success", true) // Set default success URL
                 .failureUrl("/login?error=true")
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
-            )
-            .build();
+            );
+
+        return http.build();
     }
 }
+
