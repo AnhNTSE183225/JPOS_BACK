@@ -1,13 +1,18 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.StatisticsDTO;
+import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.Payment;
+import com.fpt.jpos.pojo.Product;
 import com.fpt.jpos.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +48,17 @@ public class StatisticsService implements IStatisticsService {
         result.add(productRepository.getEarringsProducts().size());
         result.add(productRepository.getNecklaceProducts().size());
         return result;
+    }
+
+    @Override
+    public List<Product> getRecentlyPurchased() {
+        List<Order> orderList = orderService.findAll();
+        orderList.sort(Comparator.comparing(Order::getOrderDate).reversed());
+        return orderList.stream()
+                .map(Order::getProduct)
+                .filter(Objects::nonNull)
+                .limit(5)
+                .collect(Collectors.toList());
+
     }
 }

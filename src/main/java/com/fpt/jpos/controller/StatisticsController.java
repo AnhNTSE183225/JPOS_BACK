@@ -46,4 +46,19 @@ public class StatisticsController {
 
         return response;
     }
+
+    @PreAuthorize("hasAuthority('admin')")
+    @GetMapping("/get-recently-purchased")
+    public ResponseEntity<?> getRecentlyPurchased() {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(statisticsService.getRecentlyPurchased());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response = ResponseEntity.status(400).build();
+        }
+
+        return response;
+    }
 }

@@ -201,7 +201,7 @@ create table [ProductDesign]
 (
     [product_design_id] int identity (1,1),
     [design_name]       varchar(MAX),
-    [design_type]       varchar(MAX),
+    [design_type]       varchar(MAX), /*ring, necklace, earrings, bracelets*/
     [design_file]       varchar(MAX),
     primary key ([product_design_id])
 )
@@ -211,7 +211,6 @@ create table [ProductShellDesign]
     [shell_id]          int identity (1,1),
     [product_design_id] int,
     [shell_name]        varchar(MAX),
-    [image]             varchar(MAX),
     [diamond_quantity]  int,
     [e_diamond_price]   decimal(19, 4),
     [e_material_price]  decimal(19, 4),
@@ -232,78 +231,20 @@ create table [ProductShellMaterial]
 )
 go
 
-
-/*
--- Inserting into Diamond table
-
-INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [image], [active]) VALUES
-('DC001', 'Diamond A', 'round', 'LAB_GROWN', 'https://example.com/image1', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'FL', 1.5000, 'A beautiful lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC002', 'Diamond B', 'princess', 'NATURAL', 'https://example.com/image2', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'E', 'IF', 2.0000, 'A natural diamond with faint fluorescence', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC003', 'Diamond C', 'cushion', 'LAB_GROWN', 'https://example.com/image3', 'Medium', 'Good', 'Good', 'Good', 'F', 'VVS1', 0.7500, 'A cushion cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC004', 'Diamond D', 'emerald', 'NATURAL', 'https://example.com/image4', 'Strong', 'Fair', 'Fair', 'Fair', 'G', 'VVS2', 1.2500, 'An emerald cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC005', 'Diamond E', 'oval', 'LAB_GROWN', 'https://example.com/image5', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'H', 'VS1', 1.1000, 'An oval cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC006', 'Diamond F', 'radiant', 'NATURAL', 'https://example.com/image6', 'None', 'Excellent', 'Excellent', 'Excellent', 'I', 'VS2', 2.5000, 'A radiant cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC007', 'Diamond G', 'asscher', 'LAB_GROWN', 'https://example.com/image7', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'J', 'SI1', 1.8000, 'An asscher cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC008', 'Diamond H', 'marquise', 'NATURAL', 'https://example.com/image8', 'Medium', 'Good', 'Good', 'Good', 'K', 'SI2', 1.0000, 'A marquise cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC009', 'Diamond I', 'heart', 'LAB_GROWN', 'https://example.com/image9', 'Strong', 'Fair', 'Fair', 'Fair', 'D', 'VS1', 0.9000, 'A heart cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC010', 'Diamond J', 'pear', 'NATURAL', 'https://example.com/image10', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'E', 'VS2', 1.7500, 'A pear cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC011', 'Diamond K', 'round', 'LAB_GROWN', 'https://example.com/image11', 'None', 'Excellent', 'Excellent', 'Excellent', 'F', 'VS2', 0.8500, 'A beautiful round lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC012', 'Diamond L', 'princess', 'NATURAL', 'https://example.com/image12', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'G', 'FL', 1.4000, 'A princess cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC013', 'Diamond M', 'cushion', 'LAB_GROWN', 'https://example.com/image13', 'Medium', 'Good', 'Good', 'Good', 'H', 'IF', 2.2000, 'A cushion cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC014', 'Diamond N', 'emerald', 'NATURAL', 'https://example.com/image14', 'Strong', 'Fair', 'Fair', 'Fair', 'I', 'VVS1', 2.1000, 'An emerald cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC015', 'Diamond O', 'oval', 'LAB_GROWN', 'https://example.com/image15', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'J', 'VVS2', 2.3000, 'An oval cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC016', 'Diamond P', 'radiant', 'NATURAL', 'https://example.com/image16', 'None', 'Excellent', 'Excellent', 'Excellent', 'K', 'VS1', 0.9500, 'A radiant cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC017', 'Diamond Q', 'asscher', 'LAB_GROWN', 'https://example.com/image17', 'Faint', 'Very_Good', 'Very_Good', 'Very_Good', 'D', 'VS2', 1.6000, 'An asscher cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC018', 'Diamond R', 'marquise', 'NATURAL', 'https://example.com/image18', 'Medium', 'Good', 'Good', 'Good', 'E', 'SI1', 1.3000, 'A marquise cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC019', 'Diamond S', 'heart', 'LAB_GROWN', 'https://example.com/image19', 'Strong', 'Fair', 'Fair', 'Fair', 'F', 'SI2', 2.6000, 'A heart cut lab-grown diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1),
-('DC020', 'Diamond T', 'pear', 'NATURAL', 'https://example.com/image20', 'Very_Strong', 'Poor', 'Poor', 'Fair', 'G', 'VS1', 1.2000, 'A pear cut natural diamond', 'https://ion.bluenile.com/sgmdirect/photoID/34760580/Diamond/20959885/nl/Diamond-round-1.04-Carat_3_first_.jpg', 1);
-
--- Inserting into DiamondPriceList table
-INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_weight_to], [color], [clarity], [cut], [price], [effective_date]) VALUES
-('LAB_GROWN', 'round', 1.0000, 2.0000, 'D', 'FL', 'Excellent', 5000.00, '2024-01-01'),
-('NATURAL', 'princess', 1.5000, 2.5000, 'E', 'IF', 'Very_Good', 7500.00, '2024-02-01'),
-('LAB_GROWN', 'cushion', 0.5000, 1.0000, 'F', 'VVS1', 'Good', 3000.00, '2024-03-01'),
-('NATURAL', 'emerald', 1.0000, 2.0000, 'G', 'VVS2', 'Fair', 4000.00, '2024-04-01'),
-('LAB_GROWN', 'round', 1.0000, 2.0000, 'D', 'FL', 'Excellent', 500.00, '2023-01-01'),
-('NATURAL', 'princess', 1.5000, 2.5000, 'E', 'IF', 'Very_Good', 700.00, '2023-02-01'),
-('LAB_GROWN', 'cushion', 0.5000, 1.0000, 'F', 'VVS1', 'Good', 300.00, '2023-03-01'),
-('NATURAL', 'emerald', 1.0000, 2.0000, 'G', 'VVS2', 'Fair', 400.00, '2023-04-01'),
-('LAB_GROWN', 'oval', 1.0000, 1.5000, 'H', 'VS1', 'Fair', 2500.00, '2024-05-01'),
-('NATURAL', 'radiant', 2.0000, 3.0000, 'I', 'VS2', 'Excellent', 9000.00, '2024-06-01'),
-('LAB_GROWN', 'asscher', 1.5000, 2.0000, 'J', 'SI1', 'Very_Good', 5500.00, '2024-05-01'),
-('NATURAL', 'marquise', 0.5000, 1.0000, 'K', 'SI2', 'Good', 2000.00, '2024-05-01'),
-('LAB_GROWN', 'heart', 0.7500, 1.0000, 'D', 'VS1', 'Fair', 1800.00, '2024-05-01'),
-('NATURAL', 'pear', 1.0000, 2.0000, 'E', 'VS2', 'Fair', 2200.00, '2024-05-01'),
-('LAB_GROWN', 'round', 0.5000, 1.0000, 'F', 'VS2', 'Excellent', 3500.00, '2024-05-01'),
-('NATURAL', 'princess', 1.0000, 1.5000, 'G', 'FL', 'Very_Good', 6500.00, '2024-05-01'),
-('LAB_GROWN', 'round', 0.5000, 1.0000, 'F', 'VS2', 'Excellent', 350000.00, '2026-11-01'),
-('NATURAL', 'princess', 1.0000, 1.5000, 'G', 'FL', 'Very_Good', 650000.00, '2026-12-01'),
-('LAB_GROWN', 'cushion', 2.0000, 2.5000, 'H', 'IF', 'Good', 10000.00, '2025-01-01'),
-('NATURAL', 'emerald', 1.5000, 2.5000, 'I', 'VVS1', 'Fair', 8500.00, '2025-02-01'),
-('LAB_GROWN', 'oval', 2.0000, 3.0000, 'J', 'VVS2', 'Fair', 12000.00, '2025-03-01'),
-('NATURAL', 'radiant', 0.5000, 1.0000, 'K', 'VS1', 'Excellent', 2800.00, '2025-04-01'),
-('LAB_GROWN', 'asscher', 1.0000, 2.0000, 'D', 'VS2', 'Very_Good', 7000.00, '2025-05-01'),
-('NATURAL', 'marquise', 1.0000, 1.5000, 'E', 'SI1', 'Good', 4800.00, '2025-06-01'),
-('LAB_GROWN', 'heart', 2.0000, 3.0000, 'F', 'SI2', 'Fair', 11000.00, '2025-07-01'),
-('NATURAL', 'pear', 1.0000, 1.5000, 'G', 'VS1', 'Fair', 3200.00, '2025-08-01'),
-
-('LAB_GROWN', 'cushion', 2.0000, 2.5000, 'H', 'IF', 'Good', 9999.00, '2024-01-01'),
-('NATURAL', 'emerald', 1.5000, 2.5000, 'I', 'VVS1', 'Fair', 8499.00, '2024-02-01'),
-('LAB_GROWN', 'oval', 2.0000, 3.0000, 'J', 'VVS2', 'Fair', 11999.00, '2024-03-01'),
-('NATURAL', 'radiant', 0.5000, 1.0000, 'K', 'VS1', 'Excellent', 2799.00, '2024-04-01'),
-('LAB_GROWN', 'asscher', 1.0000, 2.0000, 'D', 'VS2', 'Very_Good', 6999.00, '2024-05-01'),
-('NATURAL', 'marquise', 1.0000, 1.5000, 'E', 'SI1', 'Good', 4799.00, '2024-05-01'),
-('LAB_GROWN', 'heart', 2.0000, 3.0000, 'F', 'SI2', 'Fair', 10999.00, '2024-05-01'),
-('NATURAL', 'pear', 1.0000, 1.5000, 'G', 'VS1', 'Fair', 3199.00, '2024-05-01')
-go
-*/
 insert into [Account]
 values ('admin', 'admin@gmail.com', '$2a$10$w.D7u6ER7AmFamDj7lSSHe5TCnVRkr5gtlA4Ji9JFWSFWU0WDWUUe', 1, 'admin'),
        ('nguyen', 'nguyen@gmail.com', '$2a$10$pmL28xzaY6XueEJzEMIyzua48PIOpf9bBsXj5oF95M2ZzSWNRxunK', 1, 'customer'),
-       ('manage', 'test@gmail.com', '$2a$10$S03I4mUWnhDpn4YVAaDV6eRmg3cG2Zh1w/ZhBM8yM0ndiElfAlmkC', 1, 'staff')
+       ('manage', 'test@gmail.com', '$2a$10$S03I4mUWnhDpn4YVAaDV6eRmg3cG2Zh1w/ZhBM8yM0ndiElfAlmkC', 1, 'staff'),
+	   ('salestaff','sale@gmail.com','$2a$10$eWez7raD1lNUbXWcFh/WsejyOSgeYgGI.d2nxbKhy2tjy9mXFLk3.',1,'staff'),
+	   ('designstaff','design@gmail.com','$2a$10$tMMuaoWkiHWufO8yqCV1pe.1ZPfLG3DHcY9iT/mwh4eBp5DCMppfS',1,'staff'),
+	   ('productionstaff','produce@gmail.com','$2a$10$g5c6ujz8YXo85ZOgBmDzp.cFzhpgBqSZ7XR.NYiDQYqb284xIB/Tm',1,'staff')
+
 go
 insert into [Staff]([username], [name], [phone], [staff_type])
-values ('manage', 'Manager', '02938492893', 'manage')
+values	('manage', 'Manager', '02938492893', 'manage'),
+		('salestaff','salestaff','09102389','sale'),
+		('designstaff','designstaff','089192732','design'),
+		('productionstaff','productionstaff','0192398712','produce')
 go
 insert into [Customer]([username], [name], [address])
 values ('nguyen', 'Minh', '123 Becker Street')
@@ -356,11 +297,11 @@ values ('Four Stone Emerald Diamond Engagement Ring In Platinum', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150541/RND/Images/gallery.jpg'),
        ('Studio Double Halo Gala Diamond Engagement Ring In Platinum (7/8 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/195312/RND/Images/gallery.jpg'),
-       (N'Crescent Fancy Pink Pav� Diamond Open Engagement Ring In 14k White Gold (1/10 Ct. Tw.)', 'ring',
+       (N'Crescent Fancy Pink Pav Diamond Open Engagement Ring In 14k White Gold (1/10 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150524/RND/Images/gallery.jpg'),
        ('Two Stone Engagement Ring With Cushion Shaped Diamond In 14k White Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/149478/RND/Images/gallery.jpg'),
-       (N'Bella Vaughan For Blue Nile Seattle Split Shank Double Pav� Diamond Engagement Ring In Platinum (3/4 Ct. Tw.)',
+       (N'Bella Vaughan For Blue Nile Seattle Split Shank Double Pav Diamond Engagement Ring In Platinum (3/4 Ct. Tw.)',
         'ring', 'https://ion.bluenile.com/sets/Jewelry-bn/195607/RND/Images/gallery.jpg'),
        ('Romantic Diamond Floral Halo Engagement Ring In 14k White Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/150339/RND/Images/gallery.jpg'),
@@ -386,19 +327,24 @@ values ('Four Stone Emerald Diamond Engagement Ring In Platinum', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/192274/RND/Images/gallery.jpg'),
        ('Two-Tone Intertwined Double Halo Diamond Engagement Ring In 14k White And Yellow Gold (1/2 Ct. Tw.)', 'ring',
         'https://ion.bluenile.com/sets/Jewelry-bn/193494/RND/Images/gallery.jpg'),
-       ('SUNFLOWER DIAMOND PENDANT NECKLACE 14K YELLOW GOLD (0.19CT)', 'Necklace',
-        'https://d2d22nphq0yz8t.cloudfront.net/35aee99d-95d9-46a2-9030-ab04199b35ba/https://images.allurez.com/productimages/large/C15059-14Y.jpg')
+       ('SUNFLOWER DIAMOND PENDANT NECKLACE 14K YELLOW GOLD (0.19CT)', 'necklace',
+        'https://d2d22nphq0yz8t.cloudfront.net/35aee99d-95d9-46a2-9030-ab04199b35ba/https://images.allurez.com/productimages/large/C15059-14Y.jpg'),
+		('HUGGIE ROUND DIAMOND PAVE EARRINGS HOOPS', 'earrings',
+		'https://d2d22nphq0yz8t.cloudfront.net/35aee99d-95d9-46a2-9030-ab04199b35ba/https://images.allurez.com/productimages/large/40978-14Y.jpg'),
+		('ETERNITY DIAMOND TENNIS BRACELET','bracelets',
+		'https://d2d22nphq0yz8t.cloudfront.net/35aee99d-95d9-46a2-9030-ab04199b35ba/https://images.allurez.com/productimages/large/B5641WD2.jpg')
+
 go
 -- Insert into ProductShellDesign
 DECLARE @design_id INT = 1;
 
-WHILE @design_id <= 22
+WHILE @design_id <= 24
     BEGIN
         INSERT INTO [ProductShellDesign] ([product_design_id], [shell_name], [diamond_quantity], [e_diamond_price],
-                                          [e_material_price], [production_price], [markup_rate], [image])
-        VALUES (@design_id, 'gold shell', 1, 100.00, 200.00, 300.00, 1.0, null),
-               (@design_id, 'platinum shell', 2, 120.00, 250.00, 350.00, 1.0, null),
-               (@design_id, 'silver shell', 3, 80.00, 150.00, 250.00, 1.0, null);
+                                          [e_material_price], [production_price], [markup_rate])
+        VALUES (@design_id, 'gold shell', 1, 100.00, 200.00, 300.00, 1.0),
+               (@design_id, 'platinum shell', 2, 120.00, 250.00, 350.00, 1.0),
+               (@design_id, 'silver shell', 3, 80.00, 150.00, 250.00, 1.0);
 
         SET @design_id = @design_id + 1;
     END;
@@ -407,7 +353,7 @@ GO
 -- Insert into ProductShellMaterial
 DECLARE @shell_id INT = 1;
 
-WHILE @shell_id <= 63 -- 21 designs * 3 shells each
+WHILE @shell_id <= 72 -- 24 designs * 3 shells each
     BEGIN
         INSERT INTO [ProductShellMaterial] ([shell_id], [material_id], [weight])
         VALUES (@shell_id, 1, 0.96),     -- gold
