@@ -45,6 +45,6 @@ public class ProductShellDesign {
     @JoinColumn(name = "product_design_id")
     private ProductDesign productDesign;
 
-    @OneToMany(mappedBy = "productShellDesign", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productShellDesign", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductShellMaterial> productShellMaterials;
 }

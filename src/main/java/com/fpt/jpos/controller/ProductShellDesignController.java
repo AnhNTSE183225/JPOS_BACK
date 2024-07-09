@@ -1,6 +1,7 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.service.IProductShellDesignService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,16 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
+@CrossOrigin
 public class ProductShellDesignController {
 
     private final IProductShellDesignService productShellDesignService;
 
-    @Autowired
-    public ProductShellDesignController(IProductShellDesignService productShellDesignService) {
-        this.productShellDesignService = productShellDesignService;
-    }
 
-    @CrossOrigin
     @GetMapping("/shells/{productDesignId}")
     @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> getByProductDesignId(@PathVariable Integer productDesignId) {

@@ -32,7 +32,8 @@ public class ProductDesign {
 
     @OneToMany(
             mappedBy = "productDesign",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private List<ProductShellDesign> productShellDesigns;
 
