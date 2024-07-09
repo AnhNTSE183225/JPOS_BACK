@@ -4,18 +4,16 @@ import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService implements IOrderService {
 
     private final IOrderRepository orderRepository;
@@ -41,38 +39,8 @@ public class OrderService implements IOrderService {
     private final IDiamondPriceService diamondPriceService;
 
     private final IMaterialPriceService materialPriceService;
-    private final ProductService productService;
 
-    ModelMapper modelMapper = new ModelMapper();
-
-
-    @Autowired
-    public OrderService(IOrderRepository theIOrderRepository,
-                        ICustomerRepository theICustomerRepository,
-                        IPaymentRepository theIPaymentRepository,
-                        IStaffRepository theIStaffRepository,
-                        IProductRepository theIProductRepository,
-                        IProductShellDesignRepository productShellDesignRepository,
-                        IProductDesignRepository productDesignRepository,
-                        IProductShellMaterialRepository productShellMaterialRepository,
-                        IProductMaterialRepository productMaterialRepository,
-                        IDiamondRepository diamondRepository,
-                        IDiamondPriceService diamondPriceService,
-                        IMaterialPriceService materialPriceService, ProductService productService) {
-        orderRepository = theIOrderRepository;
-        customerRepository = theICustomerRepository;
-        paymentRepository = theIPaymentRepository;
-        staffRepository = theIStaffRepository;
-        productRepository = theIProductRepository;
-        this.productShellDesignRepository = productShellDesignRepository;
-        this.productDesignRepository = productDesignRepository;
-        this.productShellMaterialRepository = productShellMaterialRepository;
-        this.productMaterialRepository = productMaterialRepository;
-        this.diamondRepository = diamondRepository;
-        this.diamondPriceService = diamondPriceService;
-        this.materialPriceService = materialPriceService;
-        this.productService = productService;
-    }
+    private final IWarrantyRepository warrantyRepository;
 
     @Override
     @Transactional
@@ -85,7 +53,7 @@ public class OrderService implements IOrderService {
             order.setTotalAmount(managerResponseDTO.getTotalAmount());
             order.setStatus(OrderStatus.manager_approved);
         } else {
-            order.setStatus(OrderStatus.wait_manager);
+            order.setStatus(OrderStatus.wait_sale_staff);
         }
 
         orderRepository.save(order);
@@ -125,13 +93,14 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Order updateOrderStatusDesigning(Integer id, PaymentDTO paymentDTO) {
+    public Order updateOrderStatusDesigning(Integer id, PaymentRestDTO.PaymentRequest paymentDTO) {
+        ModelMapper modelMapper = new ModelMapper();
         Optional<Order> theOrder = orderRepository.findById(id);
         Payment payment = modelMapper.map(paymentDTO, Payment.class);
 
         if (theOrder.isPresent()) {
             Order order = theOrder.get();
-            if(order.getOrderType().equals("from_design")) {
+            if (order.getOrderType().equals("from_design")) {
                 order.setStatus(OrderStatus.production);
             } else {
                 order.setStatus(OrderStatus.designing);
@@ -143,6 +112,7 @@ public class OrderService implements IOrderService {
             throw new RuntimeException("Order not found with id: " + id);
         }
     }
+
 
     @Override
     @Transactional
@@ -230,14 +200,40 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
-    public Integer acceptOrder(Order order) {
-        order.setStatus(OrderStatus.customer_accept);
-        order.setODate(new Date());
+    public Integer acceptQuotation(Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+
+        double oDiamondPrice = 0.0;
+        double oMaterialPrice = 0.0;
+        for (Diamond diamond : order.getProduct().getDiamonds()) {
+            DiamondPriceQueryDTO query = new DiamondPriceQueryDTO(
+                    diamond.getOrigin(),
+                    diamond.getShape(),
+                    diamond.getCaratWeight(),
+                    diamond.getColor(),
+                    diamond.getClarity(),
+                    diamond.getCut()
+            );
+            oDiamondPrice += diamondPriceService.getSingleDiamondPrice(query);
+        }
+        for (ProductMaterial material : order.getProduct().getMaterials()) {
+            oMaterialPrice += materialPriceService.getLatestPriceById(material.getMaterial().getMaterialId()) * material.getWeight();
+        }
+        double totalAmount = (oMaterialPrice + oDiamondPrice + order.getEMaterialPrice() + order.getEDiamondPrice() + order.getProductionPrice()) * order.getMarkupRate() * 1.1;
+        double taxFee = (oMaterialPrice + oDiamondPrice + order.getEMaterialPrice() + order.getEDiamondPrice() + order.getProductionPrice()) * order.getMarkupRate() * 0.1;
+
+        order.setOrderDate(new Date());
+        order.setTaxFee(taxFee);
+        order.setTotalAmount(totalAmount);
+        order.setODiamondPrice(oDiamondPrice);
+        order.setOMaterialPrice(oMaterialPrice);
+        order.setStatus(OrderStatus.wait_payment);
+
         return orderRepository.save(order).getId();
     }
 
     @Override
-    public Order completeProduct(Integer id, String imageUrl, Integer productionStaffId) {
+    public Order completeProduct(Integer id, String imageUrls) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + id));
 
@@ -245,40 +241,37 @@ public class OrderService implements IOrderService {
             throw new IllegalStateException("Order status must be 'production' to complete the product");
         }
 
-        Staff productionStaff = staffRepository.findById(productionStaffId)
-                .orElseThrow(() -> new ResourceNotFoundException("Staff not found for this id :: " + productionStaffId));
-
         order.setStatus(OrderStatus.delivered);
-        order.setProductImage(imageUrl);
-        order.setProductionStaff(productionStaff); // Gán productionStaffId vào order
+        order.setProductImage(imageUrls);
         return orderRepository.save(order);
     }
 
     @Override
     @Transactional
-    public Order completeOrder(PaymentDTO paymentDTO, Integer orderId) {
+    public Order completeOrder(Integer orderId) {
 
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        Payment payment = modelMapper.map(paymentDTO, Payment.class);
-        Payment depositPayment = paymentRepository.findPaymentByOrderId(orderId);
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.YEAR, 3);
+        Date endOfSupportDate = calendar.getTime();
 
-        Double depositMoney = 0.0;
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        Payment payment = paymentRepository.findPaymentByOrderId(orderId);
+        Warranty warranty = Warranty.builder()
+                .customer(order.getCustomer())
+                .product(order.getProduct())
+                .purchaseDate(today)
+                .endOfSupportDate(endOfSupportDate)
+                .build();
+        warrantyRepository.save(warranty);
 
-        if (depositPayment != null) {
-            depositMoney = depositPayment.getAmountPaid();
-        }
-        double sum = depositMoney + payment.getAmountPaid();
+        payment.setAmountPaid(order.getTotalAmount());
+        payment.setPaymentStatus("Fully paid");
+        paymentRepository.save(payment);
 
-        if (sum == payment.getAmountTotal()) {
-            paymentRepository.save(payment);
-        }
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.setStatus(OrderStatus.completed);
-            return orderRepository.save(order);
-        } else {
-            throw new RuntimeException("Order not found with id: " + orderId);
-        }
+        order.setStatus(OrderStatus.completed);
+        return orderRepository.save(order);
     }
 
     @Override
@@ -319,8 +312,18 @@ public class OrderService implements IOrderService {
 
         for (Integer id : productDesignDTO.getDiamondIds()) {
             Diamond diamond = diamondRepository.findById(id).orElseThrow();
+            diamond.setActive(false);
+            diamond = diamondRepository.save(diamond);
             diamonds.add(diamond);
-            diamondPrice += diamondPriceService.getDiamondPricesBy4C(new Diamond4CDTO(diamond.getColor(), diamond.getClarity(), diamond.getCut(), diamond.getCaratWeight(), diamond.getShape()));
+            DiamondPriceQueryDTO query = new DiamondPriceQueryDTO(
+                    diamond.getOrigin(),
+                    diamond.getShape(),
+                    diamond.getCaratWeight(),
+                    diamond.getColor(),
+                    diamond.getClarity(),
+                    diamond.getCut()
+            );
+            diamondPrice += diamondPriceService.getSingleDiamondPrice(query);
         }
         product.setDiamonds(diamonds);
 
@@ -328,11 +331,7 @@ public class OrderService implements IOrderService {
 
         Order order = new Order();
         order.setProduct(product);
-        if(productDesignDTO.getHavePaid()) {
-            order.setStatus(OrderStatus.production);
-        } else {
-            order.setStatus(OrderStatus.customer_accept);
-        }
+        order.setStatus(OrderStatus.wait_payment);
         order.setCustomer(customerRepository.findById(productDesignDTO.getCustomerId()).orElseThrow());
         order.setOrderDate(new Date());
         order.setOrderType("from_design");
@@ -343,9 +342,73 @@ public class OrderService implements IOrderService {
         order.setDesignFile(productDesign.getDesignFile());
         order.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         order.setEMaterialPrice(productShellDesign.getEMaterialPrice());
-        order.setTaxFee((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate()*0.1);
-        order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice())*order.getMarkupRate() + order.getTaxFee());
+        order.setTaxFee((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() * 0.1);
+        order.setTotalAmount((diamondPrice + materialPrice + order.getProductionPrice() + order.getEDiamondPrice() + order.getEMaterialPrice()) * order.getMarkupRate() + order.getTaxFee());
+        order.setNote(productDesignDTO.getNote());
+
         return orderRepository.save(order);
+    }
+
+    @Override
+    public void confirmPaymentSuccess(Integer orderId, String orderType) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        Payment payment = new Payment();
+        payment.setOrder(order);
+        payment.setPaymentDate(new Date());
+        payment.setPaymentStatus("30% Paid");
+        payment.setAmountPaid(order.getTotalAmount() * 0.3);
+        payment.setAmountTotal(order.getTotalAmount());
+        payment.setPaymentMethod("VN-PAY");
+        paymentRepository.save(payment);
+        if (orderType.equals("from_design")) {
+            order.setStatus(OrderStatus.production);
+        } else {
+            order.setStatus(OrderStatus.designing);
+        }
+        orderRepository.save(order);
+    }
+
+    @Override
+    public Integer assign(Integer orderId, Integer saleStaffId, Integer designStaffId, Integer productionStaffId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+
+        if (saleStaffId != null) {
+            Staff staff = staffRepository.findById(saleStaffId).orElseThrow();
+            order.setSaleStaff(staff);
+        }
+
+        if (designStaffId != null) {
+            Staff staff = staffRepository.findById(designStaffId).orElseThrow();
+            order.setDesignStaff(staff);
+        }
+
+        if (productionStaffId != null) {
+            Staff staff = staffRepository.findById(productionStaffId).orElseThrow();
+            order.setProductionStaff(staff);
+        }
+
+        return orderRepository.save(order).getId();
+    }
+
+    @Override
+    public Order addImage(String imageUrls, Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.setModelFile(imageUrls);
+        order.setStatus(OrderStatus.pending_design);
+        return orderRepository.save(order);
+    }
+
+    @Override
+    @Transactional
+    public Order cancelOrder(Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.setStatus(OrderStatus.cancelled);
+        return orderRepository.save(order);
+    }
+
+    @Override
+    public List<Order> findCompletedOrders() {
+        return orderRepository.findCompletedOrders();
     }
 
 }

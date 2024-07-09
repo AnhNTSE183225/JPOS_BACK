@@ -28,7 +28,7 @@ public class FileUploadService implements IFileUploadService {
 
 
     @Override
-    public String upload(MultipartFile multipartFile) throws IOException{
+    public String upload(MultipartFile multipartFile) throws IOException {
         return cloudinary.uploader()
                 .upload(multipartFile.getBytes(),
                         Map.of("public_id", UUID.randomUUID().toString()))

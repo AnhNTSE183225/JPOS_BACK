@@ -1,19 +1,20 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.dto.DiamondQuery;
+import com.fpt.jpos.dto.DiamondQueryDTO;
+import com.fpt.jpos.dto.DiamondQueryResponseDTO;
 import com.fpt.jpos.pojo.Diamond;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface IDiamondService {
-    List<Diamond> findDiamondsBy4C(Double fromCaratWeight, Double toCaratWeight, String clarity, String color, String cut, String shape);
+    List<Diamond> getAllDiamond();
 
-    List<Diamond> getAllDiamonds(int pageNo, int pageSize);
+    Page<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO, int pageNo, int pageSize);
 
-    Diamond findById(Integer diamondId);
+    Diamond getDiamondById(int diamondId);
 
-    List<Diamond> diamondQuery(DiamondQuery diamondQuery, int pageNo, int pageSize);
+    void deleteDiamond(int diamondId);
 
-    List<Diamond> getDiamondsById(List<Integer> diamondIds);
+    Diamond updateDiamond(Diamond diamond);
 }

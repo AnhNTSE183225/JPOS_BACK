@@ -2,6 +2,7 @@ package com.fpt.jpos.pojo;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Staff {
 
     @Id
@@ -17,8 +19,9 @@ public class Staff {
     @Column(name = "staff_id")
     private Integer staffId;
 
-    @Column(name = "username")
-    private String username;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "username")
+    private Account account;
 
     @Column(name = "name")
     private String name;

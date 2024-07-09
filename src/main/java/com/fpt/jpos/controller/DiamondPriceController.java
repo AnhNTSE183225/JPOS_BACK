@@ -1,55 +1,98 @@
 package com.fpt.jpos.controller;
 
-import com.fpt.jpos.dto.Diamond4CDTO;
-import com.fpt.jpos.dto.DiamondPriceProjection;
+import com.fpt.jpos.dto.DiamondPriceQueryDTO;
+import com.fpt.jpos.dto.ListDiamondPriceQueryDTO;
 import com.fpt.jpos.pojo.DiamondPrice;
 import com.fpt.jpos.service.IDiamondPriceService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/diamond-price")
+@RequiredArgsConstructor
+@CrossOrigin
 public class DiamondPriceController {
     private final IDiamondPriceService diamondPriceService;
 
-    @Autowired
-    public DiamondPriceController(IDiamondPriceService diamondPriceService) {
-        this.diamondPriceService = diamondPriceService;
-    }
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    @PostMapping("/get-single-price")
+    public ResponseEntity<?> getSingleDiamondPrice(@RequestBody DiamondPriceQueryDTO diamondPriceQueryDTO) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
 
-    @CrossOrigin
-    @GetMapping("/diamond-prices")
-    public ResponseEntity<?> getAllDiamondPrice(
-            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
-    ) {
-        List<DiamondPrice> diamondPriceListing = diamondPriceService.getDiamondPrices(pageNo, pageSize);
-        if(diamondPriceListing.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamondPriceListing);
+        try {
+            response = ResponseEntity.ok(diamondPriceService.getSingleDiamondPrice(diamondPriceQueryDTO));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
         }
+
+        return response;
     }
 
-    @CrossOrigin
-    @PostMapping("/get-price-by-4C")
-    public ResponseEntity<?> getDiamondPriceBy4C(@RequestBody Diamond4CDTO diamond4CDTO) {
+    @PreAuthorize("hasAnyAuthority('staff','admin')")
+    @PostMapping("/get-diamond-prices")
+    public ResponseEntity<?> getDiamondPrices(@RequestBody ListDiamondPriceQueryDTO listDiamondPriceQueryDTO,
+                                              @RequestParam(required = false, defaultValue = "0") int pageNo,
+                                              @RequestParam(required = false, defaultValue = "50") int pageSize) {
+        ResponseEntity<?> response;
 
-        double diamondPriceList = diamondPriceService.getDiamondPricesBy4C(diamond4CDTO);
-        return ResponseEntity.ok(diamondPriceList); // thrown exception in service
-    }
+        System.out.println(listDiamondPriceQueryDTO.toString());
 
-    @CrossOrigin
-    @GetMapping("/prices")
-    public ResponseEntity<?> getAllDiamondPrice() {
-        List<DiamondPriceProjection> diamondPrices = diamondPriceService.getDiamondPrices();
-        if(diamondPrices.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(diamondPrices);
+        try {
+            response = ResponseEntity.ok(diamondPriceService.getDiamondPricesByQuery(
+                    listDiamondPriceQueryDTO,
+                    pageNo,
+                    pageSize
+            ));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response = ResponseEntity.status(400).build();
         }
+
+        return response;
+    }
+
+    @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
+    @PostMapping("/add")
+    public ResponseEntity<?> addDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondPriceService.addDiamondPrice(diamondPrice));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PreAuthorize("hasAnyAuthority('admin', 'staff')")
+    @PutMapping("/update")
+    public ResponseEntity<?> updateDiamondPrice(@RequestBody DiamondPrice diamondPrice) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            response = ResponseEntity.ok(diamondPriceService.updateDiamondPrice(diamondPrice));
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PreAuthorize("hasAnyAuthority('admin', 'staff')")
+    @GetMapping("/delete")
+    public ResponseEntity<?> deleteDiamondPrice(@RequestParam int diamondPriceId) {
+        ResponseEntity<?> response = ResponseEntity.noContent().build();
+
+        try {
+            diamondPriceService.deletePrice(diamondPriceId);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
     }
 }
