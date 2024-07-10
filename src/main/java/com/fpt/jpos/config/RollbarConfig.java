@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration()
 @EnableWebMvc
 @ComponentScan({
-        "com.fpt.jpos",
+        "com.fpt.jpos.config",
         "com.rollbar.spring"
 })
 public class RollbarConfig {
