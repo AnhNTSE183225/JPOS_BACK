@@ -1,5 +1,6 @@
 package com.fpt.jpos.exception;
 
+import com.fpt.jpos.rollbar.RollbarConfig;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpStatusCode;
@@ -12,12 +13,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private final RollbarConfig rollbarConfig;
+
+    public GlobalExceptionHandler(RollbarConfig rollbarConfig) {
+        this.rollbarConfig = rollbarConfig;
+    }
+
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleSecurityException(Exception exception) {
         ProblemDetail errorDetail = null;
 
         // TODO send this stack trace to an observability tool
         exception.printStackTrace();
+
+        rollbarConfig.rollbar().log(exception);
 
         if (exception instanceof BadCredentialsException) {
             errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), exception.getMessage());

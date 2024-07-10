@@ -5,6 +5,7 @@ import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.dto.StaffRegistrationDTO;
 import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Staff;
+import com.fpt.jpos.rollbar.RollbarConfig;
 import com.fpt.jpos.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
     private final StaffService staffService;
+    private final RollbarConfig rollbarConfig;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
