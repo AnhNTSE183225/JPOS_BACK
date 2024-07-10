@@ -1,6 +1,5 @@
 package com.fpt.jpos.exception;
 
-import com.fpt.jpos.config.RollbarConfig;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +17,12 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-    public static RollbarConfig rollbarConfig;
 
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleSecurityException(Exception exception) {
         ProblemDetail errorDetail = null;
 
         // TODO send this stack trace to an observability tool
-        rollbarConfig.rollbar().log(exception);
         exception.printStackTrace();
 
         if (exception instanceof BadCredentialsException) {
@@ -66,7 +63,7 @@ public class GlobalExceptionHandler {
             errorDetail.setProperty("description", "SQL error");
         }
 
-        rollbarConfig.rollbar().log(errorDetail.getDetail());
+        //rollbarConfig.rollbar().log(errorDetail.getDetail());
         return errorDetail;
     }
 }
