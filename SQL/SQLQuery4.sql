@@ -10,3 +10,7 @@ FIELDTERMINATOR = ','
 )
 UPDATE STATISTICS DiamondPriceList;
 UPDATE STATISTICS Diamond;
+CREATE INDEX idx_diamondpricelist 
+ON DiamondPriceList (
+    origin, shape, carat_weight_from, carat_weight_to, color, clarity, cut, effective_date
+);

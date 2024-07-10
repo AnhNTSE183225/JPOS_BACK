@@ -46,7 +46,7 @@ public class StatisticsService implements IStatisticsService {
         result.add(productRepository.getRingProducts().size());
         result.add(productRepository.getNecklaceProducts().size());
         result.add(productRepository.getEarringsProducts().size());
-        result.add(productRepository.getNecklaceProducts().size());
+        result.add(productRepository.getBraceletsProducts().size());
         return result;
     }
 

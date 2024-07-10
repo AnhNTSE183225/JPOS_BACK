@@ -13,20 +13,37 @@ import java.util.List;
 public interface IDiamondRepository extends JpaRepository<Diamond, Integer> {
 
     @Query(value = """
-            select d.*, dp.price, dp.latest_date from Diamond d
-            left join
+
+                        SELECT d.*, dp.price, dp.latest_date\s
+            FROM Diamond d
+            LEFT JOIN
             (
-            	select p.origin, p.shape, p.carat_weight_from, p.carat_weight_to, p.color, p.clarity, p.cut, p.price, pp.latest_date from DiamondPriceList p
-            	inner join
-            	(
-            		select origin, shape, carat_weight_from, carat_weight_to, color, clarity, cut, MAX(effective_date) as latest_date from DiamondPriceList
-            		where effective_date <= GETDATE()
-            		group by origin, shape, carat_weight_from, carat_weight_to, color, clarity, cut
-            	) pp
-            	on p.effective_date = pp.latest_date and p.origin = pp.origin and p.shape = pp.shape and p.carat_weight_from = pp.carat_weight_from and p.carat_weight_to = pp.carat_weight_to and p.color = pp.color and p.cut = pp.cut and p.clarity = pp.clarity
+                SELECT p.origin, p.shape, p.carat_weight_from, p.carat_weight_to, p.color, p.clarity, p.cut, p.price, pp.latest_date\s
+                FROM DiamondPriceList p
+                INNER JOIN
+                (
+                    SELECT origin, shape, carat_weight_from, carat_weight_to, color, clarity, cut, MAX(effective_date) as latest_date\s
+                    FROM DiamondPriceList
+                    WHERE effective_date <= GETDATE()
+                    GROUP BY origin, shape, carat_weight_from, carat_weight_to, color, clarity, cut
+                ) pp
+                ON p.effective_date = pp.latest_date\s
+                AND p.origin = pp.origin\s
+                AND p.shape = pp.shape\s
+                AND p.carat_weight_from = pp.carat_weight_from\s
+                AND p.carat_weight_to = pp.carat_weight_to\s
+                AND p.color = pp.color\s
+                AND p.cut = pp.cut\s
+                AND p.clarity = pp.clarity
             ) dp
-            on d.origin = dp.origin and d.shape = dp.shape and d.carat_weight > dp.carat_weight_from and d.carat_weight <= dp.carat_weight_to and d.color = dp.color and d.clarity = dp.clarity and d.cut = dp.cut
+            ON d.origin = dp.origin\s
+            AND d.shape = dp.shape\s
+            AND d.carat_weight > dp.carat_weight_from\s
+            AND d.carat_weight <= dp.carat_weight_to\s
+            AND d.color = dp.color\s
+            AND d.clarity = dp.clarity\s
+            AND d.cut = dp.cut            
             where d.origin = ?1 and d.shape in ?2 and dp.price >= ?3 and dp.price <= ?4 and d.carat_weight >= ?5 and d.carat_weight <= ?6 and d.color in ?7 and d.clarity in ?8 and d.cut in ?9 and d.active = 1
-            """, nativeQuery = true)
+                        """, nativeQuery = true)
     Page<Object[]> getDiamondWithPriceBy4C(String origin, List<String> shapeList, Double minPrice, Double maxPrice, Double minCarat, Double maxCarat, List<String> colorList, List<String> clarityList, List<String> cutList, Pageable pageable);
 }
