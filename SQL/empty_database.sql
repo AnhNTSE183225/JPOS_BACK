@@ -18,6 +18,7 @@ create table [Account]
     [username] varchar(255) not null,
     [email]    varchar(MAX) not null,
     [password] varchar(MAX) not null,
+	[provider] varchar(MAX) not null,
     [status]   bit          not null,
     [role]     varchar(MAX) not null, /*customer,staff,admin*/
     primary key ([username])
@@ -232,12 +233,12 @@ create table [ProductShellMaterial]
 go
 
 insert into [Account]
-values ('admin', 'admin@gmail.com', '$2a$10$w.D7u6ER7AmFamDj7lSSHe5TCnVRkr5gtlA4Ji9JFWSFWU0WDWUUe', 1, 'admin'),
-       ('nguyen', 'nguyen@gmail.com', '$2a$10$pmL28xzaY6XueEJzEMIyzua48PIOpf9bBsXj5oF95M2ZzSWNRxunK', 1, 'customer'),
-       ('manage', 'test@gmail.com', '$2a$10$S03I4mUWnhDpn4YVAaDV6eRmg3cG2Zh1w/ZhBM8yM0ndiElfAlmkC', 1, 'staff'),
-	   ('salestaff','sale@gmail.com','$2a$10$eWez7raD1lNUbXWcFh/WsejyOSgeYgGI.d2nxbKhy2tjy9mXFLk3.',1,'staff'),
-	   ('designstaff','design@gmail.com','$2a$10$tMMuaoWkiHWufO8yqCV1pe.1ZPfLG3DHcY9iT/mwh4eBp5DCMppfS',1,'staff'),
-	   ('productionstaff','produce@gmail.com','$2a$10$g5c6ujz8YXo85ZOgBmDzp.cFzhpgBqSZ7XR.NYiDQYqb284xIB/Tm',1,'staff')
+values ('admin', 'admin@gmail.com', '$2a$10$w.D7u6ER7AmFamDj7lSSHe5TCnVRkr5gtlA4Ji9JFWSFWU0WDWUUe','LOCAL', 1, 'admin'),
+       ('nguyen', 'nguyen@gmail.com', '$2a$10$pmL28xzaY6XueEJzEMIyzua48PIOpf9bBsXj5oF95M2ZzSWNRxunK','LOCAL', 1, 'customer'),
+       ('manage', 'test@gmail.com', '$2a$10$S03I4mUWnhDpn4YVAaDV6eRmg3cG2Zh1w/ZhBM8yM0ndiElfAlmkC','LOCAL',1, 'staff'),
+	   ('salestaff','sale@gmail.com','$2a$10$eWez7raD1lNUbXWcFh/WsejyOSgeYgGI.d2nxbKhy2tjy9mXFLk3.','LOCAL',1,'staff'),
+	   ('designstaff','design@gmail.com','$2a$10$tMMuaoWkiHWufO8yqCV1pe.1ZPfLG3DHcY9iT/mwh4eBp5DCMppfS','LOCAL',1,'staff'),
+	   ('productionstaff','produce@gmail.com','$2a$10$g5c6ujz8YXo85ZOgBmDzp.cFzhpgBqSZ7XR.NYiDQYqb284xIB/Tm','LOCAL',1,'staff')
 
 go
 insert into [Staff]([username], [name], [phone], [staff_type])
