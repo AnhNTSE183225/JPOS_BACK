@@ -12,8 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +28,9 @@ public class DiamondService implements IDiamondService {
     }
 
     @Override
-    public Page<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO, int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Object[]> rawResult = diamondRepository.getDiamondWithPriceBy4C(
+    public List<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO) {
+//        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        List<Object[]> rawResult = diamondRepository.getDiamondBy4C(
                 diamondQueryDTO.getOrigin(),
                 diamondQueryDTO.getShapeList(),
                 diamondQueryDTO.getMinPrice(),
@@ -37,10 +39,9 @@ public class DiamondService implements IDiamondService {
                 diamondQueryDTO.getMaxCarat(),
                 diamondQueryDTO.getColorList(),
                 diamondQueryDTO.getClarityList(),
-                diamondQueryDTO.getCutList(),
-                pageable
+                diamondQueryDTO.getCutList()
         );
-        return rawResult.map(row -> {
+        return rawResult.stream().map(row -> {
 
             Diamond diamond = new Diamond();
             diamond.setDiamondId((Integer) row[0]);
@@ -61,7 +62,7 @@ public class DiamondService implements IDiamondService {
             diamond.setActive((Boolean) row[15]);
 
             return new DiamondQueryResponseDTO(diamond, ((BigDecimal) row[16]).doubleValue(), (Date) row[17]);
-        });
+        }).collect(Collectors.toList());
     }
 
     @Override

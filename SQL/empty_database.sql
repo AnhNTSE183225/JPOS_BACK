@@ -154,7 +154,7 @@ create table [Diamond]
     [diamond_code] varchar(MAX),
     [diamond_name] varchar(MAX),
 
-    [shape]        varchar(50), /*round, princess, cushion, emerald, oval, radiant, asscher, marquise, heart, pear*/
+    [shape]        varchar(50), /*('round', 'princess', 'cushion', 'emerald', 'oval', 'radiant', 'asscher', 'marquise', 'heart', 'pear')*/
 
     [origin]       varchar(50), /*LAB_GROWN, NATURAL*/
     [proportions]  varchar(MAX), /*image link*/
@@ -162,10 +162,10 @@ create table [Diamond]
     [symmetry]     varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
     [polish]       varchar(MAX), /*Poor, Fair, Good, Very_Good, Excellent*/
 
-    [cut]          varchar(50), /*(Poor,) Fair, Good, Very_Good, Excellent*/
-    [color]        varchar(50), /*(Z,Y,X,W,V,U,T,S,R,Q,P,O,N,M,L,) K,J,I,H,G,F,E,D (only use from K to D)*/
-    [clarity]      varchar(50), /*I3, I2, I1, SI3, SI2, SI1, VS2, VS1, VVS2, VVS1, IF, FL*/
-    [carat_weight] decimal(19, 4), /* 0 to 10*/
+    [cut]          varchar(50), /*('Fair', 'Good', 'Very_Good', 'Excellent')*/
+    [color]        varchar(50), /*('K','J','I','H','G','F','E','D')*/
+    [clarity]      varchar(50), /*('I3', 'I2', 'I1', 'SI3', 'SI2', 'SI1', 'VS2', 'VS1', 'VVS2', 'VVS1', 'IF', 'FL') */
+    [carat_weight] decimal(19, 4), /* 0.05 to 10.05*/
     [note]         varchar(MAX),
 
     [image]        varchar(MAX),

@@ -46,11 +46,11 @@ public class DiamondController {
 
     @PostMapping("/get-diamond-with-price-by-4C")
     @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
-    public ResponseEntity<?> getDiamondWithPriceBy4C(@RequestBody DiamondQueryDTO diamondQueryDTO, @RequestParam int pageNo, @RequestParam int pageSize) {
+    public ResponseEntity<?> getDiamondWithPriceBy4C(@RequestBody DiamondQueryDTO diamondQueryDTO) {
         ResponseEntity<?> response = ResponseEntity.noContent().build();
 
         try {
-            response = ResponseEntity.ok(diamondService.getDiamondWithPriceBy4C(diamondQueryDTO, pageNo, pageSize));
+            response = ResponseEntity.ok(diamondService.getDiamondWithPriceBy4C(diamondQueryDTO));
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }

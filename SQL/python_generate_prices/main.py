@@ -1,6 +1,5 @@
 import csv
 from datetime import datetime
-from generate_sql_insert import generate_sql_inserts
 
 colors = ['K','J','I','H','G','F','E','D']
 shapes = ['round', 'princess', 'cushion', 'emerald', 'oval', 'radiant', 'asscher', 'marquise', 'heart', 'pear']
