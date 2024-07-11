@@ -8,6 +8,7 @@ import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.enums.Provider;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.service.ICustomerService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private final UserService userService;
 
 
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
@@ -35,18 +37,25 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String email = authUser.getEmail();
         System.out.println(email);
         Account user = accountRepository.findOneByEmail(email);
-        if (user != null  && user.getProvider().equals(Provider.GOOGLE) && user.getStatus()) {
+        AuthenticationResponse authenticationResponse = null;
+
+        if (user != null && user.getProvider().equals(Provider.GOOGLE) && user.getStatus()) {
             Customer customer = customerService.loginCustomer(user);
             String token = jwtTokenProvider.generateToken(user);
-            AuthenticationResponse authenticationResponse = new AuthenticationResponse(customer, token);
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.setContentType("application/json");
-            objectMapper.writeValue(response.getWriter(), authenticationResponse);
+            authenticationResponse = new AuthenticationResponse(customer, token);
+
+        } else if (user == null) {
+            user = userService.processOAuthPostLogin(email);
+            String jwtToken = jwtTokenProvider.generateToken(user);
+            Customer customer = customerService.createNewCustomer(user, authUser.getName(), "*");
+            authenticationResponse = AuthenticationResponse.builder()
+                    .account(customer)
+                    .token(jwtToken)
+                    .build();
         }
 
-        if (user == null) {
-            userService.processOAuthPostLogin(email);
-        }
-
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        objectMapper.writeValue(response.getWriter(), authenticationResponse);
     }
 }

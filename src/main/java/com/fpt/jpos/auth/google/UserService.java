@@ -2,8 +2,10 @@ package com.fpt.jpos.auth.google;
 
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.enums.Provider;
+import com.fpt.jpos.pojo.enums.Role;
 import com.fpt.jpos.repository.IAccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,15 +13,17 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final IAccountRepository accountRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public void processOAuthPostLogin(String email) {
-
+    public Account processOAuthPostLogin(String email) {
         Account newUser = new Account();
+        newUser.setUsername("GOOGLE_" + email.split("@")[0]);
+        newUser.setPassword(passwordEncoder.encode("GOOGLE_" + email.split("@")[0]));
         newUser.setEmail(email);
         newUser.setProvider(Provider.GOOGLE);
+        newUser.setRole(Role.customer);
         newUser.setStatus(true);
-        accountRepository.save(newUser);
-
+        return newUser;
     }
 
     public Account getAccount(String email) {
