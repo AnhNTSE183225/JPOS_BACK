@@ -37,14 +37,14 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login", "/public/**", "/api/v1/auth/**", "/", "/oauth/**").permitAll()
+                        .requestMatchers("/login", "/public/**", "/api/v1/auth/**", "/", "/oauth/**", "/oauth2/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManagementCustomizer ->
                         sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
+                        .loginPage("/login") // trang nào chứa cái chỗ login google :D
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oauthUserService))
                         .successHandler(new CustomAuthenticationSuccessHandler(jwtTokenProvider, objectMapper, accountRepository, customerService, userService)));

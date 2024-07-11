@@ -3,28 +3,31 @@ package com.fpt.jpos.auth.google;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.enums.Provider;
 import com.fpt.jpos.repository.IAccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private IAccountRepository accountRepository;
+    private final IAccountRepository accountRepository;
 
-    public void processOAuthPostLogin(String username) {
-        Optional<Account> existUser = accountRepository.findByUsername(username);
+    public void processOAuthPostLogin(String email) {
 
-        if (existUser.isEmpty()) {
-            Account newUser = new Account();
-            newUser.setUsername(username);
-            newUser.setProvider(Provider.GOOGLE);
-            newUser.setStatus(true);
-            accountRepository.save(newUser);
-        }
+        Account newUser = new Account();
+        newUser.setEmail(email);
+        newUser.setProvider(Provider.GOOGLE);
+        newUser.setStatus(true);
+        accountRepository.save(newUser);
 
+    }
+
+    public Account getAccount(String email) {
+        return accountRepository.findOneByEmail(email);
+    }
+
+    public void saveAccount(Account account) {
+        accountRepository.save(account);
     }
 
 }

@@ -2,7 +2,6 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.service.IProductShellDesignService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

@@ -7,6 +7,7 @@ import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.Staff;
+import com.fpt.jpos.pojo.enums.Provider;
 import com.fpt.jpos.pojo.enums.Role;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.ICustomerRepository;
@@ -39,6 +40,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .status(true)
                 .role(Role.customer)
+                .provider(Provider.LOCAL)
                 .build();
         if (accountRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new AccountAlreadyExistsException();
@@ -63,6 +65,7 @@ public class AuthenticationService {
                 .email(staffRegistrationDTO.getEmail())
                 .status(true)
                 .role(Role.staff)
+                .provider(Provider.LOCAL)
                 .build();
         if (accountRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new AccountAlreadyExistsException();
@@ -89,8 +92,9 @@ public class AuthenticationService {
                 .email(adminRegistrationDTO.getEmail())
                 .status(true)
                 .role(Role.admin)
+                .provider(Provider.LOCAL)
                 .build();
-        if(accountRepository.findByUsername(account.getUsername()).isPresent()) {
+        if (accountRepository.findByUsername(account.getUsername()).isPresent()) {
             throw new AccountAlreadyExistsException();
         }
         account = accountRepository.save(account);
@@ -113,7 +117,7 @@ public class AuthenticationService {
             authenticatedUser = customerService.loginCustomer(user);
         } else if (user.getRole() == Role.staff) {
             authenticatedUser = staffService.getStaffByAccount(user);
-        } else if(user.getRole() == Role.admin) {
+        } else if (user.getRole() == Role.admin) {
             authenticatedUser = user;
         }
         return AuthenticationResponse.builder()
