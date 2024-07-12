@@ -10,7 +10,7 @@ import java.util.List;
 public interface IDiamondService {
     List<Diamond> getAllDiamond();
 
-    Page<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO, int pageNo, int pageSize);
+    List<DiamondQueryResponseDTO> getDiamondWithPriceBy4C(DiamondQueryDTO diamondQueryDTO);
 
     Diamond getDiamondById(int diamondId);
 
