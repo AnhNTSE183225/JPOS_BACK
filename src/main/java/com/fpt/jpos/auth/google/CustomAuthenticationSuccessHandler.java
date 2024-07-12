@@ -8,8 +8,6 @@ import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.enums.Provider;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.service.ICustomerService;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,12 +28,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private final IAccountRepository accountRepository;
     private final ICustomerService customerService;
     private final UserService userService;
-
+    private final GoogleCallbackConfig googleCallbackConfig;
 
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
         CustomOAuth2User authUser = (CustomOAuth2User) authentication.getPrincipal();
         String email = authUser.getEmail();
         System.out.println(email);
@@ -63,6 +61,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //        response.setStatus(HttpServletResponse.SC_OK);
 //        response.setContentType("application/json");
 //        objectMapper.writeValue(response.getWriter(), authenticationResponse);
-        response.sendRedirect("http://localhost:5173/google-callback?" + encodedAuthResponse);
+        response.sendRedirect(googleCallbackConfig.getGoogleCallbackUrl() + encodedAuthResponse);
     }
 }
