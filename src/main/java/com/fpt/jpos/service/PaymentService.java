@@ -34,7 +34,7 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public PaymentRestDTO.VNPayResponse createVnPayPayment(HttpServletRequest request) {
-        double d = Double.parseDouble(request.getParameter("amount")) * 25455.50 / 1000; //Conversion rate
+        double d = Double.parseDouble(request.getParameter("amount")) * 25455.50; //Conversion rate
         int i = (int) Math.ceil(d);
         long l = i * 100L;
         String s = String.valueOf(l);
