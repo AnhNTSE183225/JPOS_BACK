@@ -2,30 +2,38 @@ package com.fpt.jpos.auth.google;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fpt.jpos.auth.AuthenticationRequest;
+import com.fpt.jpos.auth.AuthenticationResponse;
+import com.fpt.jpos.auth.JwtService;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.pojo.Account;
+import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.enums.Provider;
 import com.fpt.jpos.repository.IAccountRepository;
+import com.fpt.jpos.service.CustomerService;
+import com.fpt.jpos.service.ICustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    //private final JwtService jwtTokenProvider;
+    private final JwtService jwtTokenProvider;
     private final ObjectMapper objectMapper;
     private final IAccountRepository accountRepository;
     //private final ICustomerService customerService;
     private final GoogleCallbackConfig googleCallbackConfig;
+    private final ICustomerService customerService;
 
 
     @Override
@@ -39,17 +47,19 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String password = "GOOGLE_" + email;
         String method;
 
-        Account user = accountRepository.findOneByEmail(email);
+        Optional<Account> user = accountRepository.findByUsername(username);
         String json;
 
-        if (user != null && user.getProvider().equals(Provider.GOOGLE) && user.getStatus()) {
-
-            AuthenticationRequest authenticationRequest = AuthenticationRequest.builder()
-                    .username(user.getUsername())
-                    .password(user.getPassword())
+        if (user.isPresent()) {
+            Account account = user.get();
+            Customer customer = customerService.loginCustomer(account);
+            String token = jwtTokenProvider.generateToken(account);
+            AuthenticationResponse authenticationResponse = AuthenticationResponse.builder()
+                    .account(customer)
+                    .token(token)
                     .build();
             method = "L";
-            json = objectMapper.writeValueAsString(authenticationRequest);
+            json = objectMapper.writeValueAsString(authenticationResponse);
 
 
         } else {

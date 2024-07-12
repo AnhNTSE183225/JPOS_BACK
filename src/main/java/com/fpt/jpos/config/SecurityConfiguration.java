@@ -49,7 +49,7 @@ public class SecurityConfiguration {
                         .loginPage("/login") // trang nào chứa cái chỗ login google :D
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oauthUserService))
-                        .successHandler(new CustomAuthenticationSuccessHandler( objectMapper, accountRepository, googleCallbackConfig)));
+                        .successHandler(new CustomAuthenticationSuccessHandler( jwtTokenProvider, objectMapper, accountRepository, googleCallbackConfig, customerService)));
         return http.build();
     }
 
