@@ -8,6 +8,7 @@ import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.pojo.enums.Provider;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.service.ICustomerService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +18,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Component
 @RequiredArgsConstructor
@@ -32,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException {
+                                        Authentication authentication) throws IOException, ServletException {
         CustomOAuth2User authUser = (CustomOAuth2User) authentication.getPrincipal();
         String email = authUser.getEmail();
         System.out.println(email);
@@ -54,8 +57,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                     .build();
         }
 
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("application/json");
-        objectMapper.writeValue(response.getWriter(), authenticationResponse);
+        String json = objectMapper.writeValueAsString(authenticationResponse);
+        String encodedAuthResponse = Base64.getUrlEncoder().encodeToString(json.getBytes(StandardCharsets.UTF_8));
+
+//        response.setStatus(HttpServletResponse.SC_OK);
+//        response.setContentType("application/json");
+//        objectMapper.writeValue(response.getWriter(), authenticationResponse);
+        response.sendRedirect("http://localhost:5173/google-callback?" + encodedAuthResponse);
     }
 }
