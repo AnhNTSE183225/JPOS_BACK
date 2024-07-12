@@ -1,6 +1,6 @@
 package com.fpt.jpos.exception;
 
-import com.fpt.jpos.config.RollbarConfig;
+//import com.fpt.jpos.config.RollbarConfig;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
