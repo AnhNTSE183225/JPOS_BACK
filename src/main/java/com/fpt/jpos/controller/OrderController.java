@@ -33,7 +33,7 @@ public class OrderController {
 
     //Test - get all Orders
     @GetMapping("/order/all")
-    @PreAuthorize("hasAnyAuthority('staff','admin')")
+    @PreAuthorize("hasAnyAuthority('staff','admin','customer')")
     public ResponseEntity<?> getAllOrders() {
         return ResponseEntity.ok(orderService.findAll());
     }
