@@ -1,5 +1,6 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.config.RollbarConfig;
 import com.fpt.jpos.dto.DiamondQueryDTO;
 import com.fpt.jpos.pojo.Diamond;
 import com.fpt.jpos.service.IDiamondService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class DiamondController {
 
     private final IDiamondService diamondService;
+    private static RollbarConfig rollbarConfig;
 
     @GetMapping("/get-all")
     @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")

@@ -1,5 +1,6 @@
 package com.fpt.jpos.controller;
 
+import com.fpt.jpos.config.RollbarConfig;
 import com.fpt.jpos.pojo.Material;
 import com.fpt.jpos.service.IDiamondPriceService;
 import com.fpt.jpos.service.IMaterialPriceService;
@@ -26,6 +27,7 @@ public class PublicController {
 
         try {
             response = ResponseEntity.ok(diamondPriceService.getAllDiamondPrice());
+
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
         }
@@ -39,6 +41,7 @@ public class PublicController {
 
         try {
             response = ResponseEntity.ok(diamondPriceService.getDiamondPriceByOriginAndShapeAndCaratRange(origin, shape, caratFrom, caratTo));
+            new RollbarConfig().rollbar().debug("Here is some debug message");
         } catch (Exception ex) {
             response = ResponseEntity.status(400).build();
         }
