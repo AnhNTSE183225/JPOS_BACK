@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fpt.jpos.auth.JwtService;
 import com.fpt.jpos.auth.google.CustomAuthenticationSuccessHandler;
 import com.fpt.jpos.auth.google.CustomOAuth2UserService;
+import com.fpt.jpos.auth.google.GoogleCallbackConfig;
 import com.fpt.jpos.auth.google.UserService;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.service.ICustomerService;
@@ -31,6 +32,7 @@ public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
+    private final GoogleCallbackConfig googleCallbackConfig;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -47,7 +49,7 @@ public class SecurityConfiguration {
                         .loginPage("/login") // trang nào chứa cái chỗ login google :D
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oauthUserService))
-                        .successHandler(new CustomAuthenticationSuccessHandler(jwtTokenProvider, objectMapper, accountRepository, customerService, userService)));
+                        .successHandler(new CustomAuthenticationSuccessHandler( objectMapper, accountRepository, googleCallbackConfig)));
         return http.build();
     }
 

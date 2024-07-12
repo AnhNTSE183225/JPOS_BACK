@@ -15,16 +15,16 @@ public class UserService {
     private final IAccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Account processOAuthPostLogin(String email) {
-        Account newUser = new Account();
-        newUser.setUsername("GOOGLE_" + email.split("@")[0]);
-        newUser.setPassword(passwordEncoder.encode("GOOGLE_" + email.split("@")[0]));
-        newUser.setEmail(email);
-        newUser.setProvider(Provider.GOOGLE);
-        newUser.setRole(Role.customer);
-        newUser.setStatus(true);
-        return newUser;
-    }
+//    public Account processOAuthPostLogin(String email) {
+//        Account newUser = new Account();
+//        newUser.setUsername("GOOGLE_" + email.split("@")[0]);
+//        newUser.setPassword(passwordEncoder.encode());
+//        newUser.setEmail(email);
+//        newUser.setProvider(Provider.GOOGLE);
+//        newUser.setRole(Role.customer);
+//        newUser.setStatus(true);
+//        return newUser;
+//    }
 
     public Account getAccount(String email) {
         return accountRepository.findOneByEmail(email);

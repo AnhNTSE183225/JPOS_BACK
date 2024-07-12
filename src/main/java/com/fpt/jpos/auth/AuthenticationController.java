@@ -21,7 +21,7 @@ public class AuthenticationController {
             @RequestBody CustomerRegistrationDTO request
     ) {
         ResponseEntity<AuthenticationResponse> response;
-
+        System.out.println(request);
         try {
             response = ResponseEntity.ok(authenticationService.register(request));
         } catch (AccountAlreadyExistsException ex) {
