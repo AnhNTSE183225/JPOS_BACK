@@ -37,10 +37,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String name = email.split("@")[0];
         String username = "GOOGLE_" + email.split("@")[0];
         String password = "GOOGLE_" + email;
-        String method = "";
+        String method;
 
         Account user = accountRepository.findOneByEmail(email);
-        String json = "";
+        String json;
 
         if (user != null && user.getProvider().equals(Provider.GOOGLE) && user.getStatus()) {
 
@@ -52,7 +52,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             json = objectMapper.writeValueAsString(authenticationRequest);
 
 
-        } else if (user == null) {
+        } else {
 
             CustomerRegistrationDTO customerRegistrationDTO = CustomerRegistrationDTO.builder()
                     .name(name)
