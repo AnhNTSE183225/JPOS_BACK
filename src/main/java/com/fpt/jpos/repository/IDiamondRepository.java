@@ -46,7 +46,7 @@ public interface IDiamondRepository extends JpaRepository<Diamond, Integer> {
             d.clarity = m.clarity AND 
             d.color = m.color AND 
             d.cut = m.cut AND 
-            d.carat_weight BETWEEN m.carat_weight_from AND m.carat_weight_to 
+            d.carat_weight >= m.carat_weight_from AND d.carat_weight < m.carat_weight_to 
             """, nativeQuery = true)
     List<Object[]> getDiamondBy4C(String origin, List<String> shapeList, Double minPrice, Double maxPrice, Double minCarat, Double maxCarat, List<String> colorList, List<String> clarityList, List<String> cutList);
 }
