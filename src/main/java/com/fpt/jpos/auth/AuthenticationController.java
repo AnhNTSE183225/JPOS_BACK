@@ -4,7 +4,6 @@ import com.fpt.jpos.dto.AdminRegistrationDTO;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.dto.StaffRegistrationDTO;
 import com.fpt.jpos.exception.AccountAlreadyExistsException;
-import com.fpt.jpos.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

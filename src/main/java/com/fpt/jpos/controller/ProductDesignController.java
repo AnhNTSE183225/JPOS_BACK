@@ -1,8 +1,6 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.ProductDesign;
-import com.fpt.jpos.pojo.ProductShellDesign;
-import com.fpt.jpos.pojo.ProductShellMaterial;
 import com.fpt.jpos.service.ProductDesignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

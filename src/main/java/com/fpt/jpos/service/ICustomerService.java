@@ -9,6 +9,8 @@ import java.util.List;
 public interface ICustomerService {
     Customer loginCustomer(Account account);
 
+    Customer createNewCustomer(Account account, String name, String address);
+
     Customer updateCustomer(Customer customer);
 
     void delete(Integer customerId);

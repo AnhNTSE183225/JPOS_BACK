@@ -34,6 +34,16 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    public Customer createNewCustomer(Account account, String name, String address) {
+        Customer customer = Customer.builder()
+                .address(address)
+                .account(account)
+                .name(name)
+                .build();
+        return customerRepository.save(customer);
+    }
+
+    @Override
     @Transactional
     public Customer updateCustomer(Customer customer) {
         return customerRepository.save(customer);

@@ -3,7 +3,6 @@ package com.fpt.jpos.service;
 import com.fpt.jpos.dto.DiamondQueryDTO;
 import com.fpt.jpos.dto.DiamondQueryResponseDTO;
 import com.fpt.jpos.pojo.Diamond;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
