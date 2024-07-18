@@ -231,7 +231,27 @@ create table [ProductShellMaterial]
     foreign key ([shell_id]) references [ProductShellDesign]
 )
 go
-
+create table [DesignConfigurations]
+(
+	[config_id]		int identity (1,1),
+	[design_type]	varchar(MAX), /*ring, necklace, earrings, bracelets*/
+	[config_info]	varchar(MAX)
+)
+go
+insert into [DesignConfigurations]([design_type], [config_info]) values
+('ring', 'Ring Size 6'),
+('ring', 'Ring Size 7'),
+('ring', 'Ring Size 8'),
+('necklace', 'Necklace length 45cm'),
+('necklace', 'Necklace length 50cm'),
+('necklace', 'Necklace length 55cm'),
+('earrings', 'Earrings Size 2cm'),
+('earrings', 'Earrings Size 3cm'),
+('earrings', 'Earrings Size 4cm'),
+('bracelets', 'Bracelets Size 18cm'),
+('bracelets', 'Bracelets Size 20cm'),
+('bracelets', 'Bracelets Size 22cm')
+go
 insert into [Account]
 values ('admin', 'admin@gmail.com', '$2a$10$w.D7u6ER7AmFamDj7lSSHe5TCnVRkr5gtlA4Ji9JFWSFWU0WDWUUe','LOCAL', 1, 'admin'),
        ('nguyen', 'nguyen@gmail.com', '$2a$10$pmL28xzaY6XueEJzEMIyzua48PIOpf9bBsXj5oF95M2ZzSWNRxunK','LOCAL', 1, 'customer'),
@@ -239,7 +259,6 @@ values ('admin', 'admin@gmail.com', '$2a$10$w.D7u6ER7AmFamDj7lSSHe5TCnVRkr5gtlA4
 	   ('salestaff','sale@gmail.com','$2a$10$eWez7raD1lNUbXWcFh/WsejyOSgeYgGI.d2nxbKhy2tjy9mXFLk3.','LOCAL',1,'staff'),
 	   ('designstaff','design@gmail.com','$2a$10$tMMuaoWkiHWufO8yqCV1pe.1ZPfLG3DHcY9iT/mwh4eBp5DCMppfS','LOCAL',1,'staff'),
 	   ('productionstaff','produce@gmail.com','$2a$10$g5c6ujz8YXo85ZOgBmDzp.cFzhpgBqSZ7XR.NYiDQYqb284xIB/Tm','LOCAL',1,'staff')
-
 go
 insert into [Staff]([username], [name], [phone], [staff_type])
 values	('manage', 'Manager', '02938492893', 'manage'),
@@ -249,6 +268,24 @@ values	('manage', 'Manager', '02938492893', 'manage'),
 go
 insert into [Customer]([username], [name], [address])
 values ('nguyen', 'Minh', '123 Becker Street')
+go
+-- Insert into Diamond
+INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [image], [active])
+VALUES 
+('D001', 'Round Brilliant Diamond', 'round', 'NATURAL', 'https://example.com/proportions1.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'IF', 0.1, 'Top quality round diamond', 'https://example.com/diamond1.jpg', 1),
+('D002', 'Princess Cut Diamond', 'princess', 'LAB_GROWN', 'https://example.com/proportions2.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'IF', 2.1, 'Beautiful princess cut diamond', 'https://example.com/diamond2.jpg', 1),
+('D003', 'Cushion Cut Diamond', 'cushion', 'NATURAL', 'https://example.com/proportions3.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'IF', 4.1, 'Elegant cushion cut diamond', 'https://example.com/diamond3.jpg', 1),
+('D004', 'Emerald Cut Diamond', 'emerald', 'LAB_GROWN', 'https://example.com/proportions4.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'IF', 6.1, 'Classic emerald cut diamond', 'https://example.com/diamond4.jpg', 1),
+('D005', 'Oval Cut Diamond', 'oval', 'NATURAL', 'https://example.com/proportions5.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'IF', 7.1, 'Unique oval cut diamond', 'https://example.com/diamond5.jpg', 1);
+go
+-- Insert into DiamondPriceList
+INSERT INTO [DiamondPriceList] ([origin], [shape], [carat_weight_from], [carat_weight_to], [color], [clarity], [cut], [price], [effective_date])
+VALUES 
+('NATURAL', 'round', 0.05, 0.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19'),
+('LAB_GROWN', 'princess', 2.05, 2.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19'),
+('NATURAL', 'cushion', 4.05, 4.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19'),
+('LAB_GROWN', 'emerald', 6.05, 6.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19'),
+('NATURAL', 'oval', 8.05, 8.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19');
 go
 --Insert into Material
 insert into [Material]([material_name])
@@ -350,7 +387,6 @@ WHILE @design_id <= 24
         SET @design_id = @design_id + 1;
     END;
 GO
-
 -- Insert into ProductShellMaterial
 DECLARE @shell_id INT = 1;
 
