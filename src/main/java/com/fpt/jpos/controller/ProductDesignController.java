@@ -62,4 +62,19 @@ public class ProductDesignController {
 
         return response;
     }
+
+    @GetMapping("/get-configurations")
+    @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
+    public ResponseEntity<?> getConfigurations(@RequestParam String designType) {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(productDesignService.findByDesignType(designType));
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+            ex.printStackTrace();
+        }
+
+        return response;
+    }
 }

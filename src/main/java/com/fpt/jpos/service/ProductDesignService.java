@@ -1,9 +1,7 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.pojo.ProductDesign;
-import com.fpt.jpos.pojo.ProductShellDesign;
-import com.fpt.jpos.pojo.ProductShellMaterial;
-import com.fpt.jpos.pojo.ProductShellMaterialId;
+import com.fpt.jpos.pojo.*;
+import com.fpt.jpos.repository.IDesignConfigurationRepository;
 import com.fpt.jpos.repository.IProductDesignRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,7 @@ import java.util.List;
 public class ProductDesignService implements IProductDesignService {
 
     private final IProductDesignRepository productDesignRepository;
+    private final IDesignConfigurationRepository designConfigurationRepository;
 
     @Override
     public List<ProductDesign> getProductDesigns() {
@@ -58,6 +57,11 @@ public class ProductDesignService implements IProductDesignService {
         }
         System.out.println("ProductDesign ID: " + productDesign.getProductDesignId());
         return productDesignRepository.save(productDesign);
+    }
+
+    @Override
+    public List<DesignConfiguration> findByDesignType(String designType) {
+        return this.designConfigurationRepository.findDesignConfigurationByDesignType(designType);
     }
 
 }
