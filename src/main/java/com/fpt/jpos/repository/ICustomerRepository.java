@@ -16,6 +16,8 @@ public interface ICustomerRepository extends CrudRepository<Customer, Integer> {
             """, nativeQuery = true)
     Customer findByUsername(String username);
 
+
+
     @Query(value="SELECT * FROM Customer",nativeQuery = true)
     List<Customer> getAllCustomer();
 }

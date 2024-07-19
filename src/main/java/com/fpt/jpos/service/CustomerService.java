@@ -1,5 +1,6 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.repository.IAccountRepository;
@@ -45,7 +46,14 @@ public class CustomerService implements ICustomerService {
 
     @Override
     @Transactional
-    public Customer updateCustomer(Customer customer) {
+    public Customer updateCustomer(Customer customer) throws AccountAlreadyExistsException {
+        Customer oldCustomer = this.customerRepository.findByUsername(customer.getAccount().getUsername());
+        //If there is changes to the email
+        if(!oldCustomer.getAccount().getEmail().equals(customer.getAccount().getEmail())) {
+            if(this.accountRepository.findOneByEmail(customer.getAccount().getEmail()) != null) {
+                throw new AccountAlreadyExistsException();
+            }
+        }
         return customerRepository.save(customer);
     }
 

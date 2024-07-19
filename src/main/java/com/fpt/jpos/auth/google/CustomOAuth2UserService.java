@@ -26,23 +26,4 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return new CustomOAuth2User(user);
     }
 
-
-    public AuthenticationResponse finishGoogleRegister(GoogleRegistrationDTO googleRegistrationDTO) {
-
-        Account account = userService.getAccount(googleRegistrationDTO.getEmail());
-        Customer customer = customerService.loginCustomer(account);
-        customer.setAddress(googleRegistrationDTO.getAddress());
-        account.setUsername(googleRegistrationDTO.getUsername());
-        userService.saveAccount(account);
-        customerService.updateCustomer(customer);
-
-        String token = jwtService.generateToken(account);
-        return AuthenticationResponse.builder()
-                .token(token)
-                .account(customer)
-                .build();
-
-    }
-
-
 }

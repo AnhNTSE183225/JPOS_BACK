@@ -19,19 +19,4 @@ public class LoginController {
         return "login";
     }
 
-    @PutMapping("/register")
-    public ResponseEntity<?> finishRegister(@RequestBody GoogleRegistrationDTO registration) {
-
-        ResponseEntity<?> response = ResponseEntity.noContent().build();
-
-        try {
-            response = ResponseEntity.ok(customOAuth2UserService.finishGoogleRegister(registration));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-
-        return response;
-    }
-
 }

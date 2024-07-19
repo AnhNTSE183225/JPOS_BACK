@@ -3,6 +3,7 @@ package com.fpt.jpos.controller;
 import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +41,7 @@ public class CustomerController {
         try {
             responseEntity = ResponseEntity.ok(customerService.updateCustomer(customer));
         } catch (Exception ex) {
-            ex.printStackTrace();
-            responseEntity = ResponseEntity.status(409).build();
+            responseEntity = ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         }
 
         return responseEntity;
