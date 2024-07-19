@@ -21,7 +21,6 @@ public class AuthenticationController {
             @RequestBody CustomerRegistrationDTO request
     ) {
         ResponseEntity<AuthenticationResponse> response;
-        System.out.println(request);
         try {
             response = ResponseEntity.ok(authenticationService.register(request));
         } catch (AccountAlreadyExistsException ex) {
@@ -58,10 +57,16 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    public ResponseEntity<?> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        ResponseEntity<?> response;
+        try {
+            response = ResponseEntity.ok(authenticationService.authenticate(request));
+        } catch (Exception ex) {
+            response = ResponseEntity.status(402).build();
+        }
+        return response;
     }
 
 }

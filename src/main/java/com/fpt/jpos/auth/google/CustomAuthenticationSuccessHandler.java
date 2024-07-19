@@ -31,7 +31,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private final JwtService jwtTokenProvider;
     private final ObjectMapper objectMapper;
     private final IAccountRepository accountRepository;
-    //private final ICustomerService customerService;
     private final GoogleCallbackConfig googleCallbackConfig;
     private final ICustomerService customerService;
 
@@ -47,23 +46,26 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String password = "GOOGLE_" + email;
         String method;
 
-        Optional<Account> user = accountRepository.findByUsername(username);
+        Optional<Account> user = accountRepository.findAccountByUsername(username);
         String json;
 
         if (user.isPresent()) {
             Account account = user.get();
-            Customer customer = customerService.loginCustomer(account);
-            String token = jwtTokenProvider.generateToken(account);
-            AuthenticationResponse authenticationResponse = AuthenticationResponse.builder()
-                    .account(customer)
-                    .token(token)
-                    .build();
-            method = "L";
-            json = objectMapper.writeValueAsString(authenticationResponse);
-
-
+            if(account.getStatus()) {
+                Customer customer = customerService.loginCustomer(account);
+                String token = jwtTokenProvider.generateToken(account);
+                AuthenticationResponse authenticationResponse = AuthenticationResponse.builder()
+                        .account(customer)
+                        .token(token)
+                        .build();
+                method = "L";
+                json = objectMapper.writeValueAsString(authenticationResponse);
+            } else {
+                method = "F";
+                json = "";
+            }
         } else {
-
+            System.out.println("ACCOUNT FIRST TIME REGISTER");
             CustomerRegistrationDTO customerRegistrationDTO = CustomerRegistrationDTO.builder()
                     .name(name)
                     .address("*")
@@ -77,10 +79,5 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         }
         String encodedAuthResponse = Base64.getUrlEncoder().encodeToString(json.getBytes(StandardCharsets.UTF_8));
         response.sendRedirect(googleCallbackConfig.getGoogleCallbackUrl() + method + encodedAuthResponse);
-
-
-//        response.setStatus(HttpServletResponse.SC_OK);
-//        response.setContentType("application/json");
-//        objectMapper.writeValue(response.getWriter(), authenticationResponse);
     }
 }

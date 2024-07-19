@@ -10,8 +10,7 @@ import java.util.Optional;
 @Repository
 public interface IAccountRepository extends JpaRepository<Account, String> {
 
-    @Query(value = "SELECT * FROM Account WHERE username = ?1 and status = 1 and provider = 'LOCAL'", nativeQuery = true)
-    Optional<Account> findByUsername(String username);
+    Optional<Account> findAccountByUsername(String username);
 
     Account findOneByEmail(String email);
 }

@@ -20,6 +20,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -42,7 +44,7 @@ public class AuthenticationService {
                 .role(Role.customer)
                 .provider(Provider.LOCAL)
                 .build();
-        if (accountRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (accountRepository.findAccountByUsername(user.getUsername()).isPresent()) {
             throw new AccountAlreadyExistsException();
         }
         user = accountRepository.save(user);
@@ -67,7 +69,7 @@ public class AuthenticationService {
                 .role(Role.staff)
                 .provider(Provider.LOCAL)
                 .build();
-        if (accountRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (accountRepository.findAccountByUsername(user.getUsername()).isPresent()) {
             throw new AccountAlreadyExistsException();
         }
         user = accountRepository.save(user);
@@ -94,7 +96,7 @@ public class AuthenticationService {
                 .role(Role.admin)
                 .provider(Provider.LOCAL)
                 .build();
-        if (accountRepository.findByUsername(account.getUsername()).isPresent()) {
+        if (accountRepository.findAccountByUsername(account.getUsername()).isPresent()) {
             throw new AccountAlreadyExistsException();
         }
         account = accountRepository.save(account);
@@ -105,12 +107,15 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request) throws AccountNotFoundException {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
-        var user = accountRepository.findByUsername(request.getUsername())
+        var user = accountRepository.findAccountByUsername(request.getUsername())
                 .orElseThrow();
+        if(!user.getStatus()) {
+            throw new AccountNotFoundException();
+        }
         var jwtToken = jwtService.generateToken(user);
         Object authenticatedUser = null;
         if (user.getRole() == Role.customer) {
