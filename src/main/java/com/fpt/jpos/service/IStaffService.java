@@ -1,5 +1,6 @@
 package com.fpt.jpos.service;
 
+import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Staff;
 
@@ -19,7 +20,7 @@ public interface IStaffService {
 
     Staff createStaff(Staff staff);
 
-    Staff updateStaff(Staff staff);
+    Staff updateStaff(Staff staff) throws AccountAlreadyExistsException;
 
     void deleteStaff(Integer staffId);
 }

@@ -7,6 +7,7 @@ import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Staff;
 import com.fpt.jpos.service.IStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -79,13 +80,15 @@ public class StaffController {
     @PreAuthorize("hasAuthority('admin')")
     @PutMapping("/staff/update")
     public ResponseEntity<?> updateStaff(@RequestBody Staff staff) {
-        System.out.println(staff);
-        ResponseEntity<?> response = ResponseEntity.noContent().build();
+        ResponseEntity<?> response;
 
         try {
             response = ResponseEntity.ok(staffService.updateStaff(staff));
+        } catch (AccountAlreadyExistsException ex) {
+            response = ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+            response = ResponseEntity.status(403).build();
         }
 
         return response;
