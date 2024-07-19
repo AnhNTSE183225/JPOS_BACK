@@ -12,8 +12,8 @@ import com.fpt.jpos.pojo.enums.Role;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.repository.ICustomerRepository;
 import com.fpt.jpos.repository.IStaffRepository;
-import com.fpt.jpos.service.CustomerService;
-import com.fpt.jpos.service.StaffService;
+import com.fpt.jpos.service.ICustomerService;
+import com.fpt.jpos.service.IStaffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,8 +32,8 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final StaffService staffService;
-    private final CustomerService customerService;
+    private final IStaffService staffService;
+    private final ICustomerService customerService;
 
     public AuthenticationResponse register(CustomerRegistrationDTO request) throws AccountAlreadyExistsException {
         var user = Account.builder()
