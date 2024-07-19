@@ -48,4 +48,18 @@ public class PaymentController {
             return new ResponseObject<>(HttpStatus.BAD_REQUEST, "Failed", null);
         }
     }
+
+    @GetMapping("/info/{orderId}")
+    @PreAuthorize("hasAnyAuthority('customer','staff','admin')")
+    public ResponseEntity<?> findPaymentByOrderId(@PathVariable Integer orderId) {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(this.paymentService.findPaymentByOrderId(orderId));
+        } catch (Exception ex) {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return response;
+    }
 }

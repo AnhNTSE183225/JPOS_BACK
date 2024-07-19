@@ -12,4 +12,6 @@ public interface IPaymentService {
     PaymentRestDTO.VNPayResponse createVnPayPayment(HttpServletRequest request);
 
     List<Payment> findAll();
+
+    Payment findPaymentByOrderId(Integer orderId) throws Exception;
 }

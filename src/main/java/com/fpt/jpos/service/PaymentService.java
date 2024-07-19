@@ -61,4 +61,13 @@ public class PaymentService implements IPaymentService {
     public List<Payment> findAll() {
         return paymentRepository.findAll();
     }
+
+    @Override
+    public Payment findPaymentByOrderId(Integer orderId) throws Exception {
+        Payment p = this.paymentRepository.findPaymentByOrderId(orderId);
+        if(p == null) {
+            throw new Exception("Payment not found");
+        }
+        return p;
+    }
 }
