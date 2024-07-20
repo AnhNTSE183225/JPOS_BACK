@@ -4,6 +4,7 @@ import com.fpt.jpos.dto.DiamondQueryDTO;
 import com.fpt.jpos.pojo.Diamond;
 import com.fpt.jpos.service.IDiamondService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -84,6 +85,19 @@ public class DiamondController {
             System.out.println(ex.getLocalizedMessage());
         }
 
+        return response;
+    }
+
+    @PostMapping("/create")
+    @PreAuthorize("hasAnyAuthority('admin')")
+    public ResponseEntity<?> createDiamond(@RequestBody Diamond diamond) {
+        ResponseEntity<?> response;
+        try {
+            response = ResponseEntity.ok(diamondService.save(diamond));
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         return response;
     }
 }

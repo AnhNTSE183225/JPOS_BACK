@@ -75,4 +75,9 @@ public class DiamondService implements IDiamondService {
     public Diamond updateDiamond(Diamond diamond) {
         return diamondRepository.save(diamond);
     }
+
+    @Override
+    public Diamond save(Diamond diamond) {
+        return diamondRepository.save(diamond);
+    }
 }
