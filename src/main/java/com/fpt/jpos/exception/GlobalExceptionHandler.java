@@ -25,7 +25,6 @@ public class GlobalExceptionHandler {
 
         // TODO send this stack trace to an observability tool
         exception.printStackTrace();
-
         rollbarConfig.rollbar().log(exception);
 
         if (exception instanceof BadCredentialsException) {
