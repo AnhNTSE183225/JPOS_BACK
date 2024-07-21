@@ -10,13 +10,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 // Binh
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
-
-    private final CustomerService customerService;
-    private final UserService userService;
-    private final JwtService jwtService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
