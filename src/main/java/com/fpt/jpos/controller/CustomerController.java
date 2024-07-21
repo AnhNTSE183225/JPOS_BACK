@@ -41,6 +41,7 @@ public class CustomerController {
         try {
             responseEntity = ResponseEntity.ok(customerService.updateCustomer(customer));
         } catch (Exception ex) {
+            ex.printStackTrace();
             responseEntity = ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         }
 
