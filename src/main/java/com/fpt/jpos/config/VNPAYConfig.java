@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 @Configuration
+// Binh
 public class VNPAYConfig {
     @Getter
     @Value("${payment.vnPay.url}")

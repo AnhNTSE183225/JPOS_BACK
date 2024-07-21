@@ -17,6 +17,7 @@ public class ProductDesignController {
 
     private final ProductDesignService productDesignService;
 
+    //Binh
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     public ResponseEntity<List<ProductDesign>> getAllProductDesigns() {
@@ -27,6 +28,7 @@ public class ProductDesignController {
         return ResponseEntity.ok(productDesigns);
     }
 
+    //Binh
     @GetMapping("/filter/{designType}")
     @PreAuthorize("hasAnyAuthority('customer','admin','staff')")
     public ResponseEntity<List<ProductDesign>> getProductDesigns(@PathVariable String designType) {

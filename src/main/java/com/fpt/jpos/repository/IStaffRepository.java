@@ -1,6 +1,5 @@
 package com.fpt.jpos.repository;
 
-import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

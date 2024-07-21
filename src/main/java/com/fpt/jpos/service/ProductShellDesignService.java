@@ -2,24 +2,24 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.ProductShellDesign;
 import com.fpt.jpos.repository.IProductShellDesignRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductShellDesignService implements IProductShellDesignService {
 
     private final IProductShellDesignRepository productShellDesignRepository;
 
-    @Autowired
-    public ProductShellDesignService(IProductShellDesignRepository productShellDesignRepository) {
-        this.productShellDesignRepository = productShellDesignRepository;
-    }
-
-
     @Override
     public List<ProductShellDesign> getByProductDesignId(Integer productDesignId) {
         return productShellDesignRepository.findByProductDesignId(productDesignId);
+    }
+
+    @Override
+    public void deleteShell(Integer productShellDesignId) {
+        this.productShellDesignRepository.deleteById(productShellDesignId);
     }
 }

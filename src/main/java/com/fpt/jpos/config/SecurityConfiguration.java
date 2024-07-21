@@ -5,7 +5,6 @@ import com.fpt.jpos.auth.JwtService;
 import com.fpt.jpos.auth.google.CustomAuthenticationSuccessHandler;
 import com.fpt.jpos.auth.google.CustomOAuth2UserService;
 import com.fpt.jpos.auth.google.GoogleCallbackConfig;
-import com.fpt.jpos.auth.google.UserService;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.service.ICustomerService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 @EnableWebMvc
 @EnableAutoConfiguration
+// Binh
 public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -46,15 +46,14 @@ public class SecurityConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login") // trang nào chứa cái chỗ login google :D
+                        .loginPage("/login")
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oauthUserService))
-                        .successHandler(new CustomAuthenticationSuccessHandler( jwtTokenProvider, objectMapper, accountRepository, googleCallbackConfig, customerService)));
+                        .successHandler(new CustomAuthenticationSuccessHandler(jwtTokenProvider, objectMapper, accountRepository, googleCallbackConfig, customerService)));
         return http.build();
     }
 
     private final CustomOAuth2UserService oauthUserService;
-    private final UserService userService;
     private final JwtService jwtTokenProvider;
     private final ObjectMapper objectMapper;
     private final IAccountRepository accountRepository;

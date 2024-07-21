@@ -161,6 +161,7 @@ public class OrderController {
     }
 
     //  design staff view orders list
+    //Binh
     @GetMapping("/designs/orders/{staffId}")
     @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     public ResponseEntity<?> getAllOrdersForDesignStaff(@PathVariable int staffId) {
@@ -196,6 +197,7 @@ public class OrderController {
     }
 
     // Customer accept design
+    //Binh
     @PreAuthorize("hasAuthority('customer') or hasAuthority('admin') or hasAuthority('staff')")
     @PostMapping("/customers/{orderId}/acceptDesign")
     public ResponseEntity<?> acceptDesign(@PathVariable Integer orderId) {
@@ -217,7 +219,9 @@ public class OrderController {
         return ResponseEntity.ok(theOrder);
     }
 
+
     //  production staff view orders list
+    //Binh
     @PreAuthorize("hasAuthority('admin') or hasAuthority('staff')")
     @GetMapping("/production/orders/{staffId}")
     public ResponseEntity<?> getAllOrdersForProductionStaff(@PathVariable int staffId) {

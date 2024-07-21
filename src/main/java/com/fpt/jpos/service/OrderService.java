@@ -60,6 +60,7 @@ public class OrderService implements IOrderService {
         return order.getStatus().name();
     }
 
+    //Binh
     @Override
     public List<Order> getOrdersByCustomerId(Integer customerId) {
         return orderRepository.findOrdersForCustomer(customerId);
@@ -70,11 +71,13 @@ public class OrderService implements IOrderService {
         return orderRepository.findOrderForSalesStaff(id);
     }
 
+    //Binh
     @Override
     public List<Order> getOrderForDesignStaff(Integer id) {
         return orderRepository.findOrdersForDesignStaff(id);
     }
 
+    //Binh
     @Override
     public List<Order> getOrderForProductionStaff(Integer id) {
         return orderRepository.findOrdersForProductionStaff(id);
@@ -93,6 +96,7 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
+    //Binh
     public Order updateOrderStatusDesigning(Integer id, PaymentRestDTO.PaymentRequest paymentDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Optional<Order> theOrder = orderRepository.findById(id);
@@ -130,6 +134,7 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
+    //Binh
     public Order updateOrderStatusProduction(Integer id) {
         Optional<Order> theOrder = orderRepository.findById(id);
         if (theOrder.isPresent()) {
@@ -286,7 +291,7 @@ public class OrderService implements IOrderService {
 
         Product product = new Product();
         product.setProductName(productDesign.getDesignName() + " - " + productShellDesign.getShellName());
-        product.setProductType(productDesign.getDesignType());
+        product.setProductType(productDesign.getDesignType().name());
         product.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         product.setEMaterialPrice(productShellDesign.getEMaterialPrice());
         product.setMarkupRate(productShellDesign.getMarkupRate());

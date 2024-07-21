@@ -1,5 +1,6 @@
 package com.fpt.jpos.pojo;
 
+import com.fpt.jpos.pojo.enums.DesignType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,15 +26,15 @@ public class ProductDesign {
     private String designName;
 
     @Column(name = "design_type")
-    private String designType;
+    @Enumerated(EnumType.STRING)
+    private DesignType designType;
 
     @Column(name = "design_file")
     private String designFile;
 
     @OneToMany(
             mappedBy = "productDesign",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     private List<ProductShellDesign> productShellDesigns;
 

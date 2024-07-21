@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 public class ProductShellMaterial {
 
     @EmbeddedId
-    @JsonIgnore
     private ProductShellMaterialId id;
 
     @JsonIgnore

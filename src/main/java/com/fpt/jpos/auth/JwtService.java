@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+// Binh
 public class JwtService {
 
     private static final String SECRET_KEY = "5YHYOKfGQSN/DzvZgieCfh7dMOVcej+bsEePD1CKmVPtHkFHi7sXvZH48+JbfaZXbdpxX2SCe5jjxvriUlq2eBJpojTlSUI6+sOzSh4kL5if2ZEdaBDBAauUNRu5DaxtkPncW68sLO18nTkCI4AXUct8yTOF4BaLNYP7AFDsdAvNRdcda/pFKDn7jud68+BK9ixOCEOi+ZFFGfjDEBSEVZDLJYqnZ2RmSGmh1zBNhT3JUNjXEoI6K1myN4SctQgT1JbqIFi79Cay3emlphKtw3VgYPWp8bpigCf4YrfDOhn0RfoD1Ujx+NwQIeAC3FfX319GKNpuEMGtFZZIdIoLv6VqfMUwDXUlofVV9NXyjS0=\n";

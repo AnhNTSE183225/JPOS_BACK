@@ -7,7 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/shells")
 @RequiredArgsConstructor
 @CrossOrigin
 public class ProductShellDesignController {
@@ -15,7 +15,7 @@ public class ProductShellDesignController {
     private final IProductShellDesignService productShellDesignService;
 
 
-    @GetMapping("/shells/{productDesignId}")
+    @GetMapping("/{productDesignId}")
     @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> getByProductDesignId(@PathVariable Integer productDesignId) {
         try {
@@ -23,5 +23,20 @@ public class ProductShellDesignController {
         } catch (Exception e) {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @DeleteMapping("/{productShellDesignId}")
+    @PreAuthorize("hasAnyAuthority('admin')")
+    public ResponseEntity<?> deleteShell(@PathVariable Integer productShellDesignId) {
+        ResponseEntity<?> response;
+
+        try {
+            this.productShellDesignService.deleteShell(productShellDesignId);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+        }
+
+        return response;
     }
 }

@@ -213,6 +213,7 @@ create table [ProductShellDesign]
     [product_design_id] int,
     [shell_name]        varchar(MAX),
     [diamond_quantity]  int,
+	[image]				varchar(MAX),
     [e_diamond_price]   decimal(19, 4),
     [e_material_price]  decimal(19, 4),
     [production_price]  decimal(19, 4),
@@ -269,7 +270,7 @@ go
 insert into [Customer]([username], [name], [address])
 values ('nguyen', 'Minh', '123 Becker Street')
 go
-/*-- Insert into Diamond
+-- Insert into Diamond
 INSERT INTO [Diamond] ([diamond_code], [diamond_name], [shape], [origin], [proportions], [fluorescence], [symmetry], [polish], [cut], [color], [clarity], [carat_weight], [note], [image], [active])
 VALUES 
 ('D001', 'Round Brilliant Diamond', 'round', 'NATURAL', 'https://example.com/proportions1.jpg', 'None', 'Excellent', 'Excellent', 'Excellent', 'D', 'IF', 0.1, 'Top quality round diamond', 'https://example.com/diamond1.jpg', 1),
@@ -286,7 +287,7 @@ VALUES
 ('NATURAL', 'cushion', 4.05, 4.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19'),
 ('LAB_GROWN', 'emerald', 6.05, 6.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19'),
 ('NATURAL', 'oval', 8.05, 8.15, 'D', 'IF', 'Excellent', 10000, '2024-07-19');
-go*/
+go
 --Insert into Material
 insert into [Material]([material_name])
 values ('gold_sjc'),

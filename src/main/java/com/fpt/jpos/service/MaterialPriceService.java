@@ -21,7 +21,7 @@ public class MaterialPriceService implements IMaterialPriceService {
         this.materialPriceRepository = materialPriceRepository;
     }
 
-
+    //Binh
     @Override
     public Double getLatestPriceById(Integer id) {
 
@@ -43,7 +43,7 @@ public class MaterialPriceService implements IMaterialPriceService {
 
         return result;
     }
-
+    //Binh
     @Override
     public boolean addMaterialPrice(Integer materialId, Double materialPrice) {
         Date today = Calendar.getInstance().getTime();
@@ -54,6 +54,7 @@ public class MaterialPriceService implements IMaterialPriceService {
 
     // 2024-06-28 16:45:31.080
     // format ngày lấy giống trong db
+    //Binh
     @Override
     public boolean updateMaterialPrice(Double materialPrice, Integer materialId, String effectiveDateStr) {
         try {
