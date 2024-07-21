@@ -1,6 +1,7 @@
 package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.ProductDesign;
+import com.fpt.jpos.service.IProductDesignService;
 import com.fpt.jpos.service.ProductDesignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductDesignController {
 
-    private final ProductDesignService productDesignService;
+    private final IProductDesignService productDesignService;
 
     //Binh
     @GetMapping("/all")
@@ -60,6 +61,38 @@ public class ProductDesignController {
             response = ResponseEntity.status(400).build();
             ex.printStackTrace();
             System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('admin','staff')")
+    public ResponseEntity<?> add(@RequestBody ProductDesign productDesign) {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(productDesignService.add(productDesign));
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return response;
+    }
+
+    @DeleteMapping("/{designId}")
+    @PreAuthorize("hasAnyAuthority('admin')")
+    public ResponseEntity<?> delete(@PathVariable Integer designId) {
+        ResponseEntity<?> response;
+
+        try {
+            this.productDesignService.delete(designId);
+            response = ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+            ex.printStackTrace();
         }
 
         return response;

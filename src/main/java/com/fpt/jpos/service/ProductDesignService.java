@@ -62,8 +62,19 @@ public class ProductDesignService implements IProductDesignService {
     }
 
     @Override
+    public ProductDesign add(ProductDesign productDesign) {
+        return productDesignRepository.save(productDesign);
+    }
+
+    @Override
     public List<DesignConfiguration> findByDesignType(String designType) {
         return this.designConfigurationRepository.findDesignConfigurationByDesignType(designType);
+    }
+
+    @Override
+    public void delete(Integer productDesignId) {
+        ProductDesign productDesign = this.productDesignRepository.findById(productDesignId).orElseThrow();
+        this.productDesignRepository.delete(productDesign);
     }
 
 }

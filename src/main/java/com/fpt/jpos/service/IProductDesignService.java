@@ -15,5 +15,9 @@ public interface IProductDesignService {
 
     ProductDesign update(ProductDesign productDesign);
 
+    ProductDesign add(ProductDesign productDesign);
+
     List<DesignConfiguration> findByDesignType(String designType);
+
+    void delete(Integer productDesignId);
 }
