@@ -1,10 +1,8 @@
 package com.fpt.jpos.service;
 
 import com.fpt.jpos.pojo.ProductShellDesign;
-import com.fpt.jpos.repository.IProductDesignRepository;
 import com.fpt.jpos.repository.IProductShellDesignRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

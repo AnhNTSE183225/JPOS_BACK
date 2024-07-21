@@ -1,21 +1,17 @@
 package com.fpt.jpos.auth.google;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fpt.jpos.auth.AuthenticationRequest;
 import com.fpt.jpos.auth.AuthenticationResponse;
 import com.fpt.jpos.auth.JwtService;
 import com.fpt.jpos.dto.CustomerRegistrationDTO;
 import com.fpt.jpos.pojo.Account;
 import com.fpt.jpos.pojo.Customer;
-import com.fpt.jpos.pojo.enums.Provider;
 import com.fpt.jpos.repository.IAccountRepository;
-import com.fpt.jpos.service.CustomerService;
 import com.fpt.jpos.service.ICustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 

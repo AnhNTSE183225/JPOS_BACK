@@ -17,6 +17,7 @@ public class ProductShellMaterialController {
         this.productShellMaterialService = productShellMaterialService;
     }
 
+    //Binh
     @CrossOrigin
     @GetMapping("/product-shell-material/{shellId}")
     @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")

@@ -2,7 +2,6 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
-import com.fpt.jpos.pojo.enums.DesignType;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +60,7 @@ public class OrderService implements IOrderService {
         return order.getStatus().name();
     }
 
+    //Binh
     @Override
     public List<Order> getOrdersByCustomerId(Integer customerId) {
         return orderRepository.findOrdersForCustomer(customerId);
@@ -71,11 +71,13 @@ public class OrderService implements IOrderService {
         return orderRepository.findOrderForSalesStaff(id);
     }
 
+    //Binh
     @Override
     public List<Order> getOrderForDesignStaff(Integer id) {
         return orderRepository.findOrdersForDesignStaff(id);
     }
 
+    //Binh
     @Override
     public List<Order> getOrderForProductionStaff(Integer id) {
         return orderRepository.findOrdersForProductionStaff(id);
@@ -94,6 +96,7 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
+    //Binh
     public Order updateOrderStatusDesigning(Integer id, PaymentRestDTO.PaymentRequest paymentDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Optional<Order> theOrder = orderRepository.findById(id);
@@ -131,6 +134,7 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
+    //Binh
     public Order updateOrderStatusProduction(Integer id) {
         Optional<Order> theOrder = orderRepository.findById(id);
         if (theOrder.isPresent()) {

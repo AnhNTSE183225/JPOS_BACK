@@ -33,6 +33,7 @@ public class MaterialController {
         }
     }
 
+    //Binh
     @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PostMapping("/add")
     public ResponseEntity<?> addMaterial(@RequestBody Material material) {
@@ -45,6 +46,7 @@ public class MaterialController {
 
     }
 
+    //Binh
     @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateMaterial(@PathVariable Integer id, @RequestBody Material material) {
@@ -56,6 +58,7 @@ public class MaterialController {
         return ResponseEntity.ok(material);
     }
 
+    //Binh
     @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteMaterial(@PathVariable Integer id) {

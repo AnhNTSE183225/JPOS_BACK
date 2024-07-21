@@ -1,6 +1,9 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.pojo.*;
+import com.fpt.jpos.pojo.DesignConfiguration;
+import com.fpt.jpos.pojo.ProductDesign;
+import com.fpt.jpos.pojo.ProductShellDesign;
+import com.fpt.jpos.pojo.ProductShellMaterial;
 import com.fpt.jpos.repository.IDesignConfigurationRepository;
 import com.fpt.jpos.repository.IProductDesignRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,7 @@ public class ProductDesignService implements IProductDesignService {
     private final IProductDesignRepository productDesignRepository;
     private final IDesignConfigurationRepository designConfigurationRepository;
 
+    //Binh
     @Override
     public List<ProductDesign> getProductDesigns() {
         List<ProductDesign> productDesigns = productDesignRepository.findAll();
@@ -27,6 +31,7 @@ public class ProductDesignService implements IProductDesignService {
 
     }
 
+    //Binh
     @Override
     public List<ProductDesign> getProductDesignsByCategory(String designType) {
         List<ProductDesign> productDesigns = productDesignRepository.findByDesignType(designType);

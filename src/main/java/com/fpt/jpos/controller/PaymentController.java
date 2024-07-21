@@ -20,12 +20,14 @@ public class PaymentController {
     private final IPaymentService paymentService;
     private final IOrderService orderService;
 
+    //Binh
     @GetMapping("/{orderId}")
     @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseEntity<?> getPaidAmountByOrderId(@PathVariable Integer orderId) {
         return ResponseEntity.ok(paymentService.getPaidAmountByOrder(orderId));
     }
 
+    //Binh
     @GetMapping("/vn-pay")
     @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseObject<PaymentRestDTO.VNPayResponse> pay(HttpServletRequest request) {
@@ -33,6 +35,7 @@ public class PaymentController {
     }
 
     // Trên frontend if code == 00 thì gọi api như luồng kia
+    //Binh
     @GetMapping("/vn-pay-callback")
     @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")
     public ResponseObject<PaymentRestDTO.VNPayResponse> payCallbackHandler(@RequestParam String vnp_ResponseCode, @RequestParam Integer orderId, @RequestParam String orderType
