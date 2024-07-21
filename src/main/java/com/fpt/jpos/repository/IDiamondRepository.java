@@ -11,42 +11,45 @@ import java.util.List;
 public interface IDiamondRepository extends JpaRepository<Diamond, Integer> {
 
     @Query(value = """
-            SELECT d.*,dp1.price, m.max_effective_date
-            FROM
+            select d.*, dp.price, dp.effective_date from Diamond d
+            join
             (
-            	SELECT dp.origin, dp.shape, dp.clarity, dp.color, dp.cut, dp.carat_weight_from, dp.carat_weight_to, MAX(dp.effective_date) max_effective_date
-                FROM DiamondPriceList AS dp
-                WHERE
-                dp.origin = ?1 AND
-                dp.shape IN ?2 AND
-                dp.price >= ?3 AND
-                dp.price <= ?4 AND
-                dp.carat_weight_from >= ?5 AND
-                dp.carat_weight_to <= ?6  AND
-                dp.color IN ?7 AND
-                dp.clarity IN ?8 AND
-                dp.cut IN ?9
-                GROUP BY dp.origin, dp.shape, dp.clarity, dp.color, dp.cut, dp.carat_weight_from, dp.carat_weight_to
-            )
-            AS m
-            JOIN DiamondPriceList AS dp1
-            ON
-            m.origin = dp1.origin AND
-            m.shape = dp1.shape AND
-            m.clarity = dp1.clarity AND
-            m.color = dp1.color AND
-            m.cut = dp1.cut AND
-            m.carat_weight_from = dp1.carat_weight_from AND
-            m.carat_weight_to = dp1.carat_weight_to AND
-            m.max_effective_date = dp1.effective_date
-            JOIN Diamond d
-            ON
-            d.origin = m.origin AND
-            d.shape = m.shape AND
-            d.clarity = m.clarity AND
-            d.color = m.color AND
-            d.cut = m.cut AND
-            d.carat_weight >= m.carat_weight_from AND d.carat_weight < m.carat_weight_to
+            	select dp.*
+            	from DiamondPriceList dp
+            	join
+            	(
+            		select dp.origin, dp.shape, dp.carat_weight_from, dp.carat_weight_to, dp.color, dp.clarity, dp.cut, max(dp.effective_date) as max_effective_date
+            		from DiamondPriceList dp
+            		group by dp.origin, dp.shape, dp.carat_weight_from, dp.carat_weight_to, dp.color, dp.clarity, dp.cut
+            	) as dp1
+            	on
+            	dp.origin = dp1.origin and
+            	dp.shape = dp1.shape and
+            	dp.carat_weight_from = dp1.carat_weight_from and
+            	dp.carat_weight_to = dp1.carat_weight_to and
+            	dp.color = dp1.color and
+            	dp.clarity = dp1.clarity and
+            	dp.cut = dp1.cut and
+            	dp.effective_date = dp1.max_effective_date
+            ) as dp
+            on
+            d.origin = dp.origin and
+            d.shape = dp.shape and
+            d.carat_weight > dp.carat_weight_from and
+            d.carat_weight <= dp.carat_weight_to and
+            d.color = dp.color and
+            d.clarity = dp.clarity and
+            d.cut = dp.cut
+            where
+            d.origin = ?1 AND
+            d.shape IN ?2 AND
+            dp.price >= ?3 AND
+            dp.price <= ?4 AND
+            d.carat_weight >= ?5 AND
+            d.carat_weight <= ?6  AND
+            d.color IN ?7 AND
+            d.clarity IN ?8 AND
+            d.cut IN ?9
             """, nativeQuery = true)
     List<Object[]> getDiamondBy4C(String origin, List<String> shapeList, Double minPrice, Double maxPrice, Double minCarat, Double maxCarat, List<String> colorList, List<String> clarityList, List<String> cutList);
 }
