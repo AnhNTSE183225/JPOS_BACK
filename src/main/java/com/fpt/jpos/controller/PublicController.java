@@ -2,6 +2,7 @@ package com.fpt.jpos.controller;
 
 import com.fpt.jpos.pojo.Material;
 import com.fpt.jpos.pojo.enums.DesignType;
+import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.pojo.enums.Shape;
 import com.fpt.jpos.service.IDiamondPriceService;
 import com.fpt.jpos.service.IMaterialPriceService;
@@ -101,6 +102,19 @@ public class PublicController {
 
         try {
             response = ResponseEntity.ok(DesignType.ring.getDeclaringClass().getEnumConstants());
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+        }
+
+        return response;
+    }
+
+    @GetMapping("/enum/orderStatus")
+    public ResponseEntity<?> getOrderStatus() {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(OrderStatus.wait_sale_staff.getDeclaringClass().getEnumConstants());
         } catch (Exception ex) {
             response = ResponseEntity.status(400).build();
         }
