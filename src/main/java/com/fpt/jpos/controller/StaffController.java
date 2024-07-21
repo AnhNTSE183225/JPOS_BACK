@@ -5,6 +5,7 @@ import com.fpt.jpos.auth.AuthenticationService;
 import com.fpt.jpos.dto.StaffRegistrationDTO;
 import com.fpt.jpos.exception.AccountAlreadyExistsException;
 import com.fpt.jpos.pojo.Staff;
+import com.fpt.jpos.pojo.enums.StaffType;
 import com.fpt.jpos.service.IStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -106,6 +107,19 @@ public class StaffController {
             System.out.println(ex.getLocalizedMessage());
         }
 
+        return response;
+    }
+
+    @GetMapping("/staff/get-staff-types")
+    public ResponseEntity<?> getStaffTypes() {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(StaffType.sale.getDeclaringClass().getEnumConstants());
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = ResponseEntity.status(400).build();
+        }
         return response;
     }
 }
