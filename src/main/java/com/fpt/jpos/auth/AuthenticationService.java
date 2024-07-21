@@ -35,6 +35,7 @@ public class AuthenticationService {
     private final IStaffService staffService;
     private final ICustomerService customerService;
 
+    //Binh
     public AuthenticationResponse register(CustomerRegistrationDTO request) throws AccountAlreadyExistsException {
         var user = Account.builder()
                 .username(request.getUsername())
@@ -107,6 +108,7 @@ public class AuthenticationService {
                 .build();
     }
 
+    //Binh
     public AuthenticationResponse authenticate(AuthenticationRequest request) throws AccountNotFoundException {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())

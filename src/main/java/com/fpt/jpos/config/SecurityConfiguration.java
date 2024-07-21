@@ -28,6 +28,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 @EnableWebMvc
 @EnableAutoConfiguration
+// Binh
 public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -46,10 +47,10 @@ public class SecurityConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login") // trang nào chứa cái chỗ login google :D
+                        .loginPage("/login")
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oauthUserService))
-                        .successHandler(new CustomAuthenticationSuccessHandler( jwtTokenProvider, objectMapper, accountRepository, googleCallbackConfig, customerService)));
+                        .successHandler(new CustomAuthenticationSuccessHandler(jwtTokenProvider, objectMapper, accountRepository, googleCallbackConfig, customerService)));
         return http.build();
     }
 

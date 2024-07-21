@@ -16,6 +16,7 @@ public class ProductDesignService implements IProductDesignService {
     private final IProductDesignRepository productDesignRepository;
     private final IDesignConfigurationRepository designConfigurationRepository;
 
+    //Binh
     @Override
     public List<ProductDesign> getProductDesigns() {
         List<ProductDesign> productDesigns = productDesignRepository.findAll();
@@ -27,6 +28,7 @@ public class ProductDesignService implements IProductDesignService {
 
     }
 
+    //Binh
     @Override
     public List<ProductDesign> getProductDesignsByCategory(String designType) {
         List<ProductDesign> productDesigns = productDesignRepository.findByDesignType(designType);

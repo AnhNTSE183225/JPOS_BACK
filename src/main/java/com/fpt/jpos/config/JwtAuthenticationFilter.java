@@ -18,9 +18,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 
-// can use Filter instead of OncePerRequestFilter
 @Component
-@RequiredArgsConstructor // create a constructor declare any private final field
+@RequiredArgsConstructor
+// Binh
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;

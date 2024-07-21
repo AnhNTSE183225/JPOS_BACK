@@ -24,6 +24,7 @@ public class MaterialService implements IMaterialService {
         return materialRepository.findAll();
     }
 
+    //Binh
     @Override
     public Material findMaterialById(int id) {
         Optional<Material> material = materialRepository.findById(id);

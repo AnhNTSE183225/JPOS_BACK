@@ -29,6 +29,7 @@ public class MaterialPriceController {
         return response;
     }
 
+    //Binh
     @PreAuthorize("hasAnyAuthority('customer','admin', 'staff')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getLatestMaterialPriceById(@PathVariable Integer id) {
@@ -40,7 +41,7 @@ public class MaterialPriceController {
         }
     }
 
-    // return true thôi chứ cũng không biết return cái gì nữa
+    //Binh
     @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PostMapping("/add")
     public ResponseEntity<?> addMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceCreateResponse materialPriceCreateResponse) {
@@ -52,6 +53,7 @@ public class MaterialPriceController {
 
     // 2024-06-28 16:45:31.080
     // format ngày lấy giống trong db
+    //Binh
     @PreAuthorize("hasAuthority('staff') or hasAuthority('admin')")
     @PutMapping("/update")
     public ResponseEntity<?> updateMaterialPrice(@RequestBody MaterialPriceDTO.MaterialPriceUpdateResponse materialPriceUpdateResponse) {

@@ -36,6 +36,7 @@ public class FileUploadService implements IFileUploadService {
                 .toString();
     }
 
+    //Binh
     @Override
     public String uploadModelDesignFile(MultipartFile multipartFile, Integer orderId, Integer designStaffId) throws IOException {
         String url = cloudinary.uploader()
