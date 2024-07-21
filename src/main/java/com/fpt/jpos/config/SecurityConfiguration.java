@@ -54,7 +54,6 @@ public class SecurityConfiguration {
     }
 
     private final CustomOAuth2UserService oauthUserService;
-    private final UserService userService;
     private final JwtService jwtTokenProvider;
     private final ObjectMapper objectMapper;
     private final IAccountRepository accountRepository;
