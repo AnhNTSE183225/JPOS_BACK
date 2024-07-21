@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IProductShellDesignService {
     List<ProductShellDesign> getByProductDesignId(Integer productDesignId);
+
+    void deleteShell(Integer productShellDesignId);
 }

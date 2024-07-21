@@ -2,6 +2,7 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
+import com.fpt.jpos.pojo.enums.DesignType;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -286,7 +287,7 @@ public class OrderService implements IOrderService {
 
         Product product = new Product();
         product.setProductName(productDesign.getDesignName() + " - " + productShellDesign.getShellName());
-        product.setProductType(productDesign.getDesignType());
+        product.setProductType(productDesign.getDesignType().name());
         product.setEDiamondPrice(productShellDesign.getEDiamondPrice());
         product.setEMaterialPrice(productShellDesign.getEMaterialPrice());
         product.setMarkupRate(productShellDesign.getMarkupRate());

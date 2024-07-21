@@ -46,16 +46,13 @@ public class ProductDesignService implements IProductDesignService {
     public ProductDesign update(ProductDesign productDesign) {
         for (ProductShellDesign shell : productDesign.getProductShellDesigns()) {
             shell.setProductDesign(productDesign);
-            for (ProductShellMaterial material : shell.getProductShellMaterials()) {
-                if (material.getId() == null) {
-                    material.setId(new ProductShellMaterialId(shell.getProductShellDesignId(), material.getMaterial().getMaterialId()));
-                    material.setProductShellDesign(shell);
-                }
-                System.out.println("Material ID: " + material.getId());
+            for (ProductShellMaterial productShellMaterial : shell.getProductShellMaterials()) {
+                productShellMaterial.setProductShellDesign(shell);
+                //System.out.println("Material ID: " + material.getId());
             }
-            System.out.println("Shell ID: " + shell.getProductShellDesignId());
+            //System.out.println("Shell ID: " + shell.getProductShellDesignId());
         }
-        System.out.println("ProductDesign ID: " + productDesign.getProductDesignId());
+        //System.out.println("ProductDesign ID: " + productDesign.getProductDesignId());
         return productDesignRepository.save(productDesign);
     }
 

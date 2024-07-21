@@ -213,6 +213,7 @@ create table [ProductShellDesign]
     [product_design_id] int,
     [shell_name]        varchar(MAX),
     [diamond_quantity]  int,
+	[image]				varchar(MAX),
     [e_diamond_price]   decimal(19, 4),
     [e_material_price]  decimal(19, 4),
     [production_price]  decimal(19, 4),

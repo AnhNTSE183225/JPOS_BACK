@@ -25,6 +25,9 @@ public class ProductShellDesign {
     @Column(name = "shell_name")
     private String shellName;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "diamond_quantity")
     private int diamondQuantity;
 
