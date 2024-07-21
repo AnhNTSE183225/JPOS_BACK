@@ -1,6 +1,9 @@
 package com.fpt.jpos.service;
 
-import com.fpt.jpos.pojo.*;
+import com.fpt.jpos.pojo.DesignConfiguration;
+import com.fpt.jpos.pojo.ProductDesign;
+import com.fpt.jpos.pojo.ProductShellDesign;
+import com.fpt.jpos.pojo.ProductShellMaterial;
 import com.fpt.jpos.repository.IDesignConfigurationRepository;
 import com.fpt.jpos.repository.IProductDesignRepository;
 import lombok.RequiredArgsConstructor;

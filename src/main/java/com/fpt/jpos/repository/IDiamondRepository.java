@@ -11,20 +11,20 @@ import java.util.List;
 public interface IDiamondRepository extends JpaRepository<Diamond, Integer> {
 
     @Query(value = """
-            SELECT d.*,dp1.price, m.max_effective_date 
-            FROM 
+            SELECT d.*,dp1.price, m.max_effective_date
+            FROM
             (
             	SELECT dp.origin, dp.shape, dp.clarity, dp.color, dp.cut, dp.carat_weight_from, dp.carat_weight_to, MAX(dp.effective_date) max_effective_date
-                FROM DiamondPriceList AS dp 
-                WHERE 
-                dp.origin = ?1 AND 
+                FROM DiamondPriceList AS dp
+                WHERE
+                dp.origin = ?1 AND
                 dp.shape IN ?2 AND
                 dp.price >= ?3 AND
                 dp.price <= ?4 AND
-                dp.carat_weight_from >= ?5 AND 
+                dp.carat_weight_from >= ?5 AND
                 dp.carat_weight_to <= ?6  AND
-                dp.color IN ?7 AND 
-                dp.clarity IN ?8 AND 
+                dp.color IN ?7 AND
+                dp.clarity IN ?8 AND
                 dp.cut IN ?9
                 GROUP BY dp.origin, dp.shape, dp.clarity, dp.color, dp.cut, dp.carat_weight_from, dp.carat_weight_to
             )

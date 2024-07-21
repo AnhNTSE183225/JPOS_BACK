@@ -2,7 +2,6 @@ package com.fpt.jpos.service;
 
 import com.fpt.jpos.dto.*;
 import com.fpt.jpos.pojo.*;
-import com.fpt.jpos.pojo.enums.DesignType;
 import com.fpt.jpos.pojo.enums.OrderStatus;
 import com.fpt.jpos.repository.*;
 import lombok.RequiredArgsConstructor;

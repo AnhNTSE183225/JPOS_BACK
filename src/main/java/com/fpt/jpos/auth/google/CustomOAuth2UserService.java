@@ -1,9 +1,6 @@
 package com.fpt.jpos.auth.google;
 
-import com.fpt.jpos.auth.AuthenticationResponse;
 import com.fpt.jpos.auth.JwtService;
-import com.fpt.jpos.pojo.Account;
-import com.fpt.jpos.pojo.Customer;
 import com.fpt.jpos.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
