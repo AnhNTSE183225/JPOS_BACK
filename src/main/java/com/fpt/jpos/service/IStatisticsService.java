@@ -10,4 +10,6 @@ public interface IStatisticsService {
     List<Integer> getSalesReport();
 
     List<Product> getRecentlyPurchased();
+
+    List<Object[]> getPaymentByDate();
 }

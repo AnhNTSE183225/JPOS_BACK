@@ -61,4 +61,17 @@ public class StatisticsController {
 
         return response;
     }
+
+    @PreAuthorize("hasAnyAuthority('admin')")
+    @GetMapping("/get-payment-by-date")
+    public ResponseEntity<?> getPaymentByDate() {
+        ResponseEntity<?> response;
+        try {
+            response = ResponseEntity.ok(statisticsService.getPaymentByDate());
+        } catch (Exception ex) {
+            response = ResponseEntity.status(400).build();
+        }
+
+        return response;
+    }
 }

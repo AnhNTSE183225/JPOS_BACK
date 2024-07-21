@@ -20,6 +20,20 @@ public class PaymentController {
     private final IPaymentService paymentService;
     private final IOrderService orderService;
 
+    @GetMapping("/find-all")
+    @PreAuthorize("hasAnyAuthority('admin')")
+    public ResponseEntity<?> findAll() {
+        ResponseEntity<?> response;
+
+        try {
+            response = ResponseEntity.ok(paymentService.findAll());
+        } catch (Exception ex) {
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
+    }
+
     //Binh
     @GetMapping("/{orderId}")
     @PreAuthorize("hasAuthority('customer') or hasAuthority('staff') or hasAuthority('admin')")

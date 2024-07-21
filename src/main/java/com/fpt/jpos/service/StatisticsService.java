@@ -4,6 +4,7 @@ import com.fpt.jpos.dto.StatisticsDTO;
 import com.fpt.jpos.pojo.Order;
 import com.fpt.jpos.pojo.Payment;
 import com.fpt.jpos.pojo.Product;
+import com.fpt.jpos.repository.IPaymentRepository;
 import com.fpt.jpos.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,14 @@ public class StatisticsService implements IStatisticsService {
 
     private final ICustomerService customerService;
     private final IOrderService orderService;
-    private final IPaymentService paymentService;
     private final IProductRepository productRepository;
+    private final IPaymentRepository paymentRepository;
 
     @Override
     public StatisticsDTO getStatistics() {
 
         Double revenue = 0.0;
-        List<Payment> payments = paymentService.findAll();
+        List<Payment> payments = paymentRepository.findAll();
         for(Payment payment : payments) {
             revenue += payment.getAmountPaid();
         }
@@ -60,5 +61,10 @@ public class StatisticsService implements IStatisticsService {
                 .limit(5)
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public List<Object[]> getPaymentByDate() {
+        return this.paymentRepository.getPaymentByDates();
     }
 }
