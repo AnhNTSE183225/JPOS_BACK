@@ -5,7 +5,6 @@ import com.fpt.jpos.auth.JwtService;
 import com.fpt.jpos.auth.google.CustomAuthenticationSuccessHandler;
 import com.fpt.jpos.auth.google.CustomOAuth2UserService;
 import com.fpt.jpos.auth.google.GoogleCallbackConfig;
-import com.fpt.jpos.auth.google.UserService;
 import com.fpt.jpos.repository.IAccountRepository;
 import com.fpt.jpos.service.ICustomerService;
 import lombok.RequiredArgsConstructor;
